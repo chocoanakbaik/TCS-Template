@@ -1,116 +1,4684 @@
 [
   {
-    "id": "employee-roster",
-    "name": "Employee Roster",
+    "id": "ats-pelacak-kandidat-rekrutmen",
+    "name": "Pelacak Kandidat Rekrutmen (ATS) & Skor Seleksi",
     "category": "sdm",
     "categoryLabel": "Sumber daya manusia",
-    "symbol": "HR",
+    "symbol": "ATS",
     "format": "xlsx",
-    "description": "Susun daftar anggota tim, posisi, status, dan informasi administrasi dasar secara teratur.",
+    "quality": "standar",
+    "description": "Kelola kandidat dari lamaran hingga keputusan akhir, hitung skor kecocokan berbobot, tandai kandidat yang melewati ambang seleksi, dan urutkan kandidat berdasarkan skor.",
     "tags": [
-      "sdm",
-      "hr",
-      "karyawan",
-      "pegawai",
-      "anggota",
-      "tim"
+      "ATS",
+      "rekrutmen",
+      "kandidat",
+      "screening",
+      "interview",
+      "shortlist"
     ],
     "questions": [
       {
         "id": "entityName",
-        "label": "Nama instansi atau perusahaan",
+        "label": "Nama perusahaan atau unit kerja",
         "type": "text",
         "required": true,
-        "placeholder": "Contoh: Toko Sinar Jaya"
+        "placeholder": "Nama perusahaan, instansi, atau unit"
       },
       {
         "id": "ownerName",
-        "label": "Nama administrator SDM",
+        "label": "HR, recruiter, atau penanggung jawab",
         "type": "text",
         "required": false,
         "placeholder": "Nama penanggung jawab"
       },
       {
         "id": "period",
-        "label": "Periode yang digunakan",
+        "label": "Periode penggunaan",
         "type": "select",
         "required": true,
         "options": [
-          "Setiap ada perubahan",
+          "Harian",
+          "Mingguan",
           "Bulanan",
-          "Triwulanan",
-          "Tahunan"
+          "Kuartalan",
+          "Semesteran",
+          "Tahunan",
+          "Per kebutuhan"
         ]
       },
       {
         "id": "scope",
-        "label": "Ruang lingkup atau konteks penggunaan",
+        "label": "Ruang lingkup organisasi",
         "type": "select",
         "required": true,
         "options": [
-          "1–5 orang",
-          "6–20 orang",
-          "21–50 orang",
-          "Lebih dari 50 orang"
+          "Seluruh perusahaan",
+          "Kantor pusat",
+          "Cabang atau outlet",
+          "Departemen",
+          "Unit proyek",
+          "Rekrutmen atau kandidat"
         ]
       },
       {
         "id": "notes",
-        "label": "Catatan tambahan",
+        "label": "Catatan kebijakan dan asumsi",
         "type": "textarea",
         "required": false,
-        "placeholder": "Tuliskan kebutuhan tambahan yang ingin dimasukkan."
+        "placeholder": "Tuliskan kebijakan internal, parameter, atau ketentuan yang perlu diperhatikan."
       }
     ],
     "sheets": [
       {
-        "name": "Daftar Anggota",
-        "title": "Employee Roster - {{entityName}}",
+        "name": "Pipeline Kandidat",
+        "title": "Pelacak Kandidat Rekrutmen (ATS) & Skor Seleksi - {{entityName}}",
         "columns": [
-          "ID",
-          "Nama",
-          "Divisi",
-          "Posisi",
-          "Status",
-          "Tanggal Bergabung"
+          "ID Kandidat",
+          "Posisi Dilamar",
+          "Skor CV (1-5)",
+          "Tes Teknis (1-5)",
+          "Wawancara (1-5)",
+          "Skor Akhir",
+          "Lolos Ambang (1/0)",
+          "Peringkat"
+        ],
+        "rows": [
+          [
+            "C-001",
+            "HR Generalist",
+            4,
+            4,
+            5,
+            0,
+            0,
+            0
+          ],
+          [
+            "C-002",
+            "HR Generalist",
+            5,
+            3,
+            4,
+            0,
+            0,
+            0
+          ],
+          [
+            "C-003",
+            "HR Generalist",
+            3,
+            5,
+            4,
+            0,
+            0,
+            0
+          ],
+          [
+            "C-004",
+            "HR Generalist",
+            4,
+            3,
+            3,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "C6*0.20+D6*0.35+E6*0.45",
+            "cachedValue": 4.45
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(F6>=3.8,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "H6",
+            "formula": "RANK(F6,F6:F9,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F7",
+            "formula": "C7*0.20+D7*0.35+E7*0.45",
+            "cachedValue": 3.85
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(F7>=3.8,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "H7",
+            "formula": "RANK(F7,F6:F9,0)",
+            "cachedValue": 3
+          },
+          {
+            "cell": "F8",
+            "formula": "C8*0.20+D8*0.35+E8*0.45",
+            "cachedValue": 4.15
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(F8>=3.8,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "H8",
+            "formula": "RANK(F8,F6:F9,0)",
+            "cachedValue": 2
+          },
+          {
+            "cell": "F9",
+            "formula": "C9*0.20+D9*0.35+E9*0.45",
+            "cachedValue": 3.2
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(F9>=3.8,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H9",
+            "formula": "RANK(F9,F6:F9,0)",
+            "cachedValue": 4
+          }
+        ],
+        "columnWidths": [
+          18,
+          22,
+          16,
+          17,
+          18,
+          16,
+          18,
+          14
+        ]
+      }
+    ]
+  },
+  {
+    "id": "simulasi-payroll-slip-gaji-bpjs-pph21",
+    "name": "Simulasi Payroll, Slip Gaji & Estimasi Potongan BPJS/PPh 21",
+    "category": "sdm",
+    "categoryLabel": "Sumber daya manusia",
+    "symbol": "PAY",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Susun estimasi take-home pay dari gaji pokok, tunjangan, dan lembur. Persentase potongan merupakan parameter yang dapat diubah sesuai konfigurasi perusahaan; PPh 21 di sini hanya estimasi provision sederhana, bukan kalkulator pajak resmi.",
+    "tags": [
+      "payroll",
+      "slip gaji",
+      "take home pay",
+      "BPJS",
+      "PPh 21",
+      "potongan"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama perusahaan, instansi, atau unit"
+      },
+      {
+        "id": "ownerName",
+        "label": "HR, recruiter, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Semesteran",
+          "Tahunan",
+          "Per kebutuhan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup organisasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Seluruh perusahaan",
+          "Kantor pusat",
+          "Cabang atau outlet",
+          "Departemen",
+          "Unit proyek",
+          "Rekrutmen atau kandidat"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kebijakan dan asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan kebijakan internal, parameter, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Simulasi Payroll",
+        "title": "Simulasi Payroll, Slip Gaji & Estimasi Potongan BPJS/PPh 21 - {{entityName}}",
+        "columns": [
+          "Kode Pegawai",
+          "Gaji Pokok (Rp)",
+          "Tunjangan (Rp)",
+          "Lembur (Rp)",
+          "Bruto (Rp)",
+          "Rate BPJS Kes (input)",
+          "BPJS Kes Pegawai (Rp)",
+          "Rate JHT Pegawai (input)",
+          "JHT Pegawai (Rp)",
+          "Rate Est. PPh 21 (input)",
+          "Estimasi PPh 21 (Rp)",
+          "Total Potongan (Rp)",
+          "Take Home Pay (Rp)"
         ],
         "rows": [
           [
             "EMP-001",
-            "Nama Contoh 1",
-            "Operasional",
-            "Staf",
-            "Aktif",
-            "2026-01-05"
+            6000000,
+            1500000,
+            350000,
+            0,
+            0.01,
+            0,
+            0.02,
+            0,
+            0.025,
+            0,
+            0,
+            0
           ],
           [
             "EMP-002",
-            "Nama Contoh 2",
-            "Administrasi",
-            "Koordinator",
-            "Aktif",
-            "2026-02-10"
+            4500000,
+            750000,
+            0,
+            0,
+            0.01,
+            0,
+            0.02,
+            0,
+            0.015,
+            0,
+            0,
+            0
           ],
           [
             "EMP-003",
-            "Nama Contoh 3",
-            "Keuangan",
-            "Staf",
-            "Kontrak",
-            "2026-03-15"
+            8500000,
+            2000000,
+            500000,
+            0,
+            0.01,
+            0,
+            0.02,
+            0,
+            0.04,
+            0,
+            0,
+            0
+          ],
+          [
+            "EMP-004",
+            5200000,
+            800000,
+            150000,
+            0,
+            0.01,
+            0,
+            0.02,
+            0,
+            0.02,
+            0,
+            0,
+            0
           ]
         ],
-        "formulaCells": [],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "SUM(B6:D6)",
+            "cachedValue": 7850000
+          },
+          {
+            "cell": "G6",
+            "formula": "E6*F6",
+            "cachedValue": 78500
+          },
+          {
+            "cell": "I6",
+            "formula": "E6*H6",
+            "cachedValue": 157000
+          },
+          {
+            "cell": "K6",
+            "formula": "E6*J6",
+            "cachedValue": 196250
+          },
+          {
+            "cell": "L6",
+            "formula": "SUM(G6,I6,K6)",
+            "cachedValue": 431750
+          },
+          {
+            "cell": "M6",
+            "formula": "E6-L6",
+            "cachedValue": 7418250
+          },
+          {
+            "cell": "E7",
+            "formula": "SUM(B7:D7)",
+            "cachedValue": 5250000
+          },
+          {
+            "cell": "G7",
+            "formula": "E7*F7",
+            "cachedValue": 52500
+          },
+          {
+            "cell": "I7",
+            "formula": "E7*H7",
+            "cachedValue": 105000
+          },
+          {
+            "cell": "K7",
+            "formula": "E7*J7",
+            "cachedValue": 78750
+          },
+          {
+            "cell": "L7",
+            "formula": "SUM(G7,I7,K7)",
+            "cachedValue": 236250
+          },
+          {
+            "cell": "M7",
+            "formula": "E7-L7",
+            "cachedValue": 5013750
+          },
+          {
+            "cell": "E8",
+            "formula": "SUM(B8:D8)",
+            "cachedValue": 11000000
+          },
+          {
+            "cell": "G8",
+            "formula": "E8*F8",
+            "cachedValue": 110000
+          },
+          {
+            "cell": "I8",
+            "formula": "E8*H8",
+            "cachedValue": 220000
+          },
+          {
+            "cell": "K8",
+            "formula": "E8*J8",
+            "cachedValue": 440000
+          },
+          {
+            "cell": "L8",
+            "formula": "SUM(G8,I8,K8)",
+            "cachedValue": 770000
+          },
+          {
+            "cell": "M8",
+            "formula": "E8-L8",
+            "cachedValue": 10230000
+          },
+          {
+            "cell": "E9",
+            "formula": "SUM(B9:D9)",
+            "cachedValue": 6150000
+          },
+          {
+            "cell": "G9",
+            "formula": "E9*F9",
+            "cachedValue": 61500
+          },
+          {
+            "cell": "I9",
+            "formula": "E9*H9",
+            "cachedValue": 123000
+          },
+          {
+            "cell": "K9",
+            "formula": "E9*J9",
+            "cachedValue": 123000
+          },
+          {
+            "cell": "L9",
+            "formula": "SUM(G9,I9,K9)",
+            "cachedValue": 307500
+          },
+          {
+            "cell": "M9",
+            "formula": "E9-L9",
+            "cachedValue": 5842500
+          }
+        ],
         "columnWidths": [
-          15,
-          25,
-          22,
-          22,
+          17,
+          19,
+          17,
           16,
+          17,
+          20,
+          22,
+          21,
+          19,
+          23,
+          22,
+          21,
+          22
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rekap-absensi-keterlambatan-karyawan",
+    "name": "Rekap Absensi, Keterlambatan & Tingkat Kehadiran",
+    "category": "sdm",
+    "categoryLabel": "Sumber daya manusia",
+    "symbol": "ABS",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Rekap hari kerja, kehadiran, sakit, izin, alpa, dan keterlambatan; hitung persentase kehadiran dan beri penanda tindak lanjut berdasarkan ambang internal.",
+    "tags": [
+      "absensi",
+      "kehadiran",
+      "keterlambatan",
+      "rekap bulanan",
+      "HRIS"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama perusahaan, instansi, atau unit"
+      },
+      {
+        "id": "ownerName",
+        "label": "HR, recruiter, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Semesteran",
+          "Tahunan",
+          "Per kebutuhan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup organisasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Seluruh perusahaan",
+          "Kantor pusat",
+          "Cabang atau outlet",
+          "Departemen",
+          "Unit proyek",
+          "Rekrutmen atau kandidat"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kebijakan dan asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan kebijakan internal, parameter, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Absensi Bulanan",
+        "title": "Rekap Absensi, Keterlambatan & Tingkat Kehadiran - {{entityName}}",
+        "columns": [
+          "Kode Pegawai",
+          "Hari Kerja",
+          "Hadir",
+          "Sakit",
+          "Izin",
+          "Alpa",
+          "Persentase Hadir",
+          "Jumlah Terlambat",
+          "Perlu Review (1/0)"
+        ],
+        "rows": [
+          [
+            "EMP-001",
+            22,
+            21,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            "EMP-002",
+            22,
+            19,
+            1,
+            1,
+            1,
+            0,
+            4,
+            0
+          ],
+          [
+            "EMP-003",
+            22,
+            22,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "EMP-004",
+            22,
+            18,
+            1,
+            1,
+            2,
+            0,
+            5,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "IF(B6=0,0,C6/B6)",
+            "cachedValue": 0.9545454545
+          },
+          {
+            "cell": "I6",
+            "formula": "IF(OR(G6<0.9,H6>=4),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(B7=0,0,C7/B7)",
+            "cachedValue": 0.8636363636
+          },
+          {
+            "cell": "I7",
+            "formula": "IF(OR(G7<0.9,H7>=4),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(B8=0,0,C8/B8)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "I8",
+            "formula": "IF(OR(G8<0.9,H8>=4),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(B9=0,0,C9/B9)",
+            "cachedValue": 0.8181818182
+          },
+          {
+            "cell": "I9",
+            "formula": "IF(OR(G9<0.9,H9>=4),1,0)",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          17,
+          15,
+          13,
+          13,
+          12,
+          12,
+          19,
+          18,
+          19
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rekap-cuti-tahunan-saldo-izin",
+    "name": "Rekap Cuti Tahunan, Carry Forward & Sisa Kuota",
+    "category": "sdm",
+    "categoryLabel": "Sumber daya manusia",
+    "symbol": "CUT",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Hitung hak cuti, carry forward yang disetujui, cuti yang telah digunakan, dan saldo cuti efektif agar HR dapat memeriksa sisa kuota secara konsisten.",
+    "tags": [
+      "cuti tahunan",
+      "saldo cuti",
+      "carry forward",
+      "leave tracker",
+      "izin"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama perusahaan, instansi, atau unit"
+      },
+      {
+        "id": "ownerName",
+        "label": "HR, recruiter, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Semesteran",
+          "Tahunan",
+          "Per kebutuhan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup organisasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Seluruh perusahaan",
+          "Kantor pusat",
+          "Cabang atau outlet",
+          "Departemen",
+          "Unit proyek",
+          "Rekrutmen atau kandidat"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kebijakan dan asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan kebijakan internal, parameter, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Saldo Cuti",
+        "title": "Rekap Cuti Tahunan, Carry Forward & Sisa Kuota - {{entityName}}",
+        "columns": [
+          "Kode Pegawai",
+          "Hak Cuti Tahun Ini",
+          "Carry Forward Disetujui",
+          "Cuti Digunakan",
+          "Cuti Disetujui Mendatang",
+          "Saldo Tersedia",
+          "Di Bawah Nol (1/0)"
+        ],
+        "rows": [
+          [
+            "EMP-001",
+            12,
+            2,
+            5,
+            1,
+            0,
+            0
+          ],
+          [
+            "EMP-002",
+            12,
+            0,
+            9,
+            2,
+            0,
+            0
+          ],
+          [
+            "EMP-003",
+            12,
+            3,
+            4,
+            0,
+            0,
+            0
+          ],
+          [
+            "EMP-004",
+            12,
+            0,
+            12,
+            1,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "B6+C6-D6-E6",
+            "cachedValue": 8
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(F6<0,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F7",
+            "formula": "B7+C7-D7-E7",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(F7<0,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F8",
+            "formula": "B8+C8-D8-E8",
+            "cachedValue": 11
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(F8<0,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F9",
+            "formula": "B9+C9-D9-E9",
+            "cachedValue": -1
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(F9<0,1,0)",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          17,
+          20,
+          22,
+          17,
+          22,
+          18,
+          18
+        ]
+      }
+    ]
+  },
+  {
+    "id": "kalkulator-uang-lembur-jam-kerja",
+    "name": "Kalkulator Uang Lembur Berdasarkan Jam & Multiplier Internal",
+    "category": "sdm",
+    "categoryLabel": "Sumber daya manusia",
+    "symbol": "LEB",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Hitung estimasi pembayaran lembur dari upah dasar per jam, jam lembur yang disetujui, dan multiplier yang dimasukkan HR sesuai ketentuan yang berlaku di perusahaan.",
+    "tags": [
+      "lembur",
+      "overtime",
+      "upah per jam",
+      "kalkulator payroll",
+      "jam kerja"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama perusahaan, instansi, atau unit"
+      },
+      {
+        "id": "ownerName",
+        "label": "HR, recruiter, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Semesteran",
+          "Tahunan",
+          "Per kebutuhan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup organisasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Seluruh perusahaan",
+          "Kantor pusat",
+          "Cabang atau outlet",
+          "Departemen",
+          "Unit proyek",
+          "Rekrutmen atau kandidat"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kebijakan dan asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan kebijakan internal, parameter, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Perhitungan Lembur",
+        "title": "Kalkulator Uang Lembur Berdasarkan Jam & Multiplier Internal - {{entityName}}",
+        "columns": [
+          "Kode Pegawai",
+          "Upah Bulanan Dasar (Rp)",
+          "Pembagi Jam Bulanan (input)",
+          "Jam Lembur Segmen 1",
+          "Multiplier Segmen 1",
+          "Jam Lembur Segmen 2",
+          "Multiplier Segmen 2",
+          "Upah per Jam (Rp)",
+          "Bayar Segmen 1 (Rp)",
+          "Bayar Segmen 2 (Rp)",
+          "Total Lembur (Rp)"
+        ],
+        "rows": [
+          [
+            "EMP-001",
+            6000000,
+            173,
+            2,
+            1.5,
+            1,
+            2,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "EMP-002",
+            4500000,
+            173,
+            1,
+            1.5,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "EMP-003",
+            8500000,
+            173,
+            3,
+            1.5,
+            2,
+            2,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "EMP-004",
+            5200000,
+            173,
+            2,
+            1.5,
+            0.5,
+            2,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "H6",
+            "formula": "IF(C6=0,0,B6/C6)",
+            "cachedValue": 34682.0809248555
+          },
+          {
+            "cell": "I6",
+            "formula": "D6*E6*H6",
+            "cachedValue": 104046.2427745665
+          },
+          {
+            "cell": "J6",
+            "formula": "F6*G6*H6",
+            "cachedValue": 69364.161849711
+          },
+          {
+            "cell": "K6",
+            "formula": "SUM(I6:J6)",
+            "cachedValue": 173410.4046242775
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(C7=0,0,B7/C7)",
+            "cachedValue": 26011.5606936416
+          },
+          {
+            "cell": "I7",
+            "formula": "D7*E7*H7",
+            "cachedValue": 39017.3410404624
+          },
+          {
+            "cell": "J7",
+            "formula": "F7*G7*H7",
+            "cachedValue": 0
+          },
+          {
+            "cell": "K7",
+            "formula": "SUM(I7:J7)",
+            "cachedValue": 39017.3410404624
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(C8=0,0,B8/C8)",
+            "cachedValue": 49132.9479768786
+          },
+          {
+            "cell": "I8",
+            "formula": "D8*E8*H8",
+            "cachedValue": 221098.2658959538
+          },
+          {
+            "cell": "J8",
+            "formula": "F8*G8*H8",
+            "cachedValue": 196531.7919075145
+          },
+          {
+            "cell": "K8",
+            "formula": "SUM(I8:J8)",
+            "cachedValue": 417630.0578034682
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(C9=0,0,B9/C9)",
+            "cachedValue": 30057.8034682081
+          },
+          {
+            "cell": "I9",
+            "formula": "D9*E9*H9",
+            "cachedValue": 90173.4104046243
+          },
+          {
+            "cell": "J9",
+            "formula": "F9*G9*H9",
+            "cachedValue": 30057.8034682081
+          },
+          {
+            "cell": "K9",
+            "formula": "SUM(I9:J9)",
+            "cachedValue": 120231.2138728324
+          }
+        ],
+        "columnWidths": [
+          17,
+          22,
+          24,
+          20,
+          20,
+          20,
+          20,
+          19,
+          20,
+          20,
+          21
+        ]
+      }
+    ]
+  },
+  {
+    "id": "checklist-onboarding-karyawan-30-60-90",
+    "name": "Checklist Onboarding Karyawan Baru 30-60-90 Hari",
+    "category": "sdm",
+    "categoryLabel": "Sumber daya manusia",
+    "symbol": "ONB",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Kelola aktivitas orientasi, akses kerja, pengenalan tim, target 30-60-90 hari, dan bukti penyelesaian agar proses onboarding terukur per pegawai.",
+    "tags": [
+      "onboarding",
+      "30-60-90 hari",
+      "karyawan baru",
+      "orientasi",
+      "checklist HR"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama perusahaan, instansi, atau unit"
+      },
+      {
+        "id": "ownerName",
+        "label": "HR, recruiter, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Semesteran",
+          "Tahunan",
+          "Per kebutuhan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup organisasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Seluruh perusahaan",
+          "Kantor pusat",
+          "Cabang atau outlet",
+          "Departemen",
+          "Unit proyek",
+          "Rekrutmen atau kandidat"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kebijakan dan asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan kebijakan internal, parameter, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Checklist Onboarding",
+        "title": "Checklist Onboarding Karyawan Baru 30-60-90 Hari - {{entityName}}",
+        "columns": [
+          "Kode Pegawai",
+          "Tahap",
+          "Aktivitas Onboarding",
+          "Hari Target",
+          "Selesai (1/0)",
+          "Bukti/Referensi",
+          "Sisa Aktivitas Tahap"
+        ],
+        "rows": [
+          [
+            "EMP-101",
+            "30 hari",
+            "Akun email dan akses aplikasi aktif",
+            7,
+            1,
+            "Akses terverifikasi",
+            0
+          ],
+          [
+            "EMP-101",
+            "30 hari",
+            "Pengenalan SOP dan kebijakan kerja",
+            14,
+            1,
+            "Daftar hadir",
+            0
+          ],
+          [
+            "EMP-101",
+            "60 hari",
+            "Review target awal dengan atasan",
+            45,
+            0,
+            "Agenda review",
+            0
+          ],
+          [
+            "EMP-101",
+            "90 hari",
+            "Evaluasi masa orientasi",
+            85,
+            0,
+            "Form evaluasi",
+            0
+          ],
+          [
+            "EMP-102",
+            "30 hari",
+            "Pengenalan tim dan stakeholder",
+            10,
+            1,
+            "Catatan orientasi",
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "IF(E6=1,0,1)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(E7=1,0,1)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(E8=1,0,1)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(E9=1,0,1)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G10",
+            "formula": "IF(E10=1,0,1)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          17,
+          16,
+          37,
+          15,
+          16,
+          24,
+          22
+        ]
+      }
+    ]
+  },
+  {
+    "id": "pelacak-masa-kontrak-pkwt-peringatan",
+    "name": "Pelacak Masa Kontrak PKWT & Peringatan Habis Kontrak",
+    "category": "sdm",
+    "categoryLabel": "Sumber daya manusia",
+    "symbol": "PKW",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Pantau sisa hari kontrak berdasarkan data yang dimasukkan HR, klasifikasikan jendela pengingat, dan tandai kontrak yang membutuhkan keputusan perpanjangan atau penutupan.",
+    "tags": [
+      "PKWT",
+      "kontrak kerja",
+      "masa kontrak",
+      "pengingat",
+      "HR legal"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama perusahaan, instansi, atau unit"
+      },
+      {
+        "id": "ownerName",
+        "label": "HR, recruiter, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Semesteran",
+          "Tahunan",
+          "Per kebutuhan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup organisasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Seluruh perusahaan",
+          "Kantor pusat",
+          "Cabang atau outlet",
+          "Departemen",
+          "Unit proyek",
+          "Rekrutmen atau kandidat"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kebijakan dan asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan kebijakan internal, parameter, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Monitoring Kontrak",
+        "title": "Pelacak Masa Kontrak PKWT & Peringatan Habis Kontrak - {{entityName}}",
+        "columns": [
+          "Kode Pegawai",
+          "Jenis Kontrak",
+          "Sisa Hari Kontrak",
+          "PIC Review",
+          "Keputusan (1=Review)",
+          "Jendela Pengingat (1-4)",
+          "Perlu Tindak Lanjut (1/0)"
+        ],
+        "rows": [
+          [
+            "EMP-021",
+            "PKWT",
+            75,
+            "HR Ops",
+            0,
+            0,
+            0
+          ],
+          [
+            "EMP-022",
+            "PKWT",
+            28,
+            "HR Ops",
+            0,
+            0,
+            0
+          ],
+          [
+            "EMP-023",
+            "PKWT",
+            10,
+            "HR Manager",
+            0,
+            0,
+            0
+          ],
+          [
+            "EMP-024",
+            "PKWT",
+            -3,
+            "HR Manager",
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "IF(C6<0,4,IF(C6<=14,3,IF(C6<=30,2,1)))",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(OR(C6<=30,E6=0),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F7",
+            "formula": "IF(C7<0,4,IF(C7<=14,3,IF(C7<=30,2,1)))",
+            "cachedValue": 2
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(OR(C7<=30,E7=0),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F8",
+            "formula": "IF(C8<0,4,IF(C8<=14,3,IF(C8<=30,2,1)))",
+            "cachedValue": 3
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(OR(C8<=30,E8=0),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F9",
+            "formula": "IF(C9<0,4,IF(C9<=14,3,IF(C9<=30,2,1)))",
+            "cachedValue": 4
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(OR(C9<=30,E9=0),1,0)",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          17,
+          18,
+          20,
+          18,
+          22,
+          22,
+          23
+        ]
+      }
+    ]
+  },
+  {
+    "id": "panduan-wawancara-scorecard-kandidat",
+    "name": "Panduan Wawancara Terstruktur & Scorecard Kandidat",
+    "category": "sdm",
+    "categoryLabel": "Sumber daya manusia",
+    "symbol": "INT",
+    "format": "md",
+    "quality": "standar",
+    "description": "Panduan wawancara berbasis kompetensi dengan pertanyaan konsisten, bukti perilaku, skala penilaian, dan catatan keputusan yang dapat ditelusuri.",
+    "tags": [
+      "wawancara",
+      "scorecard kandidat",
+      "rekrutmen",
+      "kompetensi",
+      "STAR"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama perusahaan, instansi, atau unit"
+      },
+      {
+        "id": "ownerName",
+        "label": "HR, recruiter, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Semesteran",
+          "Tahunan",
+          "Per kebutuhan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup organisasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Seluruh perusahaan",
+          "Kantor pusat",
+          "Cabang atau outlet",
+          "Departemen",
+          "Unit proyek",
+          "Rekrutmen atau kandidat"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kebijakan dan asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan kebijakan internal, parameter, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Identitas proses seleksi",
+        "body": "Wawancara untuk {{entityName}}, difasilitasi oleh {{ownerName}} pada periode {{period}}. Ruang lingkup seleksi: {{scope}}. Catat kode kandidat, posisi, tahap seleksi, tanggal, dan panel pewawancara tanpa memasukkan data pribadi yang tidak relevan."
+      },
+      {
+        "heading": "Struktur wawancara dan waktu",
+        "bullets": [
+          "Pembukaan dan penjelasan proses: 5 menit; jelaskan posisi, format, dan alur wawancara.",
+          "Pengalaman relevan dan konteks pekerjaan: 10 menit; minta contoh pekerjaan yang benar-benar dilakukan.",
+          "Pertanyaan berbasis kompetensi: 20 menit; gali situasi, tugas, tindakan pribadi, dan hasil (STAR).",
+          "Simulasi atau studi kasus singkat: 10-15 menit; gunakan instruksi dan waktu yang sama untuk semua kandidat.",
+          "Pertanyaan kandidat dan penutupan: 5 menit; jelaskan tahapan lanjutan tanpa menjanjikan hasil."
+        ]
+      },
+      {
+        "heading": "Pertanyaan inti berbasis bukti",
+        "bullets": [
+          "Ceritakan situasi ketika Anda harus menyelesaikan pekerjaan dengan tenggat yang saling bertabrakan. Apa prioritas dan hasilnya?",
+          "Berikan contoh ketika Anda menerima umpan balik yang sulit. Apa yang berubah setelahnya?",
+          "Jelaskan masalah kerja yang Anda pecahkan dengan data. Data apa yang dipakai dan bagaimana hasil diukur?",
+          "Ceritakan pengalaman bekerja dengan pihak yang berbeda pendapat. Bagaimana keputusan dicapai?",
+          "Untuk pertanyaan teknis, gunakan studi kasus yang berhubungan langsung dengan tugas inti posisi."
+        ]
+      },
+      {
+        "heading": "Rubrik penilaian konsisten",
+        "bullets": [
+          "1 - Tidak ada bukti relevan atau jawaban tidak menjawab kompetensi.",
+          "2 - Bukti terbatas, tindakan pribadi tidak jelas, hasil tidak dapat diverifikasi.",
+          "3 - Bukti memadai, tindakan dan hasil cukup jelas untuk kebutuhan posisi.",
+          "4 - Bukti kuat, tindakan terstruktur, dampak dapat dijelaskan.",
+          "5 - Bukti sangat kuat, dampak terukur, dan dapat diterapkan pada konteks posisi."
+        ]
+      },
+      {
+        "heading": "Ringkasan keputusan panel",
+        "bullets": [
+          "Kekuatan yang didukung contoh konkret: [catat perilaku atau hasil].",
+          "Risiko atau gap kompetensi yang perlu diuji lagi: [catat bukti, bukan kesan pribadi].",
+          "Pertanyaan verifikasi pada tahap berikutnya: [rincian].",
+          "Rekomendasi: lanjut / pertimbangkan / tidak lanjut, disertai alasan terkait kriteria posisi."
+        ]
+      },
+      {
+        "heading": "Catatan khusus dan tata kelola",
+        "body": "Catatan proses, penyesuaian akomodasi, atau batasan evaluasi: {{notes}}. Simpan scorecard hanya pada lokasi internal dengan hak akses sesuai kebijakan retensi data kandidat."
+      }
+    ]
+  },
+  {
+    "id": "penilaian-kinerja-kpi-okr-appraisal",
+    "name": "Penilaian Kinerja Karyawan: KPI & OKR Appraisal",
+    "category": "sdm",
+    "categoryLabel": "Sumber daya manusia",
+    "symbol": "KPI",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Hitung skor appraisal dari KPI, kompetensi perilaku, pencapaian OKR, dan kolaborasi dengan bobot yang dapat disesuaikan; hasilkan rating numerik untuk kalibrasi kinerja.",
+    "tags": [
+      "KPI",
+      "OKR",
+      "appraisal",
+      "penilaian kinerja",
+      "performance review"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama perusahaan, instansi, atau unit"
+      },
+      {
+        "id": "ownerName",
+        "label": "HR, recruiter, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Semesteran",
+          "Tahunan",
+          "Per kebutuhan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup organisasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Seluruh perusahaan",
+          "Kantor pusat",
+          "Cabang atau outlet",
+          "Departemen",
+          "Unit proyek",
+          "Rekrutmen atau kandidat"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kebijakan dan asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan kebijakan internal, parameter, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Performance Appraisal",
+        "title": "Penilaian Kinerja Karyawan: KPI & OKR Appraisal - {{entityName}}",
+        "columns": [
+          "Kode Pegawai",
+          "Skor KPI (1-5)",
+          "Skor Kompetensi (1-5)",
+          "Skor OKR (1-5)",
+          "Skor Kolaborasi (1-5)",
+          "Skor Berbobot",
+          "Rating (1-5)",
+          "Perlu Review (1/0)"
+        ],
+        "rows": [
+          [
+            "EMP-001",
+            4.2,
+            4,
+            4.5,
+            4,
+            0,
+            0,
+            0
+          ],
+          [
+            "EMP-002",
+            3.5,
+            4.2,
+            3.8,
+            4.5,
+            0,
+            0,
+            0
+          ],
+          [
+            "EMP-003",
+            4.8,
+            4.5,
+            4.6,
+            4.4,
+            0,
+            0,
+            0
+          ],
+          [
+            "EMP-004",
+            2.8,
+            3.2,
+            2.5,
+            3,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "B6*0.4+C6*0.2+D6*0.25+E6*0.15",
+            "cachedValue": 4.205
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(F6>=4.5,5,IF(F6>=4,4,IF(F6>=3,3,IF(F6>=2,2,1))))",
+            "cachedValue": 4
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(G6<=2,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F7",
+            "formula": "B7*0.4+C7*0.2+D7*0.25+E7*0.15",
+            "cachedValue": 3.865
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(F7>=4.5,5,IF(F7>=4,4,IF(F7>=3,3,IF(F7>=2,2,1))))",
+            "cachedValue": 3
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(G7<=2,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F8",
+            "formula": "B8*0.4+C8*0.2+D8*0.25+E8*0.15",
+            "cachedValue": 4.63
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(F8>=4.5,5,IF(F8>=4,4,IF(F8>=3,3,IF(F8>=2,2,1))))",
+            "cachedValue": 5
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(G8<=2,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F9",
+            "formula": "B9*0.4+C9*0.2+D9*0.25+E9*0.15",
+            "cachedValue": 2.835
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(F9>=4.5,5,IF(F9>=4,4,IF(F9>=3,3,IF(F9>=2,2,1))))",
+            "cachedValue": 2
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(G9<=2,1,0)",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          17,
+          18,
+          24,
+          18,
+          22,
+          18,
+          16,
+          18
+        ]
+      }
+    ]
+  },
+  {
+    "id": "matriks-kompetensi-skill-gap-tim",
+    "name": "Matriks Kompetensi & Skill Gap Tim",
+    "category": "sdm",
+    "categoryLabel": "Sumber daya manusia",
+    "symbol": "SKL",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Bandingkan tingkat kompetensi saat ini dengan level yang dibutuhkan per jabatan, hitung gap, dan urutkan kebutuhan pengembangan yang paling mendesak.",
+    "tags": [
+      "kompetensi",
+      "skill gap",
+      "pemetaan skill",
+      "training needs",
+      "talent development"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama perusahaan, instansi, atau unit"
+      },
+      {
+        "id": "ownerName",
+        "label": "HR, recruiter, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Semesteran",
+          "Tahunan",
+          "Per kebutuhan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup organisasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Seluruh perusahaan",
+          "Kantor pusat",
+          "Cabang atau outlet",
+          "Departemen",
+          "Unit proyek",
+          "Rekrutmen atau kandidat"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kebijakan dan asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan kebijakan internal, parameter, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Matriks Skill Gap",
+        "title": "Matriks Kompetensi & Skill Gap Tim - {{entityName}}",
+        "columns": [
+          "Kompetensi",
+          "Level Dibutuhkan (1-5)",
+          "Level Saat Ini (1-5)",
+          "Gap",
+          "Prioritas Pengembangan (1/0)",
+          "Metode Pengembangan",
+          "PIC"
+        ],
+        "rows": [
+          [
+            "Analisis data",
+            4,
+            2,
+            0,
+            0,
+            "Pelatihan + praktik proyek",
+            "HR/L&D"
+          ],
+          [
+            "Komunikasi stakeholder",
+            4,
+            3,
+            0,
+            0,
+            "Coaching",
+            "Atasan"
+          ],
+          [
+            "Pengelolaan proyek",
+            5,
+            3,
+            0,
+            0,
+            "Mentoring proyek",
+            "PMO"
+          ],
+          [
+            "Dokumentasi proses",
+            3,
+            3,
+            0,
+            0,
+            "Knowledge sharing",
+            "Atasan"
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "D6",
+            "formula": "MAX(0,B6-C6)",
+            "cachedValue": 2
+          },
+          {
+            "cell": "E6",
+            "formula": "IF(D6>=2,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "D7",
+            "formula": "MAX(0,B7-C7)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "E7",
+            "formula": "IF(D7>=2,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "D8",
+            "formula": "MAX(0,B8-C8)",
+            "cachedValue": 2
+          },
+          {
+            "cell": "E8",
+            "formula": "IF(D8>=2,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "D9",
+            "formula": "MAX(0,B9-C9)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "E9",
+            "formula": "IF(D9>=2,1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          28,
+          23,
+          22,
+          13,
+          25,
+          24,
+          18
+        ]
+      }
+    ]
+  },
+  {
+    "id": "analisis-funnel-rekrutmen-time-to-hire",
+    "name": "Analisis Funnel Rekrutmen & Time-to-Hire",
+    "category": "sdm",
+    "categoryLabel": "Sumber daya manusia",
+    "symbol": "RFT",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Analisis hasil rekrutmen per sumber kandidat dengan rasio lolos screening, wawancara, penawaran, penerimaan, dan rata-rata hari pemenuhan posisi.",
+    "tags": [
+      "recruitment funnel",
+      "time to hire",
+      "conversion rate",
+      "sourcing",
+      "rekrutmen"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama perusahaan, instansi, atau unit"
+      },
+      {
+        "id": "ownerName",
+        "label": "HR, recruiter, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Semesteran",
+          "Tahunan",
+          "Per kebutuhan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup organisasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Seluruh perusahaan",
+          "Kantor pusat",
+          "Cabang atau outlet",
+          "Departemen",
+          "Unit proyek",
+          "Rekrutmen atau kandidat"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kebijakan dan asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan kebijakan internal, parameter, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Funnel Rekrutmen",
+        "title": "Analisis Funnel Rekrutmen & Time-to-Hire - {{entityName}}",
+        "columns": [
+          "Sumber Kandidat",
+          "Lamaran Masuk",
+          "Lolos Screening",
+          "Wawancara",
+          "Offering",
+          "Diterima",
+          "Conversion Diterima",
+          "Rata-rata Hari Isi Posisi"
+        ],
+        "rows": [
+          [
+            "Job portal",
+            120,
+            48,
+            24,
+            10,
+            7,
+            0,
+            32
+          ],
+          [
+            "Referral",
+            35,
+            22,
+            15,
+            9,
+            8,
+            0,
+            21
+          ],
+          [
+            "Media sosial",
+            70,
+            25,
+            12,
+            5,
+            3,
+            0,
+            29
+          ],
+          [
+            "Career fair",
+            50,
+            18,
+            10,
+            4,
+            2,
+            0,
+            35
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "IF(B6=0,0,F6/B6)",
+            "cachedValue": 0.0583333333
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(B7=0,0,F7/B7)",
+            "cachedValue": 0.2285714286
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(B8=0,0,F8/B8)",
+            "cachedValue": 0.0428571429
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(B9=0,0,F9/B9)",
+            "cachedValue": 0.04
+          }
+        ],
+        "columnWidths": [
+          22,
+          17,
+          19,
+          16,
+          14,
+          14,
+          22,
+          24
+        ]
+      }
+    ]
+  },
+  {
+    "id": "anggaran-pelatihan-ld-biaya-efektivitas",
+    "name": "Perencanaan Anggaran Pelatihan & Evaluasi L&D",
+    "category": "sdm",
+    "categoryLabel": "Sumber daya manusia",
+    "symbol": "LND",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Rencanakan biaya pelatihan per program, hitung realisasi dan varians anggaran, biaya per peserta, serta rasio penyelesaian peserta.",
+    "tags": [
+      "learning and development",
+      "anggaran pelatihan",
+      "L&D",
+      "biaya per peserta",
+      "evaluasi training"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama perusahaan, instansi, atau unit"
+      },
+      {
+        "id": "ownerName",
+        "label": "HR, recruiter, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Semesteran",
+          "Tahunan",
+          "Per kebutuhan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup organisasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Seluruh perusahaan",
+          "Kantor pusat",
+          "Cabang atau outlet",
+          "Departemen",
+          "Unit proyek",
+          "Rekrutmen atau kandidat"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kebijakan dan asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan kebijakan internal, parameter, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Anggaran L&D",
+        "title": "Perencanaan Anggaran Pelatihan & Evaluasi L&D - {{entityName}}",
+        "columns": [
+          "Program Pelatihan",
+          "Peserta",
+          "Anggaran (Rp)",
+          "Realisasi (Rp)",
+          "Varians (Rp)",
+          "Biaya per Peserta (Rp)",
+          "Peserta Lulus",
+          "Completion Rate"
+        ],
+        "rows": [
+          [
+            "Excel untuk HR",
+            20,
+            6000000,
+            5500000,
+            0,
+            0,
+            18,
+            0
+          ],
+          [
+            "Leadership dasar",
+            12,
+            9000000,
+            9400000,
+            0,
+            0,
+            10,
+            0
+          ],
+          [
+            "Keselamatan kerja",
+            30,
+            7500000,
+            7200000,
+            0,
+            0,
+            29,
+            0
+          ],
+          [
+            "Komunikasi layanan",
+            16,
+            4800000,
+            4200000,
+            0,
+            0,
+            15,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "C6-D6",
+            "cachedValue": 500000
+          },
+          {
+            "cell": "F6",
+            "formula": "IF(B6=0,0,D6/B6)",
+            "cachedValue": 275000
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(B6=0,0,G6/B6)",
+            "cachedValue": 0.9
+          },
+          {
+            "cell": "E7",
+            "formula": "C7-D7",
+            "cachedValue": -400000
+          },
+          {
+            "cell": "F7",
+            "formula": "IF(B7=0,0,D7/B7)",
+            "cachedValue": 783333.3333333334
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(B7=0,0,G7/B7)",
+            "cachedValue": 0.8333333333
+          },
+          {
+            "cell": "E8",
+            "formula": "C8-D8",
+            "cachedValue": 300000
+          },
+          {
+            "cell": "F8",
+            "formula": "IF(B8=0,0,D8/B8)",
+            "cachedValue": 240000
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(B8=0,0,G8/B8)",
+            "cachedValue": 0.9666666667
+          },
+          {
+            "cell": "E9",
+            "formula": "C9-D9",
+            "cachedValue": 600000
+          },
+          {
+            "cell": "F9",
+            "formula": "IF(B9=0,0,D9/B9)",
+            "cachedValue": 262500
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(B9=0,0,G9/B9)",
+            "cachedValue": 0.9375
+          }
+        ],
+        "columnWidths": [
+          26,
+          14,
+          19,
+          19,
+          18,
+          23,
+          16,
+          18
+        ]
+      }
+    ]
+  },
+  {
+    "id": "performance-improvement-plan-pip",
+    "name": "Pelacak Performance Improvement Plan (PIP) & Review Berkala",
+    "category": "sdm",
+    "categoryLabel": "Sumber daya manusia",
+    "symbol": "PIP",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Pantau indikator kinerja yang perlu diperbaiki, baseline, target, pencapaian aktual, waktu review, dan bukti dukungan agar PIP transparan serta terukur.",
+    "tags": [
+      "PIP",
+      "perbaikan kinerja",
+      "coaching",
+      "performance management",
+      "review"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama perusahaan, instansi, atau unit"
+      },
+      {
+        "id": "ownerName",
+        "label": "HR, recruiter, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Semesteran",
+          "Tahunan",
+          "Per kebutuhan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup organisasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Seluruh perusahaan",
+          "Kantor pusat",
+          "Cabang atau outlet",
+          "Departemen",
+          "Unit proyek",
+          "Rekrutmen atau kandidat"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kebijakan dan asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan kebijakan internal, parameter, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Monitoring PIP",
+        "title": "Pelacak Performance Improvement Plan (PIP) & Review Berkala - {{entityName}}",
+        "columns": [
+          "Kode Pegawai",
+          "Indikator Perbaikan",
+          "Baseline",
+          "Target",
+          "Aktual",
+          "Pencapaian Target (%)",
+          "Sisa Hari Review",
+          "Target Tercapai (1/0)"
+        ],
+        "rows": [
+          [
+            "EMP-041",
+            "Ketepatan laporan (%)",
+            70,
+            95,
+            88,
+            0,
+            7,
+            0
+          ],
+          [
+            "EMP-042",
+            "Penyelesaian tiket (%)",
+            60,
+            90,
+            92,
+            0,
+            2,
+            0
+          ],
+          [
+            "EMP-043",
+            "Akurasi input (%)",
+            85,
+            98,
+            90,
+            0,
+            -3,
+            0
+          ],
+          [
+            "EMP-044",
+            "Kehadiran rapat (%)",
+            75,
+            95,
+            91,
+            0,
+            10,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "IF(D6=C6,0,(E6-C6)/(D6-C6))",
+            "cachedValue": 0.72
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(E6>=D6,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F7",
+            "formula": "IF(D7=C7,0,(E7-C7)/(D7-C7))",
+            "cachedValue": 1.0666666667
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(E7>=D7,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F8",
+            "formula": "IF(D8=C8,0,(E8-C8)/(D8-C8))",
+            "cachedValue": 0.3846153846
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(E8>=D8,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F9",
+            "formula": "IF(D9=C9,0,(E9-C9)/(D9-C9))",
+            "cachedValue": 0.8
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(E9>=D9,1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          17,
+          28,
+          14,
+          14,
+          14,
+          22,
+          19,
           20
         ]
       }
+    ]
+  },
+  {
+    "id": "pelacak-permintaan-hr-sla",
+    "name": "Pelacak Permintaan Layanan HR & Kepatuhan SLA",
+    "category": "sdm",
+    "categoryLabel": "Sumber daya manusia",
+    "symbol": "HRS",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Kelola tiket layanan HR seperti perubahan data, surat keterangan, payroll query, dan fasilitas; hitung sisa SLA dan tandai permintaan yang terlambat.",
+    "tags": [
+      "HR service desk",
+      "SLA HR",
+      "tiket HR",
+      "layanan karyawan",
+      "administrasi"
     ],
-    "quality": "standar"
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama perusahaan, instansi, atau unit"
+      },
+      {
+        "id": "ownerName",
+        "label": "HR, recruiter, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Semesteran",
+          "Tahunan",
+          "Per kebutuhan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup organisasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Seluruh perusahaan",
+          "Kantor pusat",
+          "Cabang atau outlet",
+          "Departemen",
+          "Unit proyek",
+          "Rekrutmen atau kandidat"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kebijakan dan asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan kebijakan internal, parameter, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "HR Service Desk",
+        "title": "Pelacak Permintaan Layanan HR & Kepatuhan SLA - {{entityName}}",
+        "columns": [
+          "ID Tiket",
+          "Kategori Permintaan",
+          "SLA (Hari)",
+          "Hari Penyelesaian Aktual",
+          "Selisih SLA",
+          "Sesuai SLA (1/0)",
+          "Status Terbuka (1/0)"
+        ],
+        "rows": [
+          [
+            "HR-101",
+            "Surat keterangan",
+            2,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            "HR-102",
+            "Perubahan data payroll",
+            3,
+            4,
+            0,
+            0,
+            1
+          ],
+          [
+            "HR-103",
+            "Koreksi presensi",
+            2,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            "HR-104",
+            "Permintaan fasilitas",
+            5,
+            7,
+            0,
+            0,
+            1
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "C6-D6",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F6",
+            "formula": "IF(D6<=C6,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "E7",
+            "formula": "C7-D7",
+            "cachedValue": -1
+          },
+          {
+            "cell": "F7",
+            "formula": "IF(D7<=C7,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "E8",
+            "formula": "C8-D8",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F8",
+            "formula": "IF(D8<=C8,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "E9",
+            "formula": "C9-D9",
+            "cachedValue": -2
+          },
+          {
+            "cell": "F9",
+            "formula": "IF(D9<=C9,1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          16,
+          28,
+          14,
+          24,
+          16,
+          17,
+          19
+        ]
+      }
+    ]
+  },
+  {
+    "id": "monitoring-sertifikasi-pelatihan-wajib",
+    "name": "Monitoring Kehadiran Pelatihan & Masa Berlaku Sertifikasi",
+    "category": "sdm",
+    "categoryLabel": "Sumber daya manusia",
+    "symbol": "CRT",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Pantau pemenuhan jam pelatihan dan sertifikasi yang diwajibkan untuk peran tertentu, hitung completion rate, serta tandai sertifikat yang mendekati masa berlaku akhir.",
+    "tags": [
+      "sertifikasi karyawan",
+      "pelatihan wajib",
+      "compliance training",
+      "masa berlaku",
+      "L&D"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama perusahaan, instansi, atau unit"
+      },
+      {
+        "id": "ownerName",
+        "label": "HR, recruiter, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Semesteran",
+          "Tahunan",
+          "Per kebutuhan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup organisasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Seluruh perusahaan",
+          "Kantor pusat",
+          "Cabang atau outlet",
+          "Departemen",
+          "Unit proyek",
+          "Rekrutmen atau kandidat"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kebijakan dan asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan kebijakan internal, parameter, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Pelatihan dan Sertifikasi",
+        "title": "Monitoring Kehadiran Pelatihan & Masa Berlaku Sertifikasi - {{entityName}}",
+        "columns": [
+          "Kode Pegawai",
+          "Program/Sertifikasi",
+          "Jam Wajib",
+          "Jam Diikuti",
+          "Completion Rate",
+          "Hari ke Kedaluwarsa",
+          "Perlu Pembaruan (1/0)"
+        ],
+        "rows": [
+          [
+            "EMP-011",
+            "K3 dasar",
+            8,
+            8,
+            0,
+            240,
+            0
+          ],
+          [
+            "EMP-012",
+            "Operator forklift",
+            16,
+            12,
+            0,
+            20,
+            0
+          ],
+          [
+            "EMP-013",
+            "Keamanan data",
+            4,
+            4,
+            0,
+            5,
+            0
+          ],
+          [
+            "EMP-014",
+            "P3K tempat kerja",
+            8,
+            6,
+            0,
+            90,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "IF(C6=0,0,D6/C6)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(AND(E6>=1,F6<=30),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "E7",
+            "formula": "IF(C7=0,0,D7/C7)",
+            "cachedValue": 0.75
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(AND(E7>=1,F7<=30),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "E8",
+            "formula": "IF(C8=0,0,D8/C8)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(AND(E8>=1,F8<=30),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "E9",
+            "formula": "IF(C9=0,0,D9/C9)",
+            "cachedValue": 0.75
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(AND(E9>=1,F9<=30),1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          17,
+          24,
+          15,
+          15,
+          18,
+          20,
+          22
+        ]
+      }
+    ]
+  },
+  {
+    "id": "review-penyesuaian-gaji-kompensasi",
+    "name": "Review Penyesuaian Gaji & Rekomendasi Kompensasi",
+    "category": "sdm",
+    "categoryLabel": "Sumber daya manusia",
+    "symbol": "KMP",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Uji dampak kenaikan gaji berdasarkan gaji saat ini, persentase usulan, rating kinerja, dan pagu anggaran; tandai usulan yang melampaui batas internal.",
+    "tags": [
+      "kompensasi",
+      "salary review",
+      "kenaikan gaji",
+      "payroll budget",
+      "remunerasi"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama perusahaan, instansi, atau unit"
+      },
+      {
+        "id": "ownerName",
+        "label": "HR, recruiter, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Semesteran",
+          "Tahunan",
+          "Per kebutuhan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup organisasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Seluruh perusahaan",
+          "Kantor pusat",
+          "Cabang atau outlet",
+          "Departemen",
+          "Unit proyek",
+          "Rekrutmen atau kandidat"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kebijakan dan asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan kebijakan internal, parameter, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Review Kompensasi",
+        "title": "Review Penyesuaian Gaji & Rekomendasi Kompensasi - {{entityName}}",
+        "columns": [
+          "Kode Pegawai",
+          "Gaji Saat Ini (Rp)",
+          "Usulan Kenaikan (%)",
+          "Rating Kinerja (1-5)",
+          "Gaji Usulan (Rp)",
+          "Kenaikan Nominal (Rp)",
+          "Batas Anggaran (Rp)",
+          "Dalam Batas (1/0)"
+        ],
+        "rows": [
+          [
+            "EMP-001",
+            6500000,
+            0.08,
+            4,
+            0,
+            0,
+            600000,
+            0
+          ],
+          [
+            "EMP-002",
+            5200000,
+            0.05,
+            3,
+            0,
+            0,
+            300000,
+            0
+          ],
+          [
+            "EMP-003",
+            9000000,
+            0.12,
+            5,
+            0,
+            0,
+            1200000,
+            0
+          ],
+          [
+            "EMP-004",
+            4800000,
+            0.04,
+            2,
+            0,
+            0,
+            250000,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "B6*(1+C6)",
+            "cachedValue": 7020000
+          },
+          {
+            "cell": "F6",
+            "formula": "E6-B6",
+            "cachedValue": 520000
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(F6<=G6,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "E7",
+            "formula": "B7*(1+C7)",
+            "cachedValue": 5460000
+          },
+          {
+            "cell": "F7",
+            "formula": "E7-B7",
+            "cachedValue": 260000
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(F7<=G7,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "E8",
+            "formula": "B8*(1+C8)",
+            "cachedValue": 10080000.000000002
+          },
+          {
+            "cell": "F8",
+            "formula": "E8-B8",
+            "cachedValue": 1080000.0000000019
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(F8<=G8,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "E9",
+            "formula": "B9*(1+C9)",
+            "cachedValue": 4992000
+          },
+          {
+            "cell": "F9",
+            "formula": "E9-B9",
+            "cachedValue": 192000
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(F9<=G9,1,0)",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          17,
+          21,
+          21,
+          21,
+          21,
+          23,
+          20,
+          18
+        ]
+      }
+    ]
+  },
+  {
+    "id": "surat-penawaran-kerja-offering-letter-pkwt",
+    "name": "Surat Penawaran Kerja (Offering Letter) & Ringkasan Ketentuan PKWT",
+    "category": "sdm",
+    "categoryLabel": "Sumber daya manusia",
+    "symbol": "OFR",
+    "format": "md",
+    "quality": "baik",
+    "description": "Kerangka surat penawaran kerja yang memuat posisi, kompensasi, tanggal mulai, lokasi kerja, masa kontrak, persyaratan penerimaan, dan catatan pemeriksaan HR sebelum diterbitkan.",
+    "tags": [
+      "offering letter",
+      "surat penawaran kerja",
+      "PKWT",
+      "rekrutmen",
+      "kontrak kerja"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama perusahaan, instansi, atau unit"
+      },
+      {
+        "id": "ownerName",
+        "label": "HR, recruiter, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Semesteran",
+          "Tahunan",
+          "Per kebutuhan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup organisasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Seluruh perusahaan",
+          "Kantor pusat",
+          "Cabang atau outlet",
+          "Departemen",
+          "Unit proyek",
+          "Rekrutmen atau kandidat"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kebijakan dan asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan kebijakan internal, parameter, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Identitas penawaran",
+        "body": "{{entityName}} menyampaikan penawaran untuk posisi [nama jabatan] kepada [nama kandidat / kode kandidat]. Surat disusun oleh {{ownerName}} pada {{period}} untuk ruang lingkup {{scope}}."
+      },
+      {
+        "heading": "Rincian posisi dan penempatan",
+        "bullets": [
+          "Jabatan dan level: [isi jabatan, grade, atasan langsung].",
+          "Departemen/lokasi kerja: [lokasi dan pola kerja].",
+          "Tanggal mulai yang diusulkan: [tanggal].",
+          "Status hubungan kerja: [PKWTT atau PKWT sesuai kebutuhan dan hasil pemeriksaan]."
+        ]
+      },
+      {
+        "heading": "Kompensasi dan fasilitas",
+        "bullets": [
+          "Gaji pokok bruto: [nominal dan periode pembayaran].",
+          "Tunjangan tetap/tidak tetap: [jenis, nilai, dan ketentuan].",
+          "Fasilitas dan kepesertaan program: [rincian berdasarkan kebijakan dan ketentuan yang berlaku].",
+          "Pemotongan pajak dan iuran: [jelaskan sebagai pemotongan sesuai peraturan serta konfigurasi payroll]."
+        ]
+      },
+      {
+        "heading": "Ketentuan penerimaan",
+        "body": "Kandidat diminta memberikan konfirmasi tertulis paling lambat [tanggal]. Dokumen pendukung yang dibutuhkan: [daftar]. Penawaran menjadi efektif setelah persetujuan pihak berwenang dan penandatanganan dokumen kerja yang sesuai."
+      },
+      {
+        "heading": "Catatan khusus untuk PKWT",
+        "bullets": [
+          "Apabila hubungan kerja menggunakan PKWT, pastikan jenis pekerjaan, jangka waktu, tanggal mulai/akhir, serta klausul wajib diperiksa terhadap peraturan ketenagakerjaan yang berlaku.",
+          "Cantumkan kompensasi akhir PKWT dan administrasi lain sesuai hasil pemeriksaan HR/legal.",
+          "Jangan menggunakan surat penawaran ini sebagai pengganti perjanjian kerja tertulis yang diwajibkan."
+        ]
+      },
+      {
+        "heading": "Persetujuan dan catatan internal",
+        "body": "Catatan, pengecualian, atau hasil review HR/legal: {{notes}}. Nama dan jabatan pemberi persetujuan: [isi]. Tanggal penerbitan: [isi]."
+      }
+    ]
+  },
+  {
+    "id": "analisis-turnover-retensi-karyawan",
+    "name": "Analisis Turnover Karyawan & Tingkat Retensi",
+    "category": "sdm",
+    "categoryLabel": "Sumber daya manusia",
+    "symbol": "TOR",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Hitung rata-rata headcount, tingkat turnover, dan retensi per periode dari headcount awal, karyawan masuk, dan karyawan keluar untuk membaca tren stabilitas tenaga kerja.",
+    "tags": [
+      "turnover",
+      "retensi",
+      "attrition",
+      "headcount",
+      "HR analytics"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama perusahaan, instansi, atau unit"
+      },
+      {
+        "id": "ownerName",
+        "label": "HR, recruiter, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Semesteran",
+          "Tahunan",
+          "Per kebutuhan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup organisasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Seluruh perusahaan",
+          "Kantor pusat",
+          "Cabang atau outlet",
+          "Departemen",
+          "Unit proyek",
+          "Rekrutmen atau kandidat"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kebijakan dan asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan kebijakan internal, parameter, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Turnover dan Retensi",
+        "title": "Analisis Turnover Karyawan & Tingkat Retensi - {{entityName}}",
+        "columns": [
+          "Periode",
+          "Headcount Awal",
+          "Karyawan Masuk",
+          "Karyawan Keluar",
+          "Headcount Akhir",
+          "Rata-rata Headcount",
+          "Turnover Rate",
+          "Retention Rate"
+        ],
+        "rows": [
+          [
+            "Jan",
+            120,
+            6,
+            4,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Feb",
+            122,
+            5,
+            7,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Mar",
+            120,
+            8,
+            3,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Apr",
+            125,
+            4,
+            5,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Mei",
+            124,
+            7,
+            2,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "B6+C6-D6",
+            "cachedValue": 122
+          },
+          {
+            "cell": "F6",
+            "formula": "AVERAGE(B6,E6)",
+            "cachedValue": 121
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(F6=0,0,D6/F6)",
+            "cachedValue": 0.0330578512
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(B6=0,0,(B6-D6)/B6)",
+            "cachedValue": 0.9666666667
+          },
+          {
+            "cell": "E7",
+            "formula": "B7+C7-D7",
+            "cachedValue": 120
+          },
+          {
+            "cell": "F7",
+            "formula": "AVERAGE(B7,E7)",
+            "cachedValue": 121
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(F7=0,0,D7/F7)",
+            "cachedValue": 0.0578512397
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(B7=0,0,(B7-D7)/B7)",
+            "cachedValue": 0.9426229508
+          },
+          {
+            "cell": "E8",
+            "formula": "B8+C8-D8",
+            "cachedValue": 125
+          },
+          {
+            "cell": "F8",
+            "formula": "AVERAGE(B8,E8)",
+            "cachedValue": 122.5
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(F8=0,0,D8/F8)",
+            "cachedValue": 0.0244897959
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(B8=0,0,(B8-D8)/B8)",
+            "cachedValue": 0.975
+          },
+          {
+            "cell": "E9",
+            "formula": "B9+C9-D9",
+            "cachedValue": 124
+          },
+          {
+            "cell": "F9",
+            "formula": "AVERAGE(B9,E9)",
+            "cachedValue": 124.5
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(F9=0,0,D9/F9)",
+            "cachedValue": 0.0401606426
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(B9=0,0,(B9-D9)/B9)",
+            "cachedValue": 0.96
+          },
+          {
+            "cell": "E10",
+            "formula": "B10+C10-D10",
+            "cachedValue": 129
+          },
+          {
+            "cell": "F10",
+            "formula": "AVERAGE(B10,E10)",
+            "cachedValue": 126.5
+          },
+          {
+            "cell": "G10",
+            "formula": "IF(F10=0,0,D10/F10)",
+            "cachedValue": 0.0158102767
+          },
+          {
+            "cell": "H10",
+            "formula": "IF(B10=0,0,(B10-D10)/B10)",
+            "cachedValue": 0.9838709677
+          }
+        ],
+        "columnWidths": [
+          15,
+          18,
+          18,
+          18,
+          18,
+          21,
+          18,
+          18
+        ]
+      }
+    ]
+  },
+  {
+    "id": "perencanaan-headcount-biaya-tenaga-kerja",
+    "name": "Perencanaan Headcount & Forecast Biaya Tenaga Kerja",
+    "category": "sdm",
+    "categoryLabel": "Sumber daya manusia",
+    "symbol": "HCF",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Proyeksikan headcount akhir berdasarkan rencana perekrutan dan pengurangan, estimasi biaya personel tahunan, serta bandingkan kebutuhan biaya dengan pagu departemen.",
+    "tags": [
+      "headcount planning",
+      "workforce planning",
+      "biaya tenaga kerja",
+      "budget forecast",
+      "FTE"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama perusahaan, instansi, atau unit"
+      },
+      {
+        "id": "ownerName",
+        "label": "HR, recruiter, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Semesteran",
+          "Tahunan",
+          "Per kebutuhan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup organisasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Seluruh perusahaan",
+          "Kantor pusat",
+          "Cabang atau outlet",
+          "Departemen",
+          "Unit proyek",
+          "Rekrutmen atau kandidat"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kebijakan dan asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan kebijakan internal, parameter, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Forecast Headcount",
+        "title": "Perencanaan Headcount & Forecast Biaya Tenaga Kerja - {{entityName}}",
+        "columns": [
+          "Departemen",
+          "HC Saat Ini",
+          "Rencana Masuk",
+          "Rencana Keluar",
+          "HC Proyeksi",
+          "Rata-rata Biaya Bulanan/FTE",
+          "Biaya Tahunan Proyeksi",
+          "Pagu Tahunan",
+          "Selisih terhadap Pagu"
+        ],
+        "rows": [
+          [
+            "Operasional",
+            42,
+            5,
+            2,
+            0,
+            6500000,
+            0,
+            3600000000,
+            0
+          ],
+          [
+            "Sales",
+            18,
+            3,
+            1,
+            0,
+            7200000,
+            0,
+            1800000000,
+            0
+          ],
+          [
+            "Keuangan",
+            8,
+            1,
+            0,
+            0,
+            8500000,
+            0,
+            1000000000,
+            0
+          ],
+          [
+            "HR",
+            6,
+            1,
+            0,
+            0,
+            9000000,
+            0,
+            700000000,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "B6+C6-D6",
+            "cachedValue": 45
+          },
+          {
+            "cell": "G6",
+            "formula": "E6*F6*12",
+            "cachedValue": 3510000000
+          },
+          {
+            "cell": "I6",
+            "formula": "H6-G6",
+            "cachedValue": 90000000
+          },
+          {
+            "cell": "E7",
+            "formula": "B7+C7-D7",
+            "cachedValue": 20
+          },
+          {
+            "cell": "G7",
+            "formula": "E7*F7*12",
+            "cachedValue": 1728000000
+          },
+          {
+            "cell": "I7",
+            "formula": "H7-G7",
+            "cachedValue": 72000000
+          },
+          {
+            "cell": "E8",
+            "formula": "B8+C8-D8",
+            "cachedValue": 9
+          },
+          {
+            "cell": "G8",
+            "formula": "E8*F8*12",
+            "cachedValue": 918000000
+          },
+          {
+            "cell": "I8",
+            "formula": "H8-G8",
+            "cachedValue": 82000000
+          },
+          {
+            "cell": "E9",
+            "formula": "B9+C9-D9",
+            "cachedValue": 7
+          },
+          {
+            "cell": "G9",
+            "formula": "E9*F9*12",
+            "cachedValue": 756000000
+          },
+          {
+            "cell": "I9",
+            "formula": "H9-G9",
+            "cachedValue": -56000000
+          }
+        ],
+        "columnWidths": [
+          22,
+          15,
+          16,
+          16,
+          16,
+          27,
+          22,
+          19,
+          24
+        ]
+      }
+    ]
+  },
+  {
+    "id": "kalibrasi-talent-nine-box",
+    "name": "Matriks Kalibrasi Talenta 9-Box & Rencana Pengembangan",
+    "category": "sdm",
+    "categoryLabel": "Sumber daya manusia",
+    "symbol": "9BX",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Petakan karyawan berdasarkan skor kinerja dan potensi, tentukan kode kotak 1-9, dan tautkan hasil kalibrasi dengan kebutuhan pengembangan atau suksesi.",
+    "tags": [
+      "talent review",
+      "9 box",
+      "talent calibration",
+      "potensi",
+      "kinerja"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama perusahaan, instansi, atau unit"
+      },
+      {
+        "id": "ownerName",
+        "label": "HR, recruiter, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Semesteran",
+          "Tahunan",
+          "Per kebutuhan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup organisasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Seluruh perusahaan",
+          "Kantor pusat",
+          "Cabang atau outlet",
+          "Departemen",
+          "Unit proyek",
+          "Rekrutmen atau kandidat"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kebijakan dan asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan kebijakan internal, parameter, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Talent 9-Box",
+        "title": "Matriks Kalibrasi Talenta 9-Box & Rencana Pengembangan - {{entityName}}",
+        "columns": [
+          "Kode Pegawai",
+          "Skor Kinerja (1-5)",
+          "Skor Potensi (1-5)",
+          "Band Kinerja (1-3)",
+          "Band Potensi (1-3)",
+          "Kode 9-Box",
+          "Perlu Suksesi (1/0)",
+          "Arah Pengembangan"
+        ],
+        "rows": [
+          [
+            "EMP-001",
+            5,
+            5,
+            0,
+            0,
+            0,
+            1,
+            "Stretch assignment"
+          ],
+          [
+            "EMP-002",
+            4,
+            3,
+            0,
+            0,
+            0,
+            0,
+            "Perluasan tanggung jawab"
+          ],
+          [
+            "EMP-003",
+            2,
+            4,
+            0,
+            0,
+            0,
+            0,
+            "Coaching kinerja"
+          ],
+          [
+            "EMP-004",
+            3,
+            2,
+            0,
+            0,
+            0,
+            0,
+            "Penguatan kompetensi"
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "D6",
+            "formula": "IF(B6>=4,3,IF(B6>=3,2,1))",
+            "cachedValue": 3
+          },
+          {
+            "cell": "E6",
+            "formula": "IF(C6>=4,3,IF(C6>=3,2,1))",
+            "cachedValue": 3
+          },
+          {
+            "cell": "F6",
+            "formula": "(E6-1)*3+D6",
+            "cachedValue": 9
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(F6>=7,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "D7",
+            "formula": "IF(B7>=4,3,IF(B7>=3,2,1))",
+            "cachedValue": 3
+          },
+          {
+            "cell": "E7",
+            "formula": "IF(C7>=4,3,IF(C7>=3,2,1))",
+            "cachedValue": 2
+          },
+          {
+            "cell": "F7",
+            "formula": "(E7-1)*3+D7",
+            "cachedValue": 6
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(F7>=7,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "D8",
+            "formula": "IF(B8>=4,3,IF(B8>=3,2,1))",
+            "cachedValue": 1
+          },
+          {
+            "cell": "E8",
+            "formula": "IF(C8>=4,3,IF(C8>=3,2,1))",
+            "cachedValue": 3
+          },
+          {
+            "cell": "F8",
+            "formula": "(E8-1)*3+D8",
+            "cachedValue": 7
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(F8>=7,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "D9",
+            "formula": "IF(B9>=4,3,IF(B9>=3,2,1))",
+            "cachedValue": 2
+          },
+          {
+            "cell": "E9",
+            "formula": "IF(C9>=4,3,IF(C9>=3,2,1))",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F9",
+            "formula": "(E9-1)*3+D9",
+            "cachedValue": 2
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(F9>=7,1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          17,
+          18,
+          18,
+          18,
+          18,
+          16,
+          19,
+          27
+        ]
+      }
+    ]
+  },
+  {
+    "id": "kompensasi-compa-ratio-pay-equity",
+    "name": "Analisis Pay Band, Compa-Ratio & Pemeriksaan Kesetaraan Gaji",
+    "category": "sdm",
+    "categoryLabel": "Sumber daya manusia",
+    "symbol": "PAYE",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Bandingkan gaji pokok dengan midpoint rentang jabatan, hitung compa-ratio dan posisi terhadap rentang minimum-maksimum, lalu tandai kasus yang perlu ditinjau berdasarkan aturan internal.",
+    "tags": [
+      "compa ratio",
+      "pay band",
+      "pay equity",
+      "salary range",
+      "kompensasi"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama perusahaan, instansi, atau unit"
+      },
+      {
+        "id": "ownerName",
+        "label": "HR, recruiter, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Semesteran",
+          "Tahunan",
+          "Per kebutuhan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup organisasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Seluruh perusahaan",
+          "Kantor pusat",
+          "Cabang atau outlet",
+          "Departemen",
+          "Unit proyek",
+          "Rekrutmen atau kandidat"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kebijakan dan asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan kebijakan internal, parameter, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Analisis Pay Band",
+        "title": "Analisis Pay Band, Compa-Ratio & Pemeriksaan Kesetaraan Gaji - {{entityName}}",
+        "columns": [
+          "Kode Pegawai",
+          "Grade",
+          "Gaji Pokok (Rp)",
+          "Minimum Grade (Rp)",
+          "Midpoint Grade (Rp)",
+          "Maksimum Grade (Rp)",
+          "Compa-Ratio",
+          "Dalam Rentang (1/0)",
+          "Gap ke Midpoint (Rp)"
+        ],
+        "rows": [
+          [
+            "EMP-001",
+            "G5",
+            9000000,
+            7500000,
+            9500000,
+            11500000,
+            0,
+            0,
+            0
+          ],
+          [
+            "EMP-002",
+            "G4",
+            6500000,
+            6000000,
+            7000000,
+            8500000,
+            0,
+            0,
+            0
+          ],
+          [
+            "EMP-003",
+            "G6",
+            14000000,
+            11000000,
+            13500000,
+            16000000,
+            0,
+            0,
+            0
+          ],
+          [
+            "EMP-004",
+            "G3",
+            4800000,
+            4500000,
+            5500000,
+            6500000,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "IF(E6=0,0,C6/E6)",
+            "cachedValue": 0.9473684211
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(AND(C6>=D6,C6<=F6),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "I6",
+            "formula": "E6-C6",
+            "cachedValue": 500000
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(E7=0,0,C7/E7)",
+            "cachedValue": 0.9285714286
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(AND(C7>=D7,C7<=F7),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "I7",
+            "formula": "E7-C7",
+            "cachedValue": 500000
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(E8=0,0,C8/E8)",
+            "cachedValue": 1.037037037
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(AND(C8>=D8,C8<=F8),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "I8",
+            "formula": "E8-C8",
+            "cachedValue": -500000
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(E9=0,0,C9/E9)",
+            "cachedValue": 0.8727272727
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(AND(C9>=D9,C9<=F9),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "I9",
+            "formula": "E9-C9",
+            "cachedValue": 700000
+          }
+        ],
+        "columnWidths": [
+          17,
+          13,
+          20,
+          22,
+          22,
+          22,
+          17,
+          19,
+          22
+        ]
+      }
+    ]
+  },
+  {
+    "id": "perencanaan-suksesi-posisi-kritis",
+    "name": "Perencanaan Suksesi & Cakupan Pengganti Posisi Kritis",
+    "category": "sdm",
+    "categoryLabel": "Sumber daya manusia",
+    "symbol": "SUC",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Identifikasi posisi kritis, ketersediaan kandidat suksesi, tingkat kesiapan, dan risiko kekosongan peran untuk menyusun prioritas pengembangan pengganti.",
+    "tags": [
+      "succession planning",
+      "posisi kritis",
+      "talent pipeline",
+      "readiness",
+      "business continuity"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama perusahaan, instansi, atau unit"
+      },
+      {
+        "id": "ownerName",
+        "label": "HR, recruiter, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Semesteran",
+          "Tahunan",
+          "Per kebutuhan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup organisasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Seluruh perusahaan",
+          "Kantor pusat",
+          "Cabang atau outlet",
+          "Departemen",
+          "Unit proyek",
+          "Rekrutmen atau kandidat"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kebijakan dan asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan kebijakan internal, parameter, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Succession Plan",
+        "title": "Perencanaan Suksesi & Cakupan Pengganti Posisi Kritis - {{entityName}}",
+        "columns": [
+          "Posisi Kritis",
+          "Kritikalitas (1-5)",
+          "Kandidat Siap Sekarang",
+          "Kandidat Siap <2 Tahun",
+          "Target Pengganti",
+          "Coverage Rate",
+          "Gap Pengganti",
+          "Risiko Kekosongan (1/0)"
+        ],
+        "rows": [
+          [
+            "Kepala Operasional",
+            5,
+            0,
+            2,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            "Manajer Keuangan",
+            5,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            "Lead HR",
+            4,
+            0,
+            1,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            "Supervisor Gudang",
+            4,
+            2,
+            1,
+            2,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "IF(E6=0,0,(C6+D6)/E6)",
+            "cachedValue": 2
+          },
+          {
+            "cell": "G6",
+            "formula": "MAX(0,E6-C6-D6)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(AND(B6>=4,C6=0),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F7",
+            "formula": "IF(E7=0,0,(C7+D7)/E7)",
+            "cachedValue": 2
+          },
+          {
+            "cell": "G7",
+            "formula": "MAX(0,E7-C7-D7)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(AND(B7>=4,C7=0),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F8",
+            "formula": "IF(E8=0,0,(C8+D8)/E8)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G8",
+            "formula": "MAX(0,E8-C8-D8)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(AND(B8>=4,C8=0),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F9",
+            "formula": "IF(E9=0,0,(C9+D9)/E9)",
+            "cachedValue": 1.5
+          },
+          {
+            "cell": "G9",
+            "formula": "MAX(0,E9-C9-D9)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(AND(B9>=4,C9=0),1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          24,
+          18,
+          21,
+          22,
+          18,
+          17,
+          18,
+          22
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dashboard-people-cost-produktivitas",
+    "name": "Dashboard People Cost, FTE & Produktivitas Organisasi",
+    "category": "sdm",
+    "categoryLabel": "Sumber daya manusia",
+    "symbol": "PCP",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Gabungkan headcount, FTE efektif, biaya tenaga kerja, jam produktif, dan output unit untuk memantau biaya per FTE serta produktivitas antarunit.",
+    "tags": [
+      "people analytics",
+      "people cost",
+      "FTE",
+      "produktivitas tenaga kerja",
+      "dashboard HR"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama perusahaan, instansi, atau unit"
+      },
+      {
+        "id": "ownerName",
+        "label": "HR, recruiter, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Semesteran",
+          "Tahunan",
+          "Per kebutuhan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup organisasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Seluruh perusahaan",
+          "Kantor pusat",
+          "Cabang atau outlet",
+          "Departemen",
+          "Unit proyek",
+          "Rekrutmen atau kandidat"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kebijakan dan asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan kebijakan internal, parameter, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "People Cost Dashboard",
+        "title": "Dashboard People Cost, FTE & Produktivitas Organisasi - {{entityName}}",
+        "columns": [
+          "Unit Kerja",
+          "Headcount",
+          "FTE Efektif",
+          "Biaya Tenaga Kerja (Rp)",
+          "Jam Produktif",
+          "Output Unit",
+          "Biaya per FTE (Rp)",
+          "Output per Jam",
+          "Jam Produktif per FTE"
+        ],
+        "rows": [
+          [
+            "Operasional",
+            42,
+            39,
+            273000000,
+            5200,
+            7800,
+            0,
+            0,
+            0
+          ],
+          [
+            "Sales",
+            18,
+            17,
+            122400000,
+            2200,
+            440,
+            0,
+            0,
+            0
+          ],
+          [
+            "Keuangan",
+            8,
+            8,
+            68000000,
+            980,
+            350,
+            0,
+            0,
+            0
+          ],
+          [
+            "HR",
+            6,
+            5.5,
+            49500000,
+            720,
+            180,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "IF(C6=0,0,D6/C6)",
+            "cachedValue": 7000000
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(E6=0,0,F6/E6)",
+            "cachedValue": 1.5
+          },
+          {
+            "cell": "I6",
+            "formula": "IF(C6=0,0,E6/C6)",
+            "cachedValue": 133.3333333333
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(C7=0,0,D7/C7)",
+            "cachedValue": 7200000
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(E7=0,0,F7/E7)",
+            "cachedValue": 0.2
+          },
+          {
+            "cell": "I7",
+            "formula": "IF(C7=0,0,E7/C7)",
+            "cachedValue": 129.4117647059
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(C8=0,0,D8/C8)",
+            "cachedValue": 8500000
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(E8=0,0,F8/E8)",
+            "cachedValue": 0.3571428571
+          },
+          {
+            "cell": "I8",
+            "formula": "IF(C8=0,0,E8/C8)",
+            "cachedValue": 122.5
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(C9=0,0,D9/C9)",
+            "cachedValue": 9000000
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(E9=0,0,F9/E9)",
+            "cachedValue": 0.25
+          },
+          {
+            "cell": "I9",
+            "formula": "IF(C9=0,0,E9/C9)",
+            "cachedValue": 130.9090909091
+          }
+        ],
+        "columnWidths": [
+          22,
+          15,
+          15,
+          27,
+          17,
+          17,
+          23,
+          18,
+          23
+        ]
+      }
+    ]
+  },
+  {
+    "id": "analisis-pengalaman-karyawan-eNPS",
+    "name": "Analisis Engagement Karyawan & eNPS",
+    "category": "sdm",
+    "categoryLabel": "Sumber daya manusia",
+    "symbol": "ENP",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Rekap respons survei engagement berbasis skala rekomendasi 0-10, kelompokkan promoter dan detractor, lalu hitung response rate serta eNPS per unit.",
+    "tags": [
+      "employee engagement",
+      "eNPS",
+      "survei karyawan",
+      "promoter",
+      "detractor"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama perusahaan, instansi, atau unit"
+      },
+      {
+        "id": "ownerName",
+        "label": "HR, recruiter, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Semesteran",
+          "Tahunan",
+          "Per kebutuhan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup organisasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Seluruh perusahaan",
+          "Kantor pusat",
+          "Cabang atau outlet",
+          "Departemen",
+          "Unit proyek",
+          "Rekrutmen atau kandidat"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kebijakan dan asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan kebijakan internal, parameter, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "eNPS Summary",
+        "title": "Analisis Engagement Karyawan & eNPS - {{entityName}}",
+        "columns": [
+          "Unit",
+          "Pegawai Diundang",
+          "Respons Masuk",
+          "Promoter (9-10)",
+          "Passive (7-8)",
+          "Detractor (0-6)",
+          "Response Rate",
+          "eNPS"
+        ],
+        "rows": [
+          [
+            "Operasional",
+            42,
+            35,
+            18,
+            10,
+            7,
+            0,
+            0
+          ],
+          [
+            "Sales",
+            18,
+            16,
+            8,
+            5,
+            3,
+            0,
+            0
+          ],
+          [
+            "Keuangan",
+            8,
+            8,
+            4,
+            3,
+            1,
+            0,
+            0
+          ],
+          [
+            "HR",
+            6,
+            6,
+            3,
+            2,
+            1,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "IF(B6=0,0,C6/B6)",
+            "cachedValue": 0.8333333333
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(C6=0,0,(D6-F6)/C6*100)",
+            "cachedValue": 31.4285714286
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(B7=0,0,C7/B7)",
+            "cachedValue": 0.8888888889
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(C7=0,0,(D7-F7)/C7*100)",
+            "cachedValue": 31.25
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(B8=0,0,C8/B8)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(C8=0,0,(D8-F8)/C8*100)",
+            "cachedValue": 37.5
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(B9=0,0,C9/B9)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(C9=0,0,(D9-F9)/C9*100)",
+            "cachedValue": 33.3333333333
+          }
+        ],
+        "columnWidths": [
+          22,
+          20,
+          17,
+          18,
+          16,
+          18,
+          18,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "id": "kebijakan-cuti-disiplin-dan-kehadiran",
+    "name": "Kerangka Kebijakan Cuti, Kehadiran & Disiplin Kerja",
+    "category": "sdm",
+    "categoryLabel": "Sumber daya manusia",
+    "symbol": "POL",
+    "format": "md",
+    "quality": "unggulan",
+    "description": "Kerangka kebijakan internal untuk mengatur pengajuan cuti, pencatatan kehadiran, eskalasi keterlambatan, proses klarifikasi, dan dokumentasi tindakan secara konsisten.",
+    "tags": [
+      "kebijakan cuti",
+      "disiplin kerja",
+      "kehadiran",
+      "SOP HR",
+      "employee relations"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama perusahaan, instansi, atau unit"
+      },
+      {
+        "id": "ownerName",
+        "label": "HR, recruiter, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Semesteran",
+          "Tahunan",
+          "Per kebutuhan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup organisasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Seluruh perusahaan",
+          "Kantor pusat",
+          "Cabang atau outlet",
+          "Departemen",
+          "Unit proyek",
+          "Rekrutmen atau kandidat"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kebijakan dan asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan kebijakan internal, parameter, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Identitas dan cakupan kebijakan",
+        "body": "Kebijakan ini disusun untuk {{entityName}} oleh {{ownerName}}, berlaku mulai {{period}}, dengan cakupan {{scope}}. HR wajib memastikan dokumen final selaras dengan peraturan ketenagakerjaan terkini, perjanjian kerja, peraturan perusahaan/PKB, dan ketentuan khusus yang berlaku."
+      },
+      {
+        "heading": "Pengajuan dan persetujuan cuti",
+        "bullets": [
+          "Karyawan mengajukan cuti melalui kanal resmi dengan tanggal, jenis cuti, durasi, dan rencana alih tugas.",
+          "Atasan memeriksa ketersediaan personel dan dampak layanan sebelum memberi rekomendasi.",
+          "HR memverifikasi saldo, dokumen pendukung bila diwajibkan, dan kepatuhan pada kebijakan serta peraturan.",
+          "Persetujuan atau penolakan dicatat dengan alasan administratif dan jejak waktu; jangan mengubah saldo sebelum status disetujui."
+        ]
+      },
+      {
+        "heading": "Pencatatan kehadiran dan koreksi",
+        "bullets": [
+          "Gunakan sumber data presensi yang ditetapkan perusahaan dan batasi akses pada petugas berwenang.",
+          "Koreksi presensi harus memiliki alasan, bukti pendukung, pemohon, pemeriksa, dan waktu persetujuan.",
+          "Pisahkan data terlambat, izin, sakit, cuti, tugas luar, dan ketidakhadiran tanpa keterangan sesuai kode internal.",
+          "Lakukan rekonsiliasi periodik sebelum data digunakan untuk payroll atau evaluasi kinerja."
+        ]
+      },
+      {
+        "heading": "Penanganan keterlambatan dan pelanggaran",
+        "body": "Terapkan proses yang proporsional, konsisten, terdokumentasi, dan memberi kesempatan karyawan menyampaikan klarifikasi. Jangan menetapkan sanksi otomatis hanya dari satu angka absensi.",
+        "bullets": [
+          "Validasi kejadian dan sumber data sebelum mengirim pemberitahuan.",
+          "Minta klarifikasi karyawan dan catat fakta, tanggal, serta tanggapan secara terpisah dari opini.",
+          "Gunakan tahapan coaching, peringatan, atau tindakan formal hanya sesuai aturan yang sah dan berlaku.",
+          "Pastikan keputusan diperiksa HR dan pihak berwenang serta disampaikan melalui kanal resmi."
+        ]
+      },
+      {
+        "heading": "Retensi data dan kerahasiaan",
+        "bullets": [
+          "Simpan data presensi, cuti, dan dokumen disiplin pada repositori resmi dengan kontrol akses berbasis peran.",
+          "Hindari memasukkan data kesehatan rinci atau informasi pribadi yang tidak diperlukan ke laporan umum.",
+          "Tentukan masa simpan, hak koreksi, dan proses penghapusan sesuai kewajiban hukum dan kebijakan organisasi."
+        ]
+      },
+      {
+        "heading": "Pengesahan, pengecualian, dan catatan",
+        "body": "Pemilik kebijakan: {{ownerName}}. Catatan adaptasi lokal, pengecualian, atau hasil review legal: {{notes}}. Versi final perlu persetujuan manajemen dan dikomunikasikan sebelum diberlakukan."
+      }
+    ]
   }
 ]
