@@ -125,7 +125,7 @@ export function CatalogClient({templates}:Props) {
             <div className="preview-window">
               <div className="preview-topbar"><div className="preview-dots"><i/><i/><i/></div><span>WORKSPACE / PREVIEW</span><span className="preview-status">READY</span></div>
               <div className="preview-content">
-                <div className="preview-heading"><div><span className="preview-label">YOUR WORK, ORGANIZED</span><strong>Workspace overview</strong></div><span className="preview-date">TCS / 001</span></div>
+                <div className="preview-heading"><div><span className="preview-label">YOUR WORK, ORGANIZED</span><strong>Workspace overview</strong></div></div>
                 <div className="preview-metrics">
                   <div className="metric-card metric-dark"><span>COLLECTION</span><strong>09</strong><small>Categories</small></div>
                   <div className="metric-card metric-light"><span>FORMAT</span><strong>02</strong><small>XLSX & MD</small></div>
@@ -143,7 +143,7 @@ export function CatalogClient({templates}:Props) {
             <div className="floating-note note-bottom"><span className="note-number">05</span><span>Questions<br/>then download</span></div>
           </div>
         </div>
-        <div className="container hero-bottom"><span>AN ORGANIZED START FOR EVERY KIND OF WORK</span><div className="hero-bottom-line"/><span className="hero-bottom-index">TCS / 001</span></div>
+        <div className="container hero-bottom"><span>AN ORGANIZED START FOR EVERY KIND OF WORK</span><div className="hero-bottom-line"/></div>
       </section>
 
       <section className="catalog-section section-space" id="catalog">
