@@ -14,4 +14,4 @@ export const templates: TemplateDefinition[] = [
   ...projects, ...content, ...documents, ...developer,
 ] as TemplateDefinition[];
 
-export type { CategoryId, Difficulty, TemplateAnswers, TemplateDefinition, TemplateFormat, TemplateQuestion } from './schema';
+export type { CategoryId, Quality, TemplateAnswers, TemplateDefinition, TemplateFormat, TemplateQuestion } from './schema';
