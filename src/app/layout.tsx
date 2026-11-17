@@ -10,9 +10,9 @@ export const metadata: Metadata = {
   applicationName: 'TCS Template',
   keywords: ['TCS Template','The Choco Studios','template Excel','spreadsheet','template dokumen','template gratis'],
   icons: {
-    icon: tcsTemplateLogo.src,
-    shortcut: tcsTemplateLogo.src,
-    apple: tcsTemplateLogo.src,
+    icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
   },
   openGraph: {
     type: 'website',
