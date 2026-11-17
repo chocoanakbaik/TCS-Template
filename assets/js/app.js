@@ -290,6 +290,8 @@
     elements.progressCount.textContent = `${String(currentStep + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
     elements.progressBar.style.width = `${((currentStep + 1) / total) * 100}%`;
     elements.back.disabled = currentStep === 0;
+    elements.back.textContent = "Kembali";
+    elements.next.removeAttribute("data-finish");
     elements.next.textContent = currentStep === total - 1 ? "Lihat rekomendasi →" : "Lanjutkan →";
     elements.error.hidden = true;
 
