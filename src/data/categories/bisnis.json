@@ -1,39 +1,208 @@
 [
   {
-    "id": "financial-tracker",
-    "name": "Financial Tracker",
+    "id": "hpp-kuliner-margin",
+    "name": "Kalkulator HPP Kuliner & Margin",
     "category": "bisnis",
     "categoryLabel": "Bisnis & keuangan",
-    "symbol": "FT",
+    "symbol": "HPP",
     "format": "xlsx",
-    "description": "Catat pemasukan, pengeluaran, dan saldo dengan rumus otomatis yang dapat dilanjutkan sesuai kebutuhan.",
+    "quality": "standar",
+    "description": "Hitung biaya bahan, bumbu, kemasan, HPP per porsi, laba kotor, dan margin sebelum menetapkan harga menu.",
     "tags": [
-      "keuangan",
-      "finance",
-      "arus kas",
-      "transaksi",
-      "pengeluaran",
-      "pemasukan",
+      "hpp",
+      "kuliner",
+      "food cost",
+      "harga pokok",
+      "margin",
+      "restoran",
+      "kafe",
       "excel"
     ],
     "questions": [
       {
         "id": "entityName",
-        "label": "Nama instansi atau usaha",
+        "label": "Nama outlet atau merek kuliner",
         "type": "text",
         "required": true,
-        "placeholder": "Contoh: Toko Sinar Jaya"
+        "placeholder": "Nama usaha atau instansi"
       },
       {
         "id": "ownerName",
-        "label": "Nama pemilik atau penanggung jawab",
+        "label": "Pemilik atau kepala dapur",
         "type": "text",
         "required": false,
         "placeholder": "Nama penanggung jawab"
       },
       {
         "id": "period",
-        "label": "Periode yang digunakan",
+        "label": "Periode analisis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Per menu",
+          "Harian",
+          "Bulanan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Makanan",
+          "Minuman",
+          "Produk bakery",
+          "Paket menu"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan asumsi tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan asumsi atau kebutuhan tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "HPP per Porsi",
+        "title": "HPP Kuliner - {{entityName}}",
+        "columns": [
+          "Komponen biaya",
+          "Jumlah per porsi",
+          "Biaya per unit (Rp)",
+          "Biaya per porsi (Rp)",
+          "Catatan"
+        ],
+        "rows": [
+          [
+            "Bahan utama",
+            1,
+            9500,
+            0,
+            "Contoh resep standar"
+          ],
+          [
+            "Bumbu dan pelengkap",
+            1,
+            2200,
+            0,
+            "Termasuk saus atau topping"
+          ],
+          [
+            "Kemasan",
+            1,
+            1500,
+            0,
+            "Kotak, gelas, label"
+          ],
+          [
+            "TOTAL HPP",
+            0,
+            0,
+            0,
+            "Jumlah komponen"
+          ],
+          [
+            "Harga jual per porsi",
+            0,
+            18000,
+            0,
+            "Ubah kolom C"
+          ],
+          [
+            "Laba kotor per porsi",
+            0,
+            0,
+            0,
+            "Harga jual dikurangi HPP"
+          ],
+          [
+            "Margin kotor",
+            0,
+            0,
+            0,
+            "Dalam persentase"
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "D6",
+            "formula": "B6*C6",
+            "cachedValue": 9500
+          },
+          {
+            "cell": "D7",
+            "formula": "B7*C7",
+            "cachedValue": 2200
+          },
+          {
+            "cell": "D8",
+            "formula": "B8*C8",
+            "cachedValue": 1500
+          },
+          {
+            "cell": "D9",
+            "formula": "SUM(D6:D8)",
+            "cachedValue": 13200
+          },
+          {
+            "cell": "D11",
+            "formula": "C10-D9",
+            "cachedValue": 4800
+          },
+          {
+            "cell": "D12",
+            "formula": "IF(C10=0,0,D11/C10)",
+            "cachedValue": 0.2666666667
+          }
+        ],
+        "columnWidths": [
+          30,
+          18,
+          22,
+          22,
+          30
+        ]
+      }
+    ]
+  },
+  {
+    "id": "buku-kas-harian",
+    "name": "Buku Kas Harian & Saldo Berjalan",
+    "category": "bisnis",
+    "categoryLabel": "Bisnis & keuangan",
+    "symbol": "KAS",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Catat uang masuk dan keluar per transaksi serta hitung saldo kas berjalan agar selisih kas mudah ditelusuri.",
+    "tags": [
+      "kas harian",
+      "cashbook",
+      "penerimaan",
+      "pengeluaran",
+      "saldo",
+      "kasir"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama usaha atau unit kas",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Kasir atau pemegang kas",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode analisis",
         "type": "select",
         "required": true,
         "options": [
@@ -45,65 +214,839 @@
       },
       {
         "id": "scope",
-        "label": "Ruang lingkup atau konteks penggunaan",
+        "label": "Ruang lingkup penggunaan",
         "type": "select",
         "required": true,
         "options": [
-          "Keuangan usaha",
-          "Keuangan organisasi",
-          "Keuangan pribadi",
-          "Proyek atau kegiatan"
+          "Kas toko",
+          "Kas kantor",
+          "Kas kegiatan",
+          "Kas proyek"
         ]
       },
       {
         "id": "notes",
-        "label": "Catatan tambahan",
+        "label": "Catatan dan asumsi tambahan",
         "type": "textarea",
         "required": false,
-        "placeholder": "Tuliskan kebutuhan tambahan yang ingin dimasukkan."
+        "placeholder": "Tuliskan asumsi atau kebutuhan tambahan."
       }
     ],
     "sheets": [
       {
-        "name": "Transaksi",
-        "title": "Financial Tracker - {{entityName}}",
+        "name": "Mutasi Kas",
+        "title": "Buku Kas - {{entityName}}",
         "columns": [
           "Tanggal",
-          "Keterangan",
-          "Kategori",
-          "Pemasukan",
-          "Pengeluaran",
-          "Saldo"
+          "Saldo awal (Rp)",
+          "Uang masuk (Rp)",
+          "Uang keluar (Rp)",
+          "Saldo akhir (Rp)",
+          "Keterangan"
         ],
         "rows": [
           [
             "2026-11-01",
-            "Penjualan contoh",
-            "Pemasukan",
+            500000,
             1500000,
+            325000,
             0,
-            0
+            "Setoran dan belanja awal"
           ],
           [
             "2026-11-02",
-            "Biaya operasional",
-            "Operasional",
             0,
             250000,
-            0
+            150000,
+            0,
+            "Penjualan dan biaya kecil"
           ],
           [
             "2026-11-03",
-            "Pemasukan tambahan",
-            "Pemasukan",
-            500000,
+            0,
+            300000,
+            400000,
+            0,
+            "Penerimaan dan pembelian stok"
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "B6+C6-D6",
+            "cachedValue": 1675000
+          },
+          {
+            "cell": "B7",
+            "formula": "E6",
+            "cachedValue": 1675000
+          },
+          {
+            "cell": "E7",
+            "formula": "B7+C7-D7",
+            "cachedValue": 1775000
+          },
+          {
+            "cell": "B8",
+            "formula": "E7",
+            "cachedValue": 1775000
+          },
+          {
+            "cell": "E8",
+            "formula": "B8+C8-D8",
+            "cachedValue": 1675000
+          }
+        ],
+        "columnWidths": [
+          16,
+          20,
+          20,
+          20,
+          20,
+          34
+        ]
+      }
+    ]
+  },
+  {
+    "id": "anggaran-operasional-bulanan",
+    "name": "Anggaran Operasional Bulanan",
+    "category": "bisnis",
+    "categoryLabel": "Bisnis & keuangan",
+    "symbol": "AOB",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Bandingkan anggaran dan realisasi biaya rutin seperti sewa, utilitas, transportasi, dan perlengkapan.",
+    "tags": [
+      "anggaran",
+      "opex",
+      "biaya operasional",
+      "realisasi",
+      "budget"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama usaha atau departemen",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penyusun anggaran",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode analisis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Bulanan",
+          "Triwulanan",
+          "Tahunan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Seluruh operasional",
+          "Administrasi",
+          "Gerai atau outlet",
+          "Kantor pusat"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan asumsi tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan asumsi atau kebutuhan tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Anggaran vs Realisasi",
+        "title": "Anggaran Operasional - {{entityName}}",
+        "columns": [
+          "Pos biaya",
+          "Anggaran (Rp)",
+          "Realisasi (Rp)",
+          "Sisa anggaran (Rp)",
+          "Sisa terhadap anggaran"
+        ],
+        "rows": [
+          [
+            "Sewa tempat",
+            3000000,
+            3000000,
+            0,
+            0
+          ],
+          [
+            "Listrik dan internet",
+            900000,
+            850000,
+            0,
+            0
+          ],
+          [
+            "Transportasi dan logistik",
+            600000,
+            720000,
             0,
             0
           ],
           [
             "TOTAL",
-            "Ringkasan periode",
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "D6",
+            "formula": "B6-C6",
+            "cachedValue": 0
+          },
+          {
+            "cell": "E6",
+            "formula": "IF(B6=0,0,D6/B6)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "D7",
+            "formula": "B7-C7",
+            "cachedValue": 50000
+          },
+          {
+            "cell": "E7",
+            "formula": "IF(B7=0,0,D7/B7)",
+            "cachedValue": 0.0555555556
+          },
+          {
+            "cell": "D8",
+            "formula": "B8-C8",
+            "cachedValue": -120000
+          },
+          {
+            "cell": "E8",
+            "formula": "IF(B8=0,0,D8/B8)",
+            "cachedValue": -0.2
+          },
+          {
+            "cell": "B9",
+            "formula": "SUM(B6:B8)",
+            "cachedValue": 4500000
+          },
+          {
+            "cell": "C9",
+            "formula": "SUM(C6:C8)",
+            "cachedValue": 4570000
+          },
+          {
+            "cell": "D9",
+            "formula": "B9-C9",
+            "cachedValue": -70000
+          },
+          {
+            "cell": "E9",
+            "formula": "IF(B9=0,0,D9/B9)",
+            "cachedValue": -0.0155555556
+          }
+        ],
+        "columnWidths": [
+          30,
+          20,
+          20,
+          22,
+          24
+        ]
+      }
+    ]
+  },
+  {
+    "id": "kalkulator-diskon-harga-jual",
+    "name": "Kalkulator Diskon & Harga Jual Bersih",
+    "category": "bisnis",
+    "categoryLabel": "Bisnis & keuangan",
+    "symbol": "DIS",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Hitung harga setelah diskon, laba kotor per unit, dan margin agar promosi tidak menggerus keuntungan tanpa disadari.",
+    "tags": [
+      "diskon",
+      "harga jual",
+      "margin",
+      "promosi",
+      "laba kotor"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama toko atau merek",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pengelola harga",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode analisis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Per produk",
+          "Per kampanye",
+          "Bulanan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Ritel",
+          "Grosir",
+          "Marketplace",
+          "Penjualan langsung"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan asumsi tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan asumsi atau kebutuhan tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Harga dan Diskon",
+        "title": "Diskon & Harga Jual - {{entityName}}",
+        "columns": [
+          "Produk",
+          "Harga normal (Rp)",
+          "Diskon",
+          "Harga bersih (Rp)",
+          "HPP per unit (Rp)",
+          "Laba kotor (Rp)",
+          "Margin kotor"
+        ],
+        "rows": [
+          [
+            "Produk A",
+            35000,
+            0.1,
+            0,
+            18000,
+            0,
+            0
+          ],
+          [
+            "Produk B",
+            28000,
+            0.05,
+            0,
+            13000,
+            0,
+            0
+          ],
+          [
+            "Produk C",
+            50000,
+            0.15,
+            0,
+            29000,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "D6",
+            "formula": "B6*(1-C6)",
+            "cachedValue": 31500
+          },
+          {
+            "cell": "F6",
+            "formula": "D6-E6",
+            "cachedValue": 13500
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(D6=0,0,F6/D6)",
+            "cachedValue": 0.4285714286
+          },
+          {
+            "cell": "D7",
+            "formula": "B7*(1-C7)",
+            "cachedValue": 26600
+          },
+          {
+            "cell": "F7",
+            "formula": "D7-E7",
+            "cachedValue": 13600
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(D7=0,0,F7/D7)",
+            "cachedValue": 0.5112781955
+          },
+          {
+            "cell": "D8",
+            "formula": "B8*(1-C8)",
+            "cachedValue": 42500
+          },
+          {
+            "cell": "F8",
+            "formula": "D8-E8",
+            "cachedValue": 13500
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(D8=0,0,F8/D8)",
+            "cachedValue": 0.3176470588
+          }
+        ],
+        "columnWidths": [
+          25,
+          20,
+          14,
+          20,
+          21,
+          20,
+          18
+        ]
+      }
+    ]
+  },
+  {
+    "id": "daftar-invoice-jatuh-tempo",
+    "name": "Daftar Invoice & Pemantauan Jatuh Tempo",
+    "category": "bisnis",
+    "categoryLabel": "Bisnis & keuangan",
+    "symbol": "INV",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Pantau nilai invoice, pembayaran yang sudah diterima, sisa tagihan, dan kebutuhan tindak lanjut pelanggan.",
+    "tags": [
+      "invoice",
+      "tagihan",
+      "jatuh tempo",
+      "piutang",
+      "pembayaran pelanggan"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama usaha atau penyedia jasa",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Staf administrasi piutang",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode analisis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Tahunan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Penjualan barang",
+          "Jasa profesional",
+          "Proyek",
+          "Pelanggan korporat"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan asumsi tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan asumsi atau kebutuhan tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Daftar Invoice",
+        "title": "Invoice & Tagihan - {{entityName}}",
+        "columns": [
+          "No. invoice",
+          "Pelanggan",
+          "Nilai invoice (Rp)",
+          "Sudah dibayar (Rp)",
+          "Sisa tagihan (Rp)",
+          "Hari lewat jatuh tempo",
+          "Perlu ditindaklanjuti (1/0)"
+        ],
+        "rows": [
+          [
+            "INV-001",
+            "Pelanggan A",
+            5000000,
+            3000000,
+            0,
+            5,
+            0
+          ],
+          [
+            "INV-002",
+            "Pelanggan B",
+            2750000,
+            2750000,
+            0,
+            0,
+            0
+          ],
+          [
+            "INV-003",
+            "Pelanggan C",
+            4200000,
+            1000000,
+            0,
+            18,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "C6-D6",
+            "cachedValue": 2000000
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(E6>0,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "E7",
+            "formula": "C7-D7",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(E7>0,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "E8",
+            "formula": "C8-D8",
+            "cachedValue": 3200000
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(E8>0,1,0)",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          18,
+          24,
+          22,
+          22,
+          22,
+          23,
+          25
+        ]
+      }
+    ]
+  },
+  {
+    "id": "pencatatan-modal-awal-usaha",
+    "name": "Pencatatan Modal Awal & Penggunaan Dana",
+    "category": "bisnis",
+    "categoryLabel": "Bisnis & keuangan",
+    "symbol": "MOD",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Petakan sumber pendanaan awal dan penggunaan dana untuk mengetahui apakah modal awal sudah dialokasikan secara seimbang.",
+    "tags": [
+      "modal awal",
+      "investasi awal",
+      "penggunaan dana",
+      "pendanaan",
+      "belanja modal"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama usaha atau proyek",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik atau pengelola keuangan",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode analisis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Saat pendirian",
+          "Per tahap pendanaan",
+          "Perubahan modal"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Usaha baru",
+          "Pembukaan cabang",
+          "Proyek baru",
+          "Ekspansi usaha"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan asumsi tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan asumsi atau kebutuhan tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Sumber dan Penggunaan Dana",
+        "title": "Modal Awal - {{entityName}}",
+        "columns": [
+          "Pos dana",
+          "Jenis (Sumber/Penggunaan)",
+          "Nilai (Rp)",
+          "Bukti atau keterangan"
+        ],
+        "rows": [
+          [
+            "Setoran pemilik",
+            "Sumber",
+            15000000,
+            "Bukti setoran modal"
+          ],
+          [
+            "Pinjaman keluarga",
+            "Sumber",
+            5000000,
+            "Perjanjian pinjaman"
+          ],
+          [
+            "Peralatan awal",
+            "Penggunaan",
+            8000000,
+            "Daftar aset"
+          ],
+          [
+            "Persediaan awal",
+            "Penggunaan",
+            7000000,
+            "Faktur pembelian"
+          ],
+          [
+            "Kas operasional awal",
+            "Penggunaan",
+            5000000,
+            "Saldo pembukaan"
+          ],
+          [
+            "TOTAL SUMBER",
             "",
+            0,
+            ""
+          ],
+          [
+            "TOTAL PENGGUNAAN",
+            "",
+            0,
+            ""
+          ],
+          [
+            "SELISIH",
+            "",
+            0,
+            "Sumber dikurangi penggunaan"
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "C11",
+            "formula": "SUMIF(B6:B10,\"Sumber\",C6:C10)",
+            "cachedValue": 20000000
+          },
+          {
+            "cell": "C12",
+            "formula": "SUMIF(B6:B10,\"Penggunaan\",C6:C10)",
+            "cachedValue": 20000000
+          },
+          {
+            "cell": "C13",
+            "formula": "C11-C12",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          30,
+          24,
+          20,
+          34
+        ]
+      }
+    ]
+  },
+  {
+    "id": "buku-pembelian-pemasok",
+    "name": "Buku Pembelian Barang dari Pemasok",
+    "category": "bisnis",
+    "categoryLabel": "Bisnis & keuangan",
+    "symbol": "BPP",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Catat pembelian per faktur, kuantitas, harga satuan, biaya tambahan, dan total nilai pembelian untuk kontrol pengadaan.",
+    "tags": [
+      "pembelian",
+      "supplier",
+      "pemasok",
+      "faktur",
+      "pengadaan"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama usaha atau unit pembelian",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Petugas pembelian",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode analisis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Tahunan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Persediaan dagang",
+          "Bahan baku",
+          "Perlengkapan",
+          "Aset operasional"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan asumsi tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan asumsi atau kebutuhan tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Transaksi Pembelian",
+        "title": "Buku Pembelian - {{entityName}}",
+        "columns": [
+          "Tanggal",
+          "Pemasok",
+          "No. faktur",
+          "Jumlah",
+          "Harga satuan (Rp)",
+          "Subtotal (Rp)",
+          "Biaya tambahan (Rp)",
+          "Total (Rp)"
+        ],
+        "rows": [
+          [
+            "2026-11-01",
+            "Pemasok A",
+            "FA-101",
+            20,
+            15000,
+            0,
+            10000,
+            0
+          ],
+          [
+            "2026-11-03",
+            "Pemasok B",
+            "FB-208",
+            12,
+            42000,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-11-05",
+            "Pemasok A",
+            "FA-105",
+            30,
+            8000,
+            0,
+            15000,
+            0
+          ],
+          [
+            "TOTAL",
+            "",
+            "",
+            0,
+            0,
             0,
             0,
             0
@@ -112,45 +1055,4194 @@
         "formulaCells": [
           {
             "cell": "F6",
-            "formula": "D6-E6",
-            "cachedValue": 1500000
+            "formula": "D6*E6",
+            "cachedValue": 300000
+          },
+          {
+            "cell": "H6",
+            "formula": "F6+G6",
+            "cachedValue": 310000
           },
           {
             "cell": "F7",
-            "formula": "D7-E7",
-            "cachedValue": -250000
+            "formula": "D7*E7",
+            "cachedValue": 504000
+          },
+          {
+            "cell": "H7",
+            "formula": "F7+G7",
+            "cachedValue": 504000
           },
           {
             "cell": "F8",
-            "formula": "D8-E8",
-            "cachedValue": 500000
+            "formula": "D8*E8",
+            "cachedValue": 240000
           },
           {
-            "cell": "D9",
-            "formula": "SUM(D6:D8)",
-            "cachedValue": 2000000
+            "cell": "H8",
+            "formula": "F8+G8",
+            "cachedValue": 255000
+          },
+          {
+            "cell": "F9",
+            "formula": "SUM(F6:F8)",
+            "cachedValue": 1044000
+          },
+          {
+            "cell": "G9",
+            "formula": "SUM(G6:G8)",
+            "cachedValue": 25000
+          },
+          {
+            "cell": "H9",
+            "formula": "SUM(H6:H8)",
+            "cachedValue": 1069000
+          }
+        ],
+        "columnWidths": [
+          16,
+          23,
+          17,
+          14,
+          21,
+          20,
+          22,
+          20
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rekap-penjualan-harian",
+    "name": "Rekap Penjualan Harian per Produk",
+    "category": "bisnis",
+    "categoryLabel": "Bisnis & keuangan",
+    "symbol": "RPH",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Rekap kuantitas terjual, omzet kotor, diskon, dan penjualan bersih agar laporan kasir dapat diperiksa per produk.",
+    "tags": [
+      "penjualan harian",
+      "omzet",
+      "produk",
+      "diskon",
+      "kasir"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama toko atau outlet",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Kasir atau supervisor",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode analisis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Satu outlet",
+          "Beberapa outlet",
+          "Marketplace",
+          "Penjualan langsung"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan asumsi tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan asumsi atau kebutuhan tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Rekap Penjualan",
+        "title": "Penjualan Harian - {{entityName}}",
+        "columns": [
+          "Tanggal",
+          "Produk",
+          "Unit terjual",
+          "Harga per unit (Rp)",
+          "Omzet kotor (Rp)",
+          "Diskon (Rp)",
+          "Penjualan bersih (Rp)"
+        ],
+        "rows": [
+          [
+            "2026-11-01",
+            "Produk A",
+            12,
+            25000,
+            0,
+            15000,
+            0
+          ],
+          [
+            "2026-11-01",
+            "Produk B",
+            8,
+            40000,
+            0,
+            10000,
+            0
+          ],
+          [
+            "2026-11-01",
+            "Produk C",
+            5,
+            55000,
+            0,
+            0,
+            0
+          ],
+          [
+            "TOTAL",
+            "",
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "C6*D6",
+            "cachedValue": 300000
+          },
+          {
+            "cell": "G6",
+            "formula": "E6-F6",
+            "cachedValue": 285000
+          },
+          {
+            "cell": "E7",
+            "formula": "C7*D7",
+            "cachedValue": 320000
+          },
+          {
+            "cell": "G7",
+            "formula": "E7-F7",
+            "cachedValue": 310000
+          },
+          {
+            "cell": "E8",
+            "formula": "C8*D8",
+            "cachedValue": 275000
+          },
+          {
+            "cell": "G8",
+            "formula": "E8-F8",
+            "cachedValue": 275000
           },
           {
             "cell": "E9",
             "formula": "SUM(E6:E8)",
-            "cachedValue": 250000
+            "cachedValue": 895000
           },
           {
             "cell": "F9",
-            "formula": "D9-E9",
-            "cachedValue": 1750000
+            "formula": "SUM(F6:F8)",
+            "cachedValue": 25000
+          },
+          {
+            "cell": "G9",
+            "formula": "E9-F9",
+            "cachedValue": 870000
           }
         ],
         "columnWidths": [
-          15,
-          28,
-          20,
+          16,
+          23,
+          16,
+          22,
+          22,
           18,
-          18,
-          18
+          24
         ]
       }
+    ]
+  },
+  {
+    "id": "penyusutan-aset-garis-lurus",
+    "name": "Jadwal Penyusutan Aset Garis Lurus",
+    "category": "bisnis",
+    "categoryLabel": "Bisnis & keuangan",
+    "symbol": "DEP",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Hitung beban penyusutan tahunan dan bulanan untuk aset usaha berdasarkan biaya perolehan, nilai residu, dan umur manfaat.",
+    "tags": [
+      "penyusutan",
+      "depresiasi",
+      "aset tetap",
+      "garis lurus",
+      "akuntansi"
     ],
-    "quality": "unggulan"
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama usaha atau entitas",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab aset",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode analisis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Bulanan",
+          "Tahunan",
+          "Saat tutup buku"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Peralatan",
+          "Kendaraan",
+          "Perangkat IT",
+          "Seluruh aset tetap"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan asumsi tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan asumsi atau kebutuhan tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Daftar Aset",
+        "title": "Penyusutan Aset - {{entityName}}",
+        "columns": [
+          "Nama aset",
+          "Biaya perolehan (Rp)",
+          "Nilai residu (Rp)",
+          "Umur manfaat (tahun)",
+          "Penyusutan/tahun (Rp)",
+          "Penyusutan/bulan (Rp)"
+        ],
+        "rows": [
+          [
+            "Oven produksi",
+            12000000,
+            2000000,
+            5,
+            0,
+            0
+          ],
+          [
+            "Laptop administrasi",
+            9000000,
+            1000000,
+            4,
+            0,
+            0
+          ],
+          [
+            "Printer kasir",
+            3000000,
+            300000,
+            3,
+            0,
+            0
+          ],
+          [
+            "TOTAL",
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "IF(D6=0,0,(B6-C6)/D6)",
+            "cachedValue": 2000000
+          },
+          {
+            "cell": "F6",
+            "formula": "E6/12",
+            "cachedValue": 166666.6667
+          },
+          {
+            "cell": "E7",
+            "formula": "IF(D7=0,0,(B7-C7)/D7)",
+            "cachedValue": 2000000
+          },
+          {
+            "cell": "F7",
+            "formula": "E7/12",
+            "cachedValue": 166666.6667
+          },
+          {
+            "cell": "E8",
+            "formula": "IF(D8=0,0,(B8-C8)/D8)",
+            "cachedValue": 900000
+          },
+          {
+            "cell": "F8",
+            "formula": "E8/12",
+            "cachedValue": 75000
+          },
+          {
+            "cell": "E9",
+            "formula": "SUM(E6:E8)",
+            "cachedValue": 4900000
+          },
+          {
+            "cell": "F9",
+            "formula": "SUM(F6:F8)",
+            "cachedValue": 408333.3334
+          }
+        ],
+        "columnWidths": [
+          25,
+          22,
+          20,
+          20,
+          24,
+          24
+        ]
+      }
+    ]
+  },
+  {
+    "id": "analisis-aging-piutang",
+    "name": "Analisis Aging Piutang 0–30 / 31–60 / 61–90 / >90 Hari",
+    "category": "bisnis",
+    "categoryLabel": "Bisnis & keuangan",
+    "symbol": "AGE",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Kelompokkan saldo piutang berdasarkan umur keterlambatan, nilai tiap bucket, dan indikator tagihan yang perlu diprioritaskan.",
+    "tags": [
+      "aging piutang",
+      "piutang usaha",
+      "penagihan",
+      "kolektibilitas",
+      "receivable aging"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit penjualan",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Manajer piutang",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode analisis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Tanggal laporan",
+          "Mingguan",
+          "Bulanan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Seluruh pelanggan",
+          "Pelanggan korporat",
+          "Pelanggan grosir",
+          "Pelanggan proyek"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan asumsi tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan asumsi atau kebutuhan tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Aging Piutang",
+        "title": "Aging Piutang - {{entityName}}",
+        "columns": [
+          "Pelanggan",
+          "No. invoice",
+          "Sisa piutang (Rp)",
+          "Hari terlambat",
+          "0–30 hari",
+          "31–60 hari",
+          "61–90 hari",
+          ">90 hari",
+          "Prioritas tinggi (1/0)"
+        ],
+        "rows": [
+          [
+            "Pelanggan A",
+            "INV-021",
+            2500000,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Pelanggan B",
+            "INV-034",
+            4800000,
+            45,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Pelanggan C",
+            "INV-039",
+            7200000,
+            78,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Pelanggan D",
+            "INV-044",
+            3100000,
+            112,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "IF(D6<=30,C6,0)",
+            "cachedValue": 2500000
+          },
+          {
+            "cell": "F6",
+            "formula": "IF(AND(D6>30,D6<=60),C6,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(AND(D6>60,D6<=90),C6,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(D6>90,C6,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "I6",
+            "formula": "IF(D6>90,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "E7",
+            "formula": "IF(D7<=30,C7,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F7",
+            "formula": "IF(AND(D7>30,D7<=60),C7,0)",
+            "cachedValue": 4800000
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(AND(D7>60,D7<=90),C7,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(D7>90,C7,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "I7",
+            "formula": "IF(D7>90,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "E8",
+            "formula": "IF(D8<=30,C8,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F8",
+            "formula": "IF(AND(D8>30,D8<=60),C8,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(AND(D8>60,D8<=90),C8,0)",
+            "cachedValue": 7200000
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(D8>90,C8,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "I8",
+            "formula": "IF(D8>90,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "E9",
+            "formula": "IF(D9<=30,C9,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F9",
+            "formula": "IF(AND(D9>30,D9<=60),C9,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(AND(D9>60,D9<=90),C9,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(D9>90,C9,0)",
+            "cachedValue": 3100000
+          },
+          {
+            "cell": "I9",
+            "formula": "IF(D9>90,1,0)",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          23,
+          17,
+          22,
+          16,
+          18,
+          18,
+          18,
+          18,
+          24
+        ]
+      }
+    ]
+  },
+  {
+    "id": "analisis-margin-per-produk",
+    "name": "Analisis Margin Kotor & Kontribusi per Produk",
+    "category": "bisnis",
+    "categoryLabel": "Bisnis & keuangan",
+    "symbol": "MGP",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Bandingkan omzet, biaya variabel, laba kotor, dan margin tiap produk untuk mengetahui produk yang paling banyak menyumbang laba.",
+    "tags": [
+      "gross margin",
+      "margin produk",
+      "kontribusi produk",
+      "HPP",
+      "profitabilitas"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama usaha atau lini produk",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Analis produk atau pemilik",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode analisis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Seluruh katalog",
+          "Kategori produk",
+          "Produk unggulan",
+          "Produk baru"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan asumsi tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan asumsi atau kebutuhan tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Margin Produk",
+        "title": "Margin Produk - {{entityName}}",
+        "columns": [
+          "Produk",
+          "Unit terjual",
+          "Harga jual/unit (Rp)",
+          "Biaya variabel/unit (Rp)",
+          "Pendapatan (Rp)",
+          "Total biaya variabel (Rp)",
+          "Laba kotor (Rp)",
+          "Margin kotor"
+        ],
+        "rows": [
+          [
+            "Produk A",
+            120,
+            45000,
+            25000,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Produk B",
+            80,
+            65000,
+            33000,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Produk C",
+            45,
+            90000,
+            52000,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "TOTAL",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "B6*C6",
+            "cachedValue": 5400000
+          },
+          {
+            "cell": "F6",
+            "formula": "B6*D6",
+            "cachedValue": 3000000
+          },
+          {
+            "cell": "G6",
+            "formula": "E6-F6",
+            "cachedValue": 2400000
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(E6=0,0,G6/E6)",
+            "cachedValue": 0.4444444444
+          },
+          {
+            "cell": "E7",
+            "formula": "B7*C7",
+            "cachedValue": 5200000
+          },
+          {
+            "cell": "F7",
+            "formula": "B7*D7",
+            "cachedValue": 2640000
+          },
+          {
+            "cell": "G7",
+            "formula": "E7-F7",
+            "cachedValue": 2560000
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(E7=0,0,G7/E7)",
+            "cachedValue": 0.4923076923
+          },
+          {
+            "cell": "E8",
+            "formula": "B8*C8",
+            "cachedValue": 4050000
+          },
+          {
+            "cell": "F8",
+            "formula": "B8*D8",
+            "cachedValue": 2340000
+          },
+          {
+            "cell": "G8",
+            "formula": "E8-F8",
+            "cachedValue": 1710000
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(E8=0,0,G8/E8)",
+            "cachedValue": 0.4222222222
+          },
+          {
+            "cell": "E9",
+            "formula": "SUM(E6:E8)",
+            "cachedValue": 14650000
+          },
+          {
+            "cell": "F9",
+            "formula": "SUM(F6:F8)",
+            "cachedValue": 7980000
+          },
+          {
+            "cell": "G9",
+            "formula": "E9-F9",
+            "cachedValue": 6680000
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(E9=0,0,G9/E9)",
+            "cachedValue": 0.4563139932
+          }
+        ],
+        "columnWidths": [
+          24,
+          15,
+          22,
+          25,
+          20,
+          25,
+          20,
+          17
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rekonsiliasi-bank",
+    "name": "Rekonsiliasi Bank vs Buku Kas",
+    "category": "bisnis",
+    "categoryLabel": "Bisnis & keuangan",
+    "symbol": "RBK",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Cocokkan transaksi rekening koran dengan pencatatan internal, hitung selisih, dan tandai baris yang perlu investigasi.",
+    "tags": [
+      "rekonsiliasi bank",
+      "rekening koran",
+      "buku kas",
+      "selisih transaksi",
+      "bank reconciliation"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama badan usaha atau rekening",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Staf keuangan",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode analisis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Rekening operasional",
+          "Rekening penjualan",
+          "Rekening payroll",
+          "Semua rekening"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan asumsi tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan asumsi atau kebutuhan tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Pencocokan Transaksi",
+        "title": "Rekonsiliasi Bank - {{entityName}}",
+        "columns": [
+          "Tanggal",
+          "Uraian transaksi",
+          "Menurut bank (Rp)",
+          "Menurut buku (Rp)",
+          "Selisih (Rp)",
+          "Nilai selisih absolut (Rp)",
+          "Cocok (1/0)"
+        ],
+        "rows": [
+          [
+            "2026-11-01",
+            "Transfer pelanggan",
+            2500000,
+            2500000,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-11-02",
+            "Biaya administrasi bank",
+            -15000,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-11-03",
+            "Pembayaran pemasok",
+            -850000,
+            -850000,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "C6-D6",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F6",
+            "formula": "ABS(E6)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(E6=0,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "E7",
+            "formula": "C7-D7",
+            "cachedValue": -15000
+          },
+          {
+            "cell": "F7",
+            "formula": "ABS(E7)",
+            "cachedValue": 15000
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(E7=0,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "E8",
+            "formula": "C8-D8",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F8",
+            "formula": "ABS(E8)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(E8=0,1,0)",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          16,
+          30,
+          22,
+          22,
+          18,
+          26,
+          17
+        ]
+      }
+    ]
+  },
+  {
+    "id": "proyeksi-arus-kas-3-bulan",
+    "name": "Proyeksi Arus Kas Bergulir 3 Bulan",
+    "category": "bisnis",
+    "categoryLabel": "Bisnis & keuangan",
+    "symbol": "CF3",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Susun proyeksi saldo awal, penerimaan, pembayaran pemasok, biaya tenaga kerja, dan saldo akhir untuk tiga periode mendatang.",
+    "tags": [
+      "cash flow",
+      "arus kas",
+      "proyeksi kas",
+      "modal kerja",
+      "likuiditas"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama usaha atau proyek",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Manajer keuangan",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode analisis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Tiga bulan berjalan",
+          "Tiga bulan mendatang"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Operasional",
+          "Ekspansi",
+          "Proyek",
+          "Musiman"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan asumsi tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan asumsi atau kebutuhan tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Proyeksi Kas",
+        "title": "Arus Kas 3 Bulan - {{entityName}}",
+        "columns": [
+          "Bulan",
+          "Saldo awal (Rp)",
+          "Penerimaan pelanggan (Rp)",
+          "Penerimaan lain (Rp)",
+          "Pembayaran pemasok (Rp)",
+          "Payroll & operasional (Rp)",
+          "Arus kas bersih (Rp)",
+          "Saldo akhir (Rp)"
+        ],
+        "rows": [
+          [
+            "Bulan 1",
+            50000000,
+            42000000,
+            2000000,
+            25000000,
+            12000000,
+            0,
+            0
+          ],
+          [
+            "Bulan 2",
+            0,
+            47000000,
+            1000000,
+            28000000,
+            13000000,
+            0,
+            0
+          ],
+          [
+            "Bulan 3",
+            0,
+            51000000,
+            0,
+            30000000,
+            13500000,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "C6+D6-E6-F6",
+            "cachedValue": 7000000
+          },
+          {
+            "cell": "H6",
+            "formula": "B6+G6",
+            "cachedValue": 57000000
+          },
+          {
+            "cell": "B7",
+            "formula": "H6",
+            "cachedValue": 57000000
+          },
+          {
+            "cell": "G7",
+            "formula": "C7+D7-E7-F7",
+            "cachedValue": 7000000
+          },
+          {
+            "cell": "H7",
+            "formula": "B7+G7",
+            "cachedValue": 64000000
+          },
+          {
+            "cell": "B8",
+            "formula": "H7",
+            "cachedValue": 64000000
+          },
+          {
+            "cell": "G8",
+            "formula": "C8+D8-E8-F8",
+            "cachedValue": 7500000
+          },
+          {
+            "cell": "H8",
+            "formula": "B8+G8",
+            "cachedValue": 71500000
+          }
+        ],
+        "columnWidths": [
+          17,
+          22,
+          26,
+          22,
+          25,
+          26,
+          23,
+          22
+        ]
+      }
+    ]
+  },
+  {
+    "id": "analisis-rasio-keuangan-umkm",
+    "name": "Analisis Rasio Keuangan Usaha",
+    "category": "bisnis",
+    "categoryLabel": "Bisnis & keuangan",
+    "symbol": "RKU",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Hitung current ratio, quick ratio, debt-to-equity, dan net profit margin dari saldo laporan keuangan yang dimasukkan.",
+    "tags": [
+      "rasio keuangan",
+      "current ratio",
+      "quick ratio",
+      "debt equity",
+      "net profit margin"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama usaha atau entitas",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penyusun laporan",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode analisis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Bulanan",
+          "Kuartalan",
+          "Tahunan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "UMKM",
+          "Perdagangan",
+          "Jasa",
+          "Manufaktur kecil"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan asumsi tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan asumsi atau kebutuhan tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Input dan Rasio",
+        "title": "Rasio Keuangan - {{entityName}}",
+        "columns": [
+          "Metrik",
+          "Nilai (Rp atau angka)",
+          "Satuan",
+          "Catatan"
+        ],
+        "rows": [
+          [
+            "Aset lancar",
+            100000000,
+            "Rp",
+            "Kas, bank, piutang, aset lancar lain"
+          ],
+          [
+            "Persediaan",
+            25000000,
+            "Rp",
+            "Persediaan akhir periode"
+          ],
+          [
+            "Liabilitas lancar",
+            40000000,
+            "Rp",
+            "Kewajiban jangka pendek"
+          ],
+          [
+            "Total utang",
+            60000000,
+            "Rp",
+            "Utang jangka pendek dan panjang"
+          ],
+          [
+            "Ekuitas",
+            90000000,
+            "Rp",
+            "Modal dan saldo laba"
+          ],
+          [
+            "Penjualan bersih",
+            200000000,
+            "Rp",
+            "Pendapatan setelah retur/diskon"
+          ],
+          [
+            "Laba bersih",
+            18000000,
+            "Rp",
+            "Setelah beban dan pajak"
+          ],
+          [
+            "Current ratio",
+            0,
+            "x",
+            "Aset lancar / liabilitas lancar"
+          ],
+          [
+            "Quick ratio",
+            0,
+            "x",
+            "(Aset lancar - persediaan) / liabilitas lancar"
+          ],
+          [
+            "Debt-to-equity",
+            0,
+            "x",
+            "Total utang / ekuitas"
+          ],
+          [
+            "Net profit margin",
+            0,
+            "%",
+            "Laba bersih / penjualan bersih"
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "B13",
+            "formula": "IF(B8=0,0,B6/B8)",
+            "cachedValue": 2.5
+          },
+          {
+            "cell": "B14",
+            "formula": "IF(B8=0,0,(B6-B7)/B8)",
+            "cachedValue": 1.875
+          },
+          {
+            "cell": "B15",
+            "formula": "IF(B10=0,0,B9/B10)",
+            "cachedValue": 0.6666666667
+          },
+          {
+            "cell": "B16",
+            "formula": "IF(B11=0,0,B12/B11)",
+            "cachedValue": 0.09
+          }
+        ],
+        "columnWidths": [
+          28,
+          24,
+          14,
+          46
+        ]
+      }
+    ]
+  },
+  {
+    "id": "perbandingan-harga-pemasok",
+    "name": "Perbandingan Harga & Penghematan Pemasok",
+    "category": "bisnis",
+    "categoryLabel": "Bisnis & keuangan",
+    "symbol": "PHS",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Bandingkan harga barang dengan spesifikasi sama dari tiga pemasok dan hitung harga terendah serta potensi penghematan.",
+    "tags": [
+      "perbandingan supplier",
+      "harga pemasok",
+      "procurement",
+      "penghematan",
+      "vendor"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama usaha atau unit pengadaan",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Petugas pengadaan",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode analisis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Per pengadaan",
+          "Bulanan",
+          "Per kuartal"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Bahan baku",
+          "Barang dagang",
+          "Kemasan",
+          "Perlengkapan"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan asumsi tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan asumsi atau kebutuhan tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Perbandingan Vendor",
+        "title": "Harga Pemasok - {{entityName}}",
+        "columns": [
+          "Barang dan spesifikasi",
+          "Satuan",
+          "Pemasok A (Rp)",
+          "Pemasok B (Rp)",
+          "Pemasok C (Rp)",
+          "Harga terendah (Rp)",
+          "Potensi hemat vs termahal"
+        ],
+        "rows": [
+          [
+            "Tepung protein sedang 25 kg",
+            "Sak",
+            285000,
+            279000,
+            292000,
+            0,
+            0
+          ],
+          [
+            "Minyak goreng 18 liter",
+            "Jeriken",
+            315000,
+            322000,
+            308000,
+            0,
+            0
+          ],
+          [
+            "Kemasan kraft 100 pcs",
+            "Pak",
+            85000,
+            79000,
+            82000,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "MIN(C6:E6)",
+            "cachedValue": 279000
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(MAX(C6:E6)=0,0,(MAX(C6:E6)-F6)/MAX(C6:E6))",
+            "cachedValue": 0.0445205479
+          },
+          {
+            "cell": "F7",
+            "formula": "MIN(C7:E7)",
+            "cachedValue": 308000
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(MAX(C7:E7)=0,0,(MAX(C7:E7)-F7)/MAX(C7:E7))",
+            "cachedValue": 0.0434782609
+          },
+          {
+            "cell": "F8",
+            "formula": "MIN(C8:E8)",
+            "cachedValue": 79000
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(MAX(C8:E8)=0,0,(MAX(C8:E8)-F8)/MAX(C8:E8))",
+            "cachedValue": 0.0721649485
+          }
+        ],
+        "columnWidths": [
+          32,
+          14,
+          20,
+          20,
+          20,
+          22,
+          28
+        ]
+      }
+    ]
+  },
+  {
+    "id": "kebijakan-kredit-penjualan",
+    "name": "Kebijakan Kredit Penjualan & Prosedur Penagihan",
+    "category": "bisnis",
+    "categoryLabel": "Bisnis & keuangan",
+    "symbol": "KRD",
+    "format": "md",
+    "quality": "baik",
+    "description": "Dokumen kerja untuk menetapkan syarat kredit pelanggan, batas otorisasi, bukti transaksi, dan tahapan penagihan yang konsisten.",
+    "tags": [
+      "kebijakan kredit",
+      "piutang",
+      "penagihan",
+      "credit control",
+      "SOP"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit usaha",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik kebijakan atau kepala keuangan",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode analisis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Berlaku mulai tanggal penetapan",
+          "Peninjauan triwulanan",
+          "Peninjauan tahunan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Penjualan B2B",
+          "Pelanggan grosir",
+          "Penjualan proyek",
+          "Pelanggan berulang"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan asumsi tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan asumsi atau kebutuhan tambahan."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Tujuan dan ruang lingkup",
+        "body": "Kebijakan ini berlaku untuk transaksi kredit **{{entityName}}** pada ruang lingkup **{{scope}}**. Dokumen menjadi acuan pemberian tempo, pemantauan saldo, dan tindak lanjut keterlambatan."
+      },
+      {
+        "heading": "Pemilik proses dan otorisasi",
+        "bullets": [
+          "Pemilik kebijakan: {{ownerName}}",
+          "Petugas administrasi memeriksa dokumen pelanggan dan kelengkapan pesanan.",
+          "Persetujuan limit kredit mengikuti matriks kewenangan internal yang disahkan manajemen.",
+          "Perubahan limit, tempo, atau pengecualian harus memiliki jejak persetujuan tertulis."
+        ]
+      },
+      {
+        "heading": "Persyaratan sebelum kredit diberikan",
+        "bullets": [
+          "Identitas dan alamat penagihan pelanggan tervalidasi.",
+          "Riwayat pembayaran dan referensi dagang diperiksa bila tersedia.",
+          "Limit kredit dan tanggal jatuh tempo dicatat pada master pelanggan.",
+          "Pesanan, bukti serah terima, dan invoice saling merujuk."
+        ]
+      },
+      {
+        "heading": "Standar penagihan bertahap",
+        "bullets": [
+          "Sebelum jatuh tempo: kirim pengingat dan salinan invoice.",
+          "1–7 hari terlambat: konfirmasi penerimaan invoice dan alasan keterlambatan.",
+          "8–30 hari terlambat: minta komitmen tanggal bayar dan eskalasi kepada pemilik akun.",
+          "Lebih dari 30 hari terlambat: evaluasi penghentian sementara fasilitas kredit dan persetujuan manajemen sebelum pengiriman berikutnya."
+        ]
+      },
+      {
+        "heading": "Pencatatan dan rekonsiliasi",
+        "body": "Setiap penerimaan dialokasikan ke invoice yang tepat. Selisih, retur, potongan, dan sengketa dicatat terpisah agar saldo piutang tidak dikurangi tanpa dasar dokumen."
+      },
+      {
+        "heading": "Indikator pemantauan",
+        "bullets": [
+          "Total piutang terbuka dan persentase piutang lewat jatuh tempo.",
+          "Nilai piutang berumur lebih dari 30, 60, dan 90 hari.",
+          "Rata-rata hari penagihan (DSO) dan persentase janji bayar yang terpenuhi.",
+          "Daftar pelanggan yang melewati limit kredit."
+        ]
+      },
+      {
+        "heading": "Pengecualian dan persetujuan",
+        "body": "Pengecualian harus menjelaskan pelanggan, nilai, alasan, periode berlaku, mitigasi risiko, dan pejabat pemberi persetujuan. Catatan khusus: {{notes}}."
+      },
+      {
+        "heading": "Pengendalian dokumen",
+        "body": "Pemilik dokumen: {{ownerName}}. Entitas: {{entityName}}. Ruang lingkup: {{scope}}. Periode peninjauan: {{period}}. Versi dan tanggal berlaku harus diperbarui setiap kali kebijakan direvisi."
+      }
+    ]
+  },
+  {
+    "id": "analisis-perputaran-persediaan",
+    "name": "Analisis Perputaran Persediaan & Hari Stok",
+    "category": "bisnis",
+    "categoryLabel": "Bisnis & keuangan",
+    "symbol": "PPI",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Ukur rata-rata persediaan, inventory turnover, dan estimasi hari stok untuk melihat dana yang tertahan pada persediaan.",
+    "tags": [
+      "inventory turnover",
+      "perputaran stok",
+      "hari persediaan",
+      "modal kerja",
+      "COGS"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama usaha atau gudang",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Manajer persediaan atau keuangan",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode analisis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Bulanan",
+          "Kuartalan",
+          "Tahunan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Seluruh persediaan",
+          "Bahan baku",
+          "Barang dagang",
+          "Produk jadi"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan asumsi tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan asumsi atau kebutuhan tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Kalkulasi Turnover",
+        "title": "Perputaran Persediaan - {{entityName}}",
+        "columns": [
+          "Metrik",
+          "Nilai",
+          "Satuan",
+          "Panduan"
+        ],
+        "rows": [
+          [
+            "Harga pokok penjualan (HPP)",
+            240000000,
+            "Rp",
+            "Total HPP selama periode"
+          ],
+          [
+            "Persediaan awal",
+            40000000,
+            "Rp",
+            "Saldo awal periode"
+          ],
+          [
+            "Persediaan akhir",
+            50000000,
+            "Rp",
+            "Saldo akhir periode"
+          ],
+          [
+            "Rata-rata persediaan",
+            0,
+            "Rp",
+            "Rata-rata awal dan akhir"
+          ],
+          [
+            "Inventory turnover",
+            0,
+            "x",
+            "HPP / rata-rata persediaan"
+          ],
+          [
+            "Estimasi hari persediaan",
+            0,
+            "hari",
+            "365 / inventory turnover"
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "B9",
+            "formula": "AVERAGE(B7:B8)",
+            "cachedValue": 45000000
+          },
+          {
+            "cell": "B10",
+            "formula": "IF(B9=0,0,B6/B9)",
+            "cachedValue": 5.3333333333
+          },
+          {
+            "cell": "B11",
+            "formula": "IF(B10=0,0,365/B10)",
+            "cachedValue": 68.4375
+          }
+        ],
+        "columnWidths": [
+          32,
+          22,
+          15,
+          48
+        ]
+      }
+    ]
+  },
+  {
+    "id": "analisis-roi-pemasaran-per-kanal",
+    "name": "Analisis CPL, CAC & ROAS per Kanal Pemasaran",
+    "category": "bisnis",
+    "categoryLabel": "Bisnis & keuangan",
+    "symbol": "MKT",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Bandingkan biaya iklan, leads, pelanggan baru, pendapatan teratribusi, cost per lead, customer acquisition cost, dan ROAS.",
+    "tags": [
+      "marketing ROI",
+      "CPL",
+      "CAC",
+      "ROAS",
+      "iklan",
+      "akuisisi pelanggan"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama brand atau unit bisnis",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Manajer pemasaran",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode analisis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mingguan",
+          "Bulanan",
+          "Per kampanye"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Meta Ads",
+          "Google Ads",
+          "TikTok Ads",
+          "Marketplace atau afiliasi"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan asumsi tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan asumsi atau kebutuhan tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Efisiensi Kanal",
+        "title": "Marketing Channel - {{entityName}}",
+        "columns": [
+          "Kanal",
+          "Biaya (Rp)",
+          "Leads",
+          "Pelanggan baru",
+          "Pendapatan teratribusi (Rp)",
+          "CPL (Rp)",
+          "CAC (Rp)",
+          "ROAS"
+        ],
+        "rows": [
+          [
+            "Kanal A",
+            5000000,
+            250,
+            40,
+            18000000,
+            0,
+            0,
+            0
+          ],
+          [
+            "Kanal B",
+            3000000,
+            120,
+            22,
+            12000000,
+            0,
+            0,
+            0
+          ],
+          [
+            "Kanal C",
+            2000000,
+            80,
+            10,
+            6500000,
+            0,
+            0,
+            0
+          ],
+          [
+            "TOTAL",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "IF(C6=0,0,B6/C6)",
+            "cachedValue": 20000
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(D6=0,0,B6/D6)",
+            "cachedValue": 125000
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(B6=0,0,E6/B6)",
+            "cachedValue": 3.6
+          },
+          {
+            "cell": "F7",
+            "formula": "IF(C7=0,0,B7/C7)",
+            "cachedValue": 25000
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(D7=0,0,B7/D7)",
+            "cachedValue": 136363.6364
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(B7=0,0,E7/B7)",
+            "cachedValue": 4
+          },
+          {
+            "cell": "F8",
+            "formula": "IF(C8=0,0,B8/C8)",
+            "cachedValue": 25000
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(D8=0,0,B8/D8)",
+            "cachedValue": 200000
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(B8=0,0,E8/B8)",
+            "cachedValue": 3.25
+          },
+          {
+            "cell": "B9",
+            "formula": "SUM(B6:B8)",
+            "cachedValue": 10000000
+          },
+          {
+            "cell": "C9",
+            "formula": "SUM(C6:C8)",
+            "cachedValue": 450
+          },
+          {
+            "cell": "D9",
+            "formula": "SUM(D6:D8)",
+            "cachedValue": 72
+          },
+          {
+            "cell": "E9",
+            "formula": "SUM(E6:E8)",
+            "cachedValue": 36500000
+          },
+          {
+            "cell": "F9",
+            "formula": "IF(C9=0,0,B9/C9)",
+            "cachedValue": 22222.2222
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(D9=0,0,B9/D9)",
+            "cachedValue": 138888.8889
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(B9=0,0,E9/B9)",
+            "cachedValue": 3.65
+          }
+        ],
+        "columnWidths": [
+          20,
+          19,
+          14,
+          18,
+          27,
+          18,
+          18,
+          14
+        ]
+      }
+    ]
+  },
+  {
+    "id": "proyeksi-arus-kas-12-bulan",
+    "name": "Model Proyeksi Arus Kas 12 Bulan",
+    "category": "bisnis",
+    "categoryLabel": "Bisnis & keuangan",
+    "symbol": "CF12",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Model kas bulanan dengan penerimaan pelanggan, penerimaan lain, biaya tetap, biaya variabel, saldo bergulir, dan peringatan saat kas turun di bawah cadangan minimum.",
+    "tags": [
+      "proyeksi arus kas",
+      "cashflow forecast",
+      "12 bulan",
+      "saldo kas",
+      "cadangan minimum",
+      "likuiditas"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau proyek",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Direktur atau manajer keuangan",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode analisis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "12 bulan mendatang",
+          "Tahun buku berjalan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Base case",
+          "Rencana ekspansi",
+          "Perencanaan modal kerja",
+          "Persiapan pendanaan"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan asumsi tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan asumsi atau kebutuhan tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Forecast 12 Bulan",
+        "title": "Cash Flow Forecast - {{entityName}}",
+        "columns": [
+          "Bulan",
+          "Penerimaan pelanggan (Rp)",
+          "Penerimaan lain (Rp)",
+          "Biaya tetap (Rp)",
+          "Biaya variabel (Rp)",
+          "Arus kas bersih (Rp)",
+          "Saldo awal (Rp)",
+          "Saldo akhir (Rp)",
+          "Cadangan minimum (Rp)",
+          "Di bawah cadangan (1/0)"
+        ],
+        "rows": [
+          [
+            "Jan",
+            42000000,
+            2000000,
+            18000000,
+            18000000,
+            0,
+            50000000,
+            0,
+            20000000,
+            0
+          ],
+          [
+            "Feb",
+            44000000,
+            0,
+            18000000,
+            19000000,
+            0,
+            0,
+            0,
+            20000000,
+            0
+          ],
+          [
+            "Mar",
+            46000000,
+            1000000,
+            18500000,
+            19500000,
+            0,
+            0,
+            0,
+            20000000,
+            0
+          ],
+          [
+            "Apr",
+            47000000,
+            0,
+            18500000,
+            20000000,
+            0,
+            0,
+            0,
+            20000000,
+            0
+          ],
+          [
+            "Mei",
+            49000000,
+            2000000,
+            19000000,
+            21000000,
+            0,
+            0,
+            0,
+            20000000,
+            0
+          ],
+          [
+            "Jun",
+            51000000,
+            0,
+            19000000,
+            22000000,
+            0,
+            0,
+            0,
+            20000000,
+            0
+          ],
+          [
+            "Jul",
+            52000000,
+            1000000,
+            19500000,
+            22500000,
+            0,
+            0,
+            0,
+            20000000,
+            0
+          ],
+          [
+            "Agu",
+            54000000,
+            0,
+            19500000,
+            23500000,
+            0,
+            0,
+            0,
+            20000000,
+            0
+          ],
+          [
+            "Sep",
+            55000000,
+            0,
+            20000000,
+            24000000,
+            0,
+            0,
+            0,
+            20000000,
+            0
+          ],
+          [
+            "Okt",
+            57000000,
+            1000000,
+            20000000,
+            25000000,
+            0,
+            0,
+            0,
+            20000000,
+            0
+          ],
+          [
+            "Nov",
+            59000000,
+            0,
+            20500000,
+            26000000,
+            0,
+            0,
+            0,
+            20000000,
+            0
+          ],
+          [
+            "Des",
+            62000000,
+            2000000,
+            21000000,
+            27500000,
+            0,
+            0,
+            0,
+            20000000,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "B6+C6-D6-E6",
+            "cachedValue": 8000000
+          },
+          {
+            "cell": "H6",
+            "formula": "G6+F6",
+            "cachedValue": 58000000
+          },
+          {
+            "cell": "J6",
+            "formula": "IF(H6<I6,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F7",
+            "formula": "B7+C7-D7-E7",
+            "cachedValue": 7000000
+          },
+          {
+            "cell": "G7",
+            "formula": "H6",
+            "cachedValue": 58000000
+          },
+          {
+            "cell": "H7",
+            "formula": "G7+F7",
+            "cachedValue": 65000000
+          },
+          {
+            "cell": "J7",
+            "formula": "IF(H7<I7,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F8",
+            "formula": "B8+C8-D8-E8",
+            "cachedValue": 9000000
+          },
+          {
+            "cell": "G8",
+            "formula": "H7",
+            "cachedValue": 65000000
+          },
+          {
+            "cell": "H8",
+            "formula": "G8+F8",
+            "cachedValue": 74000000
+          },
+          {
+            "cell": "J8",
+            "formula": "IF(H8<I8,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F9",
+            "formula": "B9+C9-D9-E9",
+            "cachedValue": 8500000
+          },
+          {
+            "cell": "G9",
+            "formula": "H8",
+            "cachedValue": 74000000
+          },
+          {
+            "cell": "H9",
+            "formula": "G9+F9",
+            "cachedValue": 82500000
+          },
+          {
+            "cell": "J9",
+            "formula": "IF(H9<I9,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F10",
+            "formula": "B10+C10-D10-E10",
+            "cachedValue": 11000000
+          },
+          {
+            "cell": "G10",
+            "formula": "H9",
+            "cachedValue": 82500000
+          },
+          {
+            "cell": "H10",
+            "formula": "G10+F10",
+            "cachedValue": 93500000
+          },
+          {
+            "cell": "J10",
+            "formula": "IF(H10<I10,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F11",
+            "formula": "B11+C11-D11-E11",
+            "cachedValue": 10000000
+          },
+          {
+            "cell": "G11",
+            "formula": "H10",
+            "cachedValue": 93500000
+          },
+          {
+            "cell": "H11",
+            "formula": "G11+F11",
+            "cachedValue": 103500000
+          },
+          {
+            "cell": "J11",
+            "formula": "IF(H11<I11,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F12",
+            "formula": "B12+C12-D12-E12",
+            "cachedValue": 11000000
+          },
+          {
+            "cell": "G12",
+            "formula": "H11",
+            "cachedValue": 103500000
+          },
+          {
+            "cell": "H12",
+            "formula": "G12+F12",
+            "cachedValue": 114500000
+          },
+          {
+            "cell": "J12",
+            "formula": "IF(H12<I12,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F13",
+            "formula": "B13+C13-D13-E13",
+            "cachedValue": 11000000
+          },
+          {
+            "cell": "G13",
+            "formula": "H12",
+            "cachedValue": 114500000
+          },
+          {
+            "cell": "H13",
+            "formula": "G13+F13",
+            "cachedValue": 125500000
+          },
+          {
+            "cell": "J13",
+            "formula": "IF(H13<I13,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F14",
+            "formula": "B14+C14-D14-E14",
+            "cachedValue": 11000000
+          },
+          {
+            "cell": "G14",
+            "formula": "H13",
+            "cachedValue": 125500000
+          },
+          {
+            "cell": "H14",
+            "formula": "G14+F14",
+            "cachedValue": 136500000
+          },
+          {
+            "cell": "J14",
+            "formula": "IF(H14<I14,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F15",
+            "formula": "B15+C15-D15-E15",
+            "cachedValue": 13000000
+          },
+          {
+            "cell": "G15",
+            "formula": "H14",
+            "cachedValue": 136500000
+          },
+          {
+            "cell": "H15",
+            "formula": "G15+F15",
+            "cachedValue": 149500000
+          },
+          {
+            "cell": "J15",
+            "formula": "IF(H15<I15,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F16",
+            "formula": "B16+C16-D16-E16",
+            "cachedValue": 12500000
+          },
+          {
+            "cell": "G16",
+            "formula": "H15",
+            "cachedValue": 149500000
+          },
+          {
+            "cell": "H16",
+            "formula": "G16+F16",
+            "cachedValue": 162000000
+          },
+          {
+            "cell": "J16",
+            "formula": "IF(H16<I16,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F17",
+            "formula": "B17+C17-D17-E17",
+            "cachedValue": 15500000
+          },
+          {
+            "cell": "G17",
+            "formula": "H16",
+            "cachedValue": 162000000
+          },
+          {
+            "cell": "H17",
+            "formula": "G17+F17",
+            "cachedValue": 177500000
+          },
+          {
+            "cell": "J17",
+            "formula": "IF(H17<I17,1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          14,
+          25,
+          22,
+          20,
+          22,
+          22,
+          20,
+          20,
+          24,
+          24
+        ]
+      }
+    ]
+  },
+  {
+    "id": "kalkulator-bep-unit-rupiah",
+    "name": "Kalkulator Break-Even Point (BEP) Unit & Rupiah",
+    "category": "bisnis",
+    "categoryLabel": "Bisnis & keuangan",
+    "symbol": "BEP",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Hitung margin kontribusi per unit, jumlah unit impas, omzet impas, margin of safety, dan indikator apakah target penjualan melewati BEP.",
+    "tags": [
+      "BEP",
+      "break even point",
+      "titik impas",
+      "margin kontribusi",
+      "margin of safety"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama produk atau lini usaha",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik usaha atau analis",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode analisis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Per produk",
+          "Bulanan",
+          "Per skenario"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Satu produk",
+          "Paket produk",
+          "Lini layanan",
+          "Keseluruhan usaha"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan asumsi tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan asumsi atau kebutuhan tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Model Titik Impas",
+        "title": "BEP - {{entityName}}",
+        "columns": [
+          "Parameter",
+          "Nilai",
+          "Satuan",
+          "Keterangan"
+        ],
+        "rows": [
+          [
+            "Biaya tetap periode",
+            25000000,
+            "Rp",
+            "Sewa, gaji tetap, biaya tetap lain"
+          ],
+          [
+            "Harga jual per unit",
+            50000,
+            "Rp",
+            "Harga bersih setelah diskon"
+          ],
+          [
+            "Biaya variabel per unit",
+            30000,
+            "Rp",
+            "HPP variabel per unit"
+          ],
+          [
+            "Rencana unit terjual",
+            1500,
+            "unit",
+            "Target volume periode sama"
+          ],
+          [
+            "Margin kontribusi per unit",
+            0,
+            "Rp",
+            "Harga jual dikurangi biaya variabel"
+          ],
+          [
+            "BEP dalam unit",
+            0,
+            "unit",
+            "Biaya tetap / kontribusi per unit"
+          ],
+          [
+            "BEP dalam rupiah",
+            0,
+            "Rp",
+            "BEP unit dikali harga jual"
+          ],
+          [
+            "Margin of safety",
+            0,
+            "%",
+            "(Rencana unit - BEP) / rencana unit"
+          ],
+          [
+            "Target di atas BEP (1/0)",
+            0,
+            "indikator",
+            "1 berarti target minimal mencapai BEP"
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "B10",
+            "formula": "B7-B8",
+            "cachedValue": 20000
+          },
+          {
+            "cell": "B11",
+            "formula": "IF(B10<=0,0,ROUNDUP(B6/B10,0))",
+            "cachedValue": 1250
+          },
+          {
+            "cell": "B12",
+            "formula": "B11*B7",
+            "cachedValue": 62500000
+          },
+          {
+            "cell": "B13",
+            "formula": "IF(B9=0,0,(B9-B11)/B9)",
+            "cachedValue": 0.1666666667
+          },
+          {
+            "cell": "B14",
+            "formula": "IF(B9>=B11,1,0)",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          34,
+          22,
+          18,
+          54
+        ]
+      }
+    ]
+  },
+  {
+    "id": "tabel-amortisasi-pinjaman",
+    "name": "Tabel Amortisasi Pinjaman dengan Angsuran PMT",
+    "category": "bisnis",
+    "categoryLabel": "Bisnis & keuangan",
+    "symbol": "AMO",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Buat jadwal angsuran yang memisahkan bunga, pokok pinjaman, dan saldo akhir berdasarkan pokok, suku bunga tahunan, serta tenor.",
+    "tags": [
+      "amortisasi",
+      "pinjaman",
+      "PMT",
+      "angsuran",
+      "bunga efektif",
+      "jadwal utang"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama usaha atau peminjam",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab keuangan",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode analisis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Bulanan",
+          "Per fasilitas pinjaman",
+          "Simulasi pendanaan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Pinjaman bank",
+          "Kredit investasi",
+          "Kredit modal kerja",
+          "Pinjaman pemegang saham"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan asumsi tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan asumsi atau kebutuhan tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Asumsi",
+        "title": "Asumsi",
+        "columns": [
+          "Parameter",
+          "Nilai",
+          "Satuan",
+          "Catatan"
+        ],
+        "rows": [
+          [
+            "Pokok pinjaman",
+            120000000,
+            "Rp",
+            "Nilai awal"
+          ],
+          [
+            "Suku bunga tahunan",
+            0.12,
+            "%",
+            "Asumsi bunga nominal"
+          ],
+          [
+            "Tenor",
+            36,
+            "bulan",
+            "Jumlah angsuran"
+          ]
+        ],
+        "formulaCells": [],
+        "columnWidths": [
+          30,
+          22,
+          16,
+          45
+        ]
+      },
+      {
+        "name": "Amortisasi",
+        "title": "Jadwal Amortisasi - {{entityName}}",
+        "columns": [
+          "Angsuran ke-",
+          "Saldo awal (Rp)",
+          "Angsuran (Rp)",
+          "Bunga (Rp)",
+          "Pokok dibayar (Rp)",
+          "Saldo akhir (Rp)"
+        ],
+        "rows": [
+          [
+            1,
+            120000000,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            3,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            5,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            6,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "C6",
+            "formula": "PMT(Asumsi!B7/12,Asumsi!B8,-Asumsi!B6)",
+            "cachedValue": 3985717.17754214
+          },
+          {
+            "cell": "D6",
+            "formula": "B6*Asumsi!B7/12",
+            "cachedValue": 1200000
+          },
+          {
+            "cell": "E6",
+            "formula": "C6-D6",
+            "cachedValue": 2785717.17754214
+          },
+          {
+            "cell": "F6",
+            "formula": "B6-E6",
+            "cachedValue": 117214282.82245786
+          },
+          {
+            "cell": "B7",
+            "formula": "F6",
+            "cachedValue": 117214282.82245786
+          },
+          {
+            "cell": "C7",
+            "formula": "PMT(Asumsi!B7/12,Asumsi!B8,-Asumsi!B6)",
+            "cachedValue": 3985717.17754214
+          },
+          {
+            "cell": "D7",
+            "formula": "B7*Asumsi!B7/12",
+            "cachedValue": 1172142.8282245786
+          },
+          {
+            "cell": "E7",
+            "formula": "C7-D7",
+            "cachedValue": 2813574.349317561
+          },
+          {
+            "cell": "F7",
+            "formula": "B7-E7",
+            "cachedValue": 114400708.4731403
+          },
+          {
+            "cell": "B8",
+            "formula": "F7",
+            "cachedValue": 114400708.4731403
+          },
+          {
+            "cell": "C8",
+            "formula": "PMT(Asumsi!B7/12,Asumsi!B8,-Asumsi!B6)",
+            "cachedValue": 3985717.17754214
+          },
+          {
+            "cell": "D8",
+            "formula": "B8*Asumsi!B7/12",
+            "cachedValue": 1144007.084731403
+          },
+          {
+            "cell": "E8",
+            "formula": "C8-D8",
+            "cachedValue": 2841710.092810737
+          },
+          {
+            "cell": "F8",
+            "formula": "B8-E8",
+            "cachedValue": 111558998.38032956
+          },
+          {
+            "cell": "B9",
+            "formula": "F8",
+            "cachedValue": 111558998.38032956
+          },
+          {
+            "cell": "C9",
+            "formula": "PMT(Asumsi!B7/12,Asumsi!B8,-Asumsi!B6)",
+            "cachedValue": 3985717.17754214
+          },
+          {
+            "cell": "D9",
+            "formula": "B9*Asumsi!B7/12",
+            "cachedValue": 1115589.9838032958
+          },
+          {
+            "cell": "E9",
+            "formula": "C9-D9",
+            "cachedValue": 2870127.1937388442
+          },
+          {
+            "cell": "F9",
+            "formula": "B9-E9",
+            "cachedValue": 108688871.18659072
+          },
+          {
+            "cell": "B10",
+            "formula": "F9",
+            "cachedValue": 108688871.18659072
+          },
+          {
+            "cell": "C10",
+            "formula": "PMT(Asumsi!B7/12,Asumsi!B8,-Asumsi!B6)",
+            "cachedValue": 3985717.17754214
+          },
+          {
+            "cell": "D10",
+            "formula": "B10*Asumsi!B7/12",
+            "cachedValue": 1086888.711865907
+          },
+          {
+            "cell": "E10",
+            "formula": "C10-D10",
+            "cachedValue": 2898828.4656762327
+          },
+          {
+            "cell": "F10",
+            "formula": "B10-E10",
+            "cachedValue": 105790042.72091448
+          },
+          {
+            "cell": "B11",
+            "formula": "F10",
+            "cachedValue": 105790042.72091448
+          },
+          {
+            "cell": "C11",
+            "formula": "PMT(Asumsi!B7/12,Asumsi!B8,-Asumsi!B6)",
+            "cachedValue": 3985717.17754214
+          },
+          {
+            "cell": "D11",
+            "formula": "B11*Asumsi!B7/12",
+            "cachedValue": 1057900.427209145
+          },
+          {
+            "cell": "E11",
+            "formula": "C11-D11",
+            "cachedValue": 2927816.750332995
+          },
+          {
+            "cell": "F11",
+            "formula": "B11-E11",
+            "cachedValue": 102862225.97058149
+          }
+        ],
+        "columnWidths": [
+          18,
+          22,
+          22,
+          20,
+          24,
+          22
+        ]
+      }
+    ]
+  },
+  {
+    "id": "model-unit-economics-ltv-cac",
+    "name": "Model Unit Economics: CAC, LTV & Payback",
+    "category": "bisnis",
+    "categoryLabel": "Bisnis & keuangan",
+    "symbol": "UEC",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Ukur biaya akuisisi pelanggan, kontribusi kotor bulanan, lifetime value, rasio LTV:CAC, dan lama pengembalian biaya akuisisi.",
+    "tags": [
+      "unit economics",
+      "CAC",
+      "LTV",
+      "payback period",
+      "retensi",
+      "churn"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama produk atau bisnis",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Growth lead atau analis keuangan",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode analisis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Bulanan",
+          "Per cohort pelanggan",
+          "Per skenario"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Langganan",
+          "Marketplace",
+          "Retail berulang",
+          "Layanan digital"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan asumsi tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan asumsi atau kebutuhan tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Unit Economics",
+        "title": "Unit Economics - {{entityName}}",
+        "columns": [
+          "Indikator",
+          "Nilai",
+          "Satuan",
+          "Definisi"
+        ],
+        "rows": [
+          [
+            "Pelanggan baru",
+            100,
+            "pelanggan",
+            "Jumlah pelanggan baru"
+          ],
+          [
+            "Biaya akuisisi total",
+            2500000,
+            "Rp",
+            "Iklan, komisi, biaya akuisisi"
+          ],
+          [
+            "Pendapatan rata-rata per pelanggan/bulan",
+            150000,
+            "Rp",
+            "ARPU bulanan"
+          ],
+          [
+            "Gross margin",
+            0.7,
+            "%",
+            "Margin setelah biaya langsung"
+          ],
+          [
+            "Churn pelanggan bulanan",
+            0.05,
+            "%",
+            "Proporsi pelanggan berhenti per bulan"
+          ],
+          [
+            "CAC",
+            0,
+            "Rp/pelanggan",
+            "Biaya akuisisi / pelanggan baru"
+          ],
+          [
+            "Kontribusi kotor per pelanggan/bulan",
+            0,
+            "Rp",
+            "ARPU dikali gross margin"
+          ],
+          [
+            "LTV sederhana",
+            0,
+            "Rp",
+            "Kontribusi bulanan / churn bulanan"
+          ],
+          [
+            "Rasio LTV:CAC",
+            0,
+            "x",
+            "LTV dibagi CAC"
+          ],
+          [
+            "Payback CAC",
+            0,
+            "bulan",
+            "CAC dibagi kontribusi bulanan"
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "B11",
+            "formula": "IF(B6=0,0,B7/B6)",
+            "cachedValue": 25000
+          },
+          {
+            "cell": "B12",
+            "formula": "B8*B9",
+            "cachedValue": 105000
+          },
+          {
+            "cell": "B13",
+            "formula": "IF(B10=0,0,B12/B10)",
+            "cachedValue": 2100000
+          },
+          {
+            "cell": "B14",
+            "formula": "IF(B11=0,0,B13/B11)",
+            "cachedValue": 84
+          },
+          {
+            "cell": "B15",
+            "formula": "IF(B12=0,0,B11/B12)",
+            "cachedValue": 0.2380952381
+          }
+        ],
+        "columnWidths": [
+          42,
+          23,
+          23,
+          52
+        ]
+      }
+    ]
+  },
+  {
+    "id": "kalkulator-burn-rate-runway",
+    "name": "Kalkulator Burn Rate & Cash Runway",
+    "category": "bisnis",
+    "categoryLabel": "Bisnis & keuangan",
+    "symbol": "BRR",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Hitung net burn historis, rata-rata burn bulanan, estimasi runway kas, dan indikator jika sisa runway di bawah ambang tiga bulan.",
+    "tags": [
+      "burn rate",
+      "runway",
+      "cash runway",
+      "startup finance",
+      "cash burn"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama startup atau perusahaan",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Founder atau finance lead",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode analisis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Tiga bulan terakhir",
+          "Enam bulan terakhir",
+          "Bulanan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Operasional startup",
+          "Pra-pendanaan",
+          "Pasca-pendanaan",
+          "Evaluasi efisiensi"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan asumsi tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan asumsi atau kebutuhan tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Burn Rate",
+        "title": "Burn Rate & Runway - {{entityName}}",
+        "columns": [
+          "Periode",
+          "Kas awal (Rp)",
+          "Kas akhir (Rp)",
+          "Net burn (Rp)"
+        ],
+        "rows": [
+          [
+            "Bulan 1",
+            100000000,
+            92000000,
+            0
+          ],
+          [
+            "Bulan 2",
+            92000000,
+            81000000,
+            0
+          ],
+          [
+            "Bulan 3",
+            81000000,
+            68000000,
+            0
+          ],
+          [
+            "Rata-rata burn bulanan",
+            "",
+            "",
+            0
+          ],
+          [
+            "Kas tersedia saat ini",
+            68000000,
+            "",
+            ""
+          ],
+          [
+            "Estimasi runway",
+            0,
+            "",
+            "bulan"
+          ],
+          [
+            "Runway di bawah 3 bulan (1/0)",
+            0,
+            "",
+            "indikator"
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "D6",
+            "formula": "B6-C6",
+            "cachedValue": 8000000
+          },
+          {
+            "cell": "D7",
+            "formula": "B7-C7",
+            "cachedValue": 11000000
+          },
+          {
+            "cell": "D8",
+            "formula": "B8-C8",
+            "cachedValue": 13000000
+          },
+          {
+            "cell": "D9",
+            "formula": "AVERAGE(D6:D8)",
+            "cachedValue": 10666666.6667
+          },
+          {
+            "cell": "B11",
+            "formula": "IF(D9<=0,0,B10/D9)",
+            "cachedValue": 6.375
+          },
+          {
+            "cell": "B12",
+            "formula": "IF(B11<3,1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          28,
+          22,
+          22,
+          22
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cap-table-saham-dilusi",
+    "name": "Cap Table Saham & Simulasi Dilusi",
+    "category": "bisnis",
+    "categoryLabel": "Bisnis & keuangan",
+    "symbol": "CAP",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Petakan saham lama, penerbitan saham baru, total saham fully diluted, dan persentase kepemilikan setiap pemegang saham.",
+    "tags": [
+      "cap table",
+      "saham",
+      "dilusi",
+      "equity",
+      "ESOP",
+      "investor"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau startup",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Founder atau corporate finance",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode analisis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sebelum putaran pendanaan",
+          "Setelah putaran pendanaan",
+          "Simulasi penerbitan saham"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Seed",
+          "Pre-seed",
+          "Series A",
+          "Employee Stock Option Pool"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan asumsi tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan asumsi atau kebutuhan tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Kepemilikan Saham",
+        "title": "Cap Table - {{entityName}}",
+        "columns": [
+          "Pemegang saham",
+          "Kategori",
+          "Saham lama",
+          "Saham baru",
+          "Total saham fully diluted",
+          "Kepemilikan"
+        ],
+        "rows": [
+          [
+            "Pendiri",
+            "Founder",
+            750000,
+            0,
+            0,
+            0
+          ],
+          [
+            "Co-founder",
+            "Founder",
+            250000,
+            0,
+            0,
+            0
+          ],
+          [
+            "Pool opsi karyawan",
+            "ESOP",
+            0,
+            100000,
+            0,
+            0
+          ],
+          [
+            "Investor baru",
+            "Investor",
+            0,
+            200000,
+            0,
+            0
+          ],
+          [
+            "TOTAL",
+            "",
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "C6+D6",
+            "cachedValue": 750000
+          },
+          {
+            "cell": "F6",
+            "formula": "IF($E$10=0,0,E6/$E$10)",
+            "cachedValue": 0.5769230769
+          },
+          {
+            "cell": "E7",
+            "formula": "C7+D7",
+            "cachedValue": 250000
+          },
+          {
+            "cell": "F7",
+            "formula": "IF($E$10=0,0,E7/$E$10)",
+            "cachedValue": 0.1923076923
+          },
+          {
+            "cell": "E8",
+            "formula": "C8+D8",
+            "cachedValue": 100000
+          },
+          {
+            "cell": "F8",
+            "formula": "IF($E$10=0,0,E8/$E$10)",
+            "cachedValue": 0.0769230769
+          },
+          {
+            "cell": "E9",
+            "formula": "C9+D9",
+            "cachedValue": 200000
+          },
+          {
+            "cell": "F9",
+            "formula": "IF($E$10=0,0,E9/$E$10)",
+            "cachedValue": 0.1538461538
+          },
+          {
+            "cell": "C10",
+            "formula": "SUM(C6:C9)",
+            "cachedValue": 1000000
+          },
+          {
+            "cell": "D10",
+            "formula": "SUM(D6:D9)",
+            "cachedValue": 300000
+          },
+          {
+            "cell": "E10",
+            "formula": "C10+D10",
+            "cachedValue": 1300000
+          },
+          {
+            "cell": "F10",
+            "formula": "SUM(F6:F9)",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          26,
+          18,
+          20,
+          20,
+          30,
+          20
+        ]
+      }
+    ]
+  },
+  {
+    "id": "model-laba-rugi-12-bulan",
+    "name": "Model Laba Rugi 12 Bulan: Gross Profit hingga Net Income",
+    "category": "bisnis",
+    "categoryLabel": "Bisnis & keuangan",
+    "symbol": "PL12",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Model bulanan dengan pendapatan, HPP, laba kotor, payroll, pemasaran, overhead, EBITDA, depresiasi, bunga, estimasi pajak berbasis asumsi, dan net margin.",
+    "tags": [
+      "laba rugi",
+      "profit and loss",
+      "P&L",
+      "EBITDA",
+      "net income",
+      "financial model"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit bisnis",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Controller atau manajer keuangan",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode analisis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "12 bulan tahun buku",
+          "Forecast 12 bulan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Anggaran tahunan",
+          "Forecast operasional",
+          "Skenario pertumbuhan",
+          "Evaluasi profitabilitas"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan asumsi tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan asumsi atau kebutuhan tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Laba Rugi 12 Bulan",
+        "title": "P&L Model - {{entityName}}",
+        "columns": [
+          "Bulan",
+          "Pendapatan bersih (Rp)",
+          "HPP (Rp)",
+          "Laba kotor (Rp)",
+          "Payroll (Rp)",
+          "Pemasaran (Rp)",
+          "Sewa (Rp)",
+          "Biaya lain (Rp)",
+          "EBITDA (Rp)",
+          "Depresiasi (Rp)",
+          "EBIT (Rp)",
+          "Bunga (Rp)",
+          "Laba sebelum pajak (Rp)",
+          "Asumsi pajak efektif",
+          "Estimasi pajak (Rp)",
+          "Laba bersih (Rp)",
+          "Net margin"
+        ],
+        "rows": [
+          [
+            "Jan",
+            85000000,
+            35700000,
+            0,
+            18000000,
+            6500000,
+            5000000,
+            4500000,
+            0,
+            2000000,
+            0,
+            1200000,
+            0,
+            0.11,
+            0,
+            0,
+            0
+          ],
+          [
+            "Feb",
+            88500000,
+            37170000,
+            0,
+            18250000,
+            6650000,
+            5000000,
+            4600000,
+            0,
+            2000000,
+            0,
+            1200000,
+            0,
+            0.11,
+            0,
+            0,
+            0
+          ],
+          [
+            "Mar",
+            92000000,
+            38640000,
+            0,
+            18500000,
+            6800000,
+            5000000,
+            4700000,
+            0,
+            2000000,
+            0,
+            1200000,
+            0,
+            0.11,
+            0,
+            0,
+            0
+          ],
+          [
+            "Apr",
+            95500000,
+            40110000,
+            0,
+            18750000,
+            6950000,
+            5000000,
+            4800000,
+            0,
+            2000000,
+            0,
+            1200000,
+            0,
+            0.11,
+            0,
+            0,
+            0
+          ],
+          [
+            "Mei",
+            99000000,
+            41580000,
+            0,
+            19000000,
+            7100000,
+            5000000,
+            4900000,
+            0,
+            2000000,
+            0,
+            1200000,
+            0,
+            0.11,
+            0,
+            0,
+            0
+          ],
+          [
+            "Jun",
+            102500000,
+            43050000,
+            0,
+            19250000,
+            7250000,
+            5000000,
+            5000000,
+            0,
+            2000000,
+            0,
+            1200000,
+            0,
+            0.11,
+            0,
+            0,
+            0
+          ],
+          [
+            "Jul",
+            106000000,
+            44520000,
+            0,
+            19500000,
+            7400000,
+            5000000,
+            5100000,
+            0,
+            2000000,
+            0,
+            1200000,
+            0,
+            0.11,
+            0,
+            0,
+            0
+          ],
+          [
+            "Agu",
+            109500000,
+            45990000,
+            0,
+            19750000,
+            7550000,
+            5000000,
+            5200000,
+            0,
+            2000000,
+            0,
+            1200000,
+            0,
+            0.11,
+            0,
+            0,
+            0
+          ],
+          [
+            "Sep",
+            113000000,
+            47460000,
+            0,
+            20000000,
+            7700000,
+            5000000,
+            5300000,
+            0,
+            2000000,
+            0,
+            1200000,
+            0,
+            0.11,
+            0,
+            0,
+            0
+          ],
+          [
+            "Okt",
+            116500000,
+            48930000,
+            0,
+            20250000,
+            7850000,
+            5000000,
+            5400000,
+            0,
+            2000000,
+            0,
+            1200000,
+            0,
+            0.11,
+            0,
+            0,
+            0
+          ],
+          [
+            "Nov",
+            120000000,
+            50400000,
+            0,
+            20500000,
+            8000000,
+            5000000,
+            5500000,
+            0,
+            2000000,
+            0,
+            1200000,
+            0,
+            0.11,
+            0,
+            0,
+            0
+          ],
+          [
+            "Des",
+            123500000,
+            51870000,
+            0,
+            20750000,
+            8150000,
+            5000000,
+            5600000,
+            0,
+            2000000,
+            0,
+            1200000,
+            0,
+            0.11,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "D6",
+            "formula": "B6-C6",
+            "cachedValue": 49300000
+          },
+          {
+            "cell": "I6",
+            "formula": "D6-E6-F6-G6-H6",
+            "cachedValue": 15300000
+          },
+          {
+            "cell": "K6",
+            "formula": "I6-J6",
+            "cachedValue": 13300000
+          },
+          {
+            "cell": "M6",
+            "formula": "K6-L6",
+            "cachedValue": 12100000
+          },
+          {
+            "cell": "O6",
+            "formula": "IF(M6>0,M6*N6,0)",
+            "cachedValue": 1331000
+          },
+          {
+            "cell": "P6",
+            "formula": "M6-O6",
+            "cachedValue": 10769000
+          },
+          {
+            "cell": "Q6",
+            "formula": "IF(B6=0,0,P6/B6)",
+            "cachedValue": 0.12669411764705882
+          },
+          {
+            "cell": "D7",
+            "formula": "B7-C7",
+            "cachedValue": 51330000
+          },
+          {
+            "cell": "I7",
+            "formula": "D7-E7-F7-G7-H7",
+            "cachedValue": 16830000
+          },
+          {
+            "cell": "K7",
+            "formula": "I7-J7",
+            "cachedValue": 14830000
+          },
+          {
+            "cell": "M7",
+            "formula": "K7-L7",
+            "cachedValue": 13630000
+          },
+          {
+            "cell": "O7",
+            "formula": "IF(M7>0,M7*N7,0)",
+            "cachedValue": 1499300
+          },
+          {
+            "cell": "P7",
+            "formula": "M7-O7",
+            "cachedValue": 12130700
+          },
+          {
+            "cell": "Q7",
+            "formula": "IF(B7=0,0,P7/B7)",
+            "cachedValue": 0.13707005649717513
+          },
+          {
+            "cell": "D8",
+            "formula": "B8-C8",
+            "cachedValue": 53360000
+          },
+          {
+            "cell": "I8",
+            "formula": "D8-E8-F8-G8-H8",
+            "cachedValue": 18360000
+          },
+          {
+            "cell": "K8",
+            "formula": "I8-J8",
+            "cachedValue": 16360000
+          },
+          {
+            "cell": "M8",
+            "formula": "K8-L8",
+            "cachedValue": 15160000
+          },
+          {
+            "cell": "O8",
+            "formula": "IF(M8>0,M8*N8,0)",
+            "cachedValue": 1667600
+          },
+          {
+            "cell": "P8",
+            "formula": "M8-O8",
+            "cachedValue": 13492400
+          },
+          {
+            "cell": "Q8",
+            "formula": "IF(B8=0,0,P8/B8)",
+            "cachedValue": 0.14665652173913044
+          },
+          {
+            "cell": "D9",
+            "formula": "B9-C9",
+            "cachedValue": 55390000
+          },
+          {
+            "cell": "I9",
+            "formula": "D9-E9-F9-G9-H9",
+            "cachedValue": 19890000
+          },
+          {
+            "cell": "K9",
+            "formula": "I9-J9",
+            "cachedValue": 17890000
+          },
+          {
+            "cell": "M9",
+            "formula": "K9-L9",
+            "cachedValue": 16690000
+          },
+          {
+            "cell": "O9",
+            "formula": "IF(M9>0,M9*N9,0)",
+            "cachedValue": 1835900
+          },
+          {
+            "cell": "P9",
+            "formula": "M9-O9",
+            "cachedValue": 14854100
+          },
+          {
+            "cell": "Q9",
+            "formula": "IF(B9=0,0,P9/B9)",
+            "cachedValue": 0.15554031413612565
+          },
+          {
+            "cell": "D10",
+            "formula": "B10-C10",
+            "cachedValue": 57420000
+          },
+          {
+            "cell": "I10",
+            "formula": "D10-E10-F10-G10-H10",
+            "cachedValue": 21420000
+          },
+          {
+            "cell": "K10",
+            "formula": "I10-J10",
+            "cachedValue": 19420000
+          },
+          {
+            "cell": "M10",
+            "formula": "K10-L10",
+            "cachedValue": 18220000
+          },
+          {
+            "cell": "O10",
+            "formula": "IF(M10>0,M10*N10,0)",
+            "cachedValue": 2004200
+          },
+          {
+            "cell": "P10",
+            "formula": "M10-O10",
+            "cachedValue": 16215800
+          },
+          {
+            "cell": "Q10",
+            "formula": "IF(B10=0,0,P10/B10)",
+            "cachedValue": 0.1637959595959596
+          },
+          {
+            "cell": "D11",
+            "formula": "B11-C11",
+            "cachedValue": 59450000
+          },
+          {
+            "cell": "I11",
+            "formula": "D11-E11-F11-G11-H11",
+            "cachedValue": 22950000
+          },
+          {
+            "cell": "K11",
+            "formula": "I11-J11",
+            "cachedValue": 20950000
+          },
+          {
+            "cell": "M11",
+            "formula": "K11-L11",
+            "cachedValue": 19750000
+          },
+          {
+            "cell": "O11",
+            "formula": "IF(M11>0,M11*N11,0)",
+            "cachedValue": 2172500
+          },
+          {
+            "cell": "P11",
+            "formula": "M11-O11",
+            "cachedValue": 17577500
+          },
+          {
+            "cell": "Q11",
+            "formula": "IF(B11=0,0,P11/B11)",
+            "cachedValue": 0.1714878048780488
+          },
+          {
+            "cell": "D12",
+            "formula": "B12-C12",
+            "cachedValue": 61480000
+          },
+          {
+            "cell": "I12",
+            "formula": "D12-E12-F12-G12-H12",
+            "cachedValue": 24480000
+          },
+          {
+            "cell": "K12",
+            "formula": "I12-J12",
+            "cachedValue": 22480000
+          },
+          {
+            "cell": "M12",
+            "formula": "K12-L12",
+            "cachedValue": 21280000
+          },
+          {
+            "cell": "O12",
+            "formula": "IF(M12>0,M12*N12,0)",
+            "cachedValue": 2340800
+          },
+          {
+            "cell": "P12",
+            "formula": "M12-O12",
+            "cachedValue": 18939200
+          },
+          {
+            "cell": "Q12",
+            "formula": "IF(B12=0,0,P12/B12)",
+            "cachedValue": 0.17867169811320754
+          },
+          {
+            "cell": "D13",
+            "formula": "B13-C13",
+            "cachedValue": 63510000
+          },
+          {
+            "cell": "I13",
+            "formula": "D13-E13-F13-G13-H13",
+            "cachedValue": 26010000
+          },
+          {
+            "cell": "K13",
+            "formula": "I13-J13",
+            "cachedValue": 24010000
+          },
+          {
+            "cell": "M13",
+            "formula": "K13-L13",
+            "cachedValue": 22810000
+          },
+          {
+            "cell": "O13",
+            "formula": "IF(M13>0,M13*N13,0)",
+            "cachedValue": 2509100
+          },
+          {
+            "cell": "P13",
+            "formula": "M13-O13",
+            "cachedValue": 20300900
+          },
+          {
+            "cell": "Q13",
+            "formula": "IF(B13=0,0,P13/B13)",
+            "cachedValue": 0.18539634703196348
+          },
+          {
+            "cell": "D14",
+            "formula": "B14-C14",
+            "cachedValue": 65540000
+          },
+          {
+            "cell": "I14",
+            "formula": "D14-E14-F14-G14-H14",
+            "cachedValue": 27540000
+          },
+          {
+            "cell": "K14",
+            "formula": "I14-J14",
+            "cachedValue": 25540000
+          },
+          {
+            "cell": "M14",
+            "formula": "K14-L14",
+            "cachedValue": 24340000
+          },
+          {
+            "cell": "O14",
+            "formula": "IF(M14>0,M14*N14,0)",
+            "cachedValue": 2677400
+          },
+          {
+            "cell": "P14",
+            "formula": "M14-O14",
+            "cachedValue": 21662600
+          },
+          {
+            "cell": "Q14",
+            "formula": "IF(B14=0,0,P14/B14)",
+            "cachedValue": 0.19170442477876107
+          },
+          {
+            "cell": "D15",
+            "formula": "B15-C15",
+            "cachedValue": 67570000
+          },
+          {
+            "cell": "I15",
+            "formula": "D15-E15-F15-G15-H15",
+            "cachedValue": 29070000
+          },
+          {
+            "cell": "K15",
+            "formula": "I15-J15",
+            "cachedValue": 27070000
+          },
+          {
+            "cell": "M15",
+            "formula": "K15-L15",
+            "cachedValue": 25870000
+          },
+          {
+            "cell": "O15",
+            "formula": "IF(M15>0,M15*N15,0)",
+            "cachedValue": 2845700
+          },
+          {
+            "cell": "P15",
+            "formula": "M15-O15",
+            "cachedValue": 23024300
+          },
+          {
+            "cell": "Q15",
+            "formula": "IF(B15=0,0,P15/B15)",
+            "cachedValue": 0.1976334763948498
+          },
+          {
+            "cell": "D16",
+            "formula": "B16-C16",
+            "cachedValue": 69600000
+          },
+          {
+            "cell": "I16",
+            "formula": "D16-E16-F16-G16-H16",
+            "cachedValue": 30600000
+          },
+          {
+            "cell": "K16",
+            "formula": "I16-J16",
+            "cachedValue": 28600000
+          },
+          {
+            "cell": "M16",
+            "formula": "K16-L16",
+            "cachedValue": 27400000
+          },
+          {
+            "cell": "O16",
+            "formula": "IF(M16>0,M16*N16,0)",
+            "cachedValue": 3014000
+          },
+          {
+            "cell": "P16",
+            "formula": "M16-O16",
+            "cachedValue": 24386000
+          },
+          {
+            "cell": "Q16",
+            "formula": "IF(B16=0,0,P16/B16)",
+            "cachedValue": 0.20321666666666666
+          },
+          {
+            "cell": "D17",
+            "formula": "B17-C17",
+            "cachedValue": 71630000
+          },
+          {
+            "cell": "I17",
+            "formula": "D17-E17-F17-G17-H17",
+            "cachedValue": 32130000
+          },
+          {
+            "cell": "K17",
+            "formula": "I17-J17",
+            "cachedValue": 30130000
+          },
+          {
+            "cell": "M17",
+            "formula": "K17-L17",
+            "cachedValue": 28930000
+          },
+          {
+            "cell": "O17",
+            "formula": "IF(M17>0,M17*N17,0)",
+            "cachedValue": 3182300
+          },
+          {
+            "cell": "P17",
+            "formula": "M17-O17",
+            "cachedValue": 25747700
+          },
+          {
+            "cell": "Q17",
+            "formula": "IF(B17=0,0,P17/B17)",
+            "cachedValue": 0.2084834008097166
+          }
+        ],
+        "columnWidths": [
+          13,
+          22,
+          18,
+          20,
+          19,
+          19,
+          16,
+          19,
+          20,
+          19,
+          18,
+          17,
+          24,
+          20,
+          21,
+          20,
+          16
+        ]
+      }
+    ]
   }
 ]
