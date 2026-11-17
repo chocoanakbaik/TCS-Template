@@ -1,38 +1,38 @@
 [
   {
-    "id": "inventory-management",
-    "name": "Inventory Management",
+    "id": "kartu-stok-reorder-point",
+    "name": "Kartu Stok Gudang & Reorder Point",
     "category": "operasional",
     "categoryLabel": "Operasional",
-    "symbol": "IM",
+    "symbol": "KSR",
     "format": "xlsx",
-    "description": "Pantau stok awal, barang masuk, barang keluar, dan stok akhir dengan perhitungan otomatis.",
+    "quality": "standar",
+    "description": "Kartu per SKU untuk saldo awal, barang masuk/keluar, saldo akhir, batas pemesanan ulang, dan sinyal RESTOCK.",
     "tags": [
-      "inventaris",
-      "stok",
-      "barang",
+      "kartu stok",
       "gudang",
-      "persediaan",
-      "operasional"
+      "reorder point",
+      "restock",
+      "persediaan"
     ],
     "questions": [
       {
         "id": "entityName",
-        "label": "Nama usaha atau unit kerja",
+        "label": "Nama perusahaan atau unit operasional",
         "type": "text",
         "required": true,
-        "placeholder": "Contoh: Toko Sinar Jaya"
+        "placeholder": "Nama fasilitas, gudang, atau unit kerja"
       },
       {
         "id": "ownerName",
-        "label": "Nama pengelola stok",
+        "label": "Penanggung jawab operasional",
         "type": "text",
         "required": false,
-        "placeholder": "Nama penanggung jawab"
+        "placeholder": "Nama PIC"
       },
       {
         "id": "period",
-        "label": "Periode yang digunakan",
+        "label": "Periode pengendalian",
         "type": "select",
         "required": true,
         "options": [
@@ -44,89 +44,3568 @@
       },
       {
         "id": "scope",
-        "label": "Ruang lingkup atau konteks penggunaan",
+        "label": "Ruang lingkup operasional",
         "type": "select",
         "required": true,
         "options": [
-          "Produk siap jual",
           "Bahan baku",
-          "Peralatan dan aset",
-          "Persediaan campuran"
+          "Barang dagang",
+          "Barang jadi",
+          "Suku cadang"
         ]
       },
       {
         "id": "notes",
-        "label": "Catatan tambahan",
+        "label": "Catatan dan ketentuan khusus",
         "type": "textarea",
         "required": false,
-        "placeholder": "Tuliskan kebutuhan tambahan yang ingin dimasukkan."
+        "placeholder": "Asumsi atau catatan operasional"
       }
     ],
     "sheets": [
       {
-        "name": "Daftar Stok",
-        "title": "Inventory Management - {{entityName}}",
+        "name": "Data Operasional",
+        "title": "Kartu Stok Gudang & Reorder Point - {{entityName}}",
         "columns": [
-          "Kode",
-          "Nama Barang",
-          "Stok Awal",
-          "Barang Masuk",
-          "Barang Keluar",
-          "Stok Akhir"
+          "SKU",
+          "Nama barang",
+          "Satuan",
+          "Stok awal",
+          "Masuk",
+          "Keluar",
+          "Stok akhir",
+          "Reorder point",
+          "RESTOCK (1/0)"
         ],
         "rows": [
           [
-            "INV-001",
-            "Produk contoh A",
-            12,
-            5,
-            3,
-            0
-          ],
-          [
-            "INV-002",
-            "Produk contoh B",
-            20,
+            "SKU-001",
+            "Kardus M",
+            "pcs",
+            120,
+            80,
+            145,
             0,
-            4,
+            60,
             0
           ],
           [
-            "INV-003",
-            "Produk contoh C",
-            8,
-            2,
-            1,
+            "SKU-002",
+            "Label",
+            "roll",
+            35,
+            10,
+            22,
+            0,
+            30,
+            0
+          ],
+          [
+            "SKU-003",
+            "Sarung tangan",
+            "box",
+            18,
+            0,
+            7,
+            0,
+            12,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "D6+E6-F6",
+            "cachedValue": 55
+          },
+          {
+            "cell": "I6",
+            "formula": "IF(G6<=H6,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G7",
+            "formula": "D7+E7-F7",
+            "cachedValue": 23
+          },
+          {
+            "cell": "I7",
+            "formula": "IF(G7<=H7,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G8",
+            "formula": "D8+E8-F8",
+            "cachedValue": 11
+          },
+          {
+            "cell": "I8",
+            "formula": "IF(G8<=H8,1,0)",
+            "cachedValue": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "checklist-buka-tutup-outlet",
+    "name": "Checklist Pembukaan & Penutupan Outlet",
+    "category": "operasional",
+    "categoryLabel": "Operasional",
+    "symbol": "BTO",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Pemeriksaan kesiapan kasir, area jual, kebersihan, stok display, perangkat POS, dan penguncian outlet per shift.",
+    "tags": [
+      "checklist outlet",
+      "opening",
+      "closing",
+      "kasir",
+      "keamanan",
+      "kebersihan"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit operasional",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama fasilitas, gudang, atau unit kerja"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab operasional",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Per shift",
+          "Harian",
+          "Mingguan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup operasional",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Toko ritel",
+          "Restoran",
+          "Loket layanan",
+          "Cabang"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan ketentuan khusus",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Asumsi atau catatan operasional"
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Data Operasional",
+        "title": "Checklist Pembukaan & Penutupan Outlet - {{entityName}}",
+        "columns": [
+          "Tahap",
+          "Area pemeriksaan",
+          "PIC",
+          "Status",
+          "Temuan / bukti",
+          "Belum selesai (1/0)"
+        ],
+        "rows": [
+          [
+            "Buka",
+            "Kas awal dan POS",
+            "Kasir",
+            "Selesai",
+            "Kas cocok",
+            0
+          ],
+          [
+            "Buka",
+            "Area pelanggan",
+            "Pramuniaga",
+            "Selesai",
+            "Area bersih",
+            0
+          ],
+          [
+            "Tutup",
+            "Rekonsiliasi kas",
+            "Kasir",
+            "Belum",
+            "Hitung ulang",
+            0
+          ],
+          [
+            "Tutup",
+            "Pintu dan alarm",
+            "Kepala shift",
+            "Selesai",
+            "Pemeriksaan akhir",
             0
           ]
         ],
         "formulaCells": [
           {
             "cell": "F6",
-            "formula": "C6+D6-E6",
-            "cachedValue": 14
+            "formula": "IF(D6=\"Selesai\",0,1)",
+            "cachedValue": 0
           },
           {
             "cell": "F7",
-            "formula": "C7+D7-E7",
-            "cachedValue": 16
+            "formula": "IF(D7=\"Selesai\",0,1)",
+            "cachedValue": 0
           },
           {
             "cell": "F8",
-            "formula": "C8+D8-E8",
-            "cachedValue": 9
+            "formula": "IF(D8=\"Selesai\",0,1)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F9",
+            "formula": "IF(D9=\"Selesai\",0,1)",
+            "cachedValue": 0
           }
-        ],
-        "columnWidths": [
-          16,
-          28,
-          15,
-          18,
-          18,
-          18
         ]
       }
+    ]
+  },
+  {
+    "id": "log-penerimaan-barang-inspeksi",
+    "name": "Log Penerimaan Barang & Pemeriksaan Kuantitas",
+    "category": "operasional",
+    "categoryLabel": "Operasional",
+    "symbol": "LPB",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Catat PO, kuantitas datang, kuantitas diterima dan ditolak untuk mendeteksi selisih penerimaan di area receiving.",
+    "tags": [
+      "receiving",
+      "purchase order",
+      "inspeksi penerimaan",
+      "barang ditolak",
+      "selisih"
     ],
-    "quality": "unggulan"
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit operasional",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama fasilitas, gudang, atau unit kerja"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab operasional",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Per kuartal"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup operasional",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Bahan baku",
+          "Barang dagang",
+          "Barang jadi",
+          "Perlengkapan"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan ketentuan khusus",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Asumsi atau catatan operasional"
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Data Operasional",
+        "title": "Log Penerimaan Barang & Pemeriksaan Kuantitas - {{entityName}}",
+        "columns": [
+          "Tanggal",
+          "No. PO",
+          "Pemasok",
+          "Qty PO",
+          "Qty datang",
+          "Qty diterima",
+          "Qty ditolak",
+          "Selisih vs PO"
+        ],
+        "rows": [
+          [
+            "2026-11-17",
+            "PO-101",
+            "Vendor A",
+            100,
+            100,
+            98,
+            2,
+            0
+          ],
+          [
+            "2026-11-17",
+            "PO-102",
+            "Vendor B",
+            60,
+            55,
+            55,
+            0,
+            0
+          ],
+          [
+            "2026-11-18",
+            "PO-103",
+            "Vendor C",
+            80,
+            82,
+            80,
+            2,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "H6",
+            "formula": "D6-F6",
+            "cachedValue": 2
+          },
+          {
+            "cell": "H7",
+            "formula": "D7-F7",
+            "cachedValue": 5
+          },
+          {
+            "cell": "H8",
+            "formula": "D8-F8",
+            "cachedValue": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "log-picking-packing-pesanan",
+    "name": "Log Picking, Packing & Verifikasi Pesanan",
+    "category": "operasional",
+    "categoryLabel": "Operasional",
+    "symbol": "PCK",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Periksa kuantitas pesanan, hasil picking, kelengkapan packing, dan kelayakan order sebelum diserahkan ke kurir.",
+    "tags": [
+      "picking",
+      "packing",
+      "fulfillment",
+      "order accuracy",
+      "warehouse"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit operasional",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama fasilitas, gudang, atau unit kerja"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab operasional",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Per kuartal"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup operasional",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Marketplace",
+          "Pesanan toko",
+          "B2B",
+          "Pesanan internal"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan ketentuan khusus",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Asumsi atau catatan operasional"
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Data Operasional",
+        "title": "Log Picking, Packing & Verifikasi Pesanan - {{entityName}}",
+        "columns": [
+          "No. order",
+          "SKU",
+          "Qty diminta",
+          "Qty dipicking",
+          "Qty lolos packing",
+          "Kurang picking",
+          "Siap kirim (1/0)"
+        ],
+        "rows": [
+          [
+            "ORD-501",
+            "SKU-A",
+            4,
+            4,
+            4,
+            0,
+            0
+          ],
+          [
+            "ORD-502",
+            "SKU-B",
+            8,
+            7,
+            7,
+            0,
+            0
+          ],
+          [
+            "ORD-503",
+            "SKU-C",
+            2,
+            2,
+            1,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "C6-D6",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(AND(D6=C6,E6=C6),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F7",
+            "formula": "C7-D7",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(AND(D7=C7,E7=C7),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F8",
+            "formula": "C8-D8",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(AND(D8=C8,E8=C8),1,0)",
+            "cachedValue": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "jadwal-pembersihan-sanitasi-area",
+    "name": "Jadwal Pembersihan & Sanitasi Area Kerja",
+    "category": "operasional",
+    "categoryLabel": "Operasional",
+    "symbol": "SAN",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Jadwalkan pembersihan area produksi, gudang, drainase, dan ruang kerja beserta PIC, frekuensi, dan verifikasi.",
+    "tags": [
+      "sanitasi",
+      "cleaning schedule",
+      "kebersihan",
+      "area kerja"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit operasional",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama fasilitas, gudang, atau unit kerja"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab operasional",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Setiap shift",
+          "Harian",
+          "Mingguan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup operasional",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Area produksi",
+          "Gudang",
+          "Outlet",
+          "Fasilitas umum"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan ketentuan khusus",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Asumsi atau catatan operasional"
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Data Operasional",
+        "title": "Jadwal Pembersihan & Sanitasi Area Kerja - {{entityName}}",
+        "columns": [
+          "Area",
+          "Aktivitas",
+          "Frekuensi",
+          "PIC",
+          "Status",
+          "Terverifikasi (1/0)"
+        ],
+        "rows": [
+          [
+            "Lantai produksi",
+            "Sapu dan pel",
+            "Setiap shift",
+            "Petugas A",
+            "Selesai",
+            0
+          ],
+          [
+            "Meja kerja",
+            "Sanitasi permukaan",
+            "Setiap shift",
+            "Petugas B",
+            "Selesai",
+            0
+          ],
+          [
+            "Drainase",
+            "Bersihkan saluran",
+            "Harian",
+            "Petugas C",
+            "Tertunda",
+            0
+          ],
+          [
+            "Area simpan",
+            "Inspeksi rak dan hama",
+            "Mingguan",
+            "Petugas A",
+            "Selesai",
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "IF(E6=\"Selesai\",1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F7",
+            "formula": "IF(E7=\"Selesai\",1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F8",
+            "formula": "IF(E8=\"Selesai\",1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F9",
+            "formula": "IF(E9=\"Selesai\",1,0)",
+            "cachedValue": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "log-pengisian-bbm-armada",
+    "name": "Log Pengisian BBM & Kilometer Armada",
+    "category": "operasional",
+    "categoryLabel": "Operasional",
+    "symbol": "BBM",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Catat odometer, liter BBM, biaya pengisian, jarak tempuh, dan efisiensi km/liter untuk tiap kendaraan.",
+    "tags": [
+      "BBM",
+      "armada",
+      "odometer",
+      "fuel log",
+      "km per liter"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit operasional",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama fasilitas, gudang, atau unit kerja"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab operasional",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Per kuartal"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup operasional",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mobil operasional",
+          "Motor kurir",
+          "Truk distribusi",
+          "Seluruh armada"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan ketentuan khusus",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Asumsi atau catatan operasional"
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Data Operasional",
+        "title": "Log Pengisian BBM & Kilometer Armada - {{entityName}}",
+        "columns": [
+          "Tanggal",
+          "No. kendaraan",
+          "Odometer awal",
+          "Odometer akhir",
+          "Liter BBM",
+          "Biaya BBM (Rp)",
+          "Jarak (km)",
+          "Efisiensi (km/l)"
+        ],
+        "rows": [
+          [
+            "2026-11-16",
+            "B 9012 TCS",
+            45200,
+            45410,
+            18,
+            240000,
+            0,
+            0
+          ],
+          [
+            "2026-11-17",
+            "B 9012 TCS",
+            45410,
+            45632,
+            19,
+            253000,
+            0,
+            0
+          ],
+          [
+            "2026-11-17",
+            "F 8123 TCS",
+            18900,
+            19080,
+            16,
+            216000,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "D6-C6",
+            "cachedValue": 210
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(E6=0,0,G6/E6)",
+            "cachedValue": 11.666666666666666
+          },
+          {
+            "cell": "G7",
+            "formula": "D7-C7",
+            "cachedValue": 222
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(E7=0,0,G7/E7)",
+            "cachedValue": 11.68421052631579
+          },
+          {
+            "cell": "G8",
+            "formula": "D8-C8",
+            "cachedValue": 180
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(E8=0,0,G8/E8)",
+            "cachedValue": 11.25
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "daftar-retur-barang-rusak",
+    "name": "Daftar Retur, Barang Rusak & Disposisi",
+    "category": "operasional",
+    "categoryLabel": "Operasional",
+    "symbol": "RET",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Pisahkan barang retur, barang rusak internal, kuantitas layak jual, dan barang yang harus dikarantina atau dihapuskan.",
+    "tags": [
+      "retur",
+      "barang rusak",
+      "disposisi",
+      "reverse logistics",
+      "klaim"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit operasional",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama fasilitas, gudang, atau unit kerja"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab operasional",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Per kuartal"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup operasional",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Retur pelanggan",
+          "Kerusakan gudang",
+          "Kerusakan kirim",
+          "Kedaluwarsa"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan ketentuan khusus",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Asumsi atau catatan operasional"
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Data Operasional",
+        "title": "Daftar Retur, Barang Rusak & Disposisi - {{entityName}}",
+        "columns": [
+          "Tanggal",
+          "No. referensi",
+          "SKU",
+          "Qty retur",
+          "Qty layak jual",
+          "Qty rusak",
+          "Persentase rusak"
+        ],
+        "rows": [
+          [
+            "2026-11-15",
+            "RET-101",
+            "SKU-A",
+            10,
+            8,
+            0,
+            0
+          ],
+          [
+            "2026-11-16",
+            "RET-102",
+            "SKU-B",
+            6,
+            2,
+            0,
+            0
+          ],
+          [
+            "2026-11-17",
+            "RET-103",
+            "SKU-C",
+            4,
+            4,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "D6-E6",
+            "cachedValue": 2
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(D6=0,0,F6/D6)",
+            "cachedValue": 0.2
+          },
+          {
+            "cell": "F7",
+            "formula": "D7-E7",
+            "cachedValue": 4
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(D7=0,0,F7/D7)",
+            "cachedValue": 0.6666666666666666
+          },
+          {
+            "cell": "F8",
+            "formula": "D8-E8",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(D8=0,0,F8/D8)",
+            "cachedValue": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "kontrol-pemakaian-bahan-kemasan",
+    "name": "Kontrol Pemakaian Bahan Baku & Kemasan",
+    "category": "operasional",
+    "categoryLabel": "Operasional",
+    "symbol": "KPK",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Bandingkan pemakaian aktual dengan standar per unit output untuk memantau pemborosan bahan baku dan material kemasan.",
+    "tags": [
+      "bahan baku",
+      "kemasan",
+      "material usage",
+      "waste",
+      "pemakaian standar"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit operasional",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama fasilitas, gudang, atau unit kerja"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab operasional",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Per batch",
+          "Harian",
+          "Mingguan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup operasional",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Bahan baku",
+          "Kemasan",
+          "Bahan penolong",
+          "Material campuran"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan ketentuan khusus",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Asumsi atau catatan operasional"
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Data Operasional",
+        "title": "Kontrol Pemakaian Bahan Baku & Kemasan - {{entityName}}",
+        "columns": [
+          "Tanggal",
+          "Material",
+          "Output unit",
+          "Standar per unit",
+          "Pemakaian standar",
+          "Pemakaian aktual",
+          "Selisih pemakaian"
+        ],
+        "rows": [
+          [
+            "2026-11-17",
+            "Botol 250 ml",
+            500,
+            1,
+            0,
+            520,
+            0
+          ],
+          [
+            "2026-11-17",
+            "Label depan",
+            500,
+            1,
+            0,
+            495,
+            0
+          ],
+          [
+            "2026-11-18",
+            "Kardus kirim",
+            100,
+            1,
+            0,
+            108,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "C6*D6",
+            "cachedValue": 500
+          },
+          {
+            "cell": "G6",
+            "formula": "F6-E6",
+            "cachedValue": 20
+          },
+          {
+            "cell": "E7",
+            "formula": "C7*D7",
+            "cachedValue": 500
+          },
+          {
+            "cell": "G7",
+            "formula": "F7-E7",
+            "cachedValue": -5
+          },
+          {
+            "cell": "E8",
+            "formula": "C8*D8",
+            "cachedValue": 100
+          },
+          {
+            "cell": "G8",
+            "formula": "F8-E8",
+            "cachedValue": 8
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "log-mutasi-barang-antargudang",
+    "name": "Log Mutasi Barang Antar Gudang & Konfirmasi Terima",
+    "category": "operasional",
+    "categoryLabel": "Operasional",
+    "symbol": "MUT",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Telusuri transfer stok antar lokasi berdasarkan surat jalan, kuantitas dikirim, kuantitas diterima, dan selisih yang perlu investigasi.",
+    "tags": [
+      "mutasi gudang",
+      "transfer stok",
+      "surat jalan",
+      "stock transfer",
+      "in transit"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit operasional",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama fasilitas, gudang, atau unit kerja"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab operasional",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Per kuartal"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup operasional",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Antargudang",
+          "Antarcabang",
+          "Gudang ke outlet",
+          "Gudang pusat ke hub"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan ketentuan khusus",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Asumsi atau catatan operasional"
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Data Operasional",
+        "title": "Log Mutasi Barang Antar Gudang & Konfirmasi Terima - {{entityName}}",
+        "columns": [
+          "No. transfer",
+          "Tanggal",
+          "Lokasi asal",
+          "Lokasi tujuan",
+          "SKU",
+          "Qty dikirim",
+          "Qty diterima",
+          "Selisih"
+        ],
+        "rows": [
+          [
+            "TRF-201",
+            "2026-11-16",
+            "Gudang A",
+            "Gudang B",
+            "SKU-11",
+            50,
+            50,
+            0
+          ],
+          [
+            "TRF-202",
+            "2026-11-17",
+            "Gudang A",
+            "Outlet C",
+            "SKU-22",
+            80,
+            78,
+            0
+          ],
+          [
+            "TRF-203",
+            "2026-11-17",
+            "Hub D",
+            "Gudang B",
+            "SKU-31",
+            25,
+            24,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "H6",
+            "formula": "F6-G6",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H7",
+            "formula": "F7-G7",
+            "cachedValue": 2
+          },
+          {
+            "cell": "H8",
+            "formula": "F8-G8",
+            "cachedValue": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "jadwal-maintenance-preventif-aset",
+    "name": "Jadwal Maintenance Preventif Mesin & Aset",
+    "category": "operasional",
+    "categoryLabel": "Operasional",
+    "symbol": "MNT",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Jadwalkan perawatan mesin dan aset, PIC teknisi, tanggal jatuh tempo, status pekerjaan, dan daftar work order terbuka.",
+    "tags": [
+      "maintenance preventif",
+      "mesin",
+      "jadwal perawatan",
+      "aset",
+      "downtime"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit operasional",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama fasilitas, gudang, atau unit kerja"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab operasional",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mingguan",
+          "Bulanan",
+          "Per kuartal"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup operasional",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mesin produksi",
+          "Kendaraan",
+          "Peralatan utilitas",
+          "Aset kritis"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan ketentuan khusus",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Asumsi atau catatan operasional"
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Data Operasional",
+        "title": "Jadwal Maintenance Preventif Mesin & Aset - {{entityName}}",
+        "columns": [
+          "Kode aset",
+          "Nama aset",
+          "Pekerjaan preventif",
+          "Tanggal jatuh tempo",
+          "Status",
+          "PIC teknisi",
+          "Terbuka (1/0)"
+        ],
+        "rows": [
+          [
+            "MC-001",
+            "Mesin filling",
+            "Cek seal dan pelumasan",
+            "2026-11-17",
+            "Selesai",
+            "Teknisi A",
+            0
+          ],
+          [
+            "MC-002",
+            "Kompresor",
+            "Kuras kondensat dan cek tekanan",
+            "2026-11-17",
+            "Open",
+            "Teknisi B",
+            0
+          ],
+          [
+            "UT-003",
+            "Genset",
+            "Tes beban dan cek aki",
+            "2026-11-18",
+            "Open",
+            "Teknisi C",
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "IF(E6=\"Selesai\",0,1)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(E7=\"Selesai\",0,1)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(E8=\"Selesai\",0,1)",
+            "cachedValue": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "audit-quality-control-reject-rate",
+    "name": "Log Audit Quality Control & Reject Rate",
+    "category": "operasional",
+    "categoryLabel": "Operasional",
+    "symbol": "QCR",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Rekam sampel inspeksi per lot, jumlah cacat, jumlah lolos, reject rate, dan keputusan lolos ambang mutu.",
+    "tags": [
+      "quality control",
+      "QC",
+      "reject rate",
+      "defect",
+      "inspeksi lot"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit operasional",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama fasilitas, gudang, atau unit kerja"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab operasional",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Per lot",
+          "Per shift",
+          "Harian"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup operasional",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Incoming material",
+          "In-process",
+          "Final inspection",
+          "Packing"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan ketentuan khusus",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Asumsi atau catatan operasional"
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Data Operasional",
+        "title": "Log Audit Quality Control & Reject Rate - {{entityName}}",
+        "columns": [
+          "Tanggal",
+          "No. lot",
+          "Produk",
+          "Sampel diperiksa",
+          "Jumlah cacat",
+          "Lolos inspeksi",
+          "Reject rate",
+          "Lolos ambang (1/0)"
+        ],
+        "rows": [
+          [
+            "2026-11-17",
+            "LOT-201",
+            "Produk A",
+            200,
+            6,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-11-17",
+            "LOT-202",
+            "Produk B",
+            150,
+            12,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-11-18",
+            "LOT-203",
+            "Produk C",
+            250,
+            3,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "D6-E6",
+            "cachedValue": 194
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(D6=0,0,E6/D6)",
+            "cachedValue": 0.03
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(G6<=0.02,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F7",
+            "formula": "D7-E7",
+            "cachedValue": 138
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(D7=0,0,E7/D7)",
+            "cachedValue": 0.08
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(G7<=0.02,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F8",
+            "formula": "D8-E8",
+            "cachedValue": 247
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(D8=0,0,E8/D8)",
+            "cachedValue": 0.012
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(G8<=0.02,1,0)",
+            "cachedValue": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "jadwal-shift-operasional-24-7",
+    "name": "Jadwal Shift Operasional 24/7 & Kecukupan Personel",
+    "category": "operasional",
+    "categoryLabel": "Operasional",
+    "symbol": "S24",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Susun cakupan shift pagi, sore, malam, kebutuhan personel minimum, jumlah petugas aktual, dan kekurangan tenaga per shift.",
+    "tags": [
+      "shift 24/7",
+      "roster",
+      "jadwal kerja",
+      "staffing",
+      "coverage"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit operasional",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama fasilitas, gudang, atau unit kerja"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab operasional",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mingguan",
+          "Dua mingguan",
+          "Bulanan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup operasional",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Operasional 24 jam",
+          "Gudang",
+          "Pusat layanan",
+          "Keamanan"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan ketentuan khusus",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Asumsi atau catatan operasional"
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Data Operasional",
+        "title": "Jadwal Shift Operasional 24/7 & Kecukupan Personel - {{entityName}}",
+        "columns": [
+          "Hari",
+          "Shift",
+          "Jam mulai",
+          "Jam selesai",
+          "Kebutuhan personel",
+          "Personel terjadwal",
+          "Kekurangan",
+          "Coverage (1/0)"
+        ],
+        "rows": [
+          [
+            "Senin",
+            "Pagi",
+            "06:00",
+            "14:00",
+            5,
+            5,
+            0,
+            0
+          ],
+          [
+            "Senin",
+            "Sore",
+            "14:00",
+            "22:00",
+            5,
+            4,
+            0,
+            0
+          ],
+          [
+            "Senin",
+            "Malam",
+            "22:00",
+            "06:00",
+            3,
+            3,
+            0,
+            0
+          ],
+          [
+            "Selasa",
+            "Pagi",
+            "06:00",
+            "14:00",
+            5,
+            6,
+            0,
+            0
+          ],
+          [
+            "Selasa",
+            "Sore",
+            "14:00",
+            "22:00",
+            5,
+            5,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "MAX(0,E6-F6)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(F6>=E6,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G7",
+            "formula": "MAX(0,E7-F7)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(F7>=E7,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G8",
+            "formula": "MAX(0,E8-F8)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(F8>=E8,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G9",
+            "formula": "MAX(0,E9-F9)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(F9>=E9,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G10",
+            "formula": "MAX(0,E10-F10)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H10",
+            "formula": "IF(F10>=E10,1,0)",
+            "cachedValue": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "evaluasi-vendor-sla-pengiriman",
+    "name": "Evaluasi Vendor & SLA Ketepatan Pengiriman",
+    "category": "operasional",
+    "categoryLabel": "Operasional",
+    "symbol": "VSL",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Bandingkan vendor berdasarkan ketepatan waktu, kelengkapan pengiriman, kesesuaian spesifikasi, dan rasio pemenuhan SLA.",
+    "tags": [
+      "vendor",
+      "SLA",
+      "supplier performance",
+      "OTD",
+      "fill rate"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit operasional",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama fasilitas, gudang, atau unit kerja"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab operasional",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Bulanan",
+          "Kuartalan",
+          "Semesteran"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup operasional",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Bahan baku",
+          "Barang dagang",
+          "Transporter",
+          "Jasa pihak ketiga"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan ketentuan khusus",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Asumsi atau catatan operasional"
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Data Operasional",
+        "title": "Evaluasi Vendor & SLA Ketepatan Pengiriman - {{entityName}}",
+        "columns": [
+          "Vendor",
+          "Total pengiriman",
+          "Tepat waktu",
+          "Pesanan lengkap",
+          "Lolos inspeksi",
+          "OTD rate",
+          "Fill rate",
+          "Quality rate"
+        ],
+        "rows": [
+          [
+            "Vendor A",
+            40,
+            36,
+            38,
+            39,
+            0,
+            0,
+            0
+          ],
+          [
+            "Vendor B",
+            25,
+            20,
+            22,
+            24,
+            0,
+            0,
+            0
+          ],
+          [
+            "Vendor C",
+            30,
+            29,
+            30,
+            28,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "IF(B6=0,0,C6/B6)",
+            "cachedValue": 0.9
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(B6=0,0,D6/B6)",
+            "cachedValue": 0.95
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(B6=0,0,E6/B6)",
+            "cachedValue": 0.975
+          },
+          {
+            "cell": "F7",
+            "formula": "IF(B7=0,0,C7/B7)",
+            "cachedValue": 0.8
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(B7=0,0,D7/B7)",
+            "cachedValue": 0.88
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(B7=0,0,E7/B7)",
+            "cachedValue": 0.96
+          },
+          {
+            "cell": "F8",
+            "formula": "IF(B8=0,0,C8/B8)",
+            "cachedValue": 0.9666666666666667
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(B8=0,0,D8/B8)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(B8=0,0,E8/B8)",
+            "cachedValue": 0.9333333333333333
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "pelacak-pengiriman-armada-biaya-bbm",
+    "name": "Pelacak Pengiriman Armada & Biaya per Rute",
+    "category": "operasional",
+    "categoryLabel": "Operasional",
+    "symbol": "TRK",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Pantau rute, jarak, konsumsi BBM, biaya tol/parkir, dan biaya transportasi per kilometer untuk tiap trip.",
+    "tags": [
+      "tracking pengiriman",
+      "armada",
+      "rute",
+      "biaya BBM",
+      "logistik"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit operasional",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama fasilitas, gudang, atau unit kerja"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab operasional",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Per kuartal"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup operasional",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Distribusi antarkota",
+          "Last-mile delivery",
+          "Pengiriman antarcabang",
+          "Pengiriman proyek"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan ketentuan khusus",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Asumsi atau catatan operasional"
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Data Operasional",
+        "title": "Pelacak Pengiriman Armada & Biaya per Rute - {{entityName}}",
+        "columns": [
+          "No. trip",
+          "Kendaraan",
+          "Rute",
+          "Jarak (km)",
+          "Liter BBM",
+          "Biaya BBM (Rp)",
+          "Biaya tol/parkir (Rp)",
+          "Biaya per km (Rp)"
+        ],
+        "rows": [
+          [
+            "TR-101",
+            "Truk A",
+            "Gudang–Kota A",
+            145,
+            22,
+            286000,
+            65000,
+            0
+          ],
+          [
+            "TR-102",
+            "Van B",
+            "Gudang–Kota B",
+            82,
+            10,
+            130000,
+            20000,
+            0
+          ],
+          [
+            "TR-103",
+            "Motor C",
+            "Outlet–Pelanggan",
+            28,
+            1.5,
+            19500,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "H6",
+            "formula": "IF(D6=0,0,(F6+G6)/D6)",
+            "cachedValue": 2420.689655172414
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(D7=0,0,(F7+G7)/D7)",
+            "cachedValue": 1829.2682926829268
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(D8=0,0,(F8+G8)/D8)",
+            "cachedValue": 696.4285714285714
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "kalkulator-kapasitas-produksi-per-shift",
+    "name": "Kalkulator Kapasitas Produksi per Shift",
+    "category": "operasional",
+    "categoryLabel": "Operasional",
+    "symbol": "KPS",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Bandingkan kapasitas efektif setelah downtime dengan output aktual untuk melihat utilisasi dan hambatan lini produksi.",
+    "tags": [
+      "kapasitas produksi",
+      "output shift",
+      "utilisasi",
+      "throughput",
+      "downtime"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit operasional",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama fasilitas, gudang, atau unit kerja"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab operasional",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Per shift",
+          "Harian",
+          "Mingguan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup operasional",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Lini perakitan",
+          "Pengemasan",
+          "Pengolahan",
+          "Produksi batch"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan ketentuan khusus",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Asumsi atau catatan operasional"
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Data Operasional",
+        "title": "Kalkulator Kapasitas Produksi per Shift - {{entityName}}",
+        "columns": [
+          "Tanggal",
+          "Shift",
+          "Kecepatan standar (unit/jam)",
+          "Jam tersedia",
+          "Kapasitas efektif",
+          "Output aktual",
+          "Jam downtime",
+          "Utilisasi kapasitas"
+        ],
+        "rows": [
+          [
+            "2026-11-17",
+            "Pagi",
+            120,
+            7.5,
+            0,
+            810,
+            0.5,
+            0
+          ],
+          [
+            "2026-11-17",
+            "Sore",
+            120,
+            7.5,
+            0,
+            760,
+            1,
+            0
+          ],
+          [
+            "2026-11-17",
+            "Malam",
+            120,
+            7.5,
+            0,
+            690,
+            1.25,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "C6*(D6-G6)",
+            "cachedValue": 840
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(E6=0,0,F6/E6)",
+            "cachedValue": 0.9642857142857143
+          },
+          {
+            "cell": "E7",
+            "formula": "C7*(D7-G7)",
+            "cachedValue": 780
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(E7=0,0,F7/E7)",
+            "cachedValue": 0.9743589743589743
+          },
+          {
+            "cell": "E8",
+            "formula": "C8*(D8-G8)",
+            "cachedValue": 750
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(E8=0,0,F8/E8)",
+            "cachedValue": 0.92
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sop-keselamatan-kerja-k3",
+    "name": "SOP Keselamatan Kerja (K3) & Respons Insiden",
+    "category": "operasional",
+    "categoryLabel": "Operasional",
+    "symbol": "K3",
+    "format": "md",
+    "quality": "baik",
+    "description": "Prosedur untuk identifikasi bahaya, penggunaan APD, pelaporan near miss, respons darurat, dan investigasi insiden.",
+    "tags": [
+      "SOP K3",
+      "keselamatan kerja",
+      "APD",
+      "HIRADC",
+      "insiden"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit operasional",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama fasilitas, gudang, atau unit kerja"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab operasional",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Berlaku mulai tanggal penetapan",
+          "Review bulanan",
+          "Review tahunan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup operasional",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Gudang dan logistik",
+          "Area produksi",
+          "Outlet atau layanan",
+          "Fasilitas umum"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan ketentuan khusus",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Asumsi atau catatan operasional"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Tujuan dan penerapan",
+        "body": "SOP ini berlaku di **{{entityName}}** untuk kegiatan **{{scope}}**. Tujuannya mengurangi paparan bahaya, mencegah cedera, dan memastikan respons insiden berjalan konsisten sesuai penilaian risiko lokasi."
+      },
+      {
+        "heading": "Tanggung jawab",
+        "bullets": [
+          "Pemilik prosedur: {{ownerName}}.",
+          "Supervisor memastikan briefing keselamatan, inspeksi area, dan kelayakan alat sebelum aktivitas dimulai.",
+          "Pekerja mengikuti instruksi kerja, menggunakan APD sesuai risiko, dan menghentikan pekerjaan saat kondisi tidak aman.",
+          "Petugas P3K dan tim tanggap darurat menjalankan peran sesuai penunjukan dan pelatihan."
+        ]
+      },
+      {
+        "heading": "Pemeriksaan sebelum bekerja",
+        "bullets": [
+          "Lakukan toolbox meeting dan sampaikan pekerjaan, bahaya utama, serta pengendalian.",
+          "Periksa jalur evakuasi, APAR, kotak P3K, penerangan, ventilasi, dan akses darurat.",
+          "Periksa mesin, pelindung, kabel, alat angkat, kendaraan, dan peralatan kerja.",
+          "Pastikan APD sesuai bahaya dan hasil penilaian risiko."
+        ]
+      },
+      {
+        "heading": "Pengendalian bahaya dan izin kerja",
+        "body": "Gunakan urutan pengendalian eliminasi, substitusi, rekayasa teknis, administratif, lalu APD. Pekerjaan panas, ruang terbatas, pekerjaan di ketinggian, dan isolasi energi harus mengikuti izin kerja serta prosedur khusus fasilitas."
+      },
+      {
+        "heading": "Respons insiden dan keadaan darurat",
+        "bullets": [
+          "Hentikan aktivitas dan amankan sumber bahaya tanpa membahayakan penolong.",
+          "Berikan pertolongan pertama oleh personel kompeten dan hubungi layanan darurat sesuai rencana lokasi.",
+          "Evakuasi melalui jalur yang ditetapkan menuju titik kumpul dan catat kehadiran.",
+          "Laporkan kecelakaan, near miss, tumpahan, kebakaran, dan kerusakan alat kepada supervisor.",
+          "Jangan mengubah lokasi kejadian kecuali untuk penyelamatan atau mencegah bahaya lanjutan."
+        ]
+      },
+      {
+        "heading": "Investigasi dan tindakan korektif",
+        "body": "Kumpulkan kronologi, saksi, bukti, faktor penyebab langsung dan akar masalah. Tetapkan tindakan korektif, PIC, tenggat, bukti penyelesaian, dan pemeriksaan efektivitas sebelum pekerjaan berisiko dimulai kembali."
+      },
+      {
+        "heading": "Catatan operasional",
+        "body": "Entitas: {{entityName}}. Penanggung jawab: {{ownerName}}. Ruang lingkup: {{scope}}. Periode peninjauan: {{period}}. Catatan khusus lokasi dan bahaya tambahan: {{notes}}."
+      }
+    ]
+  },
+  {
+    "id": "protokol-penanganan-keluhan-pelanggan",
+    "name": "Protokol Penanganan Keluhan Pelanggan & Eskalasi SLA",
+    "category": "operasional",
+    "categoryLabel": "Operasional",
+    "symbol": "KPL",
+    "format": "md",
+    "quality": "baik",
+    "description": "Standarkan pencatatan keluhan, klasifikasi urgensi, batas respons, investigasi, solusi, konfirmasi pelanggan, dan penutupan kasus.",
+    "tags": [
+      "keluhan pelanggan",
+      "complaint handling",
+      "SLA",
+      "eskalasi",
+      "customer service"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit operasional",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama fasilitas, gudang, atau unit kerja"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab operasional",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Berlaku mulai tanggal penetapan",
+          "Review mingguan",
+          "Review bulanan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup operasional",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Toko atau outlet",
+          "Layanan purnajual",
+          "Pengiriman",
+          "Layanan digital"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan ketentuan khusus",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Asumsi atau catatan operasional"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Tujuan dan cakupan",
+        "body": "Protokol ini digunakan oleh **{{entityName}}** untuk menangani keluhan terkait **{{scope}}**. Setiap keluhan harus memiliki nomor kasus, waktu diterima, kategori, urgensi, pemilik kasus, dan status yang dapat ditelusuri."
+      },
+      {
+        "heading": "Klasifikasi dan prioritas",
+        "bullets": [
+          "Kritis: risiko keselamatan, keamanan data, atau layanan utama berhenti. Segera eskalasi kepada pimpinan operasional.",
+          "Tinggi: pesanan salah, barang rusak, atau keterlambatan berdampak besar. Tetapkan PIC dan rencana pemulihan pada hari yang sama.",
+          "Normal: pertanyaan, keluhan minor, atau permintaan penyesuaian. Tangani sesuai SLA yang disetujui.",
+          "Jangan menjanjikan kompensasi atau pengembalian dana di luar kewenangan."
+        ]
+      },
+      {
+        "heading": "Alur penerimaan kasus",
+        "bullets": [
+          "Dengarkan tanpa menyela dan ulangi inti masalah untuk memastikan pemahaman.",
+          "Catat kanal kontak, nomor order, bukti, kronologi, dan dampak.",
+          "Berikan nomor tiket dan estimasi pembaruan yang realistis.",
+          "Jangan meminta kata sandi, OTP, atau data pembayaran sensitif."
+        ]
+      },
+      {
+        "heading": "Investigasi dan solusi",
+        "body": "PIC memeriksa transaksi, rekaman proses, kondisi barang, status pengiriman, dan bukti terkait. Tentukan akar masalah serta tindakan pemulihan sesuai kebijakan."
+      },
+      {
+        "heading": "SLA dan eskalasi",
+        "bullets": [
+          "Catat waktu respons pertama, waktu penyelesaian, dan setiap pembaruan.",
+          "Kasus yang melewati SLA harus memiliki alasan, pemilik eskalasi, dan tenggat baru.",
+          "Eskalasi segera untuk dugaan penipuan, ancaman keselamatan, kebocoran data, atau dampak reputasi luas.",
+          "Pastikan solusi dijalankan sebelum kasus ditutup."
+        ]
+      },
+      {
+        "heading": "Penutupan dan pencegahan berulang",
+        "body": "Konfirmasikan hasil kepada pelanggan, simpan bukti penyelesaian, klasifikasikan akar masalah, dan masukkan temuan berulang ke daftar tindakan perbaikan. Pemilik prosedur: {{ownerName}}."
+      },
+      {
+        "heading": "Keterangan penerapan",
+        "body": "Entitas: {{entityName}}. Ruang lingkup: {{scope}}. Periode evaluasi: {{period}}. Catatan kanal layanan, jam operasional, dan pengecualian: {{notes}}."
+      }
+    ]
+  },
+  {
+    "id": "log-ncr-tindakan-korektif-pemasok",
+    "name": "Log Nonconformance, Retur Pemasok & Corrective Action",
+    "category": "operasional",
+    "categoryLabel": "Operasional",
+    "symbol": "NCR",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Hubungkan temuan ketidaksesuaian material dengan lot, dampak produksi, kuantitas karantina, dan tindak lanjut korektif pemasok.",
+    "tags": [
+      "NCR",
+      "nonconformance",
+      "supplier corrective action",
+      "SCAR",
+      "karantina"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit operasional",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama fasilitas, gudang, atau unit kerja"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab operasional",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Per kejadian",
+          "Mingguan",
+          "Bulanan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup operasional",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Bahan baku",
+          "Barang kemasan",
+          "Komponen mesin",
+          "Jasa pemasok"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan ketentuan khusus",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Asumsi atau catatan operasional"
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Data Operasional",
+        "title": "Log Nonconformance, Retur Pemasok & Corrective Action - {{entityName}}",
+        "columns": [
+          "No. NCR",
+          "Tanggal",
+          "Pemasok",
+          "Lot / PO",
+          "Qty terdampak",
+          "Qty diterima",
+          "Persentase terdampak",
+          "Tindakan terverifikasi (1/0)"
+        ],
+        "rows": [
+          [
+            "NCR-001",
+            "2026-11-17",
+            "Vendor A",
+            "LOT-31",
+            12,
+            240,
+            0,
+            0
+          ],
+          [
+            "NCR-002",
+            "2026-11-17",
+            "Vendor B",
+            "LOT-52",
+            8,
+            160,
+            0,
+            0
+          ],
+          [
+            "NCR-003",
+            "2026-11-18",
+            "Vendor C",
+            "LOT-76",
+            4,
+            200,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "IF(F6=0,0,E6/F6)",
+            "cachedValue": 0.05
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(F7=0,0,E7/F7)",
+            "cachedValue": 0.05
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(F8=0,0,E8/F8)",
+            "cachedValue": 0.02
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dashboard-oee-produksi",
+    "name": "Model Overall Equipment Effectiveness (OEE)",
+    "category": "operasional",
+    "categoryLabel": "Operasional",
+    "symbol": "OEE",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Hitung availability, performance, quality rate, dan OEE dari waktu rencana, downtime, ideal cycle, output total, serta unit baik.",
+    "tags": [
+      "OEE",
+      "availability",
+      "performance",
+      "quality rate",
+      "downtime",
+      "manufacturing KPI"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit operasional",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama fasilitas, gudang, atau unit kerja"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab operasional",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Per shift",
+          "Harian",
+          "Bulanan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup operasional",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mesin bottleneck",
+          "Lini produksi",
+          "Area pengemasan",
+          "Seluruh fasilitas"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan ketentuan khusus",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Asumsi atau catatan operasional"
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Data Operasional",
+        "title": "Model Overall Equipment Effectiveness (OEE) - {{entityName}}",
+        "columns": [
+          "Tanggal",
+          "Mesin / lini",
+          "Waktu rencana (menit)",
+          "Downtime (menit)",
+          "Ideal cycle (menit/unit)",
+          "Total output",
+          "Output baik",
+          "Availability",
+          "Performance",
+          "Quality",
+          "OEE"
+        ],
+        "rows": [
+          [
+            "2026-11-17",
+            "Filling 01",
+            450,
+            35,
+            0.5,
+            790,
+            780,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-11-17",
+            "Packing 02",
+            450,
+            50,
+            0.4,
+            980,
+            960,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2026-11-17",
+            "Labeling 03",
+            450,
+            20,
+            0.3,
+            1400,
+            1380,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "H6",
+            "formula": "IF(C6=0,0,(C6-D6)/C6)",
+            "cachedValue": 0.9222222222222223
+          },
+          {
+            "cell": "I6",
+            "formula": "IF(C6-D6=0,0,E6*F6/(C6-D6))",
+            "cachedValue": 0.9518072289156626
+          },
+          {
+            "cell": "J6",
+            "formula": "IF(F6=0,0,G6/F6)",
+            "cachedValue": 0.9873417721518988
+          },
+          {
+            "cell": "K6",
+            "formula": "H6*I6*J6",
+            "cachedValue": 0.8666666666666667
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(C7=0,0,(C7-D7)/C7)",
+            "cachedValue": 0.8888888888888888
+          },
+          {
+            "cell": "I7",
+            "formula": "IF(C7-D7=0,0,E7*F7/(C7-D7))",
+            "cachedValue": 0.98
+          },
+          {
+            "cell": "J7",
+            "formula": "IF(F7=0,0,G7/F7)",
+            "cachedValue": 0.9795918367346939
+          },
+          {
+            "cell": "K7",
+            "formula": "H7*I7*J7",
+            "cachedValue": 0.8533333333333333
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(C8=0,0,(C8-D8)/C8)",
+            "cachedValue": 0.9555555555555556
+          },
+          {
+            "cell": "I8",
+            "formula": "IF(C8-D8=0,0,E8*F8/(C8-D8))",
+            "cachedValue": 0.9767441860465116
+          },
+          {
+            "cell": "J8",
+            "formula": "IF(F8=0,0,G8/F8)",
+            "cachedValue": 0.9857142857142858
+          },
+          {
+            "cell": "K8",
+            "formula": "H8*I8*J8",
+            "cachedValue": 0.92
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "model-safety-stock-demand-reorder",
+    "name": "Model Safety Stock, Demand Forecast & Reorder Quantity",
+    "category": "operasional",
+    "categoryLabel": "Operasional",
+    "symbol": "SSR",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Gabungkan demand harian, lead time pemasok, safety stock, reorder point, stok tersedia, target stok, dan kuantitas pemesanan.",
+    "tags": [
+      "safety stock",
+      "demand forecast",
+      "reorder quantity",
+      "lead time",
+      "inventory planning"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit operasional",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama fasilitas, gudang, atau unit kerja"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab operasional",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mingguan",
+          "Bulanan",
+          "Per SKU"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup operasional",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Bahan baku kritis",
+          "Fast moving",
+          "Barang impor",
+          "Multi-SKU"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan ketentuan khusus",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Asumsi atau catatan operasional"
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Data Operasional",
+        "title": "Model Safety Stock, Demand Forecast & Reorder Quantity - {{entityName}}",
+        "columns": [
+          "SKU",
+          "Nama item",
+          "Demand harian rata-rata",
+          "Lead time (hari)",
+          "Safety stock",
+          "Stok tersedia",
+          "Reorder point",
+          "Target stok",
+          "Qty pesan",
+          "Perlu pesan (1/0)"
+        ],
+        "rows": [
+          [
+            "RM-001",
+            "Bahan A",
+            42,
+            5,
+            60,
+            190,
+            0,
+            400,
+            0,
+            0
+          ],
+          [
+            "RM-002",
+            "Bahan B",
+            28,
+            8,
+            75,
+            260,
+            0,
+            350,
+            0,
+            0
+          ],
+          [
+            "PK-003",
+            "Kemasan C",
+            55,
+            3,
+            45,
+            180,
+            0,
+            300,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "C6*D6+E6",
+            "cachedValue": 270
+          },
+          {
+            "cell": "I6",
+            "formula": "MAX(0,H6-F6)",
+            "cachedValue": 210
+          },
+          {
+            "cell": "J6",
+            "formula": "IF(F6<=G6,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G7",
+            "formula": "C7*D7+E7",
+            "cachedValue": 299
+          },
+          {
+            "cell": "I7",
+            "formula": "MAX(0,H7-F7)",
+            "cachedValue": 90
+          },
+          {
+            "cell": "J7",
+            "formula": "IF(F7<=G7,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G8",
+            "formula": "C8*D8+E8",
+            "cachedValue": 210
+          },
+          {
+            "cell": "I8",
+            "formula": "MAX(0,H8-F8)",
+            "cachedValue": 120
+          },
+          {
+            "cell": "J8",
+            "formula": "IF(F8<=G8,1,0)",
+            "cachedValue": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dashboard-throughput-gudang",
+    "name": "Dashboard Throughput Gudang: Dock-to-Stock & Order Cycle",
+    "category": "operasional",
+    "categoryLabel": "Operasional",
+    "symbol": "WHS",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Ukur volume receiving, put-away, picking, packing, dispatch, waktu dock-to-stock, dan order cycle untuk menemukan bottleneck gudang.",
+    "tags": [
+      "warehouse throughput",
+      "dock to stock",
+      "order cycle time",
+      "receiving",
+      "putaway",
+      "dispatch"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit operasional",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama fasilitas, gudang, atau unit kerja"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab operasional",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Per shift",
+          "Harian",
+          "Mingguan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup operasional",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Distribution center",
+          "Gudang bahan baku",
+          "Fulfillment center",
+          "Hub transit"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan ketentuan khusus",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Asumsi atau catatan operasional"
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Data Operasional",
+        "title": "Dashboard Throughput Gudang: Dock-to-Stock & Order Cycle - {{entityName}}",
+        "columns": [
+          "Tanggal",
+          "Shift",
+          "Pallet diterima",
+          "Pallet put-away",
+          "Order picking",
+          "Order packing",
+          "Order dispatch",
+          "Dock-to-stock (jam)",
+          "Order cycle (jam)",
+          "Putaway completion"
+        ],
+        "rows": [
+          [
+            "2026-11-17",
+            "Pagi",
+            120,
+            118,
+            460,
+            455,
+            450,
+            2.1,
+            4.5,
+            0
+          ],
+          [
+            "2026-11-17",
+            "Sore",
+            95,
+            95,
+            390,
+            388,
+            380,
+            1.8,
+            4.1,
+            0
+          ],
+          [
+            "2026-11-17",
+            "Malam",
+            70,
+            66,
+            280,
+            275,
+            270,
+            3.2,
+            5.2,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "J6",
+            "formula": "IF(C6=0,0,D6/C6)",
+            "cachedValue": 0.9833333333333333
+          },
+          {
+            "cell": "J7",
+            "formula": "IF(C7=0,0,D7/C7)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "J8",
+            "formula": "IF(C8=0,0,D8/C8)",
+            "cachedValue": 0.9428571428571428
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "risk-based-maintenance-backlog",
+    "name": "Model Risiko Aset & Backlog Maintenance Berbasis Kritisitas",
+    "category": "operasional",
+    "categoryLabel": "Operasional",
+    "symbol": "RMB",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Prioritaskan backlog maintenance berdasarkan kritisitas aset, dampak downtime, umur keterlambatan, dan status pekerjaan terbuka.",
+    "tags": [
+      "asset criticality",
+      "maintenance backlog",
+      "risk score",
+      "downtime risk",
+      "maintenance priority"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit operasional",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama fasilitas, gudang, atau unit kerja"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab operasional",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mingguan",
+          "Bulanan",
+          "Review backlog"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup operasional",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Aset produksi kritis",
+          "Utilitas",
+          "Armada",
+          "Seluruh aset"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan ketentuan khusus",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Asumsi atau catatan operasional"
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Data Operasional",
+        "title": "Model Risiko Aset & Backlog Maintenance Berbasis Kritisitas - {{entityName}}",
+        "columns": [
+          "WO",
+          "Aset",
+          "Kritisitas (1-5)",
+          "Dampak downtime (1-5)",
+          "Hari terlambat",
+          "Status terbuka (1/0)",
+          "Risk score",
+          "Prioritas tinggi (1/0)"
+        ],
+        "rows": [
+          [
+            "WO-101",
+            "Compressor A",
+            5,
+            5,
+            7,
+            1,
+            0,
+            0
+          ],
+          [
+            "WO-102",
+            "Conveyor B",
+            4,
+            3,
+            2,
+            1,
+            0,
+            0
+          ],
+          [
+            "WO-103",
+            "Forklift C",
+            3,
+            4,
+            10,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "C6*D6*(1+E6/30)*F6",
+            "cachedValue": 30.833333333333336
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(AND(G6>=25,F6=1),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G7",
+            "formula": "C7*D7*(1+E7/30)*F7",
+            "cachedValue": 12.8
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(AND(G7>=25,F7=1),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G8",
+            "formula": "C8*D8*(1+E8/30)*F8",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(AND(G8>=25,F8=1),1,0)",
+            "cachedValue": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "model-tenaga-kerja-overtime-coverage",
+    "name": "Model Cakupan Tenaga Kerja, Overtime & Biaya Shift",
+    "category": "operasional",
+    "categoryLabel": "Operasional",
+    "symbol": "WFM",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Hitung kecukupan tenaga per fungsi, jam reguler, overtime, biaya lembur, kekurangan personel, dan tingkat pemenuhan kebutuhan.",
+    "tags": [
+      "workforce management",
+      "overtime",
+      "shift coverage",
+      "biaya tenaga kerja",
+      "staffing model"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit operasional",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama fasilitas, gudang, atau unit kerja"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab operasional",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mingguan",
+          "Bulanan",
+          "Per periode payroll"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup operasional",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Gudang",
+          "Produksi",
+          "Outlet multi-shift",
+          "Layanan 24 jam"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan ketentuan khusus",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Asumsi atau catatan operasional"
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Data Operasional",
+        "title": "Model Cakupan Tenaga Kerja, Overtime & Biaya Shift - {{entityName}}",
+        "columns": [
+          "Fungsi",
+          "Kebutuhan orang",
+          "Orang terjadwal",
+          "Jam reguler",
+          "Jam overtime",
+          "Tarif lembur/jam (Rp)",
+          "Biaya lembur (Rp)",
+          "Gap personel",
+          "Coverage rate"
+        ],
+        "rows": [
+          [
+            "Receiving",
+            8,
+            8,
+            320,
+            18,
+            30000,
+            0,
+            0,
+            0
+          ],
+          [
+            "Picking",
+            12,
+            10,
+            400,
+            36,
+            30000,
+            0,
+            0,
+            0
+          ],
+          [
+            "Packing",
+            10,
+            10,
+            400,
+            12,
+            28000,
+            0,
+            0,
+            0
+          ],
+          [
+            "Dispatch",
+            6,
+            7,
+            280,
+            8,
+            32000,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "E6*F6",
+            "cachedValue": 540000
+          },
+          {
+            "cell": "H6",
+            "formula": "MAX(0,B6-C6)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "I6",
+            "formula": "IF(B6=0,0,C6/B6)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G7",
+            "formula": "E7*F7",
+            "cachedValue": 1080000
+          },
+          {
+            "cell": "H7",
+            "formula": "MAX(0,B7-C7)",
+            "cachedValue": 2
+          },
+          {
+            "cell": "I7",
+            "formula": "IF(B7=0,0,C7/B7)",
+            "cachedValue": 0.8333333333333334
+          },
+          {
+            "cell": "G8",
+            "formula": "E8*F8",
+            "cachedValue": 336000
+          },
+          {
+            "cell": "H8",
+            "formula": "MAX(0,B8-C8)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "I8",
+            "formula": "IF(B8=0,0,C8/B8)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G9",
+            "formula": "E9*F9",
+            "cachedValue": 256000
+          },
+          {
+            "cell": "H9",
+            "formula": "MAX(0,B9-C9)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "I9",
+            "formula": "IF(B9=0,0,C9/B9)",
+            "cachedValue": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "model-dispatch-route-capacity-cost",
+    "name": "Model Dispatch, Kapasitas Muatan & Biaya per Pengiriman",
+    "category": "operasional",
+    "categoryLabel": "Operasional",
+    "symbol": "DPC",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Rencanakan kapasitas kendaraan, jumlah order, utilisasi muatan, biaya perjalanan, dan biaya rata-rata per order per rute.",
+    "tags": [
+      "dispatch planning",
+      "route capacity",
+      "load utilization",
+      "cost per delivery",
+      "logistics optimization"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit operasional",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama fasilitas, gudang, atau unit kerja"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab operasional",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Per rute"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup operasional",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Distribusi kota",
+          "Antarkota",
+          "Last-mile",
+          "Multi-drop"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan ketentuan khusus",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Asumsi atau catatan operasional"
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Data Operasional",
+        "title": "Model Dispatch, Kapasitas Muatan & Biaya per Pengiriman - {{entityName}}",
+        "columns": [
+          "Rute",
+          "Kendaraan",
+          "Kapasitas (kg)",
+          "Muatan (kg)",
+          "Kapasitas terpakai",
+          "Jumlah order",
+          "Jarak (km)",
+          "Biaya tetap trip (Rp)",
+          "Biaya/km (Rp)",
+          "Total biaya (Rp)",
+          "Biaya/order (Rp)"
+        ],
+        "rows": [
+          [
+            "Rute A",
+            "Truk 1",
+            5000,
+            4200,
+            0,
+            85,
+            120,
+            250000,
+            3500,
+            0,
+            0
+          ],
+          [
+            "Rute B",
+            "Van 2",
+            1500,
+            1320,
+            0,
+            42,
+            75,
+            120000,
+            2500,
+            0,
+            0
+          ],
+          [
+            "Rute C",
+            "Truk 3",
+            4000,
+            3800,
+            0,
+            70,
+            160,
+            220000,
+            3200,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "IF(C6=0,0,D6/C6)",
+            "cachedValue": 0.84
+          },
+          {
+            "cell": "J6",
+            "formula": "H6+G6*I6",
+            "cachedValue": 670000
+          },
+          {
+            "cell": "K6",
+            "formula": "IF(F6=0,0,J6/F6)",
+            "cachedValue": 7882.35294117647
+          },
+          {
+            "cell": "E7",
+            "formula": "IF(C7=0,0,D7/C7)",
+            "cachedValue": 0.88
+          },
+          {
+            "cell": "J7",
+            "formula": "H7+G7*I7",
+            "cachedValue": 307500
+          },
+          {
+            "cell": "K7",
+            "formula": "IF(F7=0,0,J7/F7)",
+            "cachedValue": 7321.428571428572
+          },
+          {
+            "cell": "E8",
+            "formula": "IF(C8=0,0,D8/C8)",
+            "cachedValue": 0.95
+          },
+          {
+            "cell": "J8",
+            "formula": "H8+G8*I8",
+            "cachedValue": 732000
+          },
+          {
+            "cell": "K8",
+            "formula": "IF(F8=0,0,J8/F8)",
+            "cachedValue": 10457.142857142857
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "scorecard-operasional-vendor-terintegrasi",
+    "name": "Scorecard Vendor Terintegrasi: SLA, Mutu & Biaya",
+    "category": "operasional",
+    "categoryLabel": "Operasional",
+    "symbol": "SVT",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Hitung skor vendor berbobot dari ketepatan waktu, kelengkapan, mutu, respons klaim, dan indeks biaya.",
+    "tags": [
+      "vendor scorecard",
+      "supplier rating",
+      "SLA",
+      "quality performance",
+      "cost index",
+      "procurement KPI"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan atau unit operasional",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama fasilitas, gudang, atau unit kerja"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab operasional",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Bulanan",
+          "Kuartalan",
+          "Semesteran"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup operasional",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Pemasok bahan baku",
+          "Pemasok kemasan",
+          "Transporter",
+          "Vendor layanan"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan dan ketentuan khusus",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Asumsi atau catatan operasional"
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Data Operasional",
+        "title": "Scorecard Vendor Terintegrasi: SLA, Mutu & Biaya - {{entityName}}",
+        "columns": [
+          "Vendor",
+          "OTD rate",
+          "Fill rate",
+          "Quality pass rate",
+          "Respons klaim rate",
+          "Cost index",
+          "Skor berbobot",
+          "Lulus ambang (1/0)"
+        ],
+        "rows": [
+          [
+            "Vendor A",
+            0.96,
+            0.98,
+            0.99,
+            0.9,
+            0.95,
+            0,
+            0
+          ],
+          [
+            "Vendor B",
+            0.88,
+            0.92,
+            0.95,
+            0.8,
+            1,
+            0,
+            0
+          ],
+          [
+            "Vendor C",
+            0.99,
+            0.97,
+            0.97,
+            0.95,
+            0.9,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "B6*0.30+C6*0.20+D6*0.25+E6*0.15+F6*0.10",
+            "cachedValue": 0.9615
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(G6>=0.95,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G7",
+            "formula": "B7*0.30+C7*0.20+D7*0.25+E7*0.15+F7*0.10",
+            "cachedValue": 0.9055
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(G7>=0.95,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G8",
+            "formula": "B8*0.30+C8*0.20+D8*0.25+E8*0.15+F8*0.10",
+            "cachedValue": 0.966
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(G8>=0.95,1,0)",
+            "cachedValue": 1
+          }
+        ]
+      }
+    ]
   }
 ]
