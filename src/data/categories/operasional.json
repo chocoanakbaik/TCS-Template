@@ -6,7 +6,6 @@
     "categoryLabel": "Operasional",
     "symbol": "IM",
     "format": "xlsx",
-    "difficulty": "menengah",
     "description": "Pantau stok awal, barang masuk, barang keluar, dan stok akhir dengan perhitungan otomatis.",
     "tags": [
       "inventaris",
@@ -127,6 +126,7 @@
           18
         ]
       }
-    ]
+    ],
+    "quality": "unggulan"
   }
 ]
