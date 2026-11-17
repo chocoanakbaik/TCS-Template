@@ -1961,7 +1961,7 @@
           {
             "cell": "G6",
             "formula": "IF(C6=0,0,B6/C6*1000)",
-            "cachedValue": 8.3333333333
+            "cachedValue": 8333.3333333333
           },
           {
             "cell": "H6",
@@ -1986,7 +1986,7 @@
           {
             "cell": "G7",
             "formula": "IF(C7=0,0,B7/C7*1000)",
-            "cachedValue": 11.8055555556
+            "cachedValue": 11805.5555555556
           },
           {
             "cell": "H7",
@@ -2011,7 +2011,7 @@
           {
             "cell": "G8",
             "formula": "IF(C8=0,0,B8/C8*1000)",
-            "cachedValue": 2.5
+            "cachedValue": 2500
           },
           {
             "cell": "H8",
@@ -2036,7 +2036,7 @@
           {
             "cell": "G9",
             "formula": "IF(C9=0,0,B9/C9*1000)",
-            "cachedValue": 11.5789473684
+            "cachedValue": 11578.9473684211
           },
           {
             "cell": "H9",
@@ -2224,7 +2224,7 @@
           {
             "cell": "I6",
             "formula": "IF(C6=0,0,B6/C6*1000)",
-            "cachedValue": 31.25
+            "cachedValue": 31250
           },
           {
             "cell": "J6",
@@ -2244,7 +2244,7 @@
           {
             "cell": "I7",
             "formula": "IF(C7=0,0,B7/C7*1000)",
-            "cachedValue": 40
+            "cachedValue": 40000
           },
           {
             "cell": "J7",
@@ -2264,7 +2264,7 @@
           {
             "cell": "I8",
             "formula": "IF(C8=0,0,B8/C8*1000)",
-            "cachedValue": 26.6666666667
+            "cachedValue": 26666.6666666667
           },
           {
             "cell": "J8",
@@ -2284,7 +2284,7 @@
           {
             "cell": "I9",
             "formula": "IF(C9=0,0,B9/C9*1000)",
-            "cachedValue": 42.8571428571
+            "cachedValue": 42857.1428571429
           },
           {
             "cell": "J9",
