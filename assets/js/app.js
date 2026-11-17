@@ -161,7 +161,6 @@
 
   const elements = {
     grid: document.getElementById("template-grid"),
-    count: document.getElementById("visible-count"),
     search: document.getElementById("template-search"),
     filters: document.getElementById("category-filter"),
     empty: document.getElementById("empty-state"),
@@ -204,7 +203,6 @@
       return categoryMatches && (!query || searchable.includes(query));
     });
 
-    elements.count.textContent = String(filtered.length).padStart(2, "0");
     elements.empty.hidden = filtered.length !== 0;
     elements.grid.hidden = filtered.length === 0;
     elements.grid.innerHTML = filtered.map((item, index) => `
