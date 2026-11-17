@@ -3399,7 +3399,7 @@
           },
           {
             "cell": "I6",
-            "formula": "IF(H6<=100,1,0)",
+            "formula": "IF(H6<=100.01,1,0)",
             "cachedValue": 1
           },
           {
@@ -3419,7 +3419,7 @@
           },
           {
             "cell": "I7",
-            "formula": "IF(H7<=100,1,0)",
+            "formula": "IF(H7<=100.01,1,0)",
             "cachedValue": 1
           },
           {
