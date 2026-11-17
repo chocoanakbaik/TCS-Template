@@ -1,116 +1,4932 @@
 [
   {
-    "id": "content-calendar",
-    "name": "Content Calendar",
+    "id": "kalender-editorial-multiplatform",
+    "name": "Kalender Editorial Multi-Platform & Pelacak Ketepatan Publikasi",
     "category": "konten",
-    "categoryLabel": "Konten",
-    "symbol": "CC",
+    "categoryLabel": "Konten & pemasaran digital",
+    "symbol": "EDT",
     "format": "xlsx",
-    "description": "Kelola ide, kanal, jadwal publikasi, penanggung jawab, dan status produksi konten.",
+    "quality": "standar",
+    "description": "Susun kalender editorial lintas kanal dengan pilar, pemilik, tanggal target dan aktual, kode status produksi, serta indikator otomatis untuk mengukur ketepatan publikasi.",
     "tags": [
-      "konten",
+      "kalender editorial",
+      "content calendar",
       "media sosial",
-      "content",
-      "kalender",
-      "publikasi",
-      "marketing"
+      "jadwal publikasi",
+      "workflow konten"
     ],
     "questions": [
       {
         "id": "entityName",
-        "label": "Nama brand, organisasi, atau proyek",
+        "label": "Nama brand, kanal, atau proyek",
         "type": "text",
         "required": true,
-        "placeholder": "Contoh: Toko Sinar Jaya"
+        "placeholder": "Nama brand atau proyek konten"
       },
       {
         "id": "ownerName",
-        "label": "Nama pengelola konten",
+        "label": "Pemilik atau penanggung jawab konten",
         "type": "text",
         "required": false,
-        "placeholder": "Nama penanggung jawab"
+        "placeholder": "Nama content lead atau PIC"
       },
       {
         "id": "period",
-        "label": "Periode yang digunakan",
+        "label": "Periode kerja atau pengukuran",
         "type": "select",
         "required": true,
         "options": [
+          "Harian",
           "Mingguan",
           "Bulanan",
-          "Per kuartal"
+          "Kuartalan",
+          "Per kampanye",
+          "Per konten"
         ]
       },
       {
         "id": "scope",
-        "label": "Ruang lingkup atau konteks penggunaan",
+        "label": "Kanal atau ruang lingkup",
         "type": "select",
         "required": true,
         "options": [
           "Instagram dan TikTok",
-          "YouTube",
-          "Website atau blog",
+          "YouTube dan Shorts",
+          "Website dan SEO",
           "LinkedIn",
-          "Beberapa kanal"
+          "Email marketing",
+          "Multi-platform",
+          "Kampanye berbayar dan influencer"
         ]
       },
       {
         "id": "notes",
-        "label": "Catatan tambahan",
+        "label": "Target, batasan, dan catatan tambahan",
         "type": "textarea",
         "required": false,
-        "placeholder": "Tuliskan kebutuhan tambahan yang ingin dimasukkan."
+        "placeholder": "Target, KPI, batas anggaran, panduan merek, atau ketentuan lain."
       }
     ],
     "sheets": [
       {
-        "name": "Kalender Konten",
-        "title": "Content Calendar - {{entityName}}",
+        "name": "Kalender Editorial",
+        "title": "Kalender Editorial Multi-Platform - {{entityName}}",
         "columns": [
-          "Tanggal",
+          "Hari Target (ke-)",
+          "Hari Terbit (ke-)",
           "Platform",
           "Pilar Konten",
-          "Ide Konten",
-          "Penanggung Jawab",
-          "Status"
+          "Topik/Judul Konten",
+          "Status (1=Tayang,2=Produksi,3=Revisi)",
+          "Tepat Waktu (1/0)"
         ],
         "rows": [
           [
-            "2026-11-18",
+            18,
+            18,
             "Instagram",
             "Edukasi",
-            "Tips penggunaan produk",
-            "{{ownerName}}",
-            "Ide"
+            "3 cara memilih produk yang tepat",
+            1,
+            0
           ],
           [
-            "2026-11-20",
+            20,
+            21,
             "TikTok",
             "Behind the scenes",
-            "Proses pembuatan",
-            "{{ownerName}}",
-            "Draf"
+            "Proses produksi di balik layar",
+            1,
+            0
           ],
           [
-            "2026-11-22",
-            "Website",
-            "Informasi",
-            "Artikel panduan",
-            "{{ownerName}}",
-            "Terjadwal"
+            22,
+            0,
+            "YouTube Shorts",
+            "Produk",
+            "Demo fitur utama dalam 30 detik",
+            2,
+            0
+          ],
+          [
+            24,
+            24,
+            "LinkedIn",
+            "Thought leadership",
+            "Pelajaran dari proyek bulan ini",
+            1,
+            0
           ]
         ],
-        "formulaCells": [],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "IF(F6=1,IF(B6<=A6,1,0),0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(F7=1,IF(B7<=A7,1,0),0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(F8=1,IF(B8<=A8,1,0),0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(F9=1,IF(B9<=A9,1,0),0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G10",
+            "formula": "AVERAGE(G6:G9)",
+            "cachedValue": 0.5
+          }
+        ],
         "columnWidths": [
-          17,
-          18,
+          16,
+          16,
+          19,
           22,
-          32,
+          38,
+          30,
+          20
+        ]
+      }
+    ]
+  },
+  {
+    "id": "pipeline-produksi-konten",
+    "name": "Pipeline Produksi Konten & Kontrol Tenggat Editorial",
+    "category": "konten",
+    "categoryLabel": "Konten & pemasaran digital",
+    "symbol": "PIPE",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Kelola perpindahan konten dari brief, penulisan, desain, review, hingga tayang; hitung deviasi hari dari tenggat dan kepatuhan rilis untuk menemukan bottleneck produksi.",
+    "tags": [
+      "content workflow",
+      "produksi konten",
+      "status editorial",
+      "deadline",
+      "approval"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama brand, kanal, atau proyek",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama brand atau proyek konten"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik atau penanggung jawab konten",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama content lead atau PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode kerja atau pengukuran",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Per kampanye",
+          "Per konten"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Kanal atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Instagram dan TikTok",
+          "YouTube dan Shorts",
+          "Website dan SEO",
+          "LinkedIn",
+          "Email marketing",
+          "Multi-platform",
+          "Kampanye berbayar dan influencer"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Target, batasan, dan catatan tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Target, KPI, batas anggaran, panduan merek, atau ketentuan lain."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Pipeline Produksi",
+        "title": "Pipeline Produksi Konten - {{entityName}}",
+        "columns": [
+          "ID",
+          "Kanal",
+          "PIC",
+          "Hari Brief",
+          "Hari Target Tayang",
+          "Hari Aktual Tayang",
+          "Status (1=Tayang,2=Review,3=Produksi)",
+          "Deviasi Hari",
+          "Sesuai Tenggat (1/0)"
+        ],
+        "rows": [
+          [
+            "CNT-001",
+            "Instagram",
+            "Editor",
+            10,
+            14,
+            14,
+            1,
+            0,
+            0
+          ],
+          [
+            "CNT-002",
+            "TikTok",
+            "Video editor",
+            11,
+            16,
+            18,
+            1,
+            0,
+            0
+          ],
+          [
+            "CNT-003",
+            "Blog",
+            "SEO writer",
+            12,
+            19,
+            0,
+            2,
+            0,
+            0
+          ],
+          [
+            "CNT-004",
+            "LinkedIn",
+            "Content lead",
+            15,
+            20,
+            19,
+            1,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "H6",
+            "formula": "F6-E6",
+            "cachedValue": 0
+          },
+          {
+            "cell": "I6",
+            "formula": "IF(AND(G6=1,H6<=0),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "H7",
+            "formula": "F7-E7",
+            "cachedValue": 2
+          },
+          {
+            "cell": "I7",
+            "formula": "IF(AND(G7=1,H7<=0),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H8",
+            "formula": "F8-E8",
+            "cachedValue": -19
+          },
+          {
+            "cell": "I8",
+            "formula": "IF(AND(G8=1,H8<=0),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H9",
+            "formula": "F9-E9",
+            "cachedValue": -1
+          },
+          {
+            "cell": "I9",
+            "formula": "IF(AND(G9=1,H9<=0),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "I10",
+            "formula": "AVERAGE(I6:I9)",
+            "cachedValue": 0.5
+          }
+        ],
+        "columnWidths": [
+          13,
+          17,
+          20,
+          15,
+          19,
+          19,
+          34,
+          15,
+          22
+        ]
+      }
+    ]
+  },
+  {
+    "id": "worksheet-script-video-pendek",
+    "name": "Worksheet Script Video Pendek (Reels/TikTok/Shorts) dengan Hook-Body-CTA",
+    "category": "konten",
+    "categoryLabel": "Konten & pemasaran digital",
+    "symbol": "VSC",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Rancang video vertikal per beat dengan fungsi narasi, teks layar, arahan visual, target durasi, dan durasi draft; ukur deviasi durasi agar pesan dan CTA tetap muat dalam format pendek.",
+    "tags": [
+      "script video",
+      "reels",
+      "tiktok",
+      "youtube shorts",
+      "hook body cta"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama brand, kanal, atau proyek",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama brand atau proyek konten"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik atau penanggung jawab konten",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama content lead atau PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode kerja atau pengukuran",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Per kampanye",
+          "Per konten"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Kanal atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Instagram dan TikTok",
+          "YouTube dan Shorts",
+          "Website dan SEO",
+          "LinkedIn",
+          "Email marketing",
+          "Multi-platform",
+          "Kampanye berbayar dan influencer"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Target, batasan, dan catatan tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Target, KPI, batas anggaran, panduan merek, atau ketentuan lain."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Script Video",
+        "title": "Worksheet Script Video Pendek - {{entityName}}",
+        "columns": [
+          "Beat/Scene",
+          "Fungsi Narasi",
+          "Naskah/Voice-over",
+          "Teks di Layar",
+          "Durasi Target (detik)",
+          "Durasi Draft (detik)",
+          "Deviasi Durasi (detik)",
+          "Dalam Batas (+3 detik) (1/0)"
+        ],
+        "rows": [
+          [
+            "01",
+            "Hook",
+            "Masih buang waktu untuk cara lama?",
+            "Masih pakai cara lama?",
+            3,
+            3,
+            0,
+            0
+          ],
+          [
+            "02",
+            "Problem",
+            "Biasanya proses ini memakan beberapa langkah yang berulang.",
+            "Masalahnya ada di proses",
+            7,
+            8,
+            0,
+            0
+          ],
+          [
+            "03",
+            "Value/demo",
+            "Gunakan fitur ini untuk menyelesaikan pekerjaan dalam satu alur.",
+            "Satu alur, lebih cepat",
+            18,
+            16,
+            0,
+            0
+          ],
+          [
+            "04",
+            "CTA",
+            "Simpan video ini dan cek panduan lengkap di profil.",
+            "Simpan untuk dicoba",
+            5,
+            5,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "F6-E6",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(G6<=3,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G7",
+            "formula": "F7-E7",
+            "cachedValue": 1
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(G7<=3,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G8",
+            "formula": "F8-E8",
+            "cachedValue": -2
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(G8<=3,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G9",
+            "formula": "F9-E9",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(G9<=3,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "H10",
+            "formula": "AVERAGE(H6:H9)",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          14,
+          20,
+          42,
+          28,
+          19,
+          19,
+          21,
+          25
+        ]
+      }
+    ]
+  },
+  {
+    "id": "pelacak-community-management-sla",
+    "name": "Pelacak Community Management, Waktu Respons & SLA",
+    "category": "konten",
+    "categoryLabel": "Konten & pemasaran digital",
+    "symbol": "COM",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Catat pertanyaan, keluhan, dan prospek dari komentar maupun pesan langsung; ukur waktu respons dalam jam dan tandai tiket yang melewati SLA layanan komunitas.",
+    "tags": [
+      "community management",
+      "social inbox",
+      "customer care",
+      "response time",
+      "SLA"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama brand, kanal, atau proyek",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama brand atau proyek konten"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik atau penanggung jawab konten",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama content lead atau PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode kerja atau pengukuran",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Per kampanye",
+          "Per konten"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Kanal atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Instagram dan TikTok",
+          "YouTube dan Shorts",
+          "Website dan SEO",
+          "LinkedIn",
+          "Email marketing",
+          "Multi-platform",
+          "Kampanye berbayar dan influencer"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Target, batasan, dan catatan tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Target, KPI, batas anggaran, panduan merek, atau ketentuan lain."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Inbox & SLA",
+        "title": "Pelacak Community Management & SLA - {{entityName}}",
+        "columns": [
+          "ID Tiket",
+          "Kanal",
+          "Jenis Isu",
+          "Jam Masuk",
+          "Jam Respons Pertama",
+          "Batas SLA (jam)",
+          "Waktu Respons (jam)",
+          "Sesuai SLA (1/0)"
+        ],
+        "rows": [
+          [
+            "DM-101",
+            "Instagram",
+            "Pertanyaan produk",
+            9,
+            10,
+            2,
+            0,
+            0
+          ],
+          [
+            "DM-102",
+            "TikTok",
+            "Keluhan pengiriman",
+            10,
+            14,
+            3,
+            0,
+            0
+          ],
+          [
+            "DM-103",
+            "Instagram",
+            "Prospek pembelian",
+            13,
+            14,
+            4,
+            0,
+            0
+          ],
+          [
+            "DM-104",
+            "Facebook",
+            "Keluhan kualitas",
+            16,
+            20,
+            2,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "E6-D6",
+            "cachedValue": 1
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(G6<=F6,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G7",
+            "formula": "E7-D7",
+            "cachedValue": 4
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(G7<=F7,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G8",
+            "formula": "E8-D8",
+            "cachedValue": 1
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(G8<=F8,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G9",
+            "formula": "E9-D9",
+            "cachedValue": 4
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(G9<=F9,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H10",
+            "formula": "AVERAGE(H6:H9)",
+            "cachedValue": 0.5
+          }
+        ],
+        "columnWidths": [
+          14,
+          18,
           25,
+          14,
+          20,
+          17,
+          20,
           18
         ]
       }
+    ]
+  },
+  {
+    "id": "register-hak-pakai-aset-ugc",
+    "name": "Register Hak Pakai UGC, Lisensi Kreator & Masa Berlaku Aset",
+    "category": "konten",
+    "categoryLabel": "Konten & pemasaran digital",
+    "symbol": "UGC",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Inventarisasi foto, video, testimoni, dan materi UGC beserta sumber, kanal yang diizinkan, durasi lisensi, tanggal kedaluwarsa, serta peringatan otomatis sebelum hak pakai berakhir.",
+    "tags": [
+      "UGC",
+      "hak cipta",
+      "lisensi konten",
+      "asset management",
+      "usage rights"
     ],
-    "quality": "baik"
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama brand, kanal, atau proyek",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama brand atau proyek konten"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik atau penanggung jawab konten",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama content lead atau PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode kerja atau pengukuran",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Per kampanye",
+          "Per konten"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Kanal atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Instagram dan TikTok",
+          "YouTube dan Shorts",
+          "Website dan SEO",
+          "LinkedIn",
+          "Email marketing",
+          "Multi-platform",
+          "Kampanye berbayar dan influencer"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Target, batasan, dan catatan tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Target, KPI, batas anggaran, panduan merek, atau ketentuan lain."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Hak Pakai Aset",
+        "title": "Register Hak Pakai UGC - {{entityName}}",
+        "columns": [
+          "ID Aset",
+          "Sumber/Kreator",
+          "Hari Persetujuan",
+          "Masa Izin (hari)",
+          "Hari Kedaluwarsa",
+          "Sisa Izin pada Hari ke-30",
+          "Perlu Perpanjangan (1/0)"
+        ],
+        "rows": [
+          [
+            "UGC-01",
+            "@ruangvisual",
+            5,
+            90,
+            0,
+            0,
+            0
+          ],
+          [
+            "UGC-02",
+            "@ceritaproduk",
+            8,
+            30,
+            0,
+            0,
+            0
+          ],
+          [
+            "UGC-03",
+            "Pelanggan A",
+            12,
+            14,
+            0,
+            0,
+            0
+          ],
+          [
+            "UGC-04",
+            "@dailyreview",
+            15,
+            180,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "C6+D6",
+            "cachedValue": 95
+          },
+          {
+            "cell": "F6",
+            "formula": "E6-30",
+            "cachedValue": 65
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(F6<=7,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "E7",
+            "formula": "C7+D7",
+            "cachedValue": 38
+          },
+          {
+            "cell": "F7",
+            "formula": "E7-30",
+            "cachedValue": 8
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(F7<=7,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "E8",
+            "formula": "C8+D8",
+            "cachedValue": 26
+          },
+          {
+            "cell": "F8",
+            "formula": "E8-30",
+            "cachedValue": -4
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(F8<=7,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "E9",
+            "formula": "C9+D9",
+            "cachedValue": 195
+          },
+          {
+            "cell": "F9",
+            "formula": "E9-30",
+            "cachedValue": 165
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(F9<=7,1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          14,
+          22,
+          18,
+          18,
+          18,
+          25,
+          24
+        ]
+      }
+    ]
+  },
+  {
+    "id": "matriks-pilar-hashtag",
+    "name": "Matriks Pilar Konten, Hashtag & Kontribusi Interaksi",
+    "category": "konten",
+    "categoryLabel": "Konten & pemasaran digital",
+    "symbol": "PIL",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Evaluasi performa hashtag dan pilar konten dengan membandingkan reach, likes, komentar, share, dan simpan; kalkulasikan total interaksi serta engagement rate per topik.",
+    "tags": [
+      "content pillar",
+      "hashtag research",
+      "engagement",
+      "content performance"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama brand, kanal, atau proyek",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama brand atau proyek konten"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik atau penanggung jawab konten",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama content lead atau PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode kerja atau pengukuran",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Per kampanye",
+          "Per konten"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Kanal atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Instagram dan TikTok",
+          "YouTube dan Shorts",
+          "Website dan SEO",
+          "LinkedIn",
+          "Email marketing",
+          "Multi-platform",
+          "Kampanye berbayar dan influencer"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Target, batasan, dan catatan tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Target, KPI, batas anggaran, panduan merek, atau ketentuan lain."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Pilar & Hashtag",
+        "title": "Matriks Pilar Konten dan Hashtag - {{entityName}}",
+        "columns": [
+          "Hashtag",
+          "Pilar Konten",
+          "Reach",
+          "Likes",
+          "Komentar",
+          "Share",
+          "Simpan",
+          "Total Interaksi",
+          "Engagement Rate (%)"
+        ],
+        "rows": [
+          [
+            "#TipsPraktis",
+            "Edukasi",
+            12000,
+            420,
+            38,
+            75,
+            110,
+            0,
+            0
+          ],
+          [
+            "#CeritaBrand",
+            "Storytelling",
+            8500,
+            260,
+            24,
+            40,
+            65,
+            0,
+            0
+          ],
+          [
+            "#CaraMenggunakan",
+            "Tutorial",
+            15000,
+            510,
+            62,
+            120,
+            190,
+            0,
+            0
+          ],
+          [
+            "#ProdukPilihan",
+            "Produk",
+            9800,
+            180,
+            15,
+            28,
+            42,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "H6",
+            "formula": "SUM(D6:G6)",
+            "cachedValue": 643
+          },
+          {
+            "cell": "I6",
+            "formula": "IF(C6=0,0,H6/C6*100)",
+            "cachedValue": 5.3583333333
+          },
+          {
+            "cell": "H7",
+            "formula": "SUM(D7:G7)",
+            "cachedValue": 389
+          },
+          {
+            "cell": "I7",
+            "formula": "IF(C7=0,0,H7/C7*100)",
+            "cachedValue": 4.5764705882
+          },
+          {
+            "cell": "H8",
+            "formula": "SUM(D8:G8)",
+            "cachedValue": 882
+          },
+          {
+            "cell": "I8",
+            "formula": "IF(C8=0,0,H8/C8*100)",
+            "cachedValue": 5.88
+          },
+          {
+            "cell": "H9",
+            "formula": "SUM(D9:G9)",
+            "cachedValue": 265
+          },
+          {
+            "cell": "I9",
+            "formula": "IF(C9=0,0,H9/C9*100)",
+            "cachedValue": 2.7040816327
+          }
+        ],
+        "columnWidths": [
+          20,
+          20,
+          15,
+          14,
+          14,
+          14,
+          14,
+          19,
+          22
+        ]
+      }
+    ]
+  },
+  {
+    "id": "brief-seo-onpage",
+    "name": "Brief SEO On-Page, Target Kata Kunci & Pemeriksaan Kelengkapan Draft",
+    "category": "konten",
+    "categoryLabel": "Konten & pemasaran digital",
+    "symbol": "SEO",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Siapkan brief artikel berbasis intent pencarian, target panjang, struktur heading, title tag, dan meta description; ukur kecukupan draft serta validasi panjang metadata sebelum publikasi.",
+    "tags": [
+      "SEO on page",
+      "content brief",
+      "title tag",
+      "meta description",
+      "search intent"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama brand, kanal, atau proyek",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama brand atau proyek konten"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik atau penanggung jawab konten",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama content lead atau PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode kerja atau pengukuran",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Per kampanye",
+          "Per konten"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Kanal atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Instagram dan TikTok",
+          "YouTube dan Shorts",
+          "Website dan SEO",
+          "LinkedIn",
+          "Email marketing",
+          "Multi-platform",
+          "Kampanye berbayar dan influencer"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Target, batasan, dan catatan tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Target, KPI, batas anggaran, panduan merek, atau ketentuan lain."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Brief SEO",
+        "title": "Brief SEO On-Page - {{entityName}}",
+        "columns": [
+          "URL/Topik",
+          "Target Kata",
+          "Draft Kata",
+          "Panjang Title",
+          "Batas Title",
+          "Panjang Meta",
+          "Batas Meta",
+          "Cakupan Draft (%)",
+          "Title Valid (1/0)",
+          "Meta Valid (1/0)"
+        ],
+        "rows": [
+          [
+            "/panduan-pemula",
+            1200,
+            1320,
+            54,
+            60,
+            148,
+            160,
+            0,
+            0,
+            0
+          ],
+          [
+            "/perbandingan-produk",
+            1800,
+            1450,
+            66,
+            60,
+            155,
+            160,
+            0,
+            0,
+            0
+          ],
+          [
+            "/cara-perawatan",
+            900,
+            920,
+            49,
+            60,
+            171,
+            160,
+            0,
+            0,
+            0
+          ],
+          [
+            "/panduan-pembelian",
+            1500,
+            1500,
+            58,
+            60,
+            152,
+            160,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "H6",
+            "formula": "IF(B6=0,0,MIN(1,C6/B6)*100)",
+            "cachedValue": 100
+          },
+          {
+            "cell": "I6",
+            "formula": "IF(D6<=E6,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "J6",
+            "formula": "IF(F6<=G6,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(B7=0,0,MIN(1,C7/B7)*100)",
+            "cachedValue": 80.5555555556
+          },
+          {
+            "cell": "I7",
+            "formula": "IF(D7<=E7,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "J7",
+            "formula": "IF(F7<=G7,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(B8=0,0,MIN(1,C8/B8)*100)",
+            "cachedValue": 100
+          },
+          {
+            "cell": "I8",
+            "formula": "IF(D8<=E8,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "J8",
+            "formula": "IF(F8<=G8,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(B9=0,0,MIN(1,C9/B9)*100)",
+            "cachedValue": 100
+          },
+          {
+            "cell": "I9",
+            "formula": "IF(D9<=E9,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "J9",
+            "formula": "IF(F9<=G9,1,0)",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          25,
+          16,
+          15,
+          17,
+          15,
+          17,
+          15,
+          19,
+          18,
+          18
+        ]
+      }
+    ]
+  },
+  {
+    "id": "checklist-publikasi-youtube",
+    "name": "Checklist Publikasi YouTube, Kelengkapan Metadata & Aset Video",
+    "category": "konten",
+    "categoryLabel": "Konten & pemasaran digital",
+    "symbol": "YTP",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Periksa kesiapan thumbnail, subtitle, deskripsi, end screen, dan chapter untuk setiap video; hitung komponen yang sudah lengkap dan cegah unggahan tayang sebelum seluruh pemeriksaan wajib selesai.",
+    "tags": [
+      "youtube publishing",
+      "thumbnail",
+      "subtitle",
+      "metadata video",
+      "publishing checklist"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama brand, kanal, atau proyek",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama brand atau proyek konten"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik atau penanggung jawab konten",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama content lead atau PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode kerja atau pengukuran",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Per kampanye",
+          "Per konten"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Kanal atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Instagram dan TikTok",
+          "YouTube dan Shorts",
+          "Website dan SEO",
+          "LinkedIn",
+          "Email marketing",
+          "Multi-platform",
+          "Kampanye berbayar dan influencer"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Target, batasan, dan catatan tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Target, KPI, batas anggaran, panduan merek, atau ketentuan lain."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Checklist YouTube",
+        "title": "Checklist Publikasi YouTube - {{entityName}}",
+        "columns": [
+          "Video",
+          "Thumbnail Siap (1/0)",
+          "Subtitle Siap (1/0)",
+          "Deskripsi Siap (1/0)",
+          "End Screen (1/0)",
+          "Chapter (1/0)",
+          "Komponen Siap",
+          "Lulus Checklist (1/0)"
+        ],
+        "rows": [
+          [
+            "Tutorial A",
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            "Review B",
+            1,
+            1,
+            1,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            "Short C",
+            1,
+            0,
+            1,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            "Wawancara D",
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "SUM(B6:F6)",
+            "cachedValue": 5
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(G6=5,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G7",
+            "formula": "SUM(B7:F7)",
+            "cachedValue": 4
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(G7=5,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G8",
+            "formula": "SUM(B8:F8)",
+            "cachedValue": 3
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(G8=5,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G9",
+            "formula": "SUM(B9:F9)",
+            "cachedValue": 4
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(G9=5,1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          22,
+          20,
+          20,
+          20,
+          17,
+          14,
+          17,
+          20
+        ]
+      }
+    ]
+  },
+  {
+    "id": "creative-brief-kampanye-konten",
+    "name": "Creative Brief Kampanye Konten & Mandat Produksi Kreatif",
+    "category": "konten",
+    "categoryLabel": "Konten & pemasaran digital",
+    "symbol": "CBR",
+    "format": "md",
+    "quality": "standar",
+    "description": "Dokumen pengarahan kampanye yang mengunci tujuan bisnis, audiens, insight, pesan utama, deliverable, kanal, batasan kreatif, dan metrik keberhasilan sebelum proses produksi dimulai.",
+    "tags": [
+      "creative brief",
+      "campaign brief",
+      "creative direction",
+      "audience insight",
+      "campaign objective"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama brand, kanal, atau proyek",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama brand atau proyek konten"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik atau penanggung jawab konten",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama content lead atau PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode kerja atau pengukuran",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Per kampanye",
+          "Per konten"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Kanal atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Instagram dan TikTok",
+          "YouTube dan Shorts",
+          "Website dan SEO",
+          "LinkedIn",
+          "Email marketing",
+          "Multi-platform",
+          "Kampanye berbayar dan influencer"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Target, batasan, dan catatan tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Target, KPI, batas anggaran, panduan merek, atau ketentuan lain."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Identitas kampanye",
+        "body": "Kampanye **{{entityName}}** dikelola oleh {{ownerName}} pada {{period}}. Ruang lingkup aktivasi: {{scope}}. Catat nama kampanye, nomor versi brief, tanggal persetujuan, dan pemilik keputusan akhir."
+      },
+      {
+        "heading": "Tujuan bisnis dan sasaran komunikasi",
+        "bullets": [
+          "Tujuan bisnis utama: [awareness, consideration, lead, conversion, retention, atau objective lain].",
+          "Perilaku audiens yang ingin diubah: [perilaku saat ini, perilaku target, dan hambatan].",
+          "KPI primer dan definisi pengukurannya: [angka target, sumber data, periode atribusi].",
+          "KPI penjaga: [frequency, negative feedback, unsubscribe, CPA maksimum, atau batas relevan]."
+        ]
+      },
+      {
+        "heading": "Audiens dan insight",
+        "bullets": [
+          "Segmen prioritas dan karakteristik yang relevan: [kebutuhan, konteks, tahap funnel].",
+          "Masalah nyata yang ingin diselesaikan: [situasi spesifik dan bukti].",
+          "Insight atau ketegangan yang menjadi dasar ide kreatif: [temuan riset, bukan asumsi].",
+          "Keberatan audiens dan jawaban yang harus muncul dalam materi: [daftar]."
+        ]
+      },
+      {
+        "heading": "Pesan dan proposisi kreatif",
+        "bullets": [
+          "Single-minded proposition: [satu pesan utama dalam satu kalimat].",
+          "Alasan untuk percaya (reason to believe): [fitur, bukti, demonstrasi, testimoni yang sah].",
+          "Dukungan pesan: [3 poin pendukung dan urutan prioritas].",
+          "Hal yang tidak boleh diklaim atau ditampilkan: [klaim, kompetitor, visual, dan wording terlarang]."
+        ]
+      },
+      {
+        "heading": "Deliverable, kanal, dan format",
+        "bullets": [
+          "Daftar aset per kanal beserta dimensi, durasi, variasi, dan jumlah revisi: [spesifikasi].",
+          "CTA, destination URL, kode promo, dan mekanisme pelacakan: [detail].",
+          "Adaptasi platform: [safe area, subtitle, rasio, batas karakter, thumbnail].",
+          "Rencana distribusi organik, paid, creator, dan owned channel: [peran masing-masing]."
+        ]
+      },
+      {
+        "heading": "Produksi, persetujuan, dan risiko",
+        "bullets": [
+          "Pemilik brief, copy, desain/video, media buying, legal, dan approver: [nama dan tenggat].",
+          "Timeline konsep, draft, review, final, trafficking, dan publikasi: [tanggal].",
+          "Hak musik, talent release, lisensi UGC, dan izin merek: [status bukti].",
+          "Risiko reputasi, operasional, atau moderasi dan jalur eskalasi: [PIC]."
+        ]
+      },
+      {
+        "heading": "Kriteria keberhasilan dan catatan",
+        "body": "Kriteria go/no-go: [ambang KPI, kelengkapan legal, dan kualitas aset]. Catatan khusus dari pemilik brief: {{notes}}. Brief dinyatakan final setelah tujuan, aset, hak penggunaan, anggaran, serta approver tercatat."
+      }
+    ]
+  },
+  {
+    "id": "kalkulator-engagement-rate-konten",
+    "name": "Kalkulator Engagement Rate (ER), Reach & Efisiensi Interaksi Konten",
+    "category": "konten",
+    "categoryLabel": "Konten & pemasaran digital",
+    "symbol": "ER",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Bandingkan performa setiap konten berdasarkan reach, likes, komentar, share, simpan, dan klik; hitung interaksi total, engagement rate berbasis reach, dan click-through rate secara otomatis.",
+    "tags": [
+      "engagement rate",
+      "reach",
+      "content analytics",
+      "interaksi",
+      "CTR"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama brand, kanal, atau proyek",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama brand atau proyek konten"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik atau penanggung jawab konten",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama content lead atau PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode kerja atau pengukuran",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Per kampanye",
+          "Per konten"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Kanal atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Instagram dan TikTok",
+          "YouTube dan Shorts",
+          "Website dan SEO",
+          "LinkedIn",
+          "Email marketing",
+          "Multi-platform",
+          "Kampanye berbayar dan influencer"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Target, batasan, dan catatan tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Target, KPI, batas anggaran, panduan merek, atau ketentuan lain."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Performa Konten",
+        "title": "Kalkulator Engagement Rate & Performa - {{entityName}}",
+        "columns": [
+          "Konten",
+          "Reach",
+          "Likes",
+          "Komentar",
+          "Share",
+          "Simpan",
+          "Total Interaksi",
+          "ER by Reach (%)",
+          "Klik Link",
+          "CTR by Reach (%)"
+        ],
+        "rows": [
+          [
+            "Carousel edukasi",
+            14500,
+            510,
+            42,
+            88,
+            140,
+            0,
+            0,
+            190,
+            0
+          ],
+          [
+            "Video tutorial",
+            28000,
+            920,
+            75,
+            210,
+            320,
+            0,
+            0,
+            460,
+            0
+          ],
+          [
+            "Story promo",
+            8200,
+            180,
+            22,
+            35,
+            28,
+            0,
+            0,
+            310,
+            0
+          ],
+          [
+            "Infografik",
+            11000,
+            390,
+            31,
+            64,
+            95,
+            0,
+            0,
+            125,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "SUM(C6:F6)",
+            "cachedValue": 780
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(B6=0,0,G6/B6*100)",
+            "cachedValue": 5.3793103448
+          },
+          {
+            "cell": "J6",
+            "formula": "IF(B6=0,0,I6/B6*100)",
+            "cachedValue": 1.3103448276
+          },
+          {
+            "cell": "G7",
+            "formula": "SUM(C7:F7)",
+            "cachedValue": 1525
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(B7=0,0,G7/B7*100)",
+            "cachedValue": 5.4464285714
+          },
+          {
+            "cell": "J7",
+            "formula": "IF(B7=0,0,I7/B7*100)",
+            "cachedValue": 1.6428571429
+          },
+          {
+            "cell": "G8",
+            "formula": "SUM(C8:F8)",
+            "cachedValue": 265
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(B8=0,0,G8/B8*100)",
+            "cachedValue": 3.2317073171
+          },
+          {
+            "cell": "J8",
+            "formula": "IF(B8=0,0,I8/B8*100)",
+            "cachedValue": 3.7804878049
+          },
+          {
+            "cell": "G9",
+            "formula": "SUM(C9:F9)",
+            "cachedValue": 580
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(B9=0,0,G9/B9*100)",
+            "cachedValue": 5.2727272727
+          },
+          {
+            "cell": "J9",
+            "formula": "IF(B9=0,0,I9/B9*100)",
+            "cachedValue": 1.1363636364
+          }
+        ],
+        "columnWidths": [
+          25,
+          14,
+          13,
+          14,
+          13,
+          13,
+          19,
+          21,
+          14,
+          21
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dashboard-budget-iklan-berbayar",
+    "name": "Dashboard Anggaran Iklan Berbayar, CPM, CPC, CTR & ROAS",
+    "category": "konten",
+    "categoryLabel": "Konten & pemasaran digital",
+    "symbol": "ADS",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Kontrol pengeluaran iklan per ad set dengan metrik CPM, CPC, CTR, biaya per konversi, dan ROAS; gunakan angka aktual untuk memutuskan alokasi ulang anggaran.",
+    "tags": [
+      "paid ads",
+      "media buying",
+      "CPM",
+      "CPC",
+      "ROAS",
+      "campaign budget"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama brand, kanal, atau proyek",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama brand atau proyek konten"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik atau penanggung jawab konten",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama content lead atau PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode kerja atau pengukuran",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Per kampanye",
+          "Per konten"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Kanal atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Instagram dan TikTok",
+          "YouTube dan Shorts",
+          "Website dan SEO",
+          "LinkedIn",
+          "Email marketing",
+          "Multi-platform",
+          "Kampanye berbayar dan influencer"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Target, batasan, dan catatan tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Target, KPI, batas anggaran, panduan merek, atau ketentuan lain."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Paid Media",
+        "title": "Dashboard Anggaran Iklan Berbayar - {{entityName}}",
+        "columns": [
+          "Ad Set/Kampanye",
+          "Spend (Rp)",
+          "Impressions",
+          "Klik",
+          "Konversi",
+          "Revenue (Rp)",
+          "CPM (Rp)",
+          "CPC (Rp)",
+          "CTR (%)",
+          "ROAS (x)",
+          "Cost/Conversion (Rp)"
+        ],
+        "rows": [
+          [
+            "Prospecting",
+            1500000,
+            180000,
+            2400,
+            96,
+            5400000,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Retargeting",
+            850000,
+            72000,
+            1800,
+            135,
+            6200000,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Video Views",
+            600000,
+            240000,
+            1200,
+            18,
+            900000,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Lead Form",
+            1100000,
+            95000,
+            2100,
+            105,
+            4800000,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "IF(C6=0,0,B6/C6*1000)",
+            "cachedValue": 8.3333333333
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(D6=0,0,B6/D6)",
+            "cachedValue": 625
+          },
+          {
+            "cell": "I6",
+            "formula": "IF(C6=0,0,D6/C6*100)",
+            "cachedValue": 1.3333333333
+          },
+          {
+            "cell": "J6",
+            "formula": "IF(B6=0,0,F6/B6)",
+            "cachedValue": 3.6
+          },
+          {
+            "cell": "K6",
+            "formula": "IF(E6=0,0,B6/E6)",
+            "cachedValue": 15625
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(C7=0,0,B7/C7*1000)",
+            "cachedValue": 11.8055555556
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(D7=0,0,B7/D7)",
+            "cachedValue": 472.2222222222
+          },
+          {
+            "cell": "I7",
+            "formula": "IF(C7=0,0,D7/C7*100)",
+            "cachedValue": 2.5
+          },
+          {
+            "cell": "J7",
+            "formula": "IF(B7=0,0,F7/B7)",
+            "cachedValue": 7.2941176471
+          },
+          {
+            "cell": "K7",
+            "formula": "IF(E7=0,0,B7/E7)",
+            "cachedValue": 6296.2962962963
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(C8=0,0,B8/C8*1000)",
+            "cachedValue": 2.5
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(D8=0,0,B8/D8)",
+            "cachedValue": 500
+          },
+          {
+            "cell": "I8",
+            "formula": "IF(C8=0,0,D8/C8*100)",
+            "cachedValue": 0.5
+          },
+          {
+            "cell": "J8",
+            "formula": "IF(B8=0,0,F8/B8)",
+            "cachedValue": 1.5
+          },
+          {
+            "cell": "K8",
+            "formula": "IF(E8=0,0,B8/E8)",
+            "cachedValue": 33333.3333333333
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(C9=0,0,B9/C9*1000)",
+            "cachedValue": 11.5789473684
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(D9=0,0,B9/D9)",
+            "cachedValue": 523.8095238095
+          },
+          {
+            "cell": "I9",
+            "formula": "IF(C9=0,0,D9/C9*100)",
+            "cachedValue": 2.2105263158
+          },
+          {
+            "cell": "J9",
+            "formula": "IF(B9=0,0,F9/B9)",
+            "cachedValue": 4.3636363636
+          },
+          {
+            "cell": "K9",
+            "formula": "IF(E9=0,0,B9/E9)",
+            "cachedValue": 10476.1904761905
+          }
+        ],
+        "columnWidths": [
+          22,
+          17,
+          16,
+          13,
+          14,
+          18,
+          17,
+          17,
+          14,
+          14,
+          24
+        ]
+      }
+    ]
+  },
+  {
+    "id": "pelacak-kampanye-influencer-roi",
+    "name": "Pelacak Kampanye Influencer, CPM, CPE & ROI Endorsement",
+    "category": "konten",
+    "categoryLabel": "Konten & pemasaran digital",
+    "symbol": "INF",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Kelola deliverable kreator, biaya endorsement, impressions, reach, interaksi, klik, pesanan, dan revenue; bandingkan CPM, CPE, ROAS, serta konversi klik untuk evaluasi kerja sama.",
+    "tags": [
+      "influencer marketing",
+      "endorsement",
+      "creator campaign",
+      "CPM",
+      "CPE",
+      "ROI"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama brand, kanal, atau proyek",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama brand atau proyek konten"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik atau penanggung jawab konten",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama content lead atau PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode kerja atau pengukuran",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Per kampanye",
+          "Per konten"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Kanal atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Instagram dan TikTok",
+          "YouTube dan Shorts",
+          "Website dan SEO",
+          "LinkedIn",
+          "Email marketing",
+          "Multi-platform",
+          "Kampanye berbayar dan influencer"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Target, batasan, dan catatan tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Target, KPI, batas anggaran, panduan merek, atau ketentuan lain."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Influencer ROI",
+        "title": "Pelacak Kampanye Influencer & ROI - {{entityName}}",
+        "columns": [
+          "Kreator",
+          "Fee (Rp)",
+          "Impressions",
+          "Reach",
+          "Engagement",
+          "Klik",
+          "Pesanan",
+          "Revenue (Rp)",
+          "CPM (Rp)",
+          "CPE (Rp)",
+          "ROAS (x)",
+          "Konversi Klik (%)"
+        ],
+        "rows": [
+          [
+            "@creatorA",
+            2500000,
+            80000,
+            62000,
+            5200,
+            1400,
+            84,
+            7200000,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "@creatorB",
+            1800000,
+            45000,
+            31000,
+            2100,
+            950,
+            38,
+            3100000,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "@creatorC",
+            4000000,
+            150000,
+            110000,
+            9800,
+            2600,
+            156,
+            12500000,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "@creatorD",
+            1200000,
+            28000,
+            22000,
+            1800,
+            600,
+            18,
+            1350000,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "I6",
+            "formula": "IF(C6=0,0,B6/C6*1000)",
+            "cachedValue": 31.25
+          },
+          {
+            "cell": "J6",
+            "formula": "IF(E6=0,0,B6/E6)",
+            "cachedValue": 480.7692307692
+          },
+          {
+            "cell": "K6",
+            "formula": "IF(B6=0,0,H6/B6)",
+            "cachedValue": 2.88
+          },
+          {
+            "cell": "L6",
+            "formula": "IF(F6=0,0,G6/F6*100)",
+            "cachedValue": 6
+          },
+          {
+            "cell": "I7",
+            "formula": "IF(C7=0,0,B7/C7*1000)",
+            "cachedValue": 40
+          },
+          {
+            "cell": "J7",
+            "formula": "IF(E7=0,0,B7/E7)",
+            "cachedValue": 857.1428571429
+          },
+          {
+            "cell": "K7",
+            "formula": "IF(B7=0,0,H7/B7)",
+            "cachedValue": 1.7222222222
+          },
+          {
+            "cell": "L7",
+            "formula": "IF(F7=0,0,G7/F7*100)",
+            "cachedValue": 4
+          },
+          {
+            "cell": "I8",
+            "formula": "IF(C8=0,0,B8/C8*1000)",
+            "cachedValue": 26.6666666667
+          },
+          {
+            "cell": "J8",
+            "formula": "IF(E8=0,0,B8/E8)",
+            "cachedValue": 408.1632653061
+          },
+          {
+            "cell": "K8",
+            "formula": "IF(B8=0,0,H8/B8)",
+            "cachedValue": 3.125
+          },
+          {
+            "cell": "L8",
+            "formula": "IF(F8=0,0,G8/F8*100)",
+            "cachedValue": 6
+          },
+          {
+            "cell": "I9",
+            "formula": "IF(C9=0,0,B9/C9*1000)",
+            "cachedValue": 42.8571428571
+          },
+          {
+            "cell": "J9",
+            "formula": "IF(E9=0,0,B9/E9)",
+            "cachedValue": 666.6666666667
+          },
+          {
+            "cell": "K9",
+            "formula": "IF(B9=0,0,H9/B9)",
+            "cachedValue": 1.125
+          },
+          {
+            "cell": "L9",
+            "formula": "IF(F9=0,0,G9/F9*100)",
+            "cachedValue": 3
+          }
+        ],
+        "columnWidths": [
+          20,
+          16,
+          16,
+          13,
+          15,
+          12,
+          13,
+          18,
+          17,
+          17,
+          14,
+          22
+        ]
+      }
+    ]
+  },
+  {
+    "id": "riset-keyword-priority",
+    "name": "Riset Kata Kunci SEO, Intent Pencarian & Skor Prioritas",
+    "category": "konten",
+    "categoryLabel": "Konten & pemasaran digital",
+    "symbol": "KEY",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Prioritaskan kata kunci berdasarkan volume bulanan, tingkat kesulitan, relevansi bisnis, dan posisi saat ini; hasilkan skor peluang numerik untuk menyusun backlog editorial SEO.",
+    "tags": [
+      "keyword research",
+      "SEO",
+      "search intent",
+      "keyword difficulty",
+      "content opportunity"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama brand, kanal, atau proyek",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama brand atau proyek konten"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik atau penanggung jawab konten",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama content lead atau PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode kerja atau pengukuran",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Per kampanye",
+          "Per konten"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Kanal atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Instagram dan TikTok",
+          "YouTube dan Shorts",
+          "Website dan SEO",
+          "LinkedIn",
+          "Email marketing",
+          "Multi-platform",
+          "Kampanye berbayar dan influencer"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Target, batasan, dan catatan tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Target, KPI, batas anggaran, panduan merek, atau ketentuan lain."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Keyword Research",
+        "title": "Riset Kata Kunci & Skor Prioritas - {{entityName}}",
+        "columns": [
+          "Kata Kunci",
+          "Volume/Bulan",
+          "Kesulitan (0-100)",
+          "Relevansi (1-5)",
+          "Posisi Saat Ini (0=baru)",
+          "Skor Prioritas",
+          "Quick Win (1/0)"
+        ],
+        "rows": [
+          [
+            "cara merawat produk",
+            2400,
+            28,
+            5,
+            0,
+            0,
+            0
+          ],
+          [
+            "perbandingan produk A B",
+            1600,
+            52,
+            5,
+            18,
+            0,
+            0
+          ],
+          [
+            "tips penggunaan harian",
+            3900,
+            35,
+            4,
+            12,
+            0,
+            0
+          ],
+          [
+            "harga produk terbaru",
+            5200,
+            68,
+            5,
+            6,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "IF(C6=0,0,B6*D6/(C6+1))",
+            "cachedValue": 413.7931034483
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(E6=0,1,IF(E6>20,1,0))",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F7",
+            "formula": "IF(C7=0,0,B7*D7/(C7+1))",
+            "cachedValue": 150.9433962264
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(E7=0,1,IF(E7>20,1,0))",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F8",
+            "formula": "IF(C8=0,0,B8*D8/(C8+1))",
+            "cachedValue": 433.3333333333
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(E8=0,1,IF(E8>20,1,0))",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F9",
+            "formula": "IF(C9=0,0,B9*D9/(C9+1))",
+            "cachedValue": 376.8115942029
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(E9=0,1,IF(E9>20,1,0))",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          30,
+          17,
+          22,
+          18,
+          24,
+          18,
+          18
+        ]
+      }
+    ]
+  },
+  {
+    "id": "matriks-repurposing-konten-pilar",
+    "name": "Matriks Distribusi & Repurposing Konten Pilar Multi-Platform",
+    "category": "konten",
+    "categoryLabel": "Konten & pemasaran digital",
+    "symbol": "REP",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Turunkan satu aset pilar menjadi format turunan yang sesuai tiap platform; catat jadwal dan hasil distribusi, lalu hitung engagement rate dan keterlambatan per publikasi turunan.",
+    "tags": [
+      "content repurposing",
+      "content distribution",
+      "pillar content",
+      "multi-platform"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama brand, kanal, atau proyek",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama brand atau proyek konten"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik atau penanggung jawab konten",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama content lead atau PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode kerja atau pengukuran",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Per kampanye",
+          "Per konten"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Kanal atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Instagram dan TikTok",
+          "YouTube dan Shorts",
+          "Website dan SEO",
+          "LinkedIn",
+          "Email marketing",
+          "Multi-platform",
+          "Kampanye berbayar dan influencer"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Target, batasan, dan catatan tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Target, KPI, batas anggaran, panduan merek, atau ketentuan lain."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Distribusi Turunan",
+        "title": "Matriks Repurposing & Distribusi - {{entityName}}",
+        "columns": [
+          "Aset Pilar",
+          "Kanal Turunan",
+          "Hari Target",
+          "Hari Aktual",
+          "Views/Reach",
+          "Interaksi",
+          "ER (%)",
+          "Deviasi Hari"
+        ],
+        "rows": [
+          [
+            "Panduan perawatan",
+            "Carousel Instagram",
+            20,
+            20,
+            14500,
+            780,
+            0,
+            0
+          ],
+          [
+            "Panduan perawatan",
+            "Video TikTok",
+            21,
+            23,
+            28000,
+            1525,
+            0,
+            0
+          ],
+          [
+            "Panduan perawatan",
+            "Artikel Blog",
+            22,
+            22,
+            6200,
+            180,
+            0,
+            0
+          ],
+          [
+            "Panduan perawatan",
+            "Email Newsletter",
+            24,
+            24,
+            4100,
+            260,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "IF(E6=0,0,F6/E6*100)",
+            "cachedValue": 5.3793103448
+          },
+          {
+            "cell": "H6",
+            "formula": "D6-C6",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(E7=0,0,F7/E7*100)",
+            "cachedValue": 5.4464285714
+          },
+          {
+            "cell": "H7",
+            "formula": "D7-C7",
+            "cachedValue": 2
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(E8=0,0,F8/E8*100)",
+            "cachedValue": 2.9032258065
+          },
+          {
+            "cell": "H8",
+            "formula": "D8-C8",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(E9=0,0,F9/E9*100)",
+            "cachedValue": 6.3414634146
+          },
+          {
+            "cell": "H9",
+            "formula": "D9-C9",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          25,
+          25,
+          15,
+          15,
+          17,
+          15,
+          15,
+          17
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ab-testing-thumbnail-judul",
+    "name": "Pelacak A/B Testing Thumbnail, Hook & Judul Video",
+    "category": "konten",
+    "categoryLabel": "Konten & pemasaran digital",
+    "symbol": "AB",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Bandingkan variasi judul dan thumbnail berdasarkan impressions, klik, penonton awal, serta total watch time; kalkulasikan CTR, hook rate, durasi tonton rata-rata, dan retensi relatif.",
+    "tags": [
+      "A/B testing",
+      "thumbnail test",
+      "video title",
+      "CTR",
+      "watch time"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama brand, kanal, atau proyek",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama brand atau proyek konten"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik atau penanggung jawab konten",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama content lead atau PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode kerja atau pengukuran",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Per kampanye",
+          "Per konten"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Kanal atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Instagram dan TikTok",
+          "YouTube dan Shorts",
+          "Website dan SEO",
+          "LinkedIn",
+          "Email marketing",
+          "Multi-platform",
+          "Kampanye berbayar dan influencer"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Target, batasan, dan catatan tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Target, KPI, batas anggaran, panduan merek, atau ketentuan lain."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Eksperimen Kreatif",
+        "title": "A/B Testing Thumbnail & Judul - {{entityName}}",
+        "columns": [
+          "Varian",
+          "Impressions",
+          "Klik",
+          "Views 3 Detik",
+          "Total Watch Time (detik)",
+          "Durasi Video (detik)",
+          "CTR (%)",
+          "Hook Rate (%)",
+          "Avg View Duration (detik)",
+          "Retensi (%)"
+        ],
+        "rows": [
+          [
+            "A - Judul manfaat",
+            42000,
+            2100,
+            15500,
+            186000,
+            30,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "B - Judul masalah",
+            40500,
+            2470,
+            17200,
+            205000,
+            30,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "C - Thumbnail close-up",
+            39000,
+            2180,
+            16000,
+            198000,
+            30,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "D - Thumbnail teks",
+            41000,
+            1960,
+            14800,
+            171000,
+            30,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "IF(B6=0,0,C6/B6*100)",
+            "cachedValue": 5
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(B6=0,0,D6/B6*100)",
+            "cachedValue": 36.9047619048
+          },
+          {
+            "cell": "I6",
+            "formula": "IF(D6=0,0,E6/D6)",
+            "cachedValue": 12
+          },
+          {
+            "cell": "J6",
+            "formula": "IF(F6=0,0,I6/F6*100)",
+            "cachedValue": 40
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(B7=0,0,C7/B7*100)",
+            "cachedValue": 6.0987654321
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(B7=0,0,D7/B7*100)",
+            "cachedValue": 42.4691358025
+          },
+          {
+            "cell": "I7",
+            "formula": "IF(D7=0,0,E7/D7)",
+            "cachedValue": 11.9186046512
+          },
+          {
+            "cell": "J7",
+            "formula": "IF(F7=0,0,I7/F7*100)",
+            "cachedValue": 39.7286821707
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(B8=0,0,C8/B8*100)",
+            "cachedValue": 5.5897435897
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(B8=0,0,D8/B8*100)",
+            "cachedValue": 41.0256410256
+          },
+          {
+            "cell": "I8",
+            "formula": "IF(D8=0,0,E8/D8)",
+            "cachedValue": 12.375
+          },
+          {
+            "cell": "J8",
+            "formula": "IF(F8=0,0,I8/F8*100)",
+            "cachedValue": 41.25
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(B9=0,0,C9/B9*100)",
+            "cachedValue": 4.7804878049
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(B9=0,0,D9/B9*100)",
+            "cachedValue": 36.0975609756
+          },
+          {
+            "cell": "I9",
+            "formula": "IF(D9=0,0,E9/D9)",
+            "cachedValue": 11.5540540541
+          },
+          {
+            "cell": "J9",
+            "formula": "IF(F9=0,0,I9/F9*100)",
+            "cachedValue": 38.5135135135
+          }
+        ],
+        "columnWidths": [
+          23,
+          16,
+          12,
+          16,
+          25,
+          20,
+          14,
+          17,
+          25,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dashboard-email-newsletter",
+    "name": "Dashboard Email Newsletter, Open Rate, Click Rate & Konversi",
+    "category": "konten",
+    "categoryLabel": "Konten & pemasaran digital",
+    "symbol": "EML",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Ukur kualitas distribusi newsletter dari penerima hingga konversi; hitung delivery rate, open rate, CTR, click-to-open rate, conversion rate, dan revenue per email terkirim.",
+    "tags": [
+      "email marketing",
+      "newsletter analytics",
+      "open rate",
+      "click rate",
+      "conversion"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama brand, kanal, atau proyek",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama brand atau proyek konten"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik atau penanggung jawab konten",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama content lead atau PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode kerja atau pengukuran",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Per kampanye",
+          "Per konten"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Kanal atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Instagram dan TikTok",
+          "YouTube dan Shorts",
+          "Website dan SEO",
+          "LinkedIn",
+          "Email marketing",
+          "Multi-platform",
+          "Kampanye berbayar dan influencer"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Target, batasan, dan catatan tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Target, KPI, batas anggaran, panduan merek, atau ketentuan lain."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Email Analytics",
+        "title": "Dashboard Email Newsletter - {{entityName}}",
+        "columns": [
+          "Kampanye Email",
+          "Terkirim Awal",
+          "Delivered",
+          "Unique Opens",
+          "Unique Clicks",
+          "Konversi",
+          "Revenue (Rp)",
+          "Delivery (%)",
+          "Open Rate (%)",
+          "CTR Delivered (%)",
+          "CTOR (%)",
+          "Konversi per Klik (%)"
+        ],
+        "rows": [
+          [
+            "Newsletter Mingguan",
+            12000,
+            11760,
+            4230,
+            980,
+            74,
+            8200000,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Promo Produk",
+            15000,
+            14600,
+            6570,
+            1752,
+            146,
+            16500000,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Edukasi Pelanggan",
+            9800,
+            9700,
+            3880,
+            582,
+            35,
+            2900000,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Reaktivasi",
+            7600,
+            7240,
+            1448,
+            435,
+            52,
+            6100000,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "H6",
+            "formula": "IF(B6=0,0,C6/B6*100)",
+            "cachedValue": 98
+          },
+          {
+            "cell": "I6",
+            "formula": "IF(C6=0,0,D6/C6*100)",
+            "cachedValue": 35.9693877551
+          },
+          {
+            "cell": "J6",
+            "formula": "IF(C6=0,0,E6/C6*100)",
+            "cachedValue": 8.3333333333
+          },
+          {
+            "cell": "K6",
+            "formula": "IF(D6=0,0,E6/D6*100)",
+            "cachedValue": 23.1678486998
+          },
+          {
+            "cell": "L6",
+            "formula": "IF(E6=0,0,F6/E6*100)",
+            "cachedValue": 7.5510204082
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(B7=0,0,C7/B7*100)",
+            "cachedValue": 97.3333333333
+          },
+          {
+            "cell": "I7",
+            "formula": "IF(C7=0,0,D7/C7*100)",
+            "cachedValue": 45
+          },
+          {
+            "cell": "J7",
+            "formula": "IF(C7=0,0,E7/C7*100)",
+            "cachedValue": 12
+          },
+          {
+            "cell": "K7",
+            "formula": "IF(D7=0,0,E7/D7*100)",
+            "cachedValue": 26.6666666667
+          },
+          {
+            "cell": "L7",
+            "formula": "IF(E7=0,0,F7/E7*100)",
+            "cachedValue": 8.3333333333
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(B8=0,0,C8/B8*100)",
+            "cachedValue": 98.9795918367
+          },
+          {
+            "cell": "I8",
+            "formula": "IF(C8=0,0,D8/C8*100)",
+            "cachedValue": 40
+          },
+          {
+            "cell": "J8",
+            "formula": "IF(C8=0,0,E8/C8*100)",
+            "cachedValue": 6
+          },
+          {
+            "cell": "K8",
+            "formula": "IF(D8=0,0,E8/D8*100)",
+            "cachedValue": 15
+          },
+          {
+            "cell": "L8",
+            "formula": "IF(E8=0,0,F8/E8*100)",
+            "cachedValue": 6.0137457045
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(B9=0,0,C9/B9*100)",
+            "cachedValue": 95.2631578947
+          },
+          {
+            "cell": "I9",
+            "formula": "IF(C9=0,0,D9/C9*100)",
+            "cachedValue": 20
+          },
+          {
+            "cell": "J9",
+            "formula": "IF(C9=0,0,E9/C9*100)",
+            "cachedValue": 6.0082872928
+          },
+          {
+            "cell": "K9",
+            "formula": "IF(D9=0,0,E9/D9*100)",
+            "cachedValue": 30.0414364641
+          },
+          {
+            "cell": "L9",
+            "formula": "IF(E9=0,0,F9/E9*100)",
+            "cachedValue": 11.9540229885
+          }
+        ],
+        "columnWidths": [
+          24,
+          19,
+          15,
+          16,
+          16,
+          13,
+          18,
+          17,
+          16,
+          18,
+          14,
+          23
+        ]
+      }
+    ]
+  },
+  {
+    "id": "panduan-brand-voice-messaging",
+    "name": "Panduan Brand Voice, Tone of Voice & Brand Messaging",
+    "category": "konten",
+    "categoryLabel": "Konten & pemasaran digital",
+    "symbol": "VOICE",
+    "format": "md",
+    "quality": "baik",
+    "description": "Dokumen standar bahasa merek yang menetapkan karakter suara, penyesuaian tone per kanal, pesan utama, istilah baku, contoh rewrite, serta batas klaim agar komunikasi konsisten di seluruh titik kontak.",
+    "tags": [
+      "brand voice",
+      "tone of voice",
+      "messaging guidelines",
+      "copywriting",
+      "brand consistency"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama brand, kanal, atau proyek",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama brand atau proyek konten"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik atau penanggung jawab konten",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama content lead atau PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode kerja atau pengukuran",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Per kampanye",
+          "Per konten"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Kanal atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Instagram dan TikTok",
+          "YouTube dan Shorts",
+          "Website dan SEO",
+          "LinkedIn",
+          "Email marketing",
+          "Multi-platform",
+          "Kampanye berbayar dan influencer"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Target, batasan, dan catatan tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Target, KPI, batas anggaran, panduan merek, atau ketentuan lain."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Mandat dan identitas suara merek",
+        "body": "Panduan ini berlaku untuk **{{entityName}}**, dikelola oleh {{ownerName}}, mulai periode {{period}} untuk kanal {{scope}}. Tetapkan versi dokumen, pemilik persetujuan, unit yang wajib mematuhi, dan tanggal evaluasi."
+      },
+      {
+        "heading": "Karakter suara merek",
+        "bullets": [
+          "Tiga sampai lima karakter inti: [misalnya jelas, kompeten, dekat, tenang, dan transparan].",
+          "Karakter yang tidak boleh muncul: [menggurui, hiperbolis, agresif, atau terlalu teknis].",
+          "Janji merek dalam satu kalimat: [nilai yang benar-benar dapat dibuktikan].",
+          "Batas humor, slang, emoji, dan gaya sapaan menurut segmen audiens: [aturan]."
+        ]
+      },
+      {
+        "heading": "Penyesuaian tone per kanal dan situasi",
+        "bullets": [
+          "Media sosial: [ringkas, kontekstual, responsif; aturan CTA dan interaksi].",
+          "Website dan SEO: [informatif, menjawab intent, struktur heading, dan terminologi].",
+          "Email: [subjek, preheader, sapaan, personalisasi, dan frekuensi].",
+          "Layanan pelanggan/krisis: [empati, fakta terverifikasi, batas janji, eskalasi]."
+        ]
+      },
+      {
+        "heading": "Message house dan bukti pendukung",
+        "bullets": [
+          "Pesan utama: [satu proposisi yang konsisten].",
+          "Pilar pesan 1-3: [manfaat, pembeda, pengalaman].",
+          "Bukti untuk setiap klaim: [data, sertifikasi, dokumentasi, atau testimoni berizin].",
+          "CTA yang diutamakan dan CTA yang dilarang: [contoh per funnel]."
+        ]
+      },
+      {
+        "heading": "Kosakata dan aturan editorial",
+        "bullets": [
+          "Istilah produk, penulisan nama, angka, satuan, kapitalisasi, dan ejaan baku: [glosarium].",
+          "Kata yang disarankan beserta konteks: [daftar].",
+          "Kata/claim yang dilarang dan alasannya: [daftar legal, etika, atau positioning].",
+          "Aturan aksesibilitas, subtitle, alt text, dan keterbacaan: [standar]."
+        ]
+      },
+      {
+        "heading": "Contoh sebelum dan sesudah",
+        "bullets": [
+          "Contoh copy yang terlalu menjanjikan: [contoh] → versi patuh: [rewrite].",
+          "Contoh CTA generik: [contoh] → CTA spesifik: [rewrite].",
+          "Contoh respons komentar negatif: [respons faktual dan jalur eskalasi].",
+          "Contoh adaptasi pesan yang sama pada dua platform: [pasangan copy]."
+        ]
+      },
+      {
+        "heading": "Governance dan pembaruan",
+        "body": "Pemilik review, jalur approval, dan frekuensi audit: [mekanisme]. Catatan implementasi dan pengecualian yang disetujui: {{notes}}. Perubahan besar pada positioning, produk, atau regulasi harus memicu pembaruan panduan."
+      }
+    ]
+  },
+  {
+    "id": "audit-konten-seo-refresh",
+    "name": "Audit Konten SEO, Penurunan Trafik & Prioritas Content Refresh",
+    "category": "konten",
+    "categoryLabel": "Konten & pemasaran digital",
+    "symbol": "REF",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Identifikasi halaman yang kehilangan trafik atau memiliki posisi pencarian lemah; bandingkan klik organik dan ranking sebelum-sesudah, hitung perubahan trafik, serta tandai halaman yang perlu diperbarui.",
+    "tags": [
+      "content audit",
+      "SEO refresh",
+      "organic traffic",
+      "ranking",
+      "content decay"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama brand, kanal, atau proyek",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama brand atau proyek konten"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik atau penanggung jawab konten",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama content lead atau PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode kerja atau pengukuran",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Per kampanye",
+          "Per konten"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Kanal atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Instagram dan TikTok",
+          "YouTube dan Shorts",
+          "Website dan SEO",
+          "LinkedIn",
+          "Email marketing",
+          "Multi-platform",
+          "Kampanye berbayar dan influencer"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Target, batasan, dan catatan tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Target, KPI, batas anggaran, panduan merek, atau ketentuan lain."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Audit Konten",
+        "title": "Audit Konten SEO & Refresh - {{entityName}}",
+        "columns": [
+          "URL",
+          "Klik Organik Sebelum",
+          "Klik Organik Saat Ini",
+          "Ranking Sebelum",
+          "Ranking Saat Ini",
+          "Perubahan Klik (%)",
+          "Perbaikan Posisi",
+          "Trafik Naik (1/0)"
+        ],
+        "rows": [
+          [
+            "/panduan-awal",
+            4200,
+            3100,
+            5,
+            8,
+            0,
+            0,
+            0
+          ],
+          [
+            "/tips-perawatan",
+            1800,
+            2450,
+            14,
+            7,
+            0,
+            0,
+            0
+          ],
+          [
+            "/review-produk",
+            5600,
+            4300,
+            3,
+            5,
+            0,
+            0,
+            0
+          ],
+          [
+            "/faq-pelanggan",
+            950,
+            1120,
+            21,
+            16,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "IF(B6=0,0,(C6-B6)/B6*100)",
+            "cachedValue": -26.1904761905
+          },
+          {
+            "cell": "G6",
+            "formula": "D6-E6",
+            "cachedValue": -3
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(C6>B6,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F7",
+            "formula": "IF(B7=0,0,(C7-B7)/B7*100)",
+            "cachedValue": 36.1111111111
+          },
+          {
+            "cell": "G7",
+            "formula": "D7-E7",
+            "cachedValue": 7
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(C7>B7,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F8",
+            "formula": "IF(B8=0,0,(C8-B8)/B8*100)",
+            "cachedValue": -23.2142857143
+          },
+          {
+            "cell": "G8",
+            "formula": "D8-E8",
+            "cachedValue": -2
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(C8>B8,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F9",
+            "formula": "IF(B9=0,0,(C9-B9)/B9*100)",
+            "cachedValue": 17.8947368421
+          },
+          {
+            "cell": "G9",
+            "formula": "D9-E9",
+            "cachedValue": 5
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(C9>B9,1,0)",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          28,
+          22,
+          22,
+          18,
+          18,
+          19,
+          18,
+          18
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dashboard-attribution-funnel",
+    "name": "Dashboard Atribusi Funnel Konten, Lead, Customer & CAC per Kanal",
+    "category": "konten",
+    "categoryLabel": "Konten & pemasaran digital",
+    "symbol": "ATTR",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Bandingkan kontribusi kanal organik, paid, email, dan creator sepanjang funnel; hitung conversion rate per tahap, customer acquisition cost, dan ROAS agar anggaran mengikuti kontribusi bisnis.",
+    "tags": [
+      "marketing attribution",
+      "conversion funnel",
+      "CAC",
+      "ROAS",
+      "lead generation",
+      "channel performance"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama brand, kanal, atau proyek",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama brand atau proyek konten"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik atau penanggung jawab konten",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama content lead atau PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode kerja atau pengukuran",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Per kampanye",
+          "Per konten"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Kanal atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Instagram dan TikTok",
+          "YouTube dan Shorts",
+          "Website dan SEO",
+          "LinkedIn",
+          "Email marketing",
+          "Multi-platform",
+          "Kampanye berbayar dan influencer"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Target, batasan, dan catatan tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Target, KPI, batas anggaran, panduan merek, atau ketentuan lain."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Attribution Funnel",
+        "title": "Dashboard Atribusi Funnel - {{entityName}}",
+        "columns": [
+          "Kanal",
+          "Spend (Rp)",
+          "Sessions",
+          "Leads",
+          "Customers",
+          "Revenue (Rp)",
+          "CAC (Rp)",
+          "Lead CVR (%)",
+          "Customer CVR (%)",
+          "ROAS (x)"
+        ],
+        "rows": [
+          [
+            "Organic Search",
+            2500000,
+            18000,
+            720,
+            108,
+            16200000,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Paid Social",
+            8500000,
+            24000,
+            1200,
+            144,
+            21600000,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Email",
+            900000,
+            8500,
+            680,
+            136,
+            20400000,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Influencer",
+            4200000,
+            11000,
+            550,
+            88,
+            13200000,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "IF(E6=0,0,B6/E6)",
+            "cachedValue": 23148.1481481481
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(C6=0,0,D6/C6*100)",
+            "cachedValue": 4
+          },
+          {
+            "cell": "I6",
+            "formula": "IF(C6=0,0,E6/C6*100)",
+            "cachedValue": 0.6
+          },
+          {
+            "cell": "J6",
+            "formula": "IF(B6=0,0,F6/B6)",
+            "cachedValue": 6.48
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(E7=0,0,B7/E7)",
+            "cachedValue": 59027.7777777778
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(C7=0,0,D7/C7*100)",
+            "cachedValue": 5
+          },
+          {
+            "cell": "I7",
+            "formula": "IF(C7=0,0,E7/C7*100)",
+            "cachedValue": 0.6
+          },
+          {
+            "cell": "J7",
+            "formula": "IF(B7=0,0,F7/B7)",
+            "cachedValue": 2.5411764706
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(E8=0,0,B8/E8)",
+            "cachedValue": 6617.6470588235
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(C8=0,0,D8/C8*100)",
+            "cachedValue": 8
+          },
+          {
+            "cell": "I8",
+            "formula": "IF(C8=0,0,E8/C8*100)",
+            "cachedValue": 1.6
+          },
+          {
+            "cell": "J8",
+            "formula": "IF(B8=0,0,F8/B8)",
+            "cachedValue": 22.6666666667
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(E9=0,0,B9/E9)",
+            "cachedValue": 47727.2727272727
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(C9=0,0,D9/C9*100)",
+            "cachedValue": 5
+          },
+          {
+            "cell": "I9",
+            "formula": "IF(C9=0,0,E9/C9*100)",
+            "cachedValue": 0.8
+          },
+          {
+            "cell": "J9",
+            "formula": "IF(B9=0,0,F9/B9)",
+            "cachedValue": 3.1428571429
+          }
+        ],
+        "columnWidths": [
+          22,
+          17,
+          17,
+          14,
+          15,
+          19,
+          18,
+          17,
+          20,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "id": "model-kapasitas-biaya-produksi",
+    "name": "Model Kapasitas Tim Konten, Biaya per Aset & Deviasi Jam Produksi",
+    "category": "konten",
+    "categoryLabel": "Konten & pemasaran digital",
+    "symbol": "CAP",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Rencanakan kapasitas writer, designer, editor, dan strategist per deliverable; bandingkan estimasi dengan jam aktual, hitung biaya internal dan biaya total untuk mengendalikan cost per asset.",
+    "tags": [
+      "content operations",
+      "capacity planning",
+      "production costing",
+      "resource utilization",
+      "cost per asset"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama brand, kanal, atau proyek",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama brand atau proyek konten"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik atau penanggung jawab konten",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama content lead atau PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode kerja atau pengukuran",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Per kampanye",
+          "Per konten"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Kanal atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Instagram dan TikTok",
+          "YouTube dan Shorts",
+          "Website dan SEO",
+          "LinkedIn",
+          "Email marketing",
+          "Multi-platform",
+          "Kampanye berbayar dan influencer"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Target, batasan, dan catatan tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Target, KPI, batas anggaran, panduan merek, atau ketentuan lain."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Kapasitas & Biaya",
+        "title": "Model Kapasitas dan Biaya Produksi - {{entityName}}",
+        "columns": [
+          "Deliverable",
+          "Jam Rencana",
+          "Jam Aktual",
+          "Tarif/Jam (Rp)",
+          "Biaya Eksternal (Rp)",
+          "Biaya Internal (Rp)",
+          "Total Biaya Aktual (Rp)",
+          "Deviasi Jam",
+          "Output Unit",
+          "Jam per Unit"
+        ],
+        "rows": [
+          [
+            "Artikel SEO",
+            8,
+            10,
+            120000,
+            150000,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            "Video pendek",
+            6,
+            7,
+            150000,
+            350000,
+            0,
+            0,
+            0,
+            3,
+            0
+          ],
+          [
+            "Carousel",
+            4,
+            3,
+            110000,
+            80000,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            "Newsletter",
+            3,
+            4,
+            100000,
+            50000,
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "C6*D6",
+            "cachedValue": 1200000
+          },
+          {
+            "cell": "G6",
+            "formula": "E6+F6",
+            "cachedValue": 1350000
+          },
+          {
+            "cell": "H6",
+            "formula": "C6-B6",
+            "cachedValue": 2
+          },
+          {
+            "cell": "J6",
+            "formula": "IF(I6=0,0,C6/I6)",
+            "cachedValue": 10
+          },
+          {
+            "cell": "F7",
+            "formula": "C7*D7",
+            "cachedValue": 1050000
+          },
+          {
+            "cell": "G7",
+            "formula": "E7+F7",
+            "cachedValue": 1400000
+          },
+          {
+            "cell": "H7",
+            "formula": "C7-B7",
+            "cachedValue": 1
+          },
+          {
+            "cell": "J7",
+            "formula": "IF(I7=0,0,C7/I7)",
+            "cachedValue": 2.3333333333
+          },
+          {
+            "cell": "F8",
+            "formula": "C8*D8",
+            "cachedValue": 330000
+          },
+          {
+            "cell": "G8",
+            "formula": "E8+F8",
+            "cachedValue": 410000
+          },
+          {
+            "cell": "H8",
+            "formula": "C8-B8",
+            "cachedValue": -1
+          },
+          {
+            "cell": "J8",
+            "formula": "IF(I8=0,0,C8/I8)",
+            "cachedValue": 3
+          },
+          {
+            "cell": "F9",
+            "formula": "C9*D9",
+            "cachedValue": 400000
+          },
+          {
+            "cell": "G9",
+            "formula": "E9+F9",
+            "cachedValue": 450000
+          },
+          {
+            "cell": "H9",
+            "formula": "C9-B9",
+            "cachedValue": 1
+          },
+          {
+            "cell": "J9",
+            "formula": "IF(I9=0,0,C9/I9)",
+            "cachedValue": 4
+          }
+        ],
+        "columnWidths": [
+          22,
+          15,
+          15,
+          20,
+          21,
+          21,
+          23,
+          15,
+          14,
+          16
+        ]
+      }
+    ]
+  },
+  {
+    "id": "profitabilitas-kampanye-konten",
+    "name": "Analisis Profitabilitas Kampanye Konten, Margin & Break-Even",
+    "category": "konten",
+    "categoryLabel": "Konten & pemasaran digital",
+    "symbol": "PROF",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Hitung kelayakan kampanye dari biaya produksi, media, kreator, dan biaya lain terhadap revenue; tampilkan total investasi, laba kontribusi, ROI, serta titik impas revenue.",
+    "tags": [
+      "campaign profitability",
+      "marketing ROI",
+      "break even",
+      "content campaign",
+      "contribution margin"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama brand, kanal, atau proyek",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama brand atau proyek konten"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik atau penanggung jawab konten",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama content lead atau PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode kerja atau pengukuran",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Per kampanye",
+          "Per konten"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Kanal atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Instagram dan TikTok",
+          "YouTube dan Shorts",
+          "Website dan SEO",
+          "LinkedIn",
+          "Email marketing",
+          "Multi-platform",
+          "Kampanye berbayar dan influencer"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Target, batasan, dan catatan tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Target, KPI, batas anggaran, panduan merek, atau ketentuan lain."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Profitabilitas Kampanye",
+        "title": "Analisis Profitabilitas Kampanye - {{entityName}}",
+        "columns": [
+          "Kampanye",
+          "Biaya Produksi (Rp)",
+          "Media Spend (Rp)",
+          "Fee Kreator (Rp)",
+          "Biaya Lain (Rp)",
+          "Revenue (Rp)",
+          "Total Biaya (Rp)",
+          "Laba Kontribusi (Rp)",
+          "ROI (%)",
+          "Revenue Break-Even (Rp)"
+        ],
+        "rows": [
+          [
+            "Launch Produk",
+            4500000,
+            8500000,
+            3000000,
+            750000,
+            24000000,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Awareness Q4",
+            2800000,
+            6200000,
+            1800000,
+            400000,
+            12500000,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Edukasi Organik",
+            1800000,
+            1200000,
+            0,
+            250000,
+            7200000,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Retargeting",
+            900000,
+            4500000,
+            600000,
+            200000,
+            9800000,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "SUM(B6:E6)",
+            "cachedValue": 16750000
+          },
+          {
+            "cell": "H6",
+            "formula": "F6-G6",
+            "cachedValue": 7250000
+          },
+          {
+            "cell": "I6",
+            "formula": "IF(G6=0,0,H6/G6*100)",
+            "cachedValue": 43.2835820896
+          },
+          {
+            "cell": "J6",
+            "formula": "G6",
+            "cachedValue": 16750000
+          },
+          {
+            "cell": "G7",
+            "formula": "SUM(B7:E7)",
+            "cachedValue": 11200000
+          },
+          {
+            "cell": "H7",
+            "formula": "F7-G7",
+            "cachedValue": 1300000
+          },
+          {
+            "cell": "I7",
+            "formula": "IF(G7=0,0,H7/G7*100)",
+            "cachedValue": 11.6071428571
+          },
+          {
+            "cell": "J7",
+            "formula": "G7",
+            "cachedValue": 11200000
+          },
+          {
+            "cell": "G8",
+            "formula": "SUM(B8:E8)",
+            "cachedValue": 3250000
+          },
+          {
+            "cell": "H8",
+            "formula": "F8-G8",
+            "cachedValue": 3950000
+          },
+          {
+            "cell": "I8",
+            "formula": "IF(G8=0,0,H8/G8*100)",
+            "cachedValue": 121.5384615385
+          },
+          {
+            "cell": "J8",
+            "formula": "G8",
+            "cachedValue": 3250000
+          },
+          {
+            "cell": "G9",
+            "formula": "SUM(B9:E9)",
+            "cachedValue": 6200000
+          },
+          {
+            "cell": "H9",
+            "formula": "F9-G9",
+            "cachedValue": 3600000
+          },
+          {
+            "cell": "I9",
+            "formula": "IF(G9=0,0,H9/G9*100)",
+            "cachedValue": 58.064516129
+          },
+          {
+            "cell": "J9",
+            "formula": "G9",
+            "cachedValue": 6200000
+          }
+        ],
+        "columnWidths": [
+          22,
+          19,
+          18,
+          18,
+          18,
+          18,
+          19,
+          22,
+          15,
+          23
+        ]
+      }
+    ]
+  },
+  {
+    "id": "seo-topic-cluster-content-gap",
+    "name": "SEO Topic Cluster, Content Gap & Estimasi Potensi Trafik",
+    "category": "konten",
+    "categoryLabel": "Konten & pemasaran digital",
+    "symbol": "CLST",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Petakan pillar page dan supporting content berdasarkan volume pencarian, ranking, dan estimasi CTR; kuantifikasi potensi trafik serta peluang halaman yang belum masuk halaman pertama.",
+    "tags": [
+      "topic cluster",
+      "content gap",
+      "topical authority",
+      "SEO strategy",
+      "organic traffic potential"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama brand, kanal, atau proyek",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama brand atau proyek konten"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik atau penanggung jawab konten",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama content lead atau PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode kerja atau pengukuran",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Per kampanye",
+          "Per konten"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Kanal atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Instagram dan TikTok",
+          "YouTube dan Shorts",
+          "Website dan SEO",
+          "LinkedIn",
+          "Email marketing",
+          "Multi-platform",
+          "Kampanye berbayar dan influencer"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Target, batasan, dan catatan tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Target, KPI, batas anggaran, panduan merek, atau ketentuan lain."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Topic Cluster",
+        "title": "SEO Topic Cluster & Content Gap - {{entityName}}",
+        "columns": [
+          "Pillar/Cluster",
+          "URL Supporting",
+          "Volume/Bulan",
+          "Ranking Saat Ini (0=baru)",
+          "CTR Potensial (%)",
+          "Estimasi Klik/Bulan",
+          "Gap ke 10 Besar",
+          "Peluang Trafik (1/0)"
+        ],
+        "rows": [
+          [
+            "Panduan Produk",
+            "/panduan-dasar",
+            3200,
+            0,
+            8,
+            0,
+            0,
+            0
+          ],
+          [
+            "Panduan Produk",
+            "/cara-memilih",
+            2100,
+            14,
+            8,
+            0,
+            0,
+            0
+          ],
+          [
+            "Perawatan",
+            "/perawatan-harian",
+            1800,
+            8,
+            10,
+            0,
+            0,
+            0
+          ],
+          [
+            "Perbandingan",
+            "/produk-a-vs-b",
+            2600,
+            22,
+            7,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "C6*E6/100",
+            "cachedValue": 256
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(D6=0,100,D6-10)",
+            "cachedValue": 100
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(D6=0,1,IF(D6>10,1,0))",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F7",
+            "formula": "C7*E7/100",
+            "cachedValue": 168
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(D7=0,100,D7-10)",
+            "cachedValue": 4
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(D7=0,1,IF(D7>10,1,0))",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F8",
+            "formula": "C8*E8/100",
+            "cachedValue": 180
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(D8=0,100,D8-10)",
+            "cachedValue": -2
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(D8=0,1,IF(D8>10,1,0))",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F9",
+            "formula": "C9*E9/100",
+            "cachedValue": 182
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(D9=0,100,D9-10)",
+            "cachedValue": 12
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(D9=0,1,IF(D9>10,1,0))",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          23,
+          25,
+          17,
+          25,
+          18,
+          19,
+          17,
+          20
+        ]
+      }
+    ]
+  },
+  {
+    "id": "social-listening-sentiment-sla",
+    "name": "Social Listening, Analisis Sentimen & SLA Eskalasi Isu",
+    "category": "konten",
+    "categoryLabel": "Konten & pemasaran digital",
+    "symbol": "LIST",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Rekap percakapan brand dan isu per topik; ukur komposisi sentimen positif/negatif, net sentiment, serta ketepatan respons agar lonjakan isu dapat diprioritaskan dengan bukti.",
+    "tags": [
+      "social listening",
+      "sentiment analysis",
+      "brand monitoring",
+      "SLA",
+      "reputation management"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama brand, kanal, atau proyek",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama brand atau proyek konten"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik atau penanggung jawab konten",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama content lead atau PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode kerja atau pengukuran",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Per kampanye",
+          "Per konten"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Kanal atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Instagram dan TikTok",
+          "YouTube dan Shorts",
+          "Website dan SEO",
+          "LinkedIn",
+          "Email marketing",
+          "Multi-platform",
+          "Kampanye berbayar dan influencer"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Target, batasan, dan catatan tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Target, KPI, batas anggaran, panduan merek, atau ketentuan lain."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Social Listening",
+        "title": "Social Listening & Sentiment - {{entityName}}",
+        "columns": [
+          "Topik/Isu",
+          "Total Mention",
+          "Positif",
+          "Netral",
+          "Negatif",
+          "Respons Pertama (jam)",
+          "Positif (%)",
+          "Negatif (%)",
+          "Net Sentiment (%)",
+          "SLA (1/0)"
+        ],
+        "rows": [
+          [
+            "Kualitas produk",
+            420,
+            250,
+            110,
+            60,
+            2,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Pengiriman",
+            310,
+            90,
+            105,
+            115,
+            5,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Promo bulanan",
+            580,
+            390,
+            150,
+            40,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Gangguan layanan",
+            190,
+            35,
+            55,
+            100,
+            7,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "IF(B6=0,0,C6/B6*100)",
+            "cachedValue": 59.5238095238
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(B6=0,0,E6/B6*100)",
+            "cachedValue": 14.2857142857
+          },
+          {
+            "cell": "I6",
+            "formula": "IF(B6=0,0,(C6-E6)/B6*100)",
+            "cachedValue": 45.2380952381
+          },
+          {
+            "cell": "J6",
+            "formula": "IF(F6<=4,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(B7=0,0,C7/B7*100)",
+            "cachedValue": 29.0322580645
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(B7=0,0,E7/B7*100)",
+            "cachedValue": 37.0967741935
+          },
+          {
+            "cell": "I7",
+            "formula": "IF(B7=0,0,(C7-E7)/B7*100)",
+            "cachedValue": -8.064516129
+          },
+          {
+            "cell": "J7",
+            "formula": "IF(F7<=4,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(B8=0,0,C8/B8*100)",
+            "cachedValue": 67.2413793103
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(B8=0,0,E8/B8*100)",
+            "cachedValue": 6.8965517241
+          },
+          {
+            "cell": "I8",
+            "formula": "IF(B8=0,0,(C8-E8)/B8*100)",
+            "cachedValue": 60.3448275862
+          },
+          {
+            "cell": "J8",
+            "formula": "IF(F8<=4,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(B9=0,0,C9/B9*100)",
+            "cachedValue": 18.4210526316
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(B9=0,0,E9/B9*100)",
+            "cachedValue": 52.6315789474
+          },
+          {
+            "cell": "I9",
+            "formula": "IF(B9=0,0,(C9-E9)/B9*100)",
+            "cachedValue": -34.2105263158
+          },
+          {
+            "cell": "J9",
+            "formula": "IF(F9<=4,1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          23,
+          17,
+          14,
+          14,
+          14,
+          20,
+          16,
+          16,
+          20,
+          14
+        ]
+      }
+    ]
+  },
+  {
+    "id": "checklist-quality-control-pra-tayang",
+    "name": "Checklist Audit Kualitas Konten Pra-Tayang & Gate Persetujuan",
+    "category": "konten",
+    "categoryLabel": "Konten & pemasaran digital",
+    "symbol": "QA",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Gunakan quality gate sebelum publikasi untuk memeriksa akurasi fakta, hak aset, kepatuhan klaim, ejaan, tautan, aksesibilitas, dan kesesuaian brand; hitung skor kesiapan dan status layak tayang.",
+    "tags": [
+      "content QA",
+      "pre-publish checklist",
+      "quality control",
+      "fact check",
+      "legal review",
+      "accessibility"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama brand, kanal, atau proyek",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama brand atau proyek konten"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik atau penanggung jawab konten",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama content lead atau PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode kerja atau pengukuran",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Per kampanye",
+          "Per konten"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Kanal atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Instagram dan TikTok",
+          "YouTube dan Shorts",
+          "Website dan SEO",
+          "LinkedIn",
+          "Email marketing",
+          "Multi-platform",
+          "Kampanye berbayar dan influencer"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Target, batasan, dan catatan tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Target, KPI, batas anggaran, panduan merek, atau ketentuan lain."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Quality Gate",
+        "title": "Checklist Audit Kualitas Konten Pra-Tayang - {{entityName}}",
+        "columns": [
+          "Konten/Aset",
+          "Fakta Terverifikasi (1/0)",
+          "Hak Aset Aman (1/0)",
+          "Klaim Disetujui (1/0)",
+          "Ejaan Final (1/0)",
+          "Link Diuji (1/0)",
+          "Aksesibel (1/0)",
+          "Brand Fit (1/0)",
+          "Skor QA",
+          "Layak Tayang (1/0)"
+        ],
+        "rows": [
+          [
+            "Carousel produk",
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            "Video testimoni",
+            1,
+            1,
+            0,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            "Artikel SEO",
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            "Promo musiman",
+            1,
+            1,
+            1,
+            1,
+            0,
+            1,
+            1,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "I6",
+            "formula": "SUM(B6:H6)",
+            "cachedValue": 7
+          },
+          {
+            "cell": "J6",
+            "formula": "IF(I6=7,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "I7",
+            "formula": "SUM(B7:H7)",
+            "cachedValue": 6
+          },
+          {
+            "cell": "J7",
+            "formula": "IF(I7=7,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "I8",
+            "formula": "SUM(B8:H8)",
+            "cachedValue": 6
+          },
+          {
+            "cell": "J8",
+            "formula": "IF(I8=7,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "I9",
+            "formula": "SUM(B9:H9)",
+            "cachedValue": 6
+          },
+          {
+            "cell": "J9",
+            "formula": "IF(I9=7,1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          23,
+          23,
+          18,
+          20,
+          16,
+          15,
+          15,
+          17,
+          14,
+          19
+        ]
+      }
+    ]
+  },
+  {
+    "id": "media-kit-rate-card-kreator",
+    "name": "Media Kit & Rate Card Kreator: Audiens, Deliverable dan Ketentuan Komersial",
+    "category": "konten",
+    "categoryLabel": "Konten & pemasaran digital",
+    "symbol": "MEDIA",
+    "format": "md",
+    "quality": "unggulan",
+    "description": "Dokumen penawaran profesional kreator yang memuat positioning, profil audiens, bukti performa, portofolio, paket kolaborasi, rate card, hak penggunaan konten, dan syarat kerja sama.",
+    "tags": [
+      "media kit",
+      "rate card",
+      "creator pricing",
+      "brand collaboration",
+      "influencer portfolio"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama brand, kanal, atau proyek",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama brand atau proyek konten"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik atau penanggung jawab konten",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama content lead atau PIC"
+      },
+      {
+        "id": "period",
+        "label": "Periode kerja atau pengukuran",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Per kampanye",
+          "Per konten"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Kanal atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Instagram dan TikTok",
+          "YouTube dan Shorts",
+          "Website dan SEO",
+          "LinkedIn",
+          "Email marketing",
+          "Multi-platform",
+          "Kampanye berbayar dan influencer"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Target, batasan, dan catatan tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Target, KPI, batas anggaran, panduan merek, atau ketentuan lain."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Profil kreator dan positioning",
+        "body": "Media kit **{{entityName}}** disiapkan oleh {{ownerName}} untuk periode {{period}}. Kanal dan ruang lingkup penawaran: {{scope}}. Cantumkan nama publik, niche, lokasi audiens utama, bahasa, dan keunikan sudut pandang."
+      },
+      {
+        "heading": "Ringkasan audiens",
+        "bullets": [
+          "Jumlah pengikut per kanal beserta tanggal pengambilan data: [angka dan bukti].",
+          "Demografi audiens yang relevan: [usia, lokasi, bahasa, minat; gunakan data insight platform].",
+          "Rata-rata reach, views, impressions, dan engagement 30/90 hari: [median dan rentang, bukan hanya konten terbaik].",
+          "Topik atau kategori brand yang paling relevan: [niche dan alasan kecocokan]."
+        ]
+      },
+      {
+        "heading": "Bukti performa dan portofolio",
+        "bullets": [
+          "Tiga studi kasus konten: [objective, format, hasil, periode, dan tautan].",
+          "Kinerja konten sponsor sebelumnya: [labelkan sebagai paid partnership dan hasil terverifikasi].",
+          "Contoh kualitas produksi, tone, storytelling, dan format: [tautan portofolio].",
+          "Pernyataan disclosure dan transparansi kerja sama berbayar: [metode penandaan]."
+        ]
+      },
+      {
+        "heading": "Rate card dan deliverable",
+        "bullets": [
+          "Instagram: [Story set, feed/carousel, Reel; jumlah frame, durasi, revisi].",
+          "TikTok/Shorts: [durasi, konsep, caption, pinned comment, cross-post].",
+          "YouTube: [integrasi, dedicated video, short, link description, segment duration].",
+          "Paket bundling: [komposisi deliverable, harga paket, periode penggunaan, dan batas revisi].",
+          "Biaya tambahan: [whitelisting, raw footage, exclusivity, rush fee, perjalanan, pajak]."
+        ]
+      },
+      {
+        "heading": "Ketentuan komersial dan hak penggunaan",
+        "bullets": [
+          "Jadwal pembayaran, uang muka, invoice, pembatalan, dan keterlambatan: [ketentuan].",
+          "Hak pakai organik dan paid usage: [platform, wilayah, durasi, placement, dan biaya].",
+          "Spark Ads/whitelisting, akses akun, dan periode otorisasi: [kontrol keamanan].",
+          "Eksklusivitas kategori dan konflik kompetitor: [kategori, durasi, kompensasi].",
+          "Kepemilikan file mentah, musik, talent release, serta hak edit: [batas izin]."
+        ]
+      },
+      {
+        "heading": "Alur kerja sama",
+        "bullets": [
+          "Tahapan: inquiry → brief → quotation → kontrak → produksi → approval → publikasi → laporan.",
+          "Batas waktu feedback brand dan jumlah revisi yang termasuk dalam fee: [aturan].",
+          "Format laporan setelah tayang: [insight, screenshot, reach, views, engagement, klik].",
+          "Kontak bisnis dan jam respons: [email/kanal resmi]."
+        ]
+      },
+      {
+        "heading": "Asumsi, validitas, dan catatan",
+        "body": "Seluruh statistik harus bertanggal dan dapat diverifikasi. Harga berlaku sesuai masa validitas yang ditetapkan. Catatan negosiasi, pengecualian, atau kebutuhan khusus: {{notes}}."
+      }
+    ]
   }
 ]
