@@ -5,13 +5,21 @@ Koleksi template digital gratis dari The Choco Studios. Website menggunakan Next
 ## Fitur
 
 - Katalog statis dengan sembilan kategori.
-- Pencarian dan filter kategori serta tingkat kesulitan.
+- Pencarian dan filter kategori serta kualitas template.
 - Alur penyesuaian tepat lima pertanyaan untuk setiap template.
 - Generator spreadsheet XLSX dengan rumus Excel aktif.
 - Generator dokumen Markdown dan TXT.
 - Nama instansi atau proyek dimasukkan ke file hasil.
 - Pembuatan file di browser menggunakan SheetJS dan FileSaver.
 - Tidak menggunakan backend, API, database, Google Drive, atau akun pengguna.
+
+## Klasifikasi kualitas
+
+Kualitas merupakan penilaian internal TCS terhadap kelengkapan struktur, cakupan penggunaan, contoh isi, dan otomatisasi template. Klasifikasi ini bukan tingkat kesulitan maupun rating pengguna.
+
+- **Standar:** struktur inti untuk kebutuhan sederhana.
+- **Baik:** isi lebih lengkap atau memiliki fungsi tambahan yang membantu penggunaan.
+- **Unggulan:** struktur menyeluruh dan/atau otomatisasi yang lebih lengkap.
 
 ## Struktur utama
 
