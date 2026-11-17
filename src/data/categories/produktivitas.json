@@ -1,131 +1,4253 @@
 [
   {
-    "id": "weekly-planner",
-    "name": "Weekly Planner",
+    "id": "matriks-prioritas-eisenhower",
+    "name": "Matriks Prioritas Eisenhower & Skor Urgensi",
     "category": "produktivitas",
     "categoryLabel": "Produktivitas",
-    "symbol": "WP",
+    "symbol": "EIS",
     "format": "xlsx",
-    "description": "Rencanakan aktivitas mingguan, prioritas, target, dan status penyelesaian dalam satu lembar kerja.",
+    "quality": "standar",
+    "description": "Klasifikasikan pekerjaan berdasarkan dampak dan urgensi, hitung skor prioritas, lalu pisahkan tugas yang harus dikerjakan, dijadwalkan, didelegasikan, atau dihapus.",
     "tags": [
-      "planner",
-      "mingguan",
-      "agenda",
-      "produktivitas",
-      "tugas",
-      "jadwal"
+      "eisenhower",
+      "prioritas",
+      "urgensi",
+      "dampak",
+      "manajemen tugas"
     ],
     "questions": [
       {
         "id": "entityName",
-        "label": "Nama individu atau tim",
+        "label": "Nama individu, tim, atau unit kerja",
         "type": "text",
         "required": true,
-        "placeholder": "Contoh: Toko Sinar Jaya"
+        "placeholder": "Nama individu atau tim"
       },
       {
         "id": "ownerName",
-        "label": "Nama penyusun jadwal",
+        "label": "Pemilik proses atau penanggung jawab",
         "type": "text",
         "required": false,
         "placeholder": "Nama penanggung jawab"
       },
       {
         "id": "period",
-        "label": "Periode yang digunakan",
+        "label": "Periode penggunaan",
         "type": "select",
         "required": true,
         "options": [
+          "Harian",
           "Mingguan",
-          "Dua mingguan",
-          "Bulanan"
+          "Bulanan",
+          "Kuartalan"
         ]
       },
       {
         "id": "scope",
-        "label": "Ruang lingkup atau konteks penggunaan",
+        "label": "Ruang lingkup penggunaan",
         "type": "select",
         "required": true,
         "options": [
-          "Pekerjaan",
-          "Belajar",
-          "Kegiatan pribadi",
-          "Kombinasi"
+          "Pekerjaan individu",
+          "Tim kerja",
+          "Proyek",
+          "Operasional rutin"
         ]
       },
       {
         "id": "notes",
-        "label": "Catatan tambahan",
+        "label": "Catatan, batasan, atau asumsi",
         "type": "textarea",
         "required": false,
-        "placeholder": "Tuliskan kebutuhan tambahan yang ingin dimasukkan."
+        "placeholder": "Tuliskan konteks dan aturan kerja yang perlu diperhatikan."
       }
     ],
     "sheets": [
       {
-        "name": "Rencana Mingguan",
-        "title": "Weekly Planner - {{entityName}}",
+        "name": "Matriks Prioritas",
+        "title": "Matriks Prioritas Eisenhower & Skor Urgensi - {{entityName}}",
         "columns": [
-          "Hari",
-          "Prioritas",
+          "Tugas atau keputusan",
+          "Dampak (1-5)",
+          "Urgensi (1-5)",
+          "Skor prioritas",
+          "Kuadran (1-4)",
+          "Tindakan berikutnya",
+          "Pemilik"
+        ],
+        "rows": [
+          [
+            "Kirim laporan yang jatuh tempo hari ini",
+            5,
+            5,
+            0,
+            0,
+            "Kerjakan sekarang",
+            "Rina"
+          ],
+          [
+            "Susun rencana kuartal berikutnya",
+            5,
+            2,
+            0,
+            0,
+            "Jadwalkan blok kerja",
+            "Dimas"
+          ],
+          [
+            "Konfirmasi jadwal administrasi rutin",
+            2,
+            5,
+            0,
+            0,
+            "Delegasikan",
+            "Ayu"
+          ],
+          [
+            "Rapikan arsip lama yang tidak digunakan",
+            1,
+            1,
+            0,
+            0,
+            "Hapus atau hentikan",
+            "Rina"
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "D6",
+            "formula": "B6*C6",
+            "cachedValue": 25
+          },
+          {
+            "cell": "E6",
+            "formula": "IF(AND(B6>=4,C6>=4),1,IF(AND(B6>=4,C6<4),2,IF(AND(B6<4,C6>=4),3,4)))",
+            "cachedValue": 1
+          },
+          {
+            "cell": "D7",
+            "formula": "B7*C7",
+            "cachedValue": 10
+          },
+          {
+            "cell": "E7",
+            "formula": "IF(AND(B7>=4,C7>=4),1,IF(AND(B7>=4,C7<4),2,IF(AND(B7<4,C7>=4),3,4)))",
+            "cachedValue": 2
+          },
+          {
+            "cell": "D8",
+            "formula": "B8*C8",
+            "cachedValue": 10
+          },
+          {
+            "cell": "E8",
+            "formula": "IF(AND(B8>=4,C8>=4),1,IF(AND(B8>=4,C8<4),2,IF(AND(B8<4,C8>=4),3,4)))",
+            "cachedValue": 3
+          },
+          {
+            "cell": "D9",
+            "formula": "B9*C9",
+            "cachedValue": 1
+          },
+          {
+            "cell": "E9",
+            "formula": "IF(AND(B9>=4,C9>=4),1,IF(AND(B9>=4,C9<4),2,IF(AND(B9<4,C9>=4),3,4)))",
+            "cachedValue": 4
+          }
+        ],
+        "columnWidths": [
+          34,
+          17,
+          17,
+          18,
+          19,
+          28,
+          18
+        ]
+      }
+    ]
+  },
+  {
+    "id": "time-blocking-audit-alokasi-jam",
+    "name": "Time Blocking Harian & Audit Alokasi Jam Kerja",
+    "category": "produktivitas",
+    "categoryLabel": "Produktivitas",
+    "symbol": "TBA",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Rancang blok waktu berdasarkan jam mulai dan selesai, bandingkan durasi rencana dengan realisasi, serta temukan aktivitas yang menyita waktu di luar alokasi.",
+    "tags": [
+      "time blocking",
+      "audit waktu",
+      "alokasi jam",
+      "jadwal harian"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama individu, tim, atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama individu atau tim"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik proses atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Pekerjaan individu",
+          "Tim kerja",
+          "Proyek",
+          "Operasional rutin"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan, batasan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan konteks dan aturan kerja yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Blok Waktu",
+        "title": "Time Blocking Harian & Audit Alokasi Jam Kerja - {{entityName}}",
+        "columns": [
           "Aktivitas",
-          "Target",
-          "Status",
-          "Catatan"
+          "Mulai (jam desimal)",
+          "Selesai (jam desimal)",
+          "Durasi rencana (jam)",
+          "Durasi aktual (jam)",
+          "Selisih (jam)",
+          "Kategori"
+        ],
+        "rows": [
+          [
+            "Analisis pekerjaan prioritas",
+            8,
+            10,
+            0,
+            2.25,
+            0,
+            "Deep work"
+          ],
+          [
+            "Rapat koordinasi",
+            10,
+            11,
+            0,
+            1.25,
+            0,
+            "Kolaborasi"
+          ],
+          [
+            "Administrasi dan email",
+            11,
+            12,
+            0,
+            1.5,
+            0,
+            "Administrasi"
+          ],
+          [
+            "Penyusunan laporan",
+            13,
+            15,
+            0,
+            1.75,
+            0,
+            "Deep work"
+          ],
+          [
+            "Istirahat dan jeda",
+            15,
+            15.5,
+            0,
+            0.5,
+            0,
+            "Pemulihan"
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "D6",
+            "formula": "C6-B6",
+            "cachedValue": 2
+          },
+          {
+            "cell": "F6",
+            "formula": "E6-D6",
+            "cachedValue": 0.25
+          },
+          {
+            "cell": "D7",
+            "formula": "C7-B7",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F7",
+            "formula": "E7-D7",
+            "cachedValue": 0.25
+          },
+          {
+            "cell": "D8",
+            "formula": "C8-B8",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F8",
+            "formula": "E8-D8",
+            "cachedValue": 0.5
+          },
+          {
+            "cell": "D9",
+            "formula": "C9-B9",
+            "cachedValue": 2
+          },
+          {
+            "cell": "F9",
+            "formula": "E9-D9",
+            "cachedValue": -0.25
+          },
+          {
+            "cell": "D10",
+            "formula": "C10-B10",
+            "cachedValue": 0.5
+          },
+          {
+            "cell": "F10",
+            "formula": "E10-D10",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          30,
+          19,
+          19,
+          20,
+          20,
+          17,
+          20
+        ]
+      }
+    ]
+  },
+  {
+    "id": "habit-tracker-konsistensi-30-hari",
+    "name": "Habit Tracker 30 Hari & Persentase Konsistensi",
+    "category": "produktivitas",
+    "categoryLabel": "Produktivitas",
+    "symbol": "H30",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Pantau target kebiasaan selama 30 hari, hitung hari yang terlewat dan persentase konsistensi, lalu tandai kebiasaan yang mencapai ambang keberhasilan.",
+    "tags": [
+      "habit tracker",
+      "kebiasaan",
+      "konsistensi",
+      "30 hari",
+      "rutinitas"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama individu, tim, atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama individu atau tim"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik proses atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Pekerjaan individu",
+          "Tim kerja",
+          "Proyek",
+          "Operasional rutin"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan, batasan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan konteks dan aturan kerja yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Pelacak Kebiasaan",
+        "title": "Habit Tracker 30 Hari & Persentase Konsistensi - {{entityName}}",
+        "columns": [
+          "Kebiasaan",
+          "Target hari",
+          "Hari terlaksana",
+          "Hari terlewat",
+          "Konsistensi",
+          "Ambang tercapai (1/0)",
+          "Pemicu atau konteks"
+        ],
+        "rows": [
+          [
+            "Membaca 20 menit",
+            30,
+            24,
+            0,
+            0,
+            0,
+            "Setelah sarapan"
+          ],
+          [
+            "Olahraga ringan",
+            20,
+            17,
+            0,
+            0,
+            0,
+            "Pukul 06.30"
+          ],
+          [
+            "Meninjau agenda esok hari",
+            30,
+            28,
+            0,
+            0,
+            0,
+            "Sebelum tidur"
+          ],
+          [
+            "Belajar keterampilan baru",
+            16,
+            9,
+            0,
+            0,
+            0,
+            "Senin-Rabu-Jumat"
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "D6",
+            "formula": "MAX(0,B6-C6)",
+            "cachedValue": 6
+          },
+          {
+            "cell": "E6",
+            "formula": "IF(B6=0,0,C6/B6)",
+            "cachedValue": 0.8
+          },
+          {
+            "cell": "F6",
+            "formula": "IF(E6>=0.8,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "D7",
+            "formula": "MAX(0,B7-C7)",
+            "cachedValue": 3
+          },
+          {
+            "cell": "E7",
+            "formula": "IF(B7=0,0,C7/B7)",
+            "cachedValue": 0.85
+          },
+          {
+            "cell": "F7",
+            "formula": "IF(E7>=0.8,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "D8",
+            "formula": "MAX(0,B8-C8)",
+            "cachedValue": 2
+          },
+          {
+            "cell": "E8",
+            "formula": "IF(B8=0,0,C8/B8)",
+            "cachedValue": 0.9333333333
+          },
+          {
+            "cell": "F8",
+            "formula": "IF(E8>=0.8,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "D9",
+            "formula": "MAX(0,B9-C9)",
+            "cachedValue": 7
+          },
+          {
+            "cell": "E9",
+            "formula": "IF(B9=0,0,C9/B9)",
+            "cachedValue": 0.5625
+          },
+          {
+            "cell": "F9",
+            "formula": "IF(E9>=0.8,1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          30,
+          15,
+          18,
+          16,
+          16,
+          22,
+          28
+        ]
+      }
+    ]
+  },
+  {
+    "id": "pelacak-eksekusi-tugas-harian",
+    "name": "Pelacak Eksekusi Tugas Harian & Deviasi Estimasi",
+    "category": "produktivitas",
+    "categoryLabel": "Produktivitas",
+    "symbol": "TEX",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Catat estimasi dan durasi aktual setiap tugas, identifikasi deviasi waktu, dan ukur penyelesaian kerja tanpa mencampur pekerjaan selesai dengan pekerjaan yang hanya dimulai.",
+    "tags": [
+      "task tracker",
+      "eksekusi",
+      "estimasi",
+      "realisasi",
+      "deviasi waktu"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama individu, tim, atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama individu atau tim"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik proses atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Pekerjaan individu",
+          "Tim kerja",
+          "Proyek",
+          "Operasional rutin"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan, batasan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan konteks dan aturan kerja yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Eksekusi Tugas",
+        "title": "Pelacak Eksekusi Tugas Harian & Deviasi Estimasi - {{entityName}}",
+        "columns": [
+          "Tugas",
+          "Penanggung jawab",
+          "Estimasi (jam)",
+          "Aktual (jam)",
+          "Selesai (1/0)",
+          "Deviasi (jam)",
+          "Poin penyelesaian"
+        ],
+        "rows": [
+          [
+            "Menyusun ringkasan laporan",
+            "Rina",
+            2,
+            1.75,
+            1,
+            0,
+            0
+          ],
+          [
+            "Memeriksa data pelanggan",
+            "Dimas",
+            1.5,
+            2,
+            1,
+            0,
+            0
+          ],
+          [
+            "Membuat materi presentasi",
+            "Ayu",
+            3,
+            2.5,
+            1,
+            0,
+            0
+          ],
+          [
+            "Menindaklanjuti permintaan vendor",
+            "Rina",
+            1,
+            0.5,
+            0,
+            0,
+            0
+          ],
+          [
+            "Memperbarui dokumentasi proses",
+            "Dimas",
+            2,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "D6-C6",
+            "cachedValue": -0.25
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(E6=1,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F7",
+            "formula": "D7-C7",
+            "cachedValue": 0.5
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(E7=1,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F8",
+            "formula": "D8-C8",
+            "cachedValue": -0.5
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(E8=1,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F9",
+            "formula": "D9-C9",
+            "cachedValue": -0.5
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(E9=1,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F10",
+            "formula": "D10-C10",
+            "cachedValue": -2
+          },
+          {
+            "cell": "G10",
+            "formula": "IF(E10=1,1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          34,
+          20,
+          17,
+          17,
+          16,
+          17,
+          19
+        ]
+      }
+    ]
+  },
+  {
+    "id": "agenda-rapat-action-items",
+    "name": "Agenda Rapat Efektif & Pelacak Action Items",
+    "category": "produktivitas",
+    "categoryLabel": "Produktivitas",
+    "symbol": "RAI",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Siapkan agenda berbatas waktu, tetapkan pemilik tindak lanjut, catat sisa tenggat, dan tandai action item yang sudah terlambat atau belum ditutup.",
+    "tags": [
+      "agenda rapat",
+      "action items",
+      "tindak lanjut",
+      "tenggat",
+      "meeting"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama individu, tim, atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama individu atau tim"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik proses atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Pekerjaan individu",
+          "Tim kerja",
+          "Proyek",
+          "Operasional rutin"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan, batasan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan konteks dan aturan kerja yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Tindak Lanjut Rapat",
+        "title": "Agenda Rapat Efektif & Pelacak Action Items - {{entityName}}",
+        "columns": [
+          "Rapat",
+          "Action item",
+          "Pemilik",
+          "Sisa hari ke tenggat",
+          "Selesai (1/0)",
+          "Terlambat (1/0)",
+          "Masih terbuka (1/0)"
+        ],
+        "rows": [
+          [
+            "Koordinasi produk",
+            "Kirim revisi spesifikasi",
+            "Rina",
+            -1,
+            0,
+            0,
+            0
+          ],
+          [
+            "Evaluasi mingguan",
+            "Verifikasi angka penjualan",
+            "Dimas",
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            "Perencanaan kampanye",
+            "Finalisasi kalender publikasi",
+            "Ayu",
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            "Review operasional",
+            "Perbarui SOP eskalasi",
+            "Rina",
+            -3,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "IF(AND(D6<0,E6=0),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(E6=0,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F7",
+            "formula": "IF(AND(D7<0,E7=0),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(E7=0,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F8",
+            "formula": "IF(AND(D8<0,E8=0),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(E8=0,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F9",
+            "formula": "IF(AND(D9<0,E9=0),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(E9=0,1,0)",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          24,
+          34,
+          19,
+          21,
+          16,
+          18,
+          21
+        ]
+      }
+    ]
+  },
+  {
+    "id": "log-sesi-pomodoro-fokus",
+    "name": "Log Sesi Pomodoro & Akumulasi Menit Fokus",
+    "category": "produktivitas",
+    "categoryLabel": "Produktivitas",
+    "symbol": "POM",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Rekam jumlah sesi fokus yang direncanakan dan diselesaikan, hitung menit fokus aktual, serta ukur kekurangan sesi setiap hari.",
+    "tags": [
+      "pomodoro",
+      "fokus",
+      "sesi kerja",
+      "menit fokus",
+      "konsentrasi"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama individu, tim, atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama individu atau tim"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik proses atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Pekerjaan individu",
+          "Tim kerja",
+          "Proyek",
+          "Operasional rutin"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan, batasan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan konteks dan aturan kerja yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Log Pomodoro",
+        "title": "Log Sesi Pomodoro & Akumulasi Menit Fokus - {{entityName}}",
+        "columns": [
+          "Tanggal",
+          "Sesi direncanakan",
+          "Sesi selesai",
+          "Menit per sesi",
+          "Total menit fokus",
+          "Sesi tersisa",
+          "Rasio penyelesaian"
         ],
         "rows": [
           [
             "Senin",
-            "Tinggi",
-            "Susun rencana mingguan",
-            "Selesai sebelum siang",
-            "Belum dimulai",
-            ""
+            8,
+            7,
+            25,
+            0,
+            0,
+            0
           ],
           [
             "Selasa",
-            "Menengah",
-            "Kerjakan tugas utama",
-            "Satu tugas utama",
-            "Belum dimulai",
-            ""
+            6,
+            6,
+            25,
+            0,
+            0,
+            0
           ],
           [
             "Rabu",
-            "Menengah",
-            "Evaluasi progres",
-            "Periksa target",
-            "Belum dimulai",
-            ""
+            8,
+            5,
+            25,
+            0,
+            0,
+            0
           ],
           [
             "Kamis",
-            "Rendah",
-            "Rapikan pekerjaan",
-            "Perbarui catatan",
-            "Belum dimulai",
-            ""
+            7,
+            7,
+            25,
+            0,
+            0,
+            0
           ],
           [
             "Jumat",
-            "Tinggi",
-            "Tinjau hasil mingguan",
-            "Catatan evaluasi",
-            "Belum dimulai",
-            ""
+            6,
+            4,
+            25,
+            0,
+            0,
+            0
           ]
         ],
-        "formulaCells": [],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "C6*D6",
+            "cachedValue": 175
+          },
+          {
+            "cell": "F6",
+            "formula": "MAX(0,B6-C6)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(B6=0,0,C6/B6)",
+            "cachedValue": 0.875
+          },
+          {
+            "cell": "E7",
+            "formula": "C7*D7",
+            "cachedValue": 150
+          },
+          {
+            "cell": "F7",
+            "formula": "MAX(0,B7-C7)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(B7=0,0,C7/B7)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "E8",
+            "formula": "C8*D8",
+            "cachedValue": 125
+          },
+          {
+            "cell": "F8",
+            "formula": "MAX(0,B8-C8)",
+            "cachedValue": 3
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(B8=0,0,C8/B8)",
+            "cachedValue": 0.625
+          },
+          {
+            "cell": "E9",
+            "formula": "C9*D9",
+            "cachedValue": 175
+          },
+          {
+            "cell": "F9",
+            "formula": "MAX(0,B9-C9)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(B9=0,0,C9/B9)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "E10",
+            "formula": "C10*D10",
+            "cachedValue": 100
+          },
+          {
+            "cell": "F10",
+            "formula": "MAX(0,B10-C10)",
+            "cachedValue": 2
+          },
+          {
+            "cell": "G10",
+            "formula": "IF(B10=0,0,C10/B10)",
+            "cachedValue": 0.6666666667
+          }
+        ],
         "columnWidths": [
+          17,
+          19,
           16,
           16,
-          30,
-          28,
           20,
-          30
+          16,
+          20
         ]
       }
+    ]
+  },
+  {
+    "id": "pelacak-energi-beban-kerja",
+    "name": "Pelacak Energi Harian & Beban Kerja",
+    "category": "produktivitas",
+    "categoryLabel": "Produktivitas",
+    "symbol": "ENR",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Bandingkan energi sebelum dan sesudah bekerja dengan jam kerja terencana, lalu tandai hari yang berisiko kelebihan beban.",
+    "tags": [
+      "energi",
+      "beban kerja",
+      "kapasitas pribadi",
+      "pemulihan"
     ],
-    "quality": "standar"
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama individu, tim, atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama individu atau tim"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik proses atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Pekerjaan individu",
+          "Tim kerja",
+          "Proyek",
+          "Operasional rutin"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan, batasan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan konteks dan aturan kerja yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Energi dan Beban",
+        "title": "Pelacak Energi Harian & Beban Kerja - {{entityName}}",
+        "columns": [
+          "Tanggal",
+          "Energi awal (1-5)",
+          "Jam kerja rencana",
+          "Jumlah jeda",
+          "Energi akhir (1-5)",
+          "Perubahan energi",
+          "Overload (1/0)"
+        ],
+        "rows": [
+          [
+            "Senin",
+            4,
+            8,
+            3,
+            3,
+            0,
+            0
+          ],
+          [
+            "Selasa",
+            4,
+            7,
+            4,
+            4,
+            0,
+            0
+          ],
+          [
+            "Rabu",
+            3,
+            9,
+            2,
+            1,
+            0,
+            0
+          ],
+          [
+            "Kamis",
+            5,
+            8,
+            3,
+            3,
+            0,
+            0
+          ],
+          [
+            "Jumat",
+            3,
+            6,
+            4,
+            3,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "E6-B6",
+            "cachedValue": -1
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(C6>8,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F7",
+            "formula": "E7-B7",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(C7>8,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F8",
+            "formula": "E8-B8",
+            "cachedValue": -2
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(C8>8,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F9",
+            "formula": "E9-B9",
+            "cachedValue": -2
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(C9>8,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F10",
+            "formula": "E10-B10",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G10",
+            "formula": "IF(C10>8,1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          17,
+          19,
+          20,
+          15,
+          18,
+          18,
+          17
+        ]
+      }
+    ]
+  },
+  {
+    "id": "kerangka-weekly-review",
+    "name": "Kerangka Weekly Review & Evaluasi Pencapaian Target",
+    "category": "produktivitas",
+    "categoryLabel": "Produktivitas",
+    "symbol": "WRV",
+    "format": "md",
+    "quality": "standar",
+    "description": "Dokumen evaluasi mingguan untuk menutup pekerjaan terbuka, mengukur pencapaian, mengidentifikasi hambatan, dan menetapkan tiga prioritas minggu berikutnya.",
+    "tags": [
+      "weekly review",
+      "evaluasi mingguan",
+      "target",
+      "refleksi",
+      "perencanaan"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama individu, tim, atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama individu atau tim"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik dokumen atau fasilitator",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Individu",
+          "Tim",
+          "Proyek",
+          "Unit kerja"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan, batasan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan konteks dan aturan kerja yang perlu diperhatikan."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Identitas dan ruang lingkup",
+        "body": "Review untuk {{entityName}} oleh {{ownerName}}. Periode yang ditinjau: {{period}}. Cakupan evaluasi: {{scope}}."
+      },
+      {
+        "heading": "Pencapaian yang dapat diverifikasi",
+        "body": "Catat hasil yang selesai dan bukti hasilnya. Pisahkan output yang benar-benar dikirim dari aktivitas yang baru dimulai.",
+        "bullets": [
+          "Target yang tercapai dan indikatornya: [isi hasil serta bukti].",
+          "Pekerjaan yang selesai di luar rencana: [isi pekerjaan dan alasan].",
+          "Target yang belum tercapai: [isi selisih dan penyebab terukur]."
+        ]
+      },
+      {
+        "heading": "Hambatan dan keputusan",
+        "body": "Untuk setiap hambatan, tulis dampaknya terhadap tenggat, mutu, atau kapasitas. Tentukan keputusan yang diperlukan dan siapa pemilik keputusannya.",
+        "bullets": [
+          "Hambatan utama: [fakta, bukan asumsi].",
+          "Keputusan yang diperlukan: [keputusan, pemilik, tenggat].",
+          "Hal yang perlu dihentikan atau disederhanakan: [rincian]."
+        ]
+      },
+      {
+        "heading": "Komitmen minggu berikutnya",
+        "bullets": [
+          "Prioritas 1, hasil akhir, dan tenggat: [isi].",
+          "Prioritas 2, hasil akhir, dan tenggat: [isi].",
+          "Prioritas 3, hasil akhir, dan tenggat: [isi].",
+          "Kapasitas yang disediakan dan pekerjaan yang ditunda: [isi]."
+        ]
+      },
+      {
+        "heading": "Catatan penutup",
+        "body": "Catatan tambahan dari pemilik review: {{notes}}. Review dianggap selesai setelah prioritas, pemilik, dan tenggat dicatat."
+      }
+    ]
+  },
+  {
+    "id": "inbox-capture-next-action",
+    "name": "Inbox Capture & Penentuan Next Action",
+    "category": "produktivitas",
+    "categoryLabel": "Produktivitas",
+    "symbol": "INA",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Kumpulkan ide, permintaan, dan pekerjaan yang belum diproses dalam satu daftar, beri skor dampak-urgensi, lalu tandai item yang perlu segera ditindaklanjuti.",
+    "tags": [
+      "inbox",
+      "next action",
+      "task capture",
+      "triase",
+      "prioritas"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama individu, tim, atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama individu atau tim"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik proses atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Pekerjaan individu",
+          "Tim kerja",
+          "Proyek",
+          "Operasional rutin"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan, batasan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan konteks dan aturan kerja yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Inbox dan Next Action",
+        "title": "Inbox Capture & Penentuan Next Action - {{entityName}}",
+        "columns": [
+          "Item masuk",
+          "Dampak (1-5)",
+          "Urgensi (1-5)",
+          "Skor prioritas",
+          "Estimasi menit",
+          "Pemilik",
+          "Prioritas tinggi (1/0)"
+        ],
+        "rows": [
+          [
+            "Tinjau kontrak sebelum Jumat",
+            5,
+            5,
+            0,
+            45,
+            "Rina",
+            0
+          ],
+          [
+            "Balas permintaan data divisi",
+            4,
+            3,
+            0,
+            20,
+            "Dimas",
+            0
+          ],
+          [
+            "Ide perbaikan format laporan",
+            3,
+            2,
+            0,
+            60,
+            "Ayu",
+            0
+          ],
+          [
+            "Arsipkan notifikasi lama",
+            1,
+            1,
+            0,
+            15,
+            "Rina",
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "D6",
+            "formula": "B6*C6",
+            "cachedValue": 25
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(D6>=16,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "D7",
+            "formula": "B7*C7",
+            "cachedValue": 12
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(D7>=16,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "D8",
+            "formula": "B8*C8",
+            "cachedValue": 6
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(D8>=16,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "D9",
+            "formula": "B9*C9",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(D9>=16,1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          34,
+          17,
+          17,
+          18,
+          17,
+          18,
+          22
+        ]
+      }
+    ]
+  },
+  {
+    "id": "log-delegasi-tugas-tim",
+    "name": "Log Delegasi Tugas Tim & Pengendalian Tenggat",
+    "category": "produktivitas",
+    "categoryLabel": "Produktivitas",
+    "symbol": "DLG",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Pantau penerima delegasi, penerimaan tanggung jawab, estimasi, tenggat relatif, status penyelesaian, dan tugas yang sudah melewati tenggat.",
+    "tags": [
+      "delegasi",
+      "manajemen tim",
+      "pemilik tugas",
+      "deadline",
+      "follow up"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama individu, tim, atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama individu atau tim"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik proses atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Pekerjaan individu",
+          "Tim kerja",
+          "Proyek",
+          "Operasional rutin"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan, batasan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan konteks dan aturan kerja yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Register Delegasi",
+        "title": "Log Delegasi Tugas Tim & Pengendalian Tenggat - {{entityName}}",
+        "columns": [
+          "Tugas yang didelegasikan",
+          "Penerima",
+          "Sisa hari tenggat",
+          "Estimasi (jam)",
+          "Selesai (1/0)",
+          "Diterima (1/0)",
+          "Terlambat (1/0)",
+          "Poin selesai"
+        ],
+        "rows": [
+          [
+            "Validasi laporan stok",
+            "Dimas",
+            -2,
+            2,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            "Perbarui daftar kontak vendor",
+            "Ayu",
+            3,
+            1,
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            "Susun dokumentasi onboarding",
+            "Rina",
+            0,
+            4,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Periksa arsip kontrak",
+            "Dimas",
+            -1,
+            1.5,
+            1,
+            1,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "IF(AND(C6<0,E6=0),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(E6=1,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(AND(C7<0,E7=0),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(E7=1,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(AND(C8<0,E8=0),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(E8=1,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(AND(C9<0,E9=0),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(E9=1,1,0)",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          34,
+          18,
+          19,
+          17,
+          16,
+          16,
+          17,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "id": "perencana-tujuan-kuartalan-90-hari",
+    "name": "Perencana Tujuan Kuartalan 90 Hari & Key Results",
+    "category": "produktivitas",
+    "categoryLabel": "Produktivitas",
+    "symbol": "90D",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Turunkan tujuan 90 hari menjadi key results yang terukur, pantau progres terhadap baseline-target, dan hitung sisa gap menuju hasil akhir.",
+    "tags": [
+      "90 day plan",
+      "quarterly goals",
+      "key results",
+      "target",
+      "progress"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama individu, tim, atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama individu atau tim"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik proses atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Pekerjaan individu",
+          "Tim kerja",
+          "Proyek",
+          "Operasional rutin"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan, batasan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan konteks dan aturan kerja yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Target 90 Hari",
+        "title": "Perencana Tujuan Kuartalan 90 Hari & Key Results - {{entityName}}",
+        "columns": [
+          "Key result",
+          "Baseline",
+          "Target 90 hari",
+          "Posisi saat ini",
+          "Progres",
+          "Gap tersisa",
+          "Key result confidence (1-5)"
+        ],
+        "rows": [
+          [
+            "Selesaikan modul pelatihan",
+            0,
+            12,
+            4,
+            0,
+            0,
+            4
+          ],
+          [
+            "Kurangi backlog tiket",
+            80,
+            20,
+            48,
+            0,
+            0,
+            3
+          ],
+          [
+            "Terbitkan artikel berkualitas",
+            0,
+            8,
+            3,
+            0,
+            0,
+            4
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "MIN(1,MAX(0,IF(C6=B6,0,(D6-B6)/(C6-B6))))",
+            "cachedValue": 0.3333333333
+          },
+          {
+            "cell": "F6",
+            "formula": "MAX(0,C6-D6)",
+            "cachedValue": 8
+          },
+          {
+            "cell": "E7",
+            "formula": "MIN(1,MAX(0,IF(C7=B7,0,(D7-B7)/(C7-B7))))",
+            "cachedValue": 0.5333333333
+          },
+          {
+            "cell": "F7",
+            "formula": "MAX(0,D7-C7)",
+            "cachedValue": 28
+          },
+          {
+            "cell": "E8",
+            "formula": "MIN(1,MAX(0,IF(C8=B8,0,(D8-B8)/(C8-B8))))",
+            "cachedValue": 0.375
+          },
+          {
+            "cell": "F8",
+            "formula": "MAX(0,C8-D8)",
+            "cachedValue": 5
+          }
+        ],
+        "columnWidths": [
+          32,
+          15,
+          18,
+          18,
+          15,
+          16,
+          24
+        ]
+      }
+    ]
+  },
+  {
+    "id": "matriks-keputusan-berbobot",
+    "name": "Matriks Pengambilan Keputusan Berbobot",
+    "category": "produktivitas",
+    "categoryLabel": "Produktivitas",
+    "symbol": "WDM",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Bandingkan beberapa alternatif menggunakan skor kriteria yang konsisten, bobot transparan, dan skor akhir agar keputusan tidak hanya bergantung pada intuisi.",
+    "tags": [
+      "weighted decision matrix",
+      "pengambilan keputusan",
+      "bobot kriteria",
+      "analisis alternatif"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama individu, tim, atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama individu atau tim"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik proses atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Pekerjaan individu",
+          "Tim kerja",
+          "Proyek",
+          "Operasional rutin"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan, batasan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan konteks dan aturan kerja yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Skor Alternatif",
+        "title": "Matriks Pengambilan Keputusan Berbobot - {{entityName}}",
+        "columns": [
+          "Alternatif",
+          "Kesesuaian biaya (1-5)",
+          "Dampak (1-5)",
+          "Kecepatan (1-5)",
+          "Kemudahan dibalik (1-5)",
+          "Skor berbobot",
+          "Lulus ambang (1/0)"
+        ],
+        "rows": [
+          [
+            "Opsi A: otomatisasi laporan",
+            4,
+            5,
+            3,
+            4,
+            0,
+            0
+          ],
+          [
+            "Opsi B: tambah personel",
+            2,
+            4,
+            4,
+            3,
+            0,
+            0
+          ],
+          [
+            "Opsi C: sederhanakan proses",
+            5,
+            4,
+            5,
+            5,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "B6*0.25+C6*0.35+D6*0.20+E6*0.20",
+            "cachedValue": 4.15
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(F6>=4,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F7",
+            "formula": "B7*0.25+C7*0.35+D7*0.20+E7*0.20",
+            "cachedValue": 3.25
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(F7>=4,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F8",
+            "formula": "B8*0.25+C8*0.35+D8*0.20+E8*0.20",
+            "cachedValue": 4.65
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(F8>=4,1,0)",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          32,
+          20,
+          16,
+          17,
+          23,
+          18,
+          19
+        ]
+      }
+    ]
+  },
+  {
+    "id": "pelacak-deep-work-gangguan-fokus",
+    "name": "Pelacak Deep Work & Gangguan Fokus",
+    "category": "produktivitas",
+    "categoryLabel": "Produktivitas",
+    "symbol": "DWF",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Ukur durasi fokus aktual terhadap sesi yang direncanakan, catat interupsi, dan ubah hasilnya menjadi rasio fokus serta jam deep work.",
+    "tags": [
+      "deep work",
+      "fokus",
+      "interupsi",
+      "jam produktif",
+      "konsentrasi"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama individu, tim, atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama individu atau tim"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik proses atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Pekerjaan individu",
+          "Tim kerja",
+          "Proyek",
+          "Operasional rutin"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan, batasan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan konteks dan aturan kerja yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Deep Work Log",
+        "title": "Pelacak Deep Work & Gangguan Fokus - {{entityName}}",
+        "columns": [
+          "Hari",
+          "Sesi direncanakan",
+          "Menit per sesi",
+          "Menit fokus aktual",
+          "Jumlah interupsi",
+          "Rasio fokus",
+          "Jam fokus aktual"
+        ],
+        "rows": [
+          [
+            "Senin",
+            3,
+            60,
+            150,
+            4,
+            0,
+            0
+          ],
+          [
+            "Selasa",
+            4,
+            50,
+            190,
+            2,
+            0,
+            0
+          ],
+          [
+            "Rabu",
+            3,
+            60,
+            120,
+            7,
+            0,
+            0
+          ],
+          [
+            "Kamis",
+            4,
+            45,
+            180,
+            3,
+            0,
+            0
+          ],
+          [
+            "Jumat",
+            2,
+            60,
+            105,
+            2,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "IF(B6*C6=0,0,D6/(B6*C6))",
+            "cachedValue": 0.8333333333
+          },
+          {
+            "cell": "G6",
+            "formula": "D6/60",
+            "cachedValue": 2.5
+          },
+          {
+            "cell": "F7",
+            "formula": "IF(B7*C7=0,0,D7/(B7*C7))",
+            "cachedValue": 0.95
+          },
+          {
+            "cell": "G7",
+            "formula": "D7/60",
+            "cachedValue": 3.1666666667
+          },
+          {
+            "cell": "F8",
+            "formula": "IF(B8*C8=0,0,D8/(B8*C8))",
+            "cachedValue": 0.6666666667
+          },
+          {
+            "cell": "G8",
+            "formula": "D8/60",
+            "cachedValue": 2
+          },
+          {
+            "cell": "F9",
+            "formula": "IF(B9*C9=0,0,D9/(B9*C9))",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G9",
+            "formula": "D9/60",
+            "cachedValue": 3
+          },
+          {
+            "cell": "F10",
+            "formula": "IF(B10*C10=0,0,D10/(B10*C10))",
+            "cachedValue": 0.875
+          },
+          {
+            "cell": "G10",
+            "formula": "D10/60",
+            "cachedValue": 1.75
+          }
+        ],
+        "columnWidths": [
+          17,
+          19,
+          18,
+          19,
+          17,
+          16,
+          20
+        ]
+      }
+    ]
+  },
+  {
+    "id": "perencana-kapasitas-beban-tim",
+    "name": "Perencana Kapasitas & Beban Kerja Tim",
+    "category": "produktivitas",
+    "categoryLabel": "Produktivitas",
+    "symbol": "WCP",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Bandingkan jam tersedia, estimasi tugas, dan waktu rapat per anggota untuk menemukan kapasitas tersisa serta anggota yang menerima beban berlebih.",
+    "tags": [
+      "workload",
+      "capacity planning",
+      "beban kerja tim",
+      "kapasitas",
+      "resource planning"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama individu, tim, atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama individu atau tim"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik proses atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Pekerjaan individu",
+          "Tim kerja",
+          "Proyek",
+          "Operasional rutin"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan, batasan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan konteks dan aturan kerja yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Kapasitas Tim",
+        "title": "Perencana Kapasitas & Beban Kerja Tim - {{entityName}}",
+        "columns": [
+          "Anggota tim",
+          "Jam tersedia",
+          "Estimasi tugas (jam)",
+          "Rapat (jam)",
+          "Kapasitas tersisa",
+          "Utilisasi",
+          "Melebihi kapasitas (1/0)"
+        ],
+        "rows": [
+          [
+            "Rina",
+            35,
+            28,
+            4,
+            0,
+            0,
+            0
+          ],
+          [
+            "Dimas",
+            35,
+            32,
+            5,
+            0,
+            0,
+            0
+          ],
+          [
+            "Ayu",
+            32,
+            20,
+            3,
+            0,
+            0,
+            0
+          ],
+          [
+            "Bima",
+            30,
+            31,
+            2,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "B6-C6-D6",
+            "cachedValue": 3
+          },
+          {
+            "cell": "F6",
+            "formula": "IF(B6=0,0,(C6+D6)/B6)",
+            "cachedValue": 0.9142857143
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(F6>1,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "E7",
+            "formula": "B7-C7-D7",
+            "cachedValue": -2
+          },
+          {
+            "cell": "F7",
+            "formula": "IF(B7=0,0,(C7+D7)/B7)",
+            "cachedValue": 1.0571428571
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(F7>1,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "E8",
+            "formula": "B8-C8-D8",
+            "cachedValue": 9
+          },
+          {
+            "cell": "F8",
+            "formula": "IF(B8=0,0,(C8+D8)/B8)",
+            "cachedValue": 0.71875
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(F8>1,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "E9",
+            "formula": "B9-C9-D9",
+            "cachedValue": -3
+          },
+          {
+            "cell": "F9",
+            "formula": "IF(B9=0,0,(C9+D9)/B9)",
+            "cachedValue": 1.1
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(F9>1,1,0)",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          22,
+          17,
+          22,
+          15,
+          18,
+          16,
+          23
+        ]
+      }
+    ]
+  },
+  {
+    "id": "kanban-wip-flow-tracker",
+    "name": "Kanban WIP Limit & Flow Tracker",
+    "category": "produktivitas",
+    "categoryLabel": "Produktivitas",
+    "symbol": "WIP",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Pantau jumlah pekerjaan aktif dibandingkan batas WIP setiap tahap, tandai pelanggaran batas, dan hitung utilisasi kapasitas alur kerja.",
+    "tags": [
+      "kanban",
+      "wip limit",
+      "workflow",
+      "throughput",
+      "flow management"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama individu, tim, atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama individu atau tim"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik proses atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Pekerjaan individu",
+          "Tim kerja",
+          "Proyek",
+          "Operasional rutin"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan, batasan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan konteks dan aturan kerja yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Alur Kanban",
+        "title": "Kanban WIP Limit & Flow Tracker - {{entityName}}",
+        "columns": [
+          "Tahap kerja",
+          "Batas WIP",
+          "Item aktif",
+          "Throughput 7 hari",
+          "Melebihi batas (1/0)",
+          "Utilisasi WIP"
+        ],
+        "rows": [
+          [
+            "Backlog siap",
+            12,
+            10,
+            8,
+            0,
+            0
+          ],
+          [
+            "Sedang dikerjakan",
+            5,
+            7,
+            6,
+            0,
+            0
+          ],
+          [
+            "Review",
+            4,
+            3,
+            5,
+            0,
+            0
+          ],
+          [
+            "Menunggu persetujuan",
+            3,
+            4,
+            2,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "IF(C6>B6,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F6",
+            "formula": "IF(B6=0,0,C6/B6)",
+            "cachedValue": 0.8333333333
+          },
+          {
+            "cell": "E7",
+            "formula": "IF(C7>B7,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F7",
+            "formula": "IF(B7=0,0,C7/B7)",
+            "cachedValue": 1.4
+          },
+          {
+            "cell": "E8",
+            "formula": "IF(C8>B8,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F8",
+            "formula": "IF(B8=0,0,C8/B8)",
+            "cachedValue": 0.75
+          },
+          {
+            "cell": "E9",
+            "formula": "IF(C9>B9,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F9",
+            "formula": "IF(B9=0,0,C9/B9)",
+            "cachedValue": 1.3333333333
+          }
+        ],
+        "columnWidths": [
+          26,
+          16,
+          17,
+          20,
+          21,
+          17
+        ]
+      }
+    ]
+  },
+  {
+    "id": "milestone-dependency-readiness",
+    "name": "Pelacak Milestone, Dependensi & Kesiapan Jadwal",
+    "category": "produktivitas",
+    "categoryLabel": "Produktivitas",
+    "symbol": "MDR",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Lacak tanggal rencana dan aktual setiap milestone, prasyarat yang harus selesai, keterlambatan hari, serta kesiapan memulai pekerjaan berikutnya.",
+    "tags": [
+      "milestone",
+      "dependency",
+      "jadwal proyek",
+      "keterlambatan",
+      "readiness"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama individu, tim, atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama individu atau tim"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik proses atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Pekerjaan individu",
+          "Tim kerja",
+          "Proyek",
+          "Operasional rutin"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan, batasan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan konteks dan aturan kerja yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Milestone Proyek",
+        "title": "Pelacak Milestone, Dependensi & Kesiapan Jadwal - {{entityName}}",
+        "columns": [
+          "Milestone",
+          "Hari rencana",
+          "Hari aktual",
+          "Prasyarat selesai (1/0)",
+          "Kritisitas (1-5)",
+          "Terlambat (hari)",
+          "Siap tepat waktu (1/0)"
+        ],
+        "rows": [
+          [
+            "Persetujuan kebutuhan",
+            5,
+            5,
+            1,
+            5,
+            0,
+            0
+          ],
+          [
+            "Desain alur kerja",
+            12,
+            14,
+            1,
+            4,
+            0,
+            0
+          ],
+          [
+            "Uji penerimaan",
+            20,
+            0,
+            0,
+            5,
+            0,
+            0
+          ],
+          [
+            "Peluncuran internal",
+            28,
+            0,
+            0,
+            4,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "MAX(0,C6-B6)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(AND(D6=1,F6=0),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F7",
+            "formula": "MAX(0,C7-B7)",
+            "cachedValue": 2
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(AND(D7=1,F7=0),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F8",
+            "formula": "MAX(0,C8-B8)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(AND(D8=1,F8=0),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F9",
+            "formula": "MAX(0,C9-B9)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(AND(D9=1,F9=0),1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          29,
+          16,
+          16,
+          23,
+          17,
+          17,
+          22
+        ]
+      }
+    ]
+  },
+  {
+    "id": "panduan-ritual-deep-work",
+    "name": "Panduan Ritual Deep Work & Perlindungan Waktu Fokus",
+    "category": "produktivitas",
+    "categoryLabel": "Produktivitas",
+    "symbol": "DWR",
+    "format": "md",
+    "quality": "baik",
+    "description": "Prosedur kerja terstruktur untuk menyiapkan sesi fokus tanpa gangguan, menetapkan keluaran sesi, dan mencatat interupsi yang harus dicegah.",
+    "tags": [
+      "deep work",
+      "ritual fokus",
+      "interupsi",
+      "protokol kerja",
+      "konsentrasi"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama individu, tim, atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama individu atau tim"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik dokumen atau fasilitator",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Individu",
+          "Tim",
+          "Proyek",
+          "Unit kerja"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan, batasan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan konteks dan aturan kerja yang perlu diperhatikan."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Mandat sesi",
+        "body": "Ritual fokus untuk {{entityName}}, dipandu oleh {{ownerName}}, pada periode {{period}}. Ruang lingkup pekerjaan: {{scope}}. Definisikan satu keluaran yang dapat diperiksa sebelum sesi dimulai."
+      },
+      {
+        "heading": "Persiapan sebelum fokus",
+        "bullets": [
+          "Pilih satu tugas dengan hasil akhir yang spesifik dan dapat diuji.",
+          "Tentukan durasi sesi, misalnya 50, 75, atau 90 menit, lalu sisipkan jeda pemulihan.",
+          "Tutup tab, aplikasi, dan notifikasi yang tidak diperlukan.",
+          "Siapkan bahan kerja, data, dan akses yang dibutuhkan sebelum timer dimulai."
+        ]
+      },
+      {
+        "heading": "Aturan selama sesi",
+        "bullets": [
+          "Jangan berpindah tugas sebelum keluaran sesi tercapai atau sesi berakhir.",
+          "Catat interupsi yang tidak dapat dihindari pada daftar parkir, lalu kembali ke pekerjaan.",
+          "Untuk permintaan mendesak, gunakan jalur eskalasi yang telah disepakati, bukan pesan acak."
+        ]
+      },
+      {
+        "heading": "Evaluasi setelah sesi",
+        "body": "Catat keluaran yang selesai, menit fokus aktual, jumlah interupsi, dan alasan jika sesi terputus. Sesi dinyatakan berhasil berdasarkan hasil kerja, bukan sekadar timer yang menyala.",
+        "bullets": [
+          "Keluaran yang dihasilkan: [tautan atau bukti].",
+          "Interupsi dan akar penyebab: [catatan].",
+          "Perubahan lingkungan kerja untuk sesi berikutnya: [tindakan]."
+        ]
+      },
+      {
+        "heading": "Catatan implementasi",
+        "body": "Kebijakan atau batasan tambahan untuk {{entityName}}: {{notes}}."
+      }
+    ]
+  },
+  {
+    "id": "weekly-priority-reset-capacity",
+    "name": "Weekly Priority Reset & Pemeriksaan Kapasitas",
+    "category": "produktivitas",
+    "categoryLabel": "Produktivitas",
+    "symbol": "WPR",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Susun ulang prioritas mingguan berdasarkan dampak, estimasi waktu, dan kapasitas yang benar-benar tersedia agar komitmen tidak melampaui waktu kerja.",
+    "tags": [
+      "weekly planning",
+      "priority reset",
+      "kapasitas mingguan",
+      "prioritas"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama individu, tim, atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama individu atau tim"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik proses atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Pekerjaan individu",
+          "Tim kerja",
+          "Proyek",
+          "Operasional rutin"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan, batasan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan konteks dan aturan kerja yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Reset Prioritas",
+        "title": "Weekly Priority Reset & Pemeriksaan Kapasitas - {{entityName}}",
+        "columns": [
+          "Tugas",
+          "Dampak (1-5)",
+          "Estimasi jam",
+          "Sisa hari tenggat",
+          "Kapasitas tersedia (jam)",
+          "Skor dampak/jam",
+          "Muat kapasitas (1/0)"
+        ],
+        "rows": [
+          [
+            "Finalisasi proposal",
+            5,
+            4,
+            2,
+            6,
+            0,
+            0
+          ],
+          [
+            "Review dokumentasi",
+            4,
+            3,
+            5,
+            4,
+            0,
+            0
+          ],
+          [
+            "Perbaikan laporan rutin",
+            3,
+            2,
+            3,
+            2,
+            0,
+            0
+          ],
+          [
+            "Pembaruan arsip historis",
+            1,
+            4,
+            10,
+            2,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "IF(C6=0,0,B6/C6)",
+            "cachedValue": 1.25
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(C6<=E6,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F7",
+            "formula": "IF(C7=0,0,B7/C7)",
+            "cachedValue": 1.3333333333
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(C7<=E7,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F8",
+            "formula": "IF(C8=0,0,B8/C8)",
+            "cachedValue": 1.5
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(C8<=E8,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F9",
+            "formula": "IF(C9=0,0,B9/C9)",
+            "cachedValue": 0.25
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(C9<=E9,1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          32,
+          16,
+          16,
+          17,
+          22,
+          18,
+          19
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dashboard-analitik-fokus-mingguan",
+    "name": "Dashboard Analitik Fokus Mingguan & Tren Interupsi",
+    "category": "produktivitas",
+    "categoryLabel": "Produktivitas",
+    "symbol": "FAN",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Konsol mingguan untuk membandingkan target dan realisasi deep work, menghitung kepatuhan sesi, intensitas interupsi, serta gap jam fokus.",
+    "tags": [
+      "focus analytics",
+      "dashboard produktivitas",
+      "deep work",
+      "interupsi",
+      "KPI mingguan"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama individu, tim, atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama individu atau tim"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik proses atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Pekerjaan individu",
+          "Tim kerja",
+          "Proyek",
+          "Operasional rutin"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan, batasan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan konteks dan aturan kerja yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Analitik Fokus",
+        "title": "Dashboard Analitik Fokus Mingguan & Tren Interupsi - {{entityName}}",
+        "columns": [
+          "Minggu",
+          "Target fokus (jam)",
+          "Aktual fokus (jam)",
+          "Interupsi",
+          "Sesi direncanakan",
+          "Kepatuhan target",
+          "Interupsi per jam",
+          "Gap fokus (jam)"
+        ],
+        "rows": [
+          [
+            "Minggu 1",
+            15,
+            13.5,
+            18,
+            20,
+            0,
+            0,
+            0
+          ],
+          [
+            "Minggu 2",
+            16,
+            15,
+            12,
+            22,
+            0,
+            0,
+            0
+          ],
+          [
+            "Minggu 3",
+            18,
+            12,
+            25,
+            24,
+            0,
+            0,
+            0
+          ],
+          [
+            "Minggu 4",
+            16,
+            17,
+            10,
+            22,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "IF(B6=0,0,C6/B6)",
+            "cachedValue": 0.9
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(C6=0,0,D6/C6)",
+            "cachedValue": 1.3333333333
+          },
+          {
+            "cell": "H6",
+            "formula": "C6-B6",
+            "cachedValue": -1.5
+          },
+          {
+            "cell": "F7",
+            "formula": "IF(B7=0,0,C7/B7)",
+            "cachedValue": 0.9375
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(C7=0,0,D7/C7)",
+            "cachedValue": 0.8
+          },
+          {
+            "cell": "H7",
+            "formula": "C7-B7",
+            "cachedValue": -1
+          },
+          {
+            "cell": "F8",
+            "formula": "IF(B8=0,0,C8/B8)",
+            "cachedValue": 0.6666666667
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(C8=0,0,D8/C8)",
+            "cachedValue": 2.0833333333
+          },
+          {
+            "cell": "H8",
+            "formula": "C8-B8",
+            "cachedValue": -6
+          },
+          {
+            "cell": "F9",
+            "formula": "IF(B9=0,0,C9/B9)",
+            "cachedValue": 1.0625
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(C9=0,0,D9/C9)",
+            "cachedValue": 0.5882352941
+          },
+          {
+            "cell": "H9",
+            "formula": "C9-B9",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          16,
+          19,
+          19,
+          15,
+          20,
+          18,
+          19,
+          18
+        ]
+      }
+    ]
+  },
+  {
+    "id": "okr-kuartalan-confidence-risk",
+    "name": "Model OKR Kuartalan, Confidence & Risk-Adjusted Progress",
+    "category": "produktivitas",
+    "categoryLabel": "Produktivitas",
+    "symbol": "OKR",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Ukur kemajuan key result terhadap baseline dan target kuartal, masukkan confidence pemilik, lalu hitung progres yang disesuaikan dengan tingkat keyakinan.",
+    "tags": [
+      "OKR",
+      "quarterly",
+      "confidence score",
+      "risk adjusted",
+      "key results"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama individu, tim, atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama individu atau tim"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik proses atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Pekerjaan individu",
+          "Tim kerja",
+          "Proyek",
+          "Operasional rutin"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan, batasan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan konteks dan aturan kerja yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "OKR dan Confidence",
+        "title": "Model OKR Kuartalan, Confidence & Risk-Adjusted Progress - {{entityName}}",
+        "columns": [
+          "Objective",
+          "Key result",
+          "Baseline",
+          "Target",
+          "Posisi saat ini",
+          "Progres",
+          "Confidence (1-5)",
+          "Progres disesuaikan",
+          "Gap ke target"
+        ],
+        "rows": [
+          [
+            "Kurangi waktu penyelesaian tiket",
+            "Median jam penyelesaian",
+            48,
+            24,
+            36,
+            0,
+            4,
+            0,
+            0
+          ],
+          [
+            "Tingkatkan kualitas dokumentasi",
+            "Dokumen lolos review",
+            10,
+            40,
+            28,
+            0,
+            3,
+            0,
+            0
+          ],
+          [
+            "Perkuat konsistensi publikasi",
+            "Konten terbit",
+            0,
+            24,
+            18,
+            0,
+            5,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "MIN(1,MAX(0,IF(D6=C6,0,(E6-C6)/(D6-C6))))",
+            "cachedValue": 0.5
+          },
+          {
+            "cell": "H6",
+            "formula": "F6*G6/5",
+            "cachedValue": 0.4
+          },
+          {
+            "cell": "I6",
+            "formula": "MAX(0,D6-E6)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F7",
+            "formula": "MIN(1,MAX(0,IF(D7=C7,0,(E7-C7)/(D7-C7))))",
+            "cachedValue": 0.6
+          },
+          {
+            "cell": "H7",
+            "formula": "F7*G7/5",
+            "cachedValue": 0.36
+          },
+          {
+            "cell": "I7",
+            "formula": "MAX(0,D7-E7)",
+            "cachedValue": 12
+          },
+          {
+            "cell": "F8",
+            "formula": "MIN(1,MAX(0,IF(D8=C8,0,(E8-C8)/(D8-C8))))",
+            "cachedValue": 0.75
+          },
+          {
+            "cell": "H8",
+            "formula": "F8*G8/5",
+            "cachedValue": 0.75
+          },
+          {
+            "cell": "I8",
+            "formula": "MAX(0,D8-E8)",
+            "cachedValue": 6
+          }
+        ],
+        "columnWidths": [
+          30,
+          27,
+          14,
+          14,
+          18,
+          15,
+          18,
+          21,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "id": "register-keputusan-raci",
+    "name": "Register Keputusan Tim & Kelengkapan RACI",
+    "category": "produktivitas",
+    "categoryLabel": "Produktivitas",
+    "symbol": "RACI",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Dokumentasikan keputusan lintas fungsi beserta Responsible, Accountable, Consulted, Informed, kelengkapan penugasan, dan keputusan yang terlambat ditutup.",
+    "tags": [
+      "decision log",
+      "RACI",
+      "governance",
+      "akuntabilitas",
+      "keputusan tim"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama individu, tim, atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama individu atau tim"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik proses atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Pekerjaan individu",
+          "Tim kerja",
+          "Proyek",
+          "Operasional rutin"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan, batasan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan konteks dan aturan kerja yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Decision Log RACI",
+        "title": "Register Keputusan Tim & Kelengkapan RACI - {{entityName}}",
+        "columns": [
+          "Keputusan",
+          "Responsible",
+          "Accountable",
+          "Consulted",
+          "Informed",
+          "Sisa hari tenggat",
+          "Ditutup (1/0)",
+          "Peran terisi",
+          "RACI lengkap (1/0)",
+          "Terlambat (1/0)"
+        ],
+        "rows": [
+          [
+            "Setujui alur approval biaya",
+            "Rina",
+            "Dimas",
+            "Finance",
+            "Tim proyek",
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Tetapkan format laporan",
+            "Ayu",
+            "Rina",
+            "Operasional",
+            "Manajemen",
+            3,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            "Pilih jadwal rilis",
+            "Dimas",
+            "Ayu",
+            "",
+            "Pengguna",
+            2,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "H6",
+            "formula": "COUNTA(B6:E6)",
+            "cachedValue": 4
+          },
+          {
+            "cell": "I6",
+            "formula": "IF(H6=4,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "J6",
+            "formula": "IF(AND(F6<0,G6=0),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "H7",
+            "formula": "COUNTA(B7:E7)",
+            "cachedValue": 4
+          },
+          {
+            "cell": "I7",
+            "formula": "IF(H7=4,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "J7",
+            "formula": "IF(AND(F7<0,G7=0),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H8",
+            "formula": "COUNTA(B8:E8)",
+            "cachedValue": 3
+          },
+          {
+            "cell": "I8",
+            "formula": "IF(H8=4,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "J8",
+            "formula": "IF(AND(F8<0,G8=0),1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          30,
+          17,
+          17,
+          18,
+          18,
+          18,
+          16,
+          15,
+          19,
+          16
+        ]
+      }
+    ]
+  },
+  {
+    "id": "audit-waktu-opportunity-cost",
+    "name": "Audit Waktu & Opportunity Cost Aktivitas",
+    "category": "produktivitas",
+    "categoryLabel": "Produktivitas",
+    "symbol": "ATO",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Petakan konsumsi waktu mingguan berdasarkan nilai aktivitas, identifikasi pekerjaan yang dapat didelegasikan atau diotomatisasi, dan estimasi jam yang bisa direbut kembali.",
+    "tags": [
+      "time audit",
+      "opportunity cost",
+      "delegasi",
+      "otomatisasi",
+      "alokasi waktu"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama individu, tim, atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama individu atau tim"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik proses atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Pekerjaan individu",
+          "Tim kerja",
+          "Proyek",
+          "Operasional rutin"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan, batasan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan konteks dan aturan kerja yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Audit Waktu",
+        "title": "Audit Waktu & Opportunity Cost Aktivitas - {{entityName}}",
+        "columns": [
+          "Aktivitas",
+          "Jam per minggu",
+          "Nilai strategis (1-5)",
+          "Dapat dialihkan (1/0)",
+          "Jam dapat direbut",
+          "Skor opportunity",
+          "Perlu ditinjau (1/0)"
+        ],
+        "rows": [
+          [
+            "Memasukkan data berulang",
+            6,
+            1,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            "Rapat status tanpa keputusan",
+            4,
+            2,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            "Analisis pelanggan",
+            8,
+            5,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Pembaruan format administrasi",
+            3,
+            2,
+            1,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "IF(D6=1,B6,0)",
+            "cachedValue": 6
+          },
+          {
+            "cell": "F6",
+            "formula": "B6*C6",
+            "cachedValue": 6
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(AND(D6=1,B6>=3,C6<=2),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "E7",
+            "formula": "IF(D7=1,B7,0)",
+            "cachedValue": 4
+          },
+          {
+            "cell": "F7",
+            "formula": "B7*C7",
+            "cachedValue": 8
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(AND(D7=1,B7>=3,C7<=2),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "E8",
+            "formula": "IF(D8=1,B8,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F8",
+            "formula": "B8*C8",
+            "cachedValue": 40
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(AND(D8=1,B8>=3,C8<=2),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "E9",
+            "formula": "IF(D9=1,B9,0)",
+            "cachedValue": 3
+          },
+          {
+            "cell": "F9",
+            "formula": "B9*C9",
+            "cachedValue": 6
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(AND(D9=1,B9>=3,C9<=2),1,0)",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          32,
+          17,
+          21,
+          20,
+          19,
+          20,
+          18
+        ]
+      }
+    ]
+  },
+  {
+    "id": "model-redistribusi-beban-risiko-kelelahan",
+    "name": "Model Redistribusi Beban & Indikator Risiko Kelelahan Tim",
+    "category": "produktivitas",
+    "categoryLabel": "Produktivitas",
+    "symbol": "BRK",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Hitung utilisasi kapasitas, lembur, frekuensi gangguan, dan indeks overload untuk membantu memindahkan pekerjaan sebelum beban tim menjadi tidak berkelanjutan.",
+    "tags": [
+      "workload balancing",
+      "capacity",
+      "overload",
+      "risiko kelelahan",
+      "resource leveling"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama individu, tim, atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama individu atau tim"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik proses atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Pekerjaan individu",
+          "Tim kerja",
+          "Proyek",
+          "Operasional rutin"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan, batasan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan konteks dan aturan kerja yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Beban dan Risiko",
+        "title": "Model Redistribusi Beban & Indikator Risiko Kelelahan Tim - {{entityName}}",
+        "columns": [
+          "Anggota",
+          "Kapasitas (jam)",
+          "Tugas terjadwal (jam)",
+          "Lembur (jam)",
+          "Interupsi",
+          "Utilisasi",
+          "Indeks overload",
+          "Risiko tinggi (1/0)"
+        ],
+        "rows": [
+          [
+            "Rina",
+            40,
+            42,
+            3,
+            8,
+            0,
+            0,
+            0
+          ],
+          [
+            "Dimas",
+            40,
+            34,
+            1,
+            3,
+            0,
+            0,
+            0
+          ],
+          [
+            "Ayu",
+            36,
+            40,
+            5,
+            10,
+            0,
+            0,
+            0
+          ],
+          [
+            "Bima",
+            40,
+            30,
+            0,
+            2,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "IF(B6=0,0,(C6+D6)/B6)",
+            "cachedValue": 1.125
+          },
+          {
+            "cell": "G6",
+            "formula": "MAX(0,C6-B6)+D6+E6*0.25",
+            "cachedValue": 7
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(OR(F6>1.1,G6>5),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F7",
+            "formula": "IF(B7=0,0,(C7+D7)/B7)",
+            "cachedValue": 0.875
+          },
+          {
+            "cell": "G7",
+            "formula": "MAX(0,C7-B7)+D7+E7*0.25",
+            "cachedValue": 1.75
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(OR(F7>1.1,G7>5),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F8",
+            "formula": "IF(B8=0,0,(C8+D8)/B8)",
+            "cachedValue": 1.25
+          },
+          {
+            "cell": "G8",
+            "formula": "MAX(0,C8-B8)+D8+E8*0.25",
+            "cachedValue": 11.5
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(OR(F8>1.1,G8>5),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F9",
+            "formula": "IF(B9=0,0,(C9+D9)/B9)",
+            "cachedValue": 0.75
+          },
+          {
+            "cell": "G9",
+            "formula": "MAX(0,C9-B9)+D9+E9*0.25",
+            "cachedValue": 0.5
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(OR(F9>1.1,G9>5),1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          18,
+          16,
+          23,
+          15,
+          15,
+          16,
+          18,
+          19
+        ]
+      }
+    ]
+  },
+  {
+    "id": "skor-efektivitas-rapat-follow-through",
+    "name": "Skor Efektivitas Rapat & Follow-through",
+    "category": "produktivitas",
+    "categoryLabel": "Produktivitas",
+    "symbol": "MEF",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Nilai rapat berdasarkan penyelesaian agenda dan tindak lanjut, hitung biaya waktu peserta, serta ukur persentase action item yang benar-benar ditutup.",
+    "tags": [
+      "meeting effectiveness",
+      "follow through",
+      "action closure",
+      "biaya rapat",
+      "meeting KPI"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama individu, tim, atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama individu atau tim"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik proses atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Pekerjaan individu",
+          "Tim kerja",
+          "Proyek",
+          "Operasional rutin"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan, batasan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan konteks dan aturan kerja yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Efektivitas Rapat",
+        "title": "Skor Efektivitas Rapat & Follow-through - {{entityName}}",
+        "columns": [
+          "Nama rapat",
+          "Peserta",
+          "Durasi (menit)",
+          "Agenda direncanakan",
+          "Agenda selesai",
+          "Action item jatuh tempo",
+          "Action item selesai",
+          "Closure rate",
+          "Jam peserta",
+          "Skor efektivitas (0-100)"
+        ],
+        "rows": [
+          [
+            "Review produk",
+            6,
+            60,
+            5,
+            4,
+            5,
+            4,
+            0,
+            0,
+            0
+          ],
+          [
+            "Koordinasi mingguan",
+            8,
+            45,
+            6,
+            6,
+            4,
+            4,
+            0,
+            0,
+            0
+          ],
+          [
+            "Diskusi status proyek",
+            5,
+            60,
+            4,
+            2,
+            6,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            "Perencanaan kuartal",
+            7,
+            90,
+            8,
+            7,
+            5,
+            4,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "H6",
+            "formula": "IF(F6=0,0,G6/F6)",
+            "cachedValue": 0.8
+          },
+          {
+            "cell": "I6",
+            "formula": "B6*C6/60",
+            "cachedValue": 6
+          },
+          {
+            "cell": "J6",
+            "formula": "IF(OR(D6=0,F6=0),0,(E6/D6)*40+H6*60)",
+            "cachedValue": 80
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(F7=0,0,G7/F7)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "I7",
+            "formula": "B7*C7/60",
+            "cachedValue": 6
+          },
+          {
+            "cell": "J7",
+            "formula": "IF(OR(D7=0,F7=0),0,(E7/D7)*40+H7*60)",
+            "cachedValue": 100
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(F8=0,0,G8/F8)",
+            "cachedValue": 0.3333333333
+          },
+          {
+            "cell": "I8",
+            "formula": "B8*C8/60",
+            "cachedValue": 5
+          },
+          {
+            "cell": "J8",
+            "formula": "IF(OR(D8=0,F8=0),0,(E8/D8)*40+H8*60)",
+            "cachedValue": 40
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(F9=0,0,G9/F9)",
+            "cachedValue": 0.8
+          },
+          {
+            "cell": "I9",
+            "formula": "B9*C9/60",
+            "cachedValue": 10.5
+          },
+          {
+            "cell": "J9",
+            "formula": "IF(OR(D9=0,F9=0),0,(E9/D9)*40+H9*60)",
+            "cachedValue": 83
+          }
+        ],
+        "columnWidths": [
+          24,
+          13,
+          17,
+          19,
+          16,
+          21,
+          18,
+          16,
+          15,
+          23
+        ]
+      }
+    ]
+  },
+  {
+    "id": "review-sistem-produktivitas-pribadi-tim",
+    "name": "Review Sistem Produktivitas Pribadi & Tim",
+    "category": "produktivitas",
+    "categoryLabel": "Produktivitas",
+    "symbol": "PSR",
+    "format": "md",
+    "quality": "unggulan",
+    "description": "Kerangka audit menyeluruh untuk menilai sistem kerja, kapasitas, kebiasaan, alur keputusan, serta perbaikan produktivitas yang dapat diukur.",
+    "tags": [
+      "productivity system",
+      "operating system",
+      "audit produktivitas",
+      "perbaikan berkelanjutan",
+      "team effectiveness"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama individu, tim, atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama individu atau tim"
+      },
+      {
+        "id": "ownerName",
+        "label": "Pemilik dokumen atau fasilitator",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Individu",
+          "Tim",
+          "Proyek",
+          "Unit kerja"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan, batasan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan konteks dan aturan kerja yang perlu diperhatikan."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Profil sistem kerja",
+        "body": "Audit dilakukan untuk {{entityName}} oleh {{ownerName}} pada periode {{period}}. Batas ruang lingkup: {{scope}}. Definisikan hasil yang ingin dicapai sebelum menilai proses."
+      },
+      {
+        "heading": "Peta alur kerja dan sumber hambatan",
+        "bullets": [
+          "Alur utama dari permintaan masuk sampai hasil diterima: [tahapan dan pemilik].",
+          "Titik tunggu, perpindahan konteks, dan pekerjaan ulang: [data frekuensi serta dampak].",
+          "Keputusan yang tertunda dan pihak yang berwenang: [daftar].",
+          "Aktivitas yang tidak menghasilkan nilai atau dapat dihentikan: [daftar]."
+        ]
+      },
+      {
+        "heading": "Audit kapasitas dan fokus",
+        "bullets": [
+          "Jam fokus aktual dibandingkan jam rapat dan administrasi: [angka].",
+          "Beban kerja per peran dan kapasitas yang tersedia: [angka].",
+          "Kebiasaan yang membantu atau menghambat konsistensi: [bukti].",
+          "Pola interupsi utama beserta sumbernya: [frekuensi dan durasi]."
+        ]
+      },
+      {
+        "heading": "Rencana perbaikan 30-60-90 hari",
+        "body": "Pilih perubahan yang memiliki pemilik, ukuran keberhasilan, dan batas waktu. Jangan memasukkan terlalu banyak inisiatif sekaligus.",
+        "bullets": [
+          "30 hari: [perbaikan kecil, baseline, target, pemilik].",
+          "60 hari: [perubahan proses, dependensi, target].",
+          "90 hari: [hasil akhir, verifikasi, keputusan lanjut]."
+        ]
+      },
+      {
+        "heading": "Tata kelola dan evaluasi",
+        "bullets": [
+          "Ritme review dan forum keputusan: [jadwal].",
+          "Indikator yang ditinjau: penyelesaian tepat waktu, jam fokus, WIP, dan kualitas hasil.",
+          "Aturan eskalasi saat kapasitas atau tenggat terancam: [pemilik dan SLA]."
+        ]
+      },
+      {
+        "heading": "Catatan dan batasan audit",
+        "body": "Temuan, asumsi, dan batasan yang perlu disimpan bersama laporan: {{notes}}. Setiap rekomendasi harus dapat ditelusuri ke bukti dan pemilik tindakan."
+      }
+    ]
   }
 ]
