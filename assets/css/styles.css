@@ -305,3 +305,59 @@ button { color: inherit; }
 /* Layout refinements after removing decorative labels and counters. */
 .principle-list article { display: block; padding: 0 0 20px; border-bottom: 1px solid rgba(225,238,224,.17); }
 .footer-bottom { display: flex; justify-content: center; gap: 20px; padding-top: 16px; color: #91a394; border-top: 1px solid rgba(225,238,224,.14); font-size: 8px; font-weight: 700; letter-spacing: .13em; text-align: center; }
+
+
+/* Principles section: clearer hierarchy and balanced feature cards. */
+.principles-layout {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 30px;
+}
+.principles-layout > div:first-child {
+  max-width: 680px;
+}
+.principles-layout .eyebrow {
+  margin-bottom: 14px;
+}
+.principles-layout h2 {
+  max-width: 620px;
+}
+.principle-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 18px;
+}
+.principle-list article,
+.principle-list article + article {
+  min-width: 0;
+  min-height: 100%;
+  padding: 23px 22px;
+  border: 1px solid rgba(225, 238, 224, .18);
+  border-radius: 11px;
+  background: rgba(255, 255, 255, .035);
+}
+.principle-list h3 {
+  font-size: 16px;
+  line-height: 1.4;
+}
+.principle-list p {
+  margin-top: 9px;
+  color: #c7d2c7;
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+@media (max-width: 720px) {
+  .principles-layout {
+    gap: 27px;
+  }
+  .principle-list {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+  .principle-list article,
+  .principle-list article + article {
+    min-height: 0;
+    padding: 19px 18px;
+  }
+}
