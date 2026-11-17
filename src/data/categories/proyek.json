@@ -6,7 +6,6 @@
     "categoryLabel": "Manajemen proyek",
     "symbol": "PB",
     "format": "md",
-    "difficulty": "menengah",
     "description": "Dokumen ringkas untuk menyusun tujuan, ruang lingkup, pihak terkait, dan rencana pelaksanaan proyek.",
     "tags": [
       "proyek",
@@ -103,6 +102,7 @@
         "heading": "Catatan penyesuaian",
         "body": "{{notes}}"
       }
-    ]
+    ],
+    "quality": "unggulan"
   }
 ]
