@@ -116,6 +116,15 @@
             "Pelajaran dari proyek bulan ini",
             1,
             0
+          ],
+          [
+            "TINGKAT TEPAT WAKTU",
+            null,
+            null,
+            null,
+            null,
+            null,
+            0
           ]
         ],
         "formulaCells": [
@@ -284,12 +293,23 @@
             1,
             0,
             0
+          ],
+          [
+            "TINGKAT SESUAI TENGGAT",
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            0
           ]
         ],
         "formulaCells": [
           {
             "cell": "H6",
-            "formula": "F6-E6",
+            "formula": "IF(G6=1,F6-E6,0)",
             "cachedValue": 0
           },
           {
@@ -299,7 +319,7 @@
           },
           {
             "cell": "H7",
-            "formula": "F7-E7",
+            "formula": "IF(G7=1,F7-E7,0)",
             "cachedValue": 2
           },
           {
@@ -309,8 +329,8 @@
           },
           {
             "cell": "H8",
-            "formula": "F8-E8",
-            "cachedValue": -19
+            "formula": "IF(G8=1,F8-E8,0)",
+            "cachedValue": 0
           },
           {
             "cell": "I8",
@@ -319,7 +339,7 @@
           },
           {
             "cell": "H9",
-            "formula": "F9-E9",
+            "formula": "IF(G9=1,F9-E9,0)",
             "cachedValue": -1
           },
           {
@@ -468,6 +488,16 @@
             5,
             5,
             0,
+            0
+          ],
+          [
+            "BEAT SESUAI BATAS DURASI",
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
             0
           ]
         ],
