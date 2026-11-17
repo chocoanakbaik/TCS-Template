@@ -1,6 +1,8 @@
 'use client';
 
+import Image from 'next/image';
 import { useEffect, useMemo, useState } from 'react';
+import tcsTemplateLogo from '../../Logo TCS Template dengan Ikon Centang.png';
 import { generateTemplateFile } from '@/lib/template-generator';
 import type { CategoryId, Quality, TemplateAnswers, TemplateDefinition, TemplateQuestion } from '@/data/schema';
 
@@ -97,7 +99,7 @@ export function CatalogClient({templates,view='home'}:Props) {
     <header className="site-header">
       <div className="container header-inner">
         <a className="wordmark" href="/" aria-label="TCS Template, halaman utama">
-          <span className="wordmark-main">TCS</span><span className="wordmark-divider" aria-hidden="true"/><span className="wordmark-sub">TEMPLATE</span>
+          <Image src={tcsTemplateLogo} alt="Logo TCS Template" className="brand-logo" priority sizes="184px" />
         </a>
         <button className="menu-toggle" type="button" aria-expanded={menuOpen} aria-controls="primary-navigation" aria-label={menuOpen?'Tutup navigasi':'Buka navigasi'} onClick={()=>setMenuOpen((v)=>!v)}><span/><span/></button>
         <nav className={'main-nav'+(menuOpen?' is-open':'')} id="primary-navigation" aria-label="Navigasi utama">
@@ -242,7 +244,7 @@ export function CatalogClient({templates,view='home'}:Props) {
 
     <footer className="site-footer">
       <div className="container footer-main">
-        <a className="wordmark footer-wordmark" href="/" aria-label="TCS Template, kembali ke atas"><span className="wordmark-main">TCS</span><span className="wordmark-divider"/><span className="wordmark-sub">TEMPLATE</span></a>
+        <a className="wordmark footer-wordmark" href="/" aria-label="TCS Template, kembali ke atas"><Image src={tcsTemplateLogo} alt="Logo TCS Template" className="brand-logo footer-brand-logo" sizes="164px" /></a>
         <p>Practical templates for everyday work.</p><a className="footer-top" href="/">Kembali ke atas <span aria-hidden="true">↑</span></a>
       </div>
       <div className="container footer-bottom"><span>© 2026 THE CHOCO STUDIOS. ALL RIGHTS RESERVED.</span></div>
@@ -251,7 +253,7 @@ export function CatalogClient({templates,view='home'}:Props) {
     {activeTemplate&&activeQuestion&&(
       <div className="modal-backdrop" onMouseDown={(e)=>{if(e.target===e.currentTarget)closeWizard();}}>
         <section className="wizard-dialog" role="dialog" aria-modal="true" aria-labelledby="wizard-title">
-          <div className="wizard-top"><a className="wordmark wizard-wordmark" href="/" aria-label="TCS Template"><span className="wordmark-main">TCS</span><span className="wordmark-divider"/><span className="wordmark-sub">TEMPLATE</span></a><button className="icon-button" type="button" onClick={closeWizard} aria-label="Tutup formulir" disabled={isGenerating}>×</button></div>
+          <div className="wizard-top"><a className="wordmark wizard-wordmark" href="/" aria-label="TCS Template"><Image src={tcsTemplateLogo} alt="Logo TCS Template" className="brand-logo wizard-brand-logo" sizes="164px" /></a><button className="icon-button" type="button" onClick={closeWizard} aria-label="Tutup formulir" disabled={isGenerating}>×</button></div>
           <div className="wizard-progress-wrap"><div className="wizard-progress-copy"><span>PERTANYAAN {String(step+1).padStart(2,'0')}</span><span>{String(step+1).padStart(2,'0')} / 05</span></div><div className="wizard-progress-track"><span style={{width:progress+'%'}}/></div></div>
           <div className="wizard-body">
             <div className="wizard-template-label">{activeTemplate.name} / {formatLabel(activeTemplate.format)}</div>
