@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import { generateTemplateFile } from '@/lib/template-generator';
-import type { CategoryId, Difficulty, TemplateAnswers, TemplateDefinition, TemplateQuestion } from '@/data/schema';
+import type { CategoryId, Quality, TemplateAnswers, TemplateDefinition, TemplateQuestion } from '@/data/schema';
 
 type Props = { templates: TemplateDefinition[] };
 type DownloadResult = { filename:string; templateName:string };
@@ -13,17 +13,17 @@ const categories:Array<{id:CategoryId|'semua';label:string}>=[
   {id:'pendidikan',label:'Pendidikan'},{id:'sdm',label:'SDM'},{id:'proyek',label:'Proyek'},
   {id:'konten',label:'Konten'},{id:'dokumen',label:'Dokumen'},{id:'developer',label:'Developer'},
 ];
-const difficulties:Array<{id:Difficulty|'semua';label:string}>=[
-  {id:'semua',label:'Semua'},{id:'dasar',label:'Dasar'},
-  {id:'menengah',label:'Menengah'},{id:'tinggi',label:'Tinggi'},
+const qualities:Array<{id:Quality|'semua';label:string}>=[
+  {id:'semua',label:'Semua'},{id:'standar',label:'Standar'},
+  {id:'baik',label:'Baik'},{id:'unggulan',label:'Unggulan'},
 ];
-const difficultyLabel:Record<Difficulty,string>={dasar:'Dasar',menengah:'Menengah',tinggi:'Tinggi'};
+const qualityLabel:Record<Quality,string>={standar:'Standar',baik:'Baik',unggulan:'Unggulan'};
 const formatLabel=(format:string)=>format.toUpperCase();
 
 export function CatalogClient({templates}:Props) {
   const [query,setQuery]=useState('');
   const [category,setCategory]=useState<CategoryId|'semua'>('semua');
-  const [difficulty,setDifficulty]=useState<Difficulty|'semua'>('semua');
+  const [quality,setQuality]=useState<Quality|'semua'>('semua');
   const [activeTemplate,setActiveTemplate]=useState<TemplateDefinition|null>(null);
   const [answers,setAnswers]=useState<TemplateAnswers>({});
   const [step,setStep]=useState(0);
@@ -36,11 +36,11 @@ export function CatalogClient({templates}:Props) {
     const term=query.trim().toLocaleLowerCase('id');
     return templates.filter((template)=>{
       const categoryMatch=category==='semua'||template.category===category;
-      const difficultyMatch=difficulty==='semua'||template.difficulty===difficulty;
+      const qualityMatch=quality==='semua'||template.quality===quality;
       const searchable=[template.name,template.categoryLabel,template.description,...template.tags].join(' ').toLocaleLowerCase('id');
-      return categoryMatch&&difficultyMatch&&(!term||searchable.includes(term));
+      return categoryMatch&&qualityMatch&&(!term||searchable.includes(term));
     });
-  },[templates,query,category,difficulty]);
+  },[templates,query,category,quality]);
 
   useEffect(()=>{
     if(!activeTemplate&&!downloadResult) return;
@@ -149,7 +149,7 @@ export function CatalogClient({templates}:Props) {
       <section className="catalog-section section-space" id="catalog">
         <div className="container">
           <div className="section-heading catalog-heading">
-            <div><p className="eyebrow">TEMPLATE COLLECTION</p><h2>Mulai dari kebutuhan Anda.</h2><p className="section-description">Pilih perangkat kerja berdasarkan bidang dan tingkat kesulitan. Seluruh file dibuat sesuai jawaban Anda dan dapat diunduh gratis.</p></div>
+            <div><p className="eyebrow">TEMPLATE COLLECTION</p><h2>Mulai dari kebutuhan Anda.</h2><p className="section-description">Pilih perangkat kerja berdasarkan bidang dan kualitas template. Seluruh file dibuat sesuai jawaban Anda dan dapat diunduh gratis.</p></div>
             <div className="catalog-count"><strong>{filteredTemplates.length.toString().padStart(2,'0')}</strong><span>template tersedia</span></div>
           </div>
           <div className="catalog-toolbar">
@@ -165,10 +165,10 @@ export function CatalogClient({templates}:Props) {
               {categories.map((item)=><button className={'filter-chip'+(category===item.id?' is-active':'')} type="button" key={item.id} aria-pressed={category===item.id} onClick={()=>setCategory(item.id)}>{item.label}</button>)}
             </div>
           </div>
-          <div className="filter-block difficulty-block">
-            <span className="filter-label">Tingkat kesulitan</span>
-            <div className="difficulty-filter" role="group" aria-label="Filter tingkat kesulitan">
-              {difficulties.map((item)=><button className={'difficulty-chip'+(difficulty===item.id?' is-active':'')} type="button" key={item.id} aria-pressed={difficulty===item.id} onClick={()=>setDifficulty(item.id)}>{item.label}</button>)}
+          <div className="filter-block quality-block">
+            <span className="filter-label">Kualitas template</span>
+            <div className="quality-filter" role="group" aria-label="Filter kualitas template">
+              {qualities.map((item)=><button className={'quality-chip'+(quality===item.id?' is-active':'')} type="button" key={item.id} aria-pressed={quality===item.id} onClick={()=>setQuality(item.id)}>{item.label}</button>)}
             </div>
           </div>
           {filteredTemplates.length>0?(
@@ -177,13 +177,13 @@ export function CatalogClient({templates}:Props) {
                 <div className="card-topline"><span className="card-category">{template.categoryLabel}</span><span className="card-format">{formatLabel(template.format)}</span></div>
                 <div className="card-symbol" aria-hidden="true">{template.symbol}</div>
                 <h3>{template.name}</h3><p>{template.description}</p>
-                <div className="card-meta"><span className={'difficulty-badge difficulty-'+template.difficulty}>{difficultyLabel[template.difficulty]}</span><span className="question-count">5 pertanyaan</span></div>
+                <div className="card-meta"><span className={'quality-badge quality-'+template.quality}>{qualityLabel[template.quality]}</span><span className="question-count">5 pertanyaan</span></div>
                 <div className="card-bottom"><span className="card-status"><i/>GRATIS</span><button className="card-action" type="button" onClick={()=>openTemplate(template)}>Sesuaikan & unduh <span aria-hidden="true">→</span></button></div>
               </article>)}
             </div>
           ):(
-            <div className="empty-state"><span className="empty-symbol">⌕</span><h3>Template tidak ditemukan.</h3><p>Coba kata kunci lain atau ubah filter kategori dan tingkat kesulitan.</p>
-              <button className="button button-secondary" type="button" onClick={()=>{setQuery('');setCategory('semua');setDifficulty('semua');}}>Reset filter</button>
+            <div className="empty-state"><span className="empty-symbol">⌕</span><h3>Template tidak ditemukan.</h3><p>Coba kata kunci lain atau ubah filter kategori dan kualitas template.</p>
+              <button className="button button-secondary" type="button" onClick={()=>{setQuery('');setCategory('semua');setQuality('semua');}}>Reset filter</button>
             </div>
           )}
         </div>
@@ -196,7 +196,7 @@ export function CatalogClient({templates}:Props) {
             <p className="section-description">Tidak perlu akun, server, atau penyimpanan cloud. Seluruh proses penyesuaian dan pembuatan file dilakukan langsung pada browser Anda.</p>
           </div>
           <div className="steps-grid">
-            <article className="step-card"><div className="step-illustration illustration-select"><div className="illus-sheet"><i/><i/><i/><i/></div><span className="illus-cursor">↖</span></div><span className="step-number">01</span><h3>Pilih template</h3><p>Temukan template berdasarkan bidang dan tingkat kesulitan yang sesuai.</p></article>
+            <article className="step-card"><div className="step-illustration illustration-select"><div className="illus-sheet"><i/><i/><i/><i/></div><span className="illus-cursor">↖</span></div><span className="step-number">01</span><h3>Pilih template</h3><p>Temukan template berdasarkan bidang dan kualitas template yang sesuai.</p></article>
             <article className="step-card"><div className="step-illustration illustration-specify"><div className="illus-question">05</div><div className="illus-choice"/><div className="illus-choice short"/></div><span className="step-number">02</span><h3>Sesuaikan kebutuhan</h3><p>Jawab lima pertanyaan untuk memasukkan identitas dan konteks penggunaan.</p></article>
             <article className="step-card"><div className="step-illustration illustration-review"><div className="illus-check">↓</div><div className="illus-lines"><i/><i/><i/></div></div><span className="step-number">03</span><h3>Unduh file</h3><p>File XLSX atau Markdown dirakit langsung di browser, tanpa layanan backend.</p></article>
           </div>
