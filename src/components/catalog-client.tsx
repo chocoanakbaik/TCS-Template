@@ -4,7 +4,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { generateTemplateFile } from '@/lib/template-generator';
 import type { CategoryId, Quality, TemplateAnswers, TemplateDefinition, TemplateQuestion } from '@/data/schema';
 
-type Props = { templates: TemplateDefinition[] };
+type View = 'home'|'catalog'|'how-it-works'|'about';
+type Props = { templates: TemplateDefinition[]; view?: View };
 type DownloadResult = { filename:string; templateName:string };
 
 const categories:Array<{id:CategoryId|'semua';label:string}>=[
@@ -20,7 +21,7 @@ const qualities:Array<{id:Quality|'semua';label:string}>=[
 const qualityLabel:Record<Quality,string>={standar:'Standar',baik:'Baik',unggulan:'Unggulan'};
 const formatLabel=(format:string)=>format.toUpperCase();
 
-export function CatalogClient({templates}:Props) {
+export function CatalogClient({templates,view='home'}:Props) {
   const [query,setQuery]=useState('');
   const [category,setCategory]=useState<CategoryId|'semua'>('semua');
   const [quality,setQuality]=useState<Quality|'semua'>('semua');
@@ -95,20 +96,21 @@ export function CatalogClient({templates}:Props) {
     <a className="skip-link" href="#main-content">Lewati ke konten utama</a>
     <header className="site-header">
       <div className="container header-inner">
-        <a className="wordmark" href="#" aria-label="TCS Template, halaman utama">
+        <a className="wordmark" href="/" aria-label="TCS Template, halaman utama">
           <span className="wordmark-main">TCS</span><span className="wordmark-divider" aria-hidden="true"/><span className="wordmark-sub">TEMPLATE</span>
         </a>
         <button className="menu-toggle" type="button" aria-expanded={menuOpen} aria-controls="primary-navigation" aria-label={menuOpen?'Tutup navigasi':'Buka navigasi'} onClick={()=>setMenuOpen((v)=>!v)}><span/><span/></button>
         <nav className={'main-nav'+(menuOpen?' is-open':'')} id="primary-navigation" aria-label="Navigasi utama">
-          <a href="#catalog" onClick={()=>setMenuOpen(false)}>Katalog</a>
-          <a href="#how-it-works" onClick={()=>setMenuOpen(false)}>Cara kerja</a>
-          <a href="#about" onClick={()=>setMenuOpen(false)}>Tentang</a>
+          <a href="/katalog" onClick={()=>setMenuOpen(false)}>Katalog</a>
+          <a href="/cara-kerja" onClick={()=>setMenuOpen(false)}>Cara kerja</a>
+          <a href="/tentang" onClick={()=>setMenuOpen(false)}>Tentang</a>
           <a className="nav-support" href="https://saweria.co/thechocostudios" target="_blank" rel="noopener noreferrer">Dukung kami <span aria-hidden="true">↗</span></a>
         </nav>
       </div>
     </header>
 
     <main id="main-content">
+      {view==='home'&&(
       <section className="hero-section">
         <div className="container hero-layout">
           <div className="hero-copy">
@@ -116,8 +118,8 @@ export function CatalogClient({templates}:Props) {
             <h1>Template yang mengikuti <span>cara Anda bekerja.</span></h1>
             <p className="hero-description">Koleksi perangkat kerja digital yang dapat disesuaikan dengan kebutuhan nyata. Pilih template, jawab lima pertanyaan, lalu unduh file yang dibuat langsung di browser.</p>
             <div className="hero-actions">
-              <a className="button button-primary" href="#catalog">Temukan template <span aria-hidden="true">↗</span></a>
-              <a className="text-link" href="#how-it-works">Pelajari cara kerja <span aria-hidden="true">↓</span></a>
+              <a className="button button-primary" href="/katalog">Temukan template <span aria-hidden="true">↗</span></a>
+              <a className="text-link" href="/cara-kerja">Pelajari cara kerja <span aria-hidden="true">↓</span></a>
             </div>
           </div>
           <div className="hero-visual" aria-label="Pratinjau koleksi template">
@@ -145,7 +147,9 @@ export function CatalogClient({templates}:Props) {
         </div>
         <div className="container hero-bottom"><span>AN ORGANIZED START FOR EVERY KIND OF WORK</span><div className="hero-bottom-line"/></div>
       </section>
+      )}
 
+      {view==='catalog'&&(
       <section className="catalog-section section-space" id="catalog">
         <div className="container">
           <div className="section-heading catalog-heading">
@@ -188,7 +192,9 @@ export function CatalogClient({templates}:Props) {
           )}
         </div>
       </section>
+      )}
 
+      {view==='how-it-works'&&(
       <section className="workflow-section section-space" id="how-it-works">
         <div className="container">
           <div className="section-heading workflow-heading">
@@ -202,7 +208,10 @@ export function CatalogClient({templates}:Props) {
           </div>
         </div>
       </section>
+      )}
 
+      {view==='about'&&(
+      <>
       <section className="about-section section-space" id="about">
         <div className="container about-layout">
           <div className="about-side"><span className="about-index">TCS<br/>/ TEMPLATE</span></div>
@@ -227,20 +236,22 @@ export function CatalogClient({templates}:Props) {
       <section className="privacy-section section-space">
         <div className="container privacy-card"><div className="privacy-icon" aria-hidden="true">◎</div><div><p className="eyebrow">YOUR INPUT STAYS YOURS</p><h2>Jawaban Anda tetap di perangkat sendiri.</h2><p>Nama instansi, proyek, dan jawaban formulir hanya digunakan untuk merakit file pada browser. Tidak ada API, database, Google Drive, atau pengiriman jawaban ke server TCS.</p></div></div>
       </section>
+      </>
+      )}
     </main>
 
     <footer className="site-footer">
       <div className="container footer-main">
-        <a className="wordmark footer-wordmark" href="#" aria-label="TCS Template, kembali ke atas"><span className="wordmark-main">TCS</span><span className="wordmark-divider"/><span className="wordmark-sub">TEMPLATE</span></a>
-        <p>Practical templates for everyday work.</p><a className="footer-top" href="#">Kembali ke atas <span aria-hidden="true">↑</span></a>
+        <a className="wordmark footer-wordmark" href="/" aria-label="TCS Template, kembali ke atas"><span className="wordmark-main">TCS</span><span className="wordmark-divider"/><span className="wordmark-sub">TEMPLATE</span></a>
+        <p>Practical templates for everyday work.</p><a className="footer-top" href="/">Kembali ke atas <span aria-hidden="true">↑</span></a>
       </div>
-      <div className="container footer-bottom"><span>© {new Date().getFullYear()} THE CHOCO STUDIOS. ALL RIGHTS RESERVED.</span></div>
+      <div className="container footer-bottom"><span>© 2026 THE CHOCO STUDIOS. ALL RIGHTS RESERVED.</span></div>
     </footer>
 
     {activeTemplate&&activeQuestion&&(
       <div className="modal-backdrop" onMouseDown={(e)=>{if(e.target===e.currentTarget)closeWizard();}}>
         <section className="wizard-dialog" role="dialog" aria-modal="true" aria-labelledby="wizard-title">
-          <div className="wizard-top"><a className="wordmark wizard-wordmark" href="#" aria-label="TCS Template"><span className="wordmark-main">TCS</span><span className="wordmark-divider"/><span className="wordmark-sub">TEMPLATE</span></a><button className="icon-button" type="button" onClick={closeWizard} aria-label="Tutup formulir" disabled={isGenerating}>×</button></div>
+          <div className="wizard-top"><a className="wordmark wizard-wordmark" href="/" aria-label="TCS Template"><span className="wordmark-main">TCS</span><span className="wordmark-divider"/><span className="wordmark-sub">TEMPLATE</span></a><button className="icon-button" type="button" onClick={closeWizard} aria-label="Tutup formulir" disabled={isGenerating}>×</button></div>
           <div className="wizard-progress-wrap"><div className="wizard-progress-copy"><span>PERTANYAAN {String(step+1).padStart(2,'0')}</span><span>{String(step+1).padStart(2,'0')} / 05</span></div><div className="wizard-progress-track"><span style={{width:progress+'%'}}/></div></div>
           <div className="wizard-body">
             <div className="wizard-template-label">{activeTemplate.name} / {formatLabel(activeTemplate.format)}</div>
