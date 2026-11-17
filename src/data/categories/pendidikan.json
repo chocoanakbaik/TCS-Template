@@ -78,6 +78,7 @@
           "Nilai PTS",
           "Nilai PAS",
           "Nilai Akhir",
+          "Predikat (1=A,2=B,3=C,4=D)",
           "Tuntas (1/0)",
           "Peringkat"
         ],
@@ -89,6 +90,7 @@
             88,
             0,
             0,
+            0,
             0
           ],
           [
@@ -96,6 +98,7 @@
             78,
             74,
             80,
+            0,
             0,
             0,
             0
@@ -107,6 +110,7 @@
             94,
             0,
             0,
+            0,
             0
           ],
           [
@@ -114,6 +118,7 @@
             68,
             72,
             70,
+            0,
             0,
             0,
             0
@@ -127,13 +132,18 @@
           },
           {
             "cell": "F6",
+            "formula": "IF(E6>=90,1,IF(E6>=80,2,IF(E6>=75,3,4)))",
+            "cachedValue": 2
+          },
+          {
+            "cell": "G6",
             "formula": "IF(E6>=75,1,0)",
             "cachedValue": 1
           },
           {
-            "cell": "G6",
+            "cell": "H6",
             "formula": "RANK(E6,E6:E9,0)",
-            "cachedValue": 2
+            "cachedValue": 3
           },
           {
             "cell": "E7",
@@ -142,13 +152,18 @@
           },
           {
             "cell": "F7",
+            "formula": "IF(E7>=90,1,IF(E7>=80,2,IF(E7>=75,3,4)))",
+            "cachedValue": 3
+          },
+          {
+            "cell": "G7",
             "formula": "IF(E7>=75,1,0)",
             "cachedValue": 1
           },
           {
-            "cell": "G7",
+            "cell": "H7",
             "formula": "RANK(E7,E6:E9,0)",
-            "cachedValue": 3
+            "cachedValue": 2
           },
           {
             "cell": "E8",
@@ -157,11 +172,16 @@
           },
           {
             "cell": "F8",
-            "formula": "IF(E8>=75,1,0)",
+            "formula": "IF(E8>=90,1,IF(E8>=80,2,IF(E8>=75,3,4)))",
             "cachedValue": 1
           },
           {
             "cell": "G8",
+            "formula": "IF(E8>=75,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "H8",
             "formula": "RANK(E8,E6:E9,0)",
             "cachedValue": 1
           },
@@ -172,11 +192,16 @@
           },
           {
             "cell": "F9",
+            "formula": "IF(E9>=90,1,IF(E9>=80,2,IF(E9>=75,3,4)))",
+            "cachedValue": 4
+          },
+          {
+            "cell": "G9",
             "formula": "IF(E9>=75,1,0)",
             "cachedValue": 0
           },
           {
-            "cell": "G9",
+            "cell": "H9",
             "formula": "RANK(E9,E6:E9,0)",
             "cachedValue": 4
           }
@@ -187,6 +212,7 @@
           15,
           15,
           16,
+          28,
           16,
           15
         ]
