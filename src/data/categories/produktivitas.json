@@ -2004,7 +2004,7 @@
           {
             "cell": "F7",
             "formula": "B7*0.25+C7*0.35+D7*0.20+E7*0.20",
-            "cachedValue": 3.25
+            "cachedValue": 3.3
           },
           {
             "cell": "G7",
@@ -3326,8 +3326,8 @@
           },
           {
             "cell": "I6",
-            "formula": "MAX(0,D6-E6)",
-            "cachedValue": 0
+            "formula": "MAX(0,IF(D6<C6,E6-D6,D6-E6))",
+            "cachedValue": 12
           },
           {
             "cell": "F7",
@@ -3341,7 +3341,7 @@
           },
           {
             "cell": "I7",
-            "formula": "MAX(0,D7-E7)",
+            "formula": "MAX(0,IF(D7<C7,E7-D7,D7-E7))",
             "cachedValue": 12
           },
           {
@@ -3356,7 +3356,7 @@
           },
           {
             "cell": "I8",
-            "formula": "MAX(0,D8-E8)",
+            "formula": "MAX(0,IF(D8<C8,E8-D8,D8-E8))",
             "cachedValue": 6
           }
         ],
