@@ -1,127 +1,4499 @@
 [
   {
-    "id": "study-planner",
-    "name": "Study Planner",
+    "id": "buku-nilai-rapor-predikat-kelulusan",
+    "name": "Buku Nilai Rapor, Predikat & Status Kelulusan Otomatis",
     "category": "pendidikan",
     "categoryLabel": "Pendidikan",
-    "symbol": "SP",
+    "symbol": "NRP",
     "format": "xlsx",
-    "description": "Atur target belajar, materi, jumlah sesi, dan progres untuk membantu pemantauan kegiatan belajar.",
+    "quality": "standar",
+    "description": "Hitung nilai akhir berbobot dari tugas, penilaian tengah semester, dan penilaian akhir semester; tentukan predikat, status ketuntasan, serta peringkat secara otomatis.",
     "tags": [
-      "pendidikan",
-      "belajar",
-      "siswa",
-      "mahasiswa",
-      "akademik",
-      "jadwal"
+      "nilai rapor",
+      "nilai akhir",
+      "predikat",
+      "KKM",
+      "kelulusan",
+      "guru"
     ],
     "questions": [
       {
         "id": "entityName",
-        "label": "Nama siswa, mahasiswa, atau lembaga",
+        "label": "Nama sekolah, kampus, kelas, atau program",
         "type": "text",
         "required": true,
-        "placeholder": "Contoh: Toko Sinar Jaya"
+        "placeholder": "Nama institusi atau program pendidikan"
       },
       {
         "id": "ownerName",
-        "label": "Nama pengajar atau penyusun",
+        "label": "Guru, dosen, wali kelas, atau penanggung jawab",
         "type": "text",
         "required": false,
         "placeholder": "Nama penanggung jawab"
       },
       {
         "id": "period",
-        "label": "Periode yang digunakan",
+        "label": "Periode pelaksanaan",
         "type": "select",
         "required": true,
         "options": [
+          "Harian",
           "Mingguan",
           "Bulanan",
-          "Per semester",
-          "Menjelang ujian"
+          "Semester ganjil",
+          "Semester genap",
+          "Tahunan",
+          "Per angkatan"
         ]
       },
       {
         "id": "scope",
-        "label": "Ruang lingkup atau konteks penggunaan",
+        "label": "Jenjang atau ruang lingkup",
         "type": "select",
         "required": true,
         "options": [
-          "Sekolah",
+          "SD/MI",
+          "SMP/MTs",
+          "SMA/SMK/MA",
           "Perguruan tinggi",
-          "Kursus",
-          "Belajar mandiri"
+          "Kursus atau pelatihan",
+          "Kegiatan sekolah"
         ]
       },
       {
         "id": "notes",
-        "label": "Catatan tambahan",
+        "label": "Catatan kurikulum, kebijakan, atau asumsi",
         "type": "textarea",
         "required": false,
-        "placeholder": "Tuliskan kebutuhan tambahan yang ingin dimasukkan."
+        "placeholder": "Tuliskan ketentuan penilaian, jadwal, atau konteks tambahan."
       }
     ],
     "sheets": [
       {
-        "name": "Target Belajar",
-        "title": "Study Planner - {{entityName}}",
+        "name": "Rekap Nilai Rapor",
+        "title": "Buku Nilai Rapor, Predikat & Status Kelulusan Otomatis - {{entityName}}",
         "columns": [
-          "Mata Pelajaran",
-          "Target Sesi",
-          "Sesi Selesai",
-          "Progres",
-          "Catatan"
+          "Nama/Kode Siswa",
+          "Rata-rata Tugas",
+          "Nilai PTS",
+          "Nilai PAS",
+          "Nilai Akhir",
+          "Tuntas (1/0)",
+          "Peringkat"
+        ],
+        "rows": [
+          [
+            "S-001",
+            85,
+            82,
+            88,
+            0,
+            0,
+            0
+          ],
+          [
+            "S-002",
+            78,
+            74,
+            80,
+            0,
+            0,
+            0
+          ],
+          [
+            "S-003",
+            92,
+            90,
+            94,
+            0,
+            0,
+            0
+          ],
+          [
+            "S-004",
+            68,
+            72,
+            70,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "B6*0.30+C6*0.30+D6*0.40",
+            "cachedValue": 85.3
+          },
+          {
+            "cell": "F6",
+            "formula": "IF(E6>=75,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G6",
+            "formula": "RANK(E6,E6:E9,0)",
+            "cachedValue": 2
+          },
+          {
+            "cell": "E7",
+            "formula": "B7*0.30+C7*0.30+D7*0.40",
+            "cachedValue": 77.6
+          },
+          {
+            "cell": "F7",
+            "formula": "IF(E7>=75,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G7",
+            "formula": "RANK(E7,E6:E9,0)",
+            "cachedValue": 3
+          },
+          {
+            "cell": "E8",
+            "formula": "B8*0.30+C8*0.30+D8*0.40",
+            "cachedValue": 92.2
+          },
+          {
+            "cell": "F8",
+            "formula": "IF(E8>=75,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G8",
+            "formula": "RANK(E8,E6:E9,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "E9",
+            "formula": "B9*0.30+C9*0.30+D9*0.40",
+            "cachedValue": 70
+          },
+          {
+            "cell": "F9",
+            "formula": "IF(E9>=75,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G9",
+            "formula": "RANK(E9,E6:E9,0)",
+            "cachedValue": 4
+          }
+        ],
+        "columnWidths": [
+          22,
+          18,
+          15,
+          15,
+          16,
+          16,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "id": "presensi-siswa-kehadiran-bulanan",
+    "name": "Rekap Presensi Siswa & Persentase Kehadiran Bulanan",
+    "category": "pendidikan",
+    "categoryLabel": "Pendidikan",
+    "symbol": "PSH",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Rekap jumlah hari belajar, kehadiran, izin, sakit, dan alpa per siswa; hitung persentase hadir dan tandai siswa yang berada di bawah ambang kehadiran.",
+    "tags": [
+      "presensi siswa",
+      "kehadiran",
+      "absensi",
+      "rekap bulanan",
+      "wali kelas"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama sekolah, kampus, kelas, atau program",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama institusi atau program pendidikan"
+      },
+      {
+        "id": "ownerName",
+        "label": "Guru, dosen, wali kelas, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pelaksanaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Semester ganjil",
+          "Semester genap",
+          "Tahunan",
+          "Per angkatan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenjang atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "SD/MI",
+          "SMP/MTs",
+          "SMA/SMK/MA",
+          "Perguruan tinggi",
+          "Kursus atau pelatihan",
+          "Kegiatan sekolah"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kurikulum, kebijakan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan ketentuan penilaian, jadwal, atau konteks tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Presensi Bulanan",
+        "title": "Rekap Presensi Siswa & Persentase Kehadiran Bulanan - {{entityName}}",
+        "columns": [
+          "Kode Siswa",
+          "Hari Efektif",
+          "Hadir",
+          "Izin",
+          "Sakit",
+          "Alpa",
+          "Persentase Hadir",
+          "Memenuhi 90% (1/0)"
+        ],
+        "rows": [
+          [
+            "S-001",
+            20,
+            19,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "S-002",
+            20,
+            17,
+            1,
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            "S-003",
+            20,
+            20,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "S-004",
+            20,
+            15,
+            2,
+            1,
+            2,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "IF(B6=0,0,C6/B6)",
+            "cachedValue": 0.95
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(G6>=0.9,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(B7=0,0,C7/B7)",
+            "cachedValue": 0.85
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(G7>=0.9,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(B8=0,0,C8/B8)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(G8>=0.9,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(B9=0,0,C9/B9)",
+            "cachedValue": 0.75
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(G9>=0.9,1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          18,
+          16,
+          13,
+          12,
+          12,
+          12,
+          19,
+          21
+        ]
+      }
+    ]
+  },
+  {
+    "id": "jadwal-piket-kelas-pemerataan-tugas",
+    "name": "Jadwal Piket Kelas & Pemerataan Beban Tugas",
+    "category": "pendidikan",
+    "categoryLabel": "Pendidikan",
+    "symbol": "JPK",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Atur pembagian piket, catat pelaksanaan dan ketidakhadiran, lalu ukur pemerataan giliran agar beban kebersihan tidak selalu jatuh kepada siswa yang sama.",
+    "tags": [
+      "jadwal piket",
+      "kelas",
+      "pembagian tugas",
+      "pemerataan",
+      "wali kelas"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama sekolah, kampus, kelas, atau program",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama institusi atau program pendidikan"
+      },
+      {
+        "id": "ownerName",
+        "label": "Guru, dosen, wali kelas, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pelaksanaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Semester ganjil",
+          "Semester genap",
+          "Tahunan",
+          "Per angkatan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenjang atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "SD/MI",
+          "SMP/MTs",
+          "SMA/SMK/MA",
+          "Perguruan tinggi",
+          "Kursus atau pelatihan",
+          "Kegiatan sekolah"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kurikulum, kebijakan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan ketentuan penilaian, jadwal, atau konteks tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Pembagian Piket",
+        "title": "Jadwal Piket Kelas & Pemerataan Beban Tugas - {{entityName}}",
+        "columns": [
+          "Kode Siswa",
+          "Giliran Dijadwalkan",
+          "Giliran Selesai",
+          "Tidak Hadir",
+          "Rasio Pelaksanaan",
+          "Perlu Tindak Lanjut (1/0)",
+          "Selisih dari Rata-rata"
+        ],
+        "rows": [
+          [
+            "S-001",
+            4,
+            4,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "S-002",
+            4,
+            3,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            "S-003",
+            3,
+            3,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "S-004",
+            3,
+            2,
+            1,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "IF(B6=0,0,C6/B6)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F6",
+            "formula": "IF(AND(D6>0,E6<1),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G6",
+            "formula": "B6-AVERAGE(B6:B9)",
+            "cachedValue": 0.5
+          },
+          {
+            "cell": "E7",
+            "formula": "IF(B7=0,0,C7/B7)",
+            "cachedValue": 0.75
+          },
+          {
+            "cell": "F7",
+            "formula": "IF(AND(D7>0,E7<1),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G7",
+            "formula": "B7-AVERAGE(B6:B9)",
+            "cachedValue": 0.5
+          },
+          {
+            "cell": "E8",
+            "formula": "IF(B8=0,0,C8/B8)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F8",
+            "formula": "IF(AND(D8>0,E8<1),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G8",
+            "formula": "B8-AVERAGE(B6:B9)",
+            "cachedValue": -0.5
+          },
+          {
+            "cell": "E9",
+            "formula": "IF(B9=0,0,C9/B9)",
+            "cachedValue": 0.6666666667
+          },
+          {
+            "cell": "F9",
+            "formula": "IF(AND(D9>0,E9<1),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G9",
+            "formula": "B9-AVERAGE(B6:B9)",
+            "cachedValue": -0.5
+          }
+        ],
+        "columnWidths": [
+          18,
+          22,
+          18,
+          15,
+          18,
+          24,
+          23
+        ]
+      }
+    ]
+  },
+  {
+    "id": "inventaris-kelas-kondisi-aset",
+    "name": "Inventaris Kelas, Kondisi Aset & Batas Stok",
+    "category": "pendidikan",
+    "categoryLabel": "Pendidikan",
+    "symbol": "IKA",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Catat aset dan perlengkapan kelas, barang masuk-keluar, kondisi, saldo stok, dan kebutuhan pengadaan ketika jumlah barang menyentuh batas minimum.",
+    "tags": [
+      "inventaris kelas",
+      "aset sekolah",
+      "stok alat tulis",
+      "pengadaan",
+      "sarana prasarana"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama sekolah, kampus, kelas, atau program",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama institusi atau program pendidikan"
+      },
+      {
+        "id": "ownerName",
+        "label": "Guru, dosen, wali kelas, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pelaksanaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Semester ganjil",
+          "Semester genap",
+          "Tahunan",
+          "Per angkatan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenjang atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "SD/MI",
+          "SMP/MTs",
+          "SMA/SMK/MA",
+          "Perguruan tinggi",
+          "Kursus atau pelatihan",
+          "Kegiatan sekolah"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kurikulum, kebijakan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan ketentuan penilaian, jadwal, atau konteks tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Inventaris Kelas",
+        "title": "Inventaris Kelas, Kondisi Aset & Batas Stok - {{entityName}}",
+        "columns": [
+          "Barang",
+          "Stok Awal",
+          "Barang Masuk",
+          "Dipakai/Rusak",
+          "Stok Akhir",
+          "Batas Minimum",
+          "Perlu Pengadaan (1/0)"
+        ],
+        "rows": [
+          [
+            "Spidol papan",
+            12,
+            6,
+            8,
+            0,
+            5,
+            0
+          ],
+          [
+            "Penghapus papan",
+            5,
+            2,
+            1,
+            0,
+            3,
+            0
+          ],
+          [
+            "Buku tulis cadangan",
+            40,
+            0,
+            17,
+            0,
+            15,
+            0
+          ],
+          [
+            "Kabel proyektor",
+            2,
+            0,
+            1,
+            0,
+            1,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "B6+C6-D6",
+            "cachedValue": 10
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(E6<=F6,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "E7",
+            "formula": "B7+C7-D7",
+            "cachedValue": 6
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(E7<=F7,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "E8",
+            "formula": "B8+C8-D8",
+            "cachedValue": 23
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(E8<=F8,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "E9",
+            "formula": "B9+C9-D9",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(E9<=F9,1,0)",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          28,
+          15,
+          16,
+          18,
+          15,
+          17,
+          23
+        ]
+      }
+    ]
+  },
+  {
+    "id": "peminjaman-buku-perpustakaan-jatuh-tempo",
+    "name": "Log Peminjaman Buku Perpustakaan & Denda Keterlambatan",
+    "category": "pendidikan",
+    "categoryLabel": "Pendidikan",
+    "symbol": "PBP",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Kelola pinjaman buku berdasarkan kode anggota, jumlah eksemplar, hari keterlambatan, dan estimasi biaya penggantian atau denda sesuai kebijakan perpustakaan.",
+    "tags": [
+      "perpustakaan sekolah",
+      "peminjaman buku",
+      "pengembalian",
+      "keterlambatan",
+      "denda"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama sekolah, kampus, kelas, atau program",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama institusi atau program pendidikan"
+      },
+      {
+        "id": "ownerName",
+        "label": "Guru, dosen, wali kelas, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pelaksanaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Semester ganjil",
+          "Semester genap",
+          "Tahunan",
+          "Per angkatan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenjang atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "SD/MI",
+          "SMP/MTs",
+          "SMA/SMK/MA",
+          "Perguruan tinggi",
+          "Kursus atau pelatihan",
+          "Kegiatan sekolah"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kurikulum, kebijakan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan ketentuan penilaian, jadwal, atau konteks tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Log Peminjaman",
+        "title": "Log Peminjaman Buku Perpustakaan & Denda Keterlambatan - {{entityName}}",
+        "columns": [
+          "Kode Anggota",
+          "Buku Dipinjam",
+          "Buku Kembali",
+          "Hari Terlambat",
+          "Denda per Hari (Rp)",
+          "Belum Kembali",
+          "Estimasi Denda (Rp)"
+        ],
+        "rows": [
+          [
+            "A-011",
+            2,
+            2,
+            0,
+            500,
+            0,
+            0
+          ],
+          [
+            "A-012",
+            3,
+            2,
+            4,
+            500,
+            0,
+            0
+          ],
+          [
+            "A-013",
+            1,
+            0,
+            7,
+            500,
+            0,
+            0
+          ],
+          [
+            "A-014",
+            2,
+            2,
+            0,
+            500,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "MAX(0,B6-C6)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G6",
+            "formula": "F6*D6*E6",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F7",
+            "formula": "MAX(0,B7-C7)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G7",
+            "formula": "F7*D7*E7",
+            "cachedValue": 2000
+          },
+          {
+            "cell": "F8",
+            "formula": "MAX(0,B8-C8)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G8",
+            "formula": "F8*D8*E8",
+            "cachedValue": 3500
+          },
+          {
+            "cell": "F9",
+            "formula": "MAX(0,B9-C9)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G9",
+            "formula": "F9*D9*E9",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          18,
+          17,
+          17,
+          17,
+          19,
+          17,
+          22
+        ]
+      }
+    ]
+  },
+  {
+    "id": "anggaran-ekstrakurikuler-osis-realisasi",
+    "name": "Anggaran Kegiatan Ekstrakurikuler/OSIS & Realisasi Dana",
+    "category": "pendidikan",
+    "categoryLabel": "Pendidikan",
+    "symbol": "AEO",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Bandingkan anggaran dan realisasi setiap kegiatan, hitung deviasi serta utilisasi dana, dan tandai pos yang melampaui pagu sebelum laporan pertanggungjawaban disusun.",
+    "tags": [
+      "anggaran OSIS",
+      "ekstrakurikuler",
+      "realisasi dana",
+      "LPJ",
+      "kegiatan siswa"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama sekolah, kampus, kelas, atau program",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama institusi atau program pendidikan"
+      },
+      {
+        "id": "ownerName",
+        "label": "Guru, dosen, wali kelas, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pelaksanaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Semester ganjil",
+          "Semester genap",
+          "Tahunan",
+          "Per angkatan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenjang atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "SD/MI",
+          "SMP/MTs",
+          "SMA/SMK/MA",
+          "Perguruan tinggi",
+          "Kursus atau pelatihan",
+          "Kegiatan sekolah"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kurikulum, kebijakan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan ketentuan penilaian, jadwal, atau konteks tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Anggaran Kegiatan",
+        "title": "Anggaran Kegiatan Ekstrakurikuler/OSIS & Realisasi Dana - {{entityName}}",
+        "columns": [
+          "Kegiatan",
+          "Anggaran (Rp)",
+          "Realisasi (Rp)",
+          "Sisa/Defisit (Rp)",
+          "Utilisasi Anggaran",
+          "Melebihi Pagu (1/0)"
+        ],
+        "rows": [
+          [
+            "Lomba antar kelas",
+            1500000,
+            1325000,
+            0,
+            0,
+            0
+          ],
+          [
+            "Latihan rutin ekskul",
+            900000,
+            950000,
+            0,
+            0,
+            0
+          ],
+          [
+            "Pentas seni",
+            3500000,
+            3250000,
+            0,
+            0,
+            0
+          ],
+          [
+            "Kegiatan sosial",
+            1200000,
+            800000,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "D6",
+            "formula": "B6-C6",
+            "cachedValue": 175000
+          },
+          {
+            "cell": "E6",
+            "formula": "IF(B6=0,0,C6/B6)",
+            "cachedValue": 0.8833333333
+          },
+          {
+            "cell": "F6",
+            "formula": "IF(C6>B6,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "D7",
+            "formula": "B7-C7",
+            "cachedValue": -50000
+          },
+          {
+            "cell": "E7",
+            "formula": "IF(B7=0,0,C7/B7)",
+            "cachedValue": 1.0555555556
+          },
+          {
+            "cell": "F7",
+            "formula": "IF(C7>B7,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "D8",
+            "formula": "B8-C8",
+            "cachedValue": 250000
+          },
+          {
+            "cell": "E8",
+            "formula": "IF(B8=0,0,C8/B8)",
+            "cachedValue": 0.9285714286
+          },
+          {
+            "cell": "F8",
+            "formula": "IF(C8>B8,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "D9",
+            "formula": "B9-C9",
+            "cachedValue": 400000
+          },
+          {
+            "cell": "E9",
+            "formula": "IF(B9=0,0,C9/B9)",
+            "cachedValue": 0.6666666667
+          },
+          {
+            "cell": "F9",
+            "formula": "IF(C9>B9,1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          28,
+          20,
+          20,
+          20,
+          19,
+          21
+        ]
+      }
+    ]
+  },
+  {
+    "id": "pelacak-tugas-remedial-pengayaan",
+    "name": "Pelacak Pengumpulan Tugas, Remedial & Pengayaan",
+    "category": "pendidikan",
+    "categoryLabel": "Pendidikan",
+    "symbol": "PTR",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Pantau tugas yang diberikan dan dikumpulkan, keterlambatan, nilai, serta kebutuhan remedial atau pengayaan agar tindak lanjut pembelajaran jelas per siswa.",
+    "tags": [
+      "tugas siswa",
+      "remedial",
+      "pengayaan",
+      "pengumpulan tugas",
+      "nilai"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama sekolah, kampus, kelas, atau program",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama institusi atau program pendidikan"
+      },
+      {
+        "id": "ownerName",
+        "label": "Guru, dosen, wali kelas, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pelaksanaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Semester ganjil",
+          "Semester genap",
+          "Tahunan",
+          "Per angkatan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenjang atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "SD/MI",
+          "SMP/MTs",
+          "SMA/SMK/MA",
+          "Perguruan tinggi",
+          "Kursus atau pelatihan",
+          "Kegiatan sekolah"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kurikulum, kebijakan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan ketentuan penilaian, jadwal, atau konteks tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Rekap Tugas",
+        "title": "Pelacak Pengumpulan Tugas, Remedial & Pengayaan - {{entityName}}",
+        "columns": [
+          "Kode Siswa",
+          "Tugas Diberikan",
+          "Tugas Dikumpulkan",
+          "Nilai Rata-rata",
+          "Kelengkapan",
+          "Tugas Belum Masuk",
+          "Remedial (1/0)"
+        ],
+        "rows": [
+          [
+            "S-001",
+            8,
+            8,
+            86,
+            0,
+            0,
+            0
+          ],
+          [
+            "S-002",
+            8,
+            6,
+            68,
+            0,
+            0,
+            0
+          ],
+          [
+            "S-003",
+            8,
+            8,
+            92,
+            0,
+            0,
+            0
+          ],
+          [
+            "S-004",
+            8,
+            7,
+            74,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "IF(B6=0,0,C6/B6)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F6",
+            "formula": "MAX(0,B6-C6)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(D6<75,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "E7",
+            "formula": "IF(B7=0,0,C7/B7)",
+            "cachedValue": 0.75
+          },
+          {
+            "cell": "F7",
+            "formula": "MAX(0,B7-C7)",
+            "cachedValue": 2
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(D7<75,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "E8",
+            "formula": "IF(B8=0,0,C8/B8)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F8",
+            "formula": "MAX(0,B8-C8)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(D8<75,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "E9",
+            "formula": "IF(B9=0,0,C9/B9)",
+            "cachedValue": 0.875
+          },
+          {
+            "cell": "F9",
+            "formula": "MAX(0,B9-C9)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(D9<75,1,0)",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          18,
+          18,
+          21,
+          18,
+          16,
+          19,
+          17
+        ]
+      }
+    ]
+  },
+  {
+    "id": "jadwal-ujian-ruang-pengawas-kapasitas",
+    "name": "Jadwal Ujian, Ruang, Pengawas & Kapasitas Peserta",
+    "category": "pendidikan",
+    "categoryLabel": "Pendidikan",
+    "symbol": "JUR",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Rencanakan kapasitas ruang ujian, jumlah peserta, kebutuhan pengawas, dan kesiapan penugasan sehingga distribusi peserta tidak melebihi kapasitas ruangan.",
+    "tags": [
+      "jadwal ujian",
+      "ruang ujian",
+      "pengawas",
+      "kapasitas",
+      "ujian sekolah"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama sekolah, kampus, kelas, atau program",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama institusi atau program pendidikan"
+      },
+      {
+        "id": "ownerName",
+        "label": "Guru, dosen, wali kelas, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pelaksanaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Semester ganjil",
+          "Semester genap",
+          "Tahunan",
+          "Per angkatan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenjang atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "SD/MI",
+          "SMP/MTs",
+          "SMA/SMK/MA",
+          "Perguruan tinggi",
+          "Kursus atau pelatihan",
+          "Kegiatan sekolah"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kurikulum, kebijakan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan ketentuan penilaian, jadwal, atau konteks tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Penempatan Ujian",
+        "title": "Jadwal Ujian, Ruang, Pengawas & Kapasitas Peserta - {{entityName}}",
+        "columns": [
+          "Mata Ujian",
+          "Kapasitas Ruang",
+          "Peserta Terdaftar",
+          "Pengawas Dibutuhkan",
+          "Pengawas Ditugaskan",
+          "Utilisasi Ruang",
+          "Siap Digunakan (1/0)"
         ],
         "rows": [
           [
             "Matematika",
-            4,
+            36,
+            34,
+            2,
             2,
             0,
-            ""
+            0
           ],
           [
             "Bahasa Indonesia",
-            3,
+            36,
+            38,
+            2,
+            2,
+            0,
+            0
+          ],
+          [
+            "Bahasa Inggris",
+            32,
+            29,
+            2,
             1,
+            0,
+            0
+          ],
+          [
+            "IPA",
+            36,
+            35,
+            2,
+            2,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "IF(B6=0,0,C6/B6)",
+            "cachedValue": 0.9444444444
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(AND(D6<=E6,F6<=1),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F7",
+            "formula": "IF(B7=0,0,C7/B7)",
+            "cachedValue": 1.0555555556
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(AND(D7<=E7,F7<=1),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F8",
+            "formula": "IF(B8=0,0,C8/B8)",
+            "cachedValue": 0.90625
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(AND(D8<=E8,F8<=1),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F9",
+            "formula": "IF(B9=0,0,C9/B9)",
+            "cachedValue": 0.9722222222
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(AND(D9<=E9,F9<=1),1,0)",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          24,
+          18,
+          20,
+          20,
+          20,
+          17,
+          19
+        ]
+      }
+    ]
+  },
+  {
+    "id": "modul-ajar-kurikulum-merdeka",
+    "name": "Modul Ajar Kurikulum Merdeka & Rencana Pembelajaran",
+    "category": "pendidikan",
+    "categoryLabel": "Pendidikan",
+    "symbol": "MAK",
+    "format": "md",
+    "quality": "standar",
+    "description": "Kerangka modul ajar yang dapat diisi guru untuk menyelaraskan tujuan pembelajaran, kegiatan, asesmen, diferensiasi, serta refleksi sesuai konteks satuan pendidikan.",
+    "tags": [
+      "modul ajar",
+      "kurikulum merdeka",
+      "RPP",
+      "tujuan pembelajaran",
+      "asesmen"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama sekolah, kampus, kelas, atau program",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama institusi atau program pendidikan"
+      },
+      {
+        "id": "ownerName",
+        "label": "Guru, dosen, wali kelas, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pelaksanaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Semester ganjil",
+          "Semester genap",
+          "Tahunan",
+          "Per angkatan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenjang atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "SD/MI",
+          "SMP/MTs",
+          "SMA/SMK/MA",
+          "Perguruan tinggi",
+          "Kursus atau pelatihan",
+          "Kegiatan sekolah"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kurikulum, kebijakan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan ketentuan penilaian, jadwal, atau konteks tambahan."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Identitas dan konteks pembelajaran",
+        "body": "Modul ajar disusun untuk {{entityName}} oleh {{ownerName}}. Periode pelaksanaan: {{period}}. Jenjang/ruang lingkup: {{scope}}. Isi fase, kelas, mata pelajaran, alokasi waktu, dan prasyarat belajar yang relevan."
+      },
+      {
+        "heading": "Capaian dan tujuan pembelajaran",
+        "bullets": [
+          "Capaian Pembelajaran (CP) yang menjadi acuan: [salin atau ringkas sesuai dokumen resmi yang digunakan].",
+          "Tujuan Pembelajaran (TP) yang dapat diamati: [gunakan kata kerja terukur dan kondisi keberhasilan].",
+          "Pemahaman bermakna dan pertanyaan pemantik: [tuliskan pertanyaan yang membuka eksplorasi].",
+          "Kriteria ketercapaian tujuan pembelajaran: [indikator dan bukti]."
+        ]
+      },
+      {
+        "heading": "Materi, media, dan sumber belajar",
+        "bullets": [
+          "Materi esensial dan miskonsepsi yang perlu diantisipasi: [rincian].",
+          "Media, alat, sumber, serta alternatif aksesibilitas: [rincian].",
+          "Konteks lokal atau contoh autentik yang relevan bagi peserta didik: [rincian]."
+        ]
+      },
+      {
+        "heading": "Alur kegiatan pembelajaran",
+        "body": "Rancang pendahuluan, kegiatan inti, dan penutup dengan estimasi waktu. Pastikan aktivitas peserta didik menghasilkan bukti yang dapat dinilai.",
+        "bullets": [
+          "Pendahuluan dan asesmen diagnostik awal: [aktivitas, waktu, instrumen].",
+          "Eksplorasi dan praktik/kolaborasi: [langkah dan peran siswa].",
+          "Penguatan konsep serta umpan balik: [strategi].",
+          "Penutup, refleksi, dan tindak lanjut: [aktivitas]."
+        ]
+      },
+      {
+        "heading": "Diferensiasi dan asesmen",
+        "bullets": [
+          "Penyesuaian konten, proses, atau produk sesuai kesiapan dan kebutuhan belajar: [rincian].",
+          "Asesmen formatif dan sumatif beserta rubrik/instrumen: [bukti, indikator, kriteria].",
+          "Rencana remedial dan pengayaan: [kondisi pemicu dan aktivitas]."
+        ]
+      },
+      {
+        "heading": "Refleksi dan catatan pelaksanaan",
+        "body": "Catat apa yang berhasil, hambatan, bukti hasil belajar, dan perubahan untuk pertemuan berikutnya. Catatan khusus: {{notes}}."
+      }
+    ]
+  },
+  {
+    "id": "analisis-butir-soal-kesukaran-daya-beda",
+    "name": "Analisis Butir Soal: Kesukaran, Daya Pembeda & Distraktor",
+    "category": "pendidikan",
+    "categoryLabel": "Pendidikan",
+    "symbol": "ABS",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Analisis kualitas soal pilihan ganda menggunakan proporsi jawaban benar, selisih kelompok atas-bawah, dan kode tindak lanjut untuk mempertahankan, merevisi, atau mengganti butir.",
+    "tags": [
+      "analisis butir soal",
+      "tingkat kesukaran",
+      "daya pembeda",
+      "evaluasi ujian",
+      "distraktor"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama sekolah, kampus, kelas, atau program",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama institusi atau program pendidikan"
+      },
+      {
+        "id": "ownerName",
+        "label": "Guru, dosen, wali kelas, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pelaksanaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Semester ganjil",
+          "Semester genap",
+          "Tahunan",
+          "Per angkatan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenjang atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "SD/MI",
+          "SMP/MTs",
+          "SMA/SMK/MA",
+          "Perguruan tinggi",
+          "Kursus atau pelatihan",
+          "Kegiatan sekolah"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kurikulum, kebijakan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan ketentuan penilaian, jadwal, atau konteks tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Analisis Butir",
+        "title": "Analisis Butir Soal: Kesukaran, Daya Pembeda & Distraktor - {{entityName}}",
+        "columns": [
+          "Nomor Soal",
+          "Peserta",
+          "Jawaban Benar",
+          "Benar Kelompok Atas",
+          "Benar Kelompok Bawah",
+          "Indeks Kesukaran",
+          "Daya Pembeda",
+          "Kategori Kesukaran (1-3)",
+          "Layak (1/0)"
+        ],
+        "rows": [
+          [
+            "1",
+            30,
+            8,
+            8,
+            2,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "2",
+            30,
+            17,
+            8,
+            3,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "3",
+            30,
+            24,
+            9,
+            7,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "4",
+            30,
+            15,
+            6,
+            5,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "IF(B6=0,0,C6/B6)",
+            "cachedValue": 0.2666666667
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(B6=0,0,(D6-E6)/(B6/3))",
+            "cachedValue": 0.6
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(F6<0.3,1,IF(F6<=0.7,2,3))",
+            "cachedValue": 1
+          },
+          {
+            "cell": "I6",
+            "formula": "IF(AND(G6>=0.3,F6>=0.2,F6<=0.8),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F7",
+            "formula": "IF(B7=0,0,C7/B7)",
+            "cachedValue": 0.5666666667
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(B7=0,0,(D7-E7)/(B7/3))",
+            "cachedValue": 0.5
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(F7<0.3,1,IF(F7<=0.7,2,3))",
+            "cachedValue": 2
+          },
+          {
+            "cell": "I7",
+            "formula": "IF(AND(G7>=0.3,F7>=0.2,F7<=0.8),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F8",
+            "formula": "IF(B8=0,0,C8/B8)",
+            "cachedValue": 0.8
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(B8=0,0,(D8-E8)/(B8/3))",
+            "cachedValue": 0.2
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(F8<0.3,1,IF(F8<=0.7,2,3))",
+            "cachedValue": 3
+          },
+          {
+            "cell": "I8",
+            "formula": "IF(AND(G8>=0.3,F8>=0.2,F8<=0.8),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F9",
+            "formula": "IF(B9=0,0,C9/B9)",
+            "cachedValue": 0.5
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(B9=0,0,(D9-E9)/(B9/3))",
+            "cachedValue": 0.1
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(F9<0.3,1,IF(F9<=0.7,2,3))",
+            "cachedValue": 2
+          },
+          {
+            "cell": "I9",
+            "formula": "IF(AND(G9>=0.3,F9>=0.2,F9<=0.8),1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          15,
+          13,
+          17,
+          22,
+          22,
+          18,
+          17,
+          24,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "id": "program-semester-prosem-alokasi-jp",
+    "name": "Program Semester (Prosem) & Alokasi Jam Pelajaran",
+    "category": "pendidikan",
+    "categoryLabel": "Pendidikan",
+    "symbol": "PSM",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Susun urutan materi dan tujuan pembelajaran per minggu, bandingkan jam pelajaran yang direncanakan dengan realisasi, serta hitung cakupan penyampaian materi semester.",
+    "tags": [
+      "program semester",
+      "prosem",
+      "alokasi JP",
+      "kalender akademik",
+      "materi ajar"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama sekolah, kampus, kelas, atau program",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama institusi atau program pendidikan"
+      },
+      {
+        "id": "ownerName",
+        "label": "Guru, dosen, wali kelas, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pelaksanaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Semester ganjil",
+          "Semester genap",
+          "Tahunan",
+          "Per angkatan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenjang atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "SD/MI",
+          "SMP/MTs",
+          "SMA/SMK/MA",
+          "Perguruan tinggi",
+          "Kursus atau pelatihan",
+          "Kegiatan sekolah"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kurikulum, kebijakan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan ketentuan penilaian, jadwal, atau konteks tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Program Semester",
+        "title": "Program Semester (Prosem) & Alokasi Jam Pelajaran - {{entityName}}",
+        "columns": [
+          "Minggu",
+          "Materi/Unit",
+          "JP Rencana",
+          "JP Terlaksana",
+          "Selisih JP",
+          "Cakupan Pelaksanaan",
+          "Catatan Penyesuaian"
+        ],
+        "rows": [
+          [
+            1,
+            "Orientasi dan asesmen diagnostik",
+            4,
+            4,
+            0,
             0,
             ""
           ],
           [
-            "Bahasa Inggris",
-            4,
+            2,
+            "Unit 1: konsep dasar",
+            6,
+            5,
+            0,
+            0,
+            "Satu JP dialihkan"
+          ],
+          [
             3,
+            "Unit 1: latihan terstruktur",
+            4,
+            4,
+            0,
+            0,
+            ""
+          ],
+          [
+            4,
+            "Asesmen formatif unit 1",
+            2,
+            2,
+            0,
+            0,
+            ""
+          ],
+          [
+            5,
+            "Unit 2: penerapan",
+            6,
+            5,
+            0,
             0,
             ""
           ]
         ],
         "formulaCells": [
           {
-            "cell": "D6",
-            "formula": "IF(B6=0,0,C6/B6)",
-            "cachedValue": 0.5
+            "cell": "E6",
+            "formula": "C6-D6",
+            "cachedValue": 0
           },
           {
-            "cell": "D7",
-            "formula": "IF(B7=0,0,C7/B7)",
-            "cachedValue": 0.3333333333
+            "cell": "F6",
+            "formula": "IF(C6=0,0,D6/C6)",
+            "cachedValue": 1
           },
           {
-            "cell": "D8",
-            "formula": "IF(B8=0,0,C8/B8)",
-            "cachedValue": 0.75
+            "cell": "E7",
+            "formula": "C7-D7",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F7",
+            "formula": "IF(C7=0,0,D7/C7)",
+            "cachedValue": 0.8333333333
+          },
+          {
+            "cell": "E8",
+            "formula": "C8-D8",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F8",
+            "formula": "IF(C8=0,0,D8/C8)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "E9",
+            "formula": "C9-D9",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F9",
+            "formula": "IF(C9=0,0,D9/C9)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "E10",
+            "formula": "C10-D10",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F10",
+            "formula": "IF(C10=0,0,D10/C10)",
+            "cachedValue": 0.8333333333
           }
         ],
         "columnWidths": [
-          28,
+          12,
+          34,
+          15,
           16,
-          18,
-          16,
-          32
+          14,
+          20,
+          28
         ]
       }
+    ]
+  },
+  {
+    "id": "rubrik-penilaian-proyek-portofolio",
+    "name": "Rubrik Penilaian Tugas Proyek & Portofolio Siswa",
+    "category": "pendidikan",
+    "categoryLabel": "Pendidikan",
+    "symbol": "RPP",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Nilai hasil proyek berdasarkan kriteria dan bobot yang transparan, hitung kontribusi setiap kriteria, serta ringkas tingkat ketercapaian rubrik.",
+    "tags": [
+      "rubrik penilaian",
+      "proyek siswa",
+      "portofolio",
+      "asesmen autentik",
+      "skor berbobot"
     ],
-    "quality": "baik"
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama sekolah, kampus, kelas, atau program",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama institusi atau program pendidikan"
+      },
+      {
+        "id": "ownerName",
+        "label": "Guru, dosen, wali kelas, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pelaksanaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Semester ganjil",
+          "Semester genap",
+          "Tahunan",
+          "Per angkatan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenjang atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "SD/MI",
+          "SMP/MTs",
+          "SMA/SMK/MA",
+          "Perguruan tinggi",
+          "Kursus atau pelatihan",
+          "Kegiatan sekolah"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kurikulum, kebijakan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan ketentuan penilaian, jadwal, atau konteks tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Rubrik Proyek",
+        "title": "Rubrik Penilaian Tugas Proyek & Portofolio Siswa - {{entityName}}",
+        "columns": [
+          "Kriteria Penilaian",
+          "Bobot (%)",
+          "Skor (1-4)",
+          "Poin Berbobot",
+          "Skor Maksimum",
+          "Ketercapaian"
+        ],
+        "rows": [
+          [
+            "Ketepatan konsep",
+            30,
+            4,
+            0,
+            30,
+            0
+          ],
+          [
+            "Kualitas proses dan metode",
+            25,
+            3,
+            0,
+            25,
+            0
+          ],
+          [
+            "Kreativitas solusi",
+            20,
+            4,
+            0,
+            20,
+            0
+          ],
+          [
+            "Komunikasi hasil",
+            15,
+            3,
+            0,
+            15,
+            0
+          ],
+          [
+            "Kolaborasi dan refleksi",
+            10,
+            4,
+            0,
+            10,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "D6",
+            "formula": "B6*C6/4",
+            "cachedValue": 30
+          },
+          {
+            "cell": "F6",
+            "formula": "IF(E6=0,0,D6/E6)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "D7",
+            "formula": "B7*C7/4",
+            "cachedValue": 18.75
+          },
+          {
+            "cell": "F7",
+            "formula": "IF(E7=0,0,D7/E7)",
+            "cachedValue": 0.75
+          },
+          {
+            "cell": "D8",
+            "formula": "B8*C8/4",
+            "cachedValue": 20
+          },
+          {
+            "cell": "F8",
+            "formula": "IF(E8=0,0,D8/E8)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "D9",
+            "formula": "B9*C9/4",
+            "cachedValue": 11.25
+          },
+          {
+            "cell": "F9",
+            "formula": "IF(E9=0,0,D9/E9)",
+            "cachedValue": 0.75
+          },
+          {
+            "cell": "D10",
+            "formula": "B10*C10/4",
+            "cachedValue": 10
+          },
+          {
+            "cell": "F10",
+            "formula": "IF(E10=0,0,D10/E10)",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          32,
+          15,
+          15,
+          18,
+          18,
+          17
+        ]
+      }
+    ]
+  },
+  {
+    "id": "pelacak-progres-skripsi-tesis-bimbingan",
+    "name": "Pelacak Progres Skripsi/Tesis & Jadwal Bimbingan",
+    "category": "pendidikan",
+    "categoryLabel": "Pendidikan",
+    "symbol": "PTS",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Kelola milestone skripsi atau tesis, bobot penyelesaian, progres aktual, tenggat relatif, dan tindak lanjut bimbingan untuk mencegah keterlambatan tahap akhir.",
+    "tags": [
+      "skripsi",
+      "tesis",
+      "bimbingan akademik",
+      "milestone",
+      "tenggat"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama sekolah, kampus, kelas, atau program",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama institusi atau program pendidikan"
+      },
+      {
+        "id": "ownerName",
+        "label": "Guru, dosen, wali kelas, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pelaksanaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Semester ganjil",
+          "Semester genap",
+          "Tahunan",
+          "Per angkatan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenjang atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "SD/MI",
+          "SMP/MTs",
+          "SMA/SMK/MA",
+          "Perguruan tinggi",
+          "Kursus atau pelatihan",
+          "Kegiatan sekolah"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kurikulum, kebijakan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan ketentuan penilaian, jadwal, atau konteks tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Progres Penelitian",
+        "title": "Pelacak Progres Skripsi/Tesis & Jadwal Bimbingan - {{entityName}}",
+        "columns": [
+          "Tahap Penelitian",
+          "Bobot (%)",
+          "Progres (%)",
+          "Kontribusi Progres",
+          "Sisa Hari ke Tenggat",
+          "Risiko Terlambat (1/0)",
+          "Agenda Bimbingan Berikutnya"
+        ],
+        "rows": [
+          [
+            "Proposal dan persetujuan topik",
+            15,
+            100,
+            0,
+            0,
+            0,
+            "Persetujuan final"
+          ],
+          [
+            "Kajian pustaka",
+            20,
+            80,
+            0,
+            5,
+            0,
+            "Periksa kerangka teori"
+          ],
+          [
+            "Metode dan instrumen",
+            20,
+            65,
+            0,
+            -2,
+            0,
+            "Validasi instrumen"
+          ],
+          [
+            "Pengumpulan data",
+            20,
+            25,
+            0,
+            18,
+            0,
+            "Tinjau akses responden"
+          ],
+          [
+            "Analisis dan penulisan",
+            25,
+            0,
+            0,
+            35,
+            0,
+            "Belum dijadwalkan"
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "D6",
+            "formula": "B6*C6/100",
+            "cachedValue": 15
+          },
+          {
+            "cell": "F6",
+            "formula": "IF(AND(E6<0,C6<100),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "D7",
+            "formula": "B7*C7/100",
+            "cachedValue": 16
+          },
+          {
+            "cell": "F7",
+            "formula": "IF(AND(E7<0,C7<100),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "D8",
+            "formula": "B8*C8/100",
+            "cachedValue": 13
+          },
+          {
+            "cell": "F8",
+            "formula": "IF(AND(E8<0,C8<100),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "D9",
+            "formula": "B9*C9/100",
+            "cachedValue": 5
+          },
+          {
+            "cell": "F9",
+            "formula": "IF(AND(E9<0,C9<100),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "D10",
+            "formula": "B10*C10/100",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F10",
+            "formula": "IF(AND(E10<0,C10<100),1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          32,
+          15,
+          15,
+          19,
+          20,
+          22,
+          30
+        ]
+      }
+    ]
+  },
+  {
+    "id": "kalkulator-ipk-simulasi-target-nilai",
+    "name": "Kalkulator IPK & Simulasi Target Nilai Semester",
+    "category": "pendidikan",
+    "categoryLabel": "Pendidikan",
+    "symbol": "KIP",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Hitung mutu mata kuliah berdasarkan SKS dan bobot nilai, jumlahkan total SKS serta mutu, lalu hitung indeks prestasi semester untuk simulasi target nilai.",
+    "tags": [
+      "IPK",
+      "IPS",
+      "SKS",
+      "kalkulator nilai",
+      "mahasiswa"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama sekolah, kampus, kelas, atau program",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama institusi atau program pendidikan"
+      },
+      {
+        "id": "ownerName",
+        "label": "Guru, dosen, wali kelas, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pelaksanaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Semester ganjil",
+          "Semester genap",
+          "Tahunan",
+          "Per angkatan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenjang atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "SD/MI",
+          "SMP/MTs",
+          "SMA/SMK/MA",
+          "Perguruan tinggi",
+          "Kursus atau pelatihan",
+          "Kegiatan sekolah"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kurikulum, kebijakan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan ketentuan penilaian, jadwal, atau konteks tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Perhitungan IPS",
+        "title": "Kalkulator IPK & Simulasi Target Nilai Semester - {{entityName}}",
+        "columns": [
+          "Mata Kuliah",
+          "SKS",
+          "Bobot Nilai (0-4)",
+          "Mutu (SKS x Bobot)",
+          "Kontribusi IP",
+          "Catatan"
+        ],
+        "rows": [
+          [
+            "Statistika",
+            3,
+            3.5,
+            0,
+            0,
+            "A-/B+"
+          ],
+          [
+            "Metodologi Penelitian",
+            3,
+            3.7,
+            0,
+            0,
+            "A-"
+          ],
+          [
+            "Bahasa Akademik",
+            2,
+            3.3,
+            0,
+            0,
+            "B+"
+          ],
+          [
+            "Etika Profesi",
+            2,
+            4,
+            0,
+            0,
+            "A"
+          ],
+          [
+            "TOTAL / IPS",
+            0,
+            0,
+            0,
+            0,
+            "Ubah nilai untuk simulasi"
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "D6",
+            "formula": "B6*C6",
+            "cachedValue": 10.5
+          },
+          {
+            "cell": "E6",
+            "formula": "IF(B6=0,0,D6/B6)",
+            "cachedValue": 3.5
+          },
+          {
+            "cell": "D7",
+            "formula": "B7*C7",
+            "cachedValue": 11.1
+          },
+          {
+            "cell": "E7",
+            "formula": "IF(B7=0,0,D7/B7)",
+            "cachedValue": 3.7
+          },
+          {
+            "cell": "D8",
+            "formula": "B8*C8",
+            "cachedValue": 6.6
+          },
+          {
+            "cell": "E8",
+            "formula": "IF(B8=0,0,D8/B8)",
+            "cachedValue": 3.3
+          },
+          {
+            "cell": "D9",
+            "formula": "B9*C9",
+            "cachedValue": 8
+          },
+          {
+            "cell": "E9",
+            "formula": "IF(B9=0,0,D9/B9)",
+            "cachedValue": 4
+          },
+          {
+            "cell": "B10",
+            "formula": "SUM(B6:B9)",
+            "cachedValue": 10
+          },
+          {
+            "cell": "D10",
+            "formula": "SUM(D6:D9)",
+            "cachedValue": 36.2
+          },
+          {
+            "cell": "E10",
+            "formula": "IF(B10=0,0,D10/B10)",
+            "cachedValue": 3.62
+          }
+        ],
+        "columnWidths": [
+          32,
+          12,
+          21,
+          20,
+          17,
+          28
+        ]
+      }
+    ]
+  },
+  {
+    "id": "log-konseling-akademik-tindak-lanjut",
+    "name": "Log Pendampingan Akademik & Tindak Lanjut Siswa",
+    "category": "pendidikan",
+    "categoryLabel": "Pendidikan",
+    "symbol": "KAT",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Catat kebutuhan dukungan belajar secara ringkas menggunakan kode siswa, tindakan akademik yang disepakati, tenggat tindak lanjut, dan status penyelesaian tanpa memasukkan diagnosis atau detail pribadi yang tidak relevan.",
+    "tags": [
+      "pendampingan siswa",
+      "konseling akademik",
+      "tindak lanjut",
+      "wali kelas",
+      "dukungan belajar"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama sekolah, kampus, kelas, atau program",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama institusi atau program pendidikan"
+      },
+      {
+        "id": "ownerName",
+        "label": "Guru, dosen, wali kelas, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pelaksanaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Semester ganjil",
+          "Semester genap",
+          "Tahunan",
+          "Per angkatan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenjang atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "SD/MI",
+          "SMP/MTs",
+          "SMA/SMK/MA",
+          "Perguruan tinggi",
+          "Kursus atau pelatihan",
+          "Kegiatan sekolah"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kurikulum, kebijakan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan ketentuan penilaian, jadwal, atau konteks tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Log Pendampingan",
+        "title": "Log Pendampingan Akademik & Tindak Lanjut Siswa - {{entityName}}",
+        "columns": [
+          "Kode Siswa",
+          "Fokus Dukungan Akademik",
+          "Tindakan yang Disepakati",
+          "Sisa Hari Review",
+          "Tindak Lanjut Selesai (1/0)",
+          "Terlambat (1/0)",
+          "Bukti Perkembangan"
+        ],
+        "rows": [
+          [
+            "S-021",
+            "Keterlambatan pengumpulan tugas",
+            "Jadwal konsultasi dan pecah tugas",
+            2,
+            0,
+            0,
+            "Target dua tugas pekan ini"
+          ],
+          [
+            "S-024",
+            "Kesulitan memahami konsep pecahan",
+            "Latihan bertahap dan umpan balik",
+            0,
+            0,
+            0,
+            "Review hasil latihan"
+          ],
+          [
+            "S-029",
+            "Perlu pengayaan materi",
+            "Tugas proyek mandiri",
+            5,
+            1,
+            0,
+            "Portofolio tersimpan"
+          ],
+          [
+            "S-031",
+            "Koordinasi dukungan belajar",
+            "Review capaian dan rencana belajar",
+            -2,
+            0,
+            0,
+            "Evaluasi akademik"
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "IF(AND(D6<0,E6=0),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F7",
+            "formula": "IF(AND(D7<0,E7=0),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F8",
+            "formula": "IF(AND(D8<0,E8=0),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F9",
+            "formula": "IF(AND(D9<0,E9=0),1,0)",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          16,
+          28,
+          34,
+          18,
+          23,
+          16,
+          27
+        ]
+      }
+    ]
+  },
+  {
+    "id": "jurnal-praktikum-laboratorium-k3",
+    "name": "Jurnal Praktikum Laboratorium & Pemeriksaan K3",
+    "category": "pendidikan",
+    "categoryLabel": "Pendidikan",
+    "symbol": "JPL",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Dokumentasikan praktikum per kelompok, pemeriksaan alat pelindung dan prosedur keselamatan, kelengkapan data, serta tingkat penyelesaian laporan praktikum.",
+    "tags": [
+      "praktikum",
+      "laboratorium",
+      "K3",
+      "jurnal lab",
+      "laporan praktikum"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama sekolah, kampus, kelas, atau program",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama institusi atau program pendidikan"
+      },
+      {
+        "id": "ownerName",
+        "label": "Guru, dosen, wali kelas, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pelaksanaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Semester ganjil",
+          "Semester genap",
+          "Tahunan",
+          "Per angkatan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenjang atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "SD/MI",
+          "SMP/MTs",
+          "SMA/SMK/MA",
+          "Perguruan tinggi",
+          "Kursus atau pelatihan",
+          "Kegiatan sekolah"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kurikulum, kebijakan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan ketentuan penilaian, jadwal, atau konteks tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Log Praktikum",
+        "title": "Jurnal Praktikum Laboratorium & Pemeriksaan K3 - {{entityName}}",
+        "columns": [
+          "Tanggal/Modul",
+          "Kelompok",
+          "Checklist K3 Wajib",
+          "Checklist Terpenuhi",
+          "Data Eksperimen Lengkap (1/0)",
+          "Kepatuhan K3",
+          "Laporan Selesai (1/0)"
+        ],
+        "rows": [
+          [
+            "Uji larutan asam-basa",
+            "Kelompok A",
+            8,
+            8,
+            1,
+            0,
+            1
+          ],
+          [
+            "Pengamatan sel",
+            "Kelompok B",
+            8,
+            7,
+            1,
+            0,
+            0
+          ],
+          [
+            "Hukum Ohm",
+            "Kelompok C",
+            8,
+            6,
+            0,
+            0,
+            0
+          ],
+          [
+            "Identifikasi jaringan",
+            "Kelompok D",
+            8,
+            8,
+            1,
+            0,
+            1
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "IF(C6=0,0,D6/C6)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F7",
+            "formula": "IF(C7=0,0,D7/C7)",
+            "cachedValue": 0.875
+          },
+          {
+            "cell": "F8",
+            "formula": "IF(C8=0,0,D8/C8)",
+            "cachedValue": 0.75
+          },
+          {
+            "cell": "F9",
+            "formula": "IF(C9=0,0,D9/C9)",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          25,
+          18,
+          20,
+          20,
+          25,
+          17,
+          20
+        ]
+      }
+    ]
+  },
+  {
+    "id": "silabus-mata-kuliah-rps-berbasis-cpl",
+    "name": "Silabus Mata Kuliah & Rencana Pembelajaran Semester",
+    "category": "pendidikan",
+    "categoryLabel": "Pendidikan",
+    "symbol": "SMK",
+    "format": "md",
+    "quality": "baik",
+    "description": "Dokumen silabus/RPS untuk memetakan CPL, CPMK, sub-CPMK, metode pembelajaran, pengalaman belajar, asesmen, dan referensi mata kuliah.",
+    "tags": [
+      "silabus",
+      "RPS",
+      "CPL",
+      "CPMK",
+      "perguruan tinggi"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama sekolah, kampus, kelas, atau program",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama institusi atau program pendidikan"
+      },
+      {
+        "id": "ownerName",
+        "label": "Guru, dosen, wali kelas, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pelaksanaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Semester ganjil",
+          "Semester genap",
+          "Tahunan",
+          "Per angkatan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenjang atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "SD/MI",
+          "SMP/MTs",
+          "SMA/SMK/MA",
+          "Perguruan tinggi",
+          "Kursus atau pelatihan",
+          "Kegiatan sekolah"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kurikulum, kebijakan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan ketentuan penilaian, jadwal, atau konteks tambahan."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Identitas mata kuliah",
+        "body": "Dokumen untuk {{entityName}}, disusun oleh {{ownerName}}. Periode: {{period}}. Ruang lingkup: {{scope}}. Lengkapi program studi, kode mata kuliah, SKS, semester, prasyarat, dan bentuk pembelajaran."
+      },
+      {
+        "heading": "Deskripsi dan capaian pembelajaran",
+        "bullets": [
+          "Deskripsi ringkas mata kuliah dan kontribusinya terhadap profil lulusan: [isi].",
+          "CPL program studi yang dibebankan pada mata kuliah: [kode dan rumusan].",
+          "CPMK dan sub-CPMK yang terukur: [rumusan menggunakan kata kerja operasional].",
+          "Pemetaan CPL ke CPMK beserta tingkat kontribusinya: [matriks]."
+        ]
+      },
+      {
+        "heading": "Rencana pembelajaran mingguan",
+        "body": "Untuk setiap pertemuan, cantumkan sub-CPMK, bahan kajian, metode, aktivitas mahasiswa, estimasi waktu, dan indikator keberhasilan.",
+        "bullets": [
+          "Pertemuan 1-4: [topik, metode, aktivitas, bukti belajar].",
+          "Pertemuan 5-8: [topik, metode, aktivitas, bukti belajar].",
+          "Pertemuan 9-12: [topik, metode, aktivitas, bukti belajar].",
+          "Pertemuan 13-16: [topik, metode, aktivitas, bukti belajar]."
+        ]
+      },
+      {
+        "heading": "Strategi penilaian",
+        "bullets": [
+          "Komponen penilaian dan bobot: [partisipasi, tugas, kuis, UTS, UAS/proyek].",
+          "Rubrik dan kriteria penilaian setiap komponen: [tautan/lampiran].",
+          "Keterkaitan asesmen dengan CPMK: [matriks bukti dan capaian].",
+          "Mekanisme umpan balik, remediasi, dan keberatan nilai: [prosedur]."
+        ]
+      },
+      {
+        "heading": "Referensi dan tata kelola",
+        "bullets": [
+          "Referensi utama dan bacaan tambahan: [daftar bibliografi].",
+          "Perangkat, LMS, dan sumber belajar digital: [daftar].",
+          "Riwayat revisi silabus dan persetujuan koordinator: [tanggal dan nama]."
+        ]
+      },
+      {
+        "heading": "Catatan pelaksanaan",
+        "body": "Ketentuan institusi, penyesuaian jadwal, atau catatan khusus: {{notes}}."
+      }
+    ]
+  },
+  {
+    "id": "silabus-bootcamp-kursus-berbasis-kompetensi",
+    "name": "Silabus Kursus/Bootcamp Berbasis Kompetensi & Portofolio",
+    "category": "pendidikan",
+    "categoryLabel": "Pendidikan",
+    "symbol": "SBC",
+    "format": "md",
+    "quality": "baik",
+    "description": "Susun silabus pelatihan berbasis keterampilan dengan prasyarat, modul, proyek praktik, rubrik kompetensi, serta kriteria kelulusan peserta.",
+    "tags": [
+      "silabus bootcamp",
+      "kursus",
+      "pelatihan",
+      "kompetensi",
+      "portofolio"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama sekolah, kampus, kelas, atau program",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama institusi atau program pendidikan"
+      },
+      {
+        "id": "ownerName",
+        "label": "Guru, dosen, wali kelas, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pelaksanaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Semester ganjil",
+          "Semester genap",
+          "Tahunan",
+          "Per angkatan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenjang atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "SD/MI",
+          "SMP/MTs",
+          "SMA/SMK/MA",
+          "Perguruan tinggi",
+          "Kursus atau pelatihan",
+          "Kegiatan sekolah"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kurikulum, kebijakan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan ketentuan penilaian, jadwal, atau konteks tambahan."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Profil program dan peserta",
+        "body": "Program {{entityName}} dikelola oleh {{ownerName}} untuk periode {{period}}. Sasaran dan ruang lingkup: {{scope}}. Isi level peserta, prasyarat, durasi total, moda belajar, dan kapasitas kelas."
+      },
+      {
+        "heading": "Kompetensi akhir dan kriteria kelulusan",
+        "bullets": [
+          "Kompetensi teknis yang harus dikuasai: [daftar kemampuan yang dapat diuji].",
+          "Kompetensi pendukung: komunikasi, kolaborasi, dokumentasi, dan pemecahan masalah.",
+          "Kriteria kelulusan: kehadiran minimum, tugas wajib, nilai asesmen, dan proyek akhir.",
+          "Portofolio atau artefak yang wajib diserahkan peserta: [daftar]."
+        ]
+      },
+      {
+        "heading": "Struktur modul dan urutan belajar",
+        "bullets": [
+          "Modul 1: [tujuan, materi, praktik, durasi].",
+          "Modul 2: [tujuan, materi, praktik, durasi].",
+          "Modul 3: [tujuan, materi, praktik, durasi].",
+          "Capstone/proyek akhir: [brief, milestone, demo, dokumentasi]."
+        ]
+      },
+      {
+        "heading": "Metode pengajaran dan fasilitas",
+        "bullets": [
+          "Porsi demonstrasi, latihan terbimbing, tugas mandiri, dan review: [proporsi].",
+          "Perangkat lunak, alat, dataset, dan akses yang dibutuhkan: [daftar].",
+          "Format mentoring, code review, konsultasi, atau klinik tugas: [jadwal]."
+        ]
+      },
+      {
+        "heading": "Asesmen, umpan balik, dan remediasi",
+        "body": "Tentukan instrumen asesmen tiap kompetensi, rubrik, ambang kelulusan, dan kesempatan perbaikan.",
+        "bullets": [
+          "Pre-test dan post-test: [cakupan dan skala].",
+          "Rubrik proyek dan bobot tiap kriteria: [matriks].",
+          "Syarat remediasi dan batas pengumpulan ulang: [aturan]."
+        ]
+      },
+      {
+        "heading": "Catatan implementasi",
+        "body": "Asumsi, batasan fasilitas, dan kebijakan khusus program: {{notes}}."
+      }
+    ]
+  },
+  {
+    "id": "pemetaan-cp-tp-kriteria-ketercapaian",
+    "name": "Pemetaan CP-TP & Kriteria Ketercapaian Pembelajaran",
+    "category": "pendidikan",
+    "categoryLabel": "Pendidikan",
+    "symbol": "CPK",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Petakan Capaian Pembelajaran ke Tujuan Pembelajaran dan bukti asesmen, hitung ketercapaian per tujuan, serta tandai kompetensi yang perlu penguatan.",
+    "tags": [
+      "capaian pembelajaran",
+      "tujuan pembelajaran",
+      "KKTP",
+      "asesmen",
+      "kurikulum merdeka"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama sekolah, kampus, kelas, atau program",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama institusi atau program pendidikan"
+      },
+      {
+        "id": "ownerName",
+        "label": "Guru, dosen, wali kelas, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pelaksanaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Semester ganjil",
+          "Semester genap",
+          "Tahunan",
+          "Per angkatan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenjang atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "SD/MI",
+          "SMP/MTs",
+          "SMA/SMK/MA",
+          "Perguruan tinggi",
+          "Kursus atau pelatihan",
+          "Kegiatan sekolah"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kurikulum, kebijakan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan ketentuan penilaian, jadwal, atau konteks tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Monitoring CP TP",
+        "title": "Pemetaan CP-TP & Kriteria Ketercapaian Pembelajaran - {{entityName}}",
+        "columns": [
+          "Kode TP",
+          "Tujuan Pembelajaran",
+          "Target Siswa",
+          "Mencapai Target",
+          "Persentase Capaian",
+          "KKTP (%)",
+          "Tuntas (1/0)",
+          "Bukti Asesmen"
+        ],
+        "rows": [
+          [
+            "TP-01",
+            "Menjelaskan konsep inti",
+            32,
+            28,
+            0,
+            80,
+            0,
+            "Tes formatif"
+          ],
+          [
+            "TP-02",
+            "Menerapkan prosedur",
+            32,
+            23,
+            0,
+            75,
+            0,
+            "Praktik terstruktur"
+          ],
+          [
+            "TP-03",
+            "Menganalisis data",
+            32,
+            18,
+            0,
+            80,
+            0,
+            "Laporan analisis"
+          ],
+          [
+            "TP-04",
+            "Menyajikan argumen",
+            32,
+            27,
+            0,
+            75,
+            0,
+            "Presentasi"
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "IF(C6=0,0,D6/C6*100)",
+            "cachedValue": 87.5
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(E6>=F6,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "E7",
+            "formula": "IF(C7=0,0,D7/C7*100)",
+            "cachedValue": 71.875
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(E7>=F7,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "E8",
+            "formula": "IF(C8=0,0,D8/C8*100)",
+            "cachedValue": 56.25
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(E8>=F8,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "E9",
+            "formula": "IF(C9=0,0,D9/C9*100)",
+            "cachedValue": 84.375
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(E9>=F9,1,0)",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          13,
+          32,
+          15,
+          17,
+          18,
+          14,
+          15,
+          24
+        ]
+      }
+    ]
+  },
+  {
+    "id": "model-beban-mengajar-guru-jpl",
+    "name": "Model Beban Mengajar Guru, JPL & Pemerataan Tugas",
+    "category": "pendidikan",
+    "categoryLabel": "Pendidikan",
+    "symbol": "BMG",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Hitung total jam pelajaran, tugas tambahan, kebutuhan persiapan, kapasitas mingguan, dan indeks beban tiap guru untuk mendukung pemerataan penugasan.",
+    "tags": [
+      "beban kerja guru",
+      "JPL",
+      "pembagian tugas",
+      "workload",
+      "sekolah"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama sekolah, kampus, kelas, atau program",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama institusi atau program pendidikan"
+      },
+      {
+        "id": "ownerName",
+        "label": "Guru, dosen, wali kelas, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pelaksanaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Semester ganjil",
+          "Semester genap",
+          "Tahunan",
+          "Per angkatan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenjang atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "SD/MI",
+          "SMP/MTs",
+          "SMA/SMK/MA",
+          "Perguruan tinggi",
+          "Kursus atau pelatihan",
+          "Kegiatan sekolah"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kurikulum, kebijakan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan ketentuan penilaian, jadwal, atau konteks tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Distribusi Beban Guru",
+        "title": "Model Beban Mengajar Guru, JPL & Pemerataan Tugas - {{entityName}}",
+        "columns": [
+          "Guru",
+          "JPL Tatap Muka",
+          "Tugas Tambahan (jam)",
+          "Persiapan (jam)",
+          "Total Jam Terukur",
+          "Kapasitas Mingguan",
+          "Utilisasi Beban",
+          "Melebihi Kapasitas (1/0)"
+        ],
+        "rows": [
+          [
+            "Guru A",
+            24,
+            4,
+            8,
+            0,
+            40,
+            0,
+            0
+          ],
+          [
+            "Guru B",
+            18,
+            8,
+            10,
+            0,
+            40,
+            0,
+            0
+          ],
+          [
+            "Guru C",
+            26,
+            2,
+            8,
+            0,
+            40,
+            0,
+            0
+          ],
+          [
+            "Guru D",
+            20,
+            6,
+            7,
+            0,
+            40,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "B6+C6+D6",
+            "cachedValue": 36
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(F6=0,0,E6/F6)",
+            "cachedValue": 0.9
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(G6>1,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "E7",
+            "formula": "B7+C7+D7",
+            "cachedValue": 36
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(F7=0,0,E7/F7)",
+            "cachedValue": 0.9
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(G7>1,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "E8",
+            "formula": "B8+C8+D8",
+            "cachedValue": 36
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(F8=0,0,E8/F8)",
+            "cachedValue": 0.9
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(G8>1,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "E9",
+            "formula": "B9+C9+D9",
+            "cachedValue": 33
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(F9=0,0,E9/F9)",
+            "cachedValue": 0.825
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(G9>1,1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          18,
+          19,
+          21,
+          18,
+          19,
+          19,
+          17,
+          23
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dashboard-capaian-mapel-peringkat-kelas",
+    "name": "Dashboard Capaian Mata Pelajaran & Peringkat Kelas",
+    "category": "pendidikan",
+    "categoryLabel": "Pendidikan",
+    "symbol": "DCP",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Bandingkan rerata nilai antarmata pelajaran, jumlah siswa yang mencapai ambang, persentase ketuntasan, dan peringkat capaian untuk menentukan fokus penguatan kelas.",
+    "tags": [
+      "dashboard akademik",
+      "capaian mata pelajaran",
+      "ketuntasan",
+      "peringkat",
+      "evaluasi kelas"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama sekolah, kampus, kelas, atau program",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama institusi atau program pendidikan"
+      },
+      {
+        "id": "ownerName",
+        "label": "Guru, dosen, wali kelas, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pelaksanaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Semester ganjil",
+          "Semester genap",
+          "Tahunan",
+          "Per angkatan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenjang atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "SD/MI",
+          "SMP/MTs",
+          "SMA/SMK/MA",
+          "Perguruan tinggi",
+          "Kursus atau pelatihan",
+          "Kegiatan sekolah"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kurikulum, kebijakan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan ketentuan penilaian, jadwal, atau konteks tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Dashboard Mata Pelajaran",
+        "title": "Dashboard Capaian Mata Pelajaran & Peringkat Kelas - {{entityName}}",
+        "columns": [
+          "Mata Pelajaran",
+          "Siswa 1",
+          "Siswa 2",
+          "Siswa 3",
+          "Siswa 4",
+          "Rata-rata",
+          "Lulus Ambang",
+          "Persentase Lulus",
+          "Peringkat"
+        ],
+        "rows": [
+          [
+            "Matematika",
+            82,
+            70,
+            88,
+            76,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Bahasa Indonesia",
+            90,
+            84,
+            78,
+            92,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "IPA",
+            68,
+            74,
+            80,
+            72,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Bahasa Inggris",
+            86,
+            91,
+            83,
+            79,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "AVERAGE(B6:E6)",
+            "cachedValue": 79
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(B6>=75,1,0)+IF(C6>=75,1,0)+IF(D6>=75,1,0)+IF(E6>=75,1,0)",
+            "cachedValue": 3
+          },
+          {
+            "cell": "H6",
+            "formula": "G6/COUNTA(B6:E6)",
+            "cachedValue": 0.75
+          },
+          {
+            "cell": "I6",
+            "formula": "RANK(F6,F6:F9,0)",
+            "cachedValue": 3
+          },
+          {
+            "cell": "F7",
+            "formula": "AVERAGE(B7:E7)",
+            "cachedValue": 86
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(B7>=75,1,0)+IF(C7>=75,1,0)+IF(D7>=75,1,0)+IF(E7>=75,1,0)",
+            "cachedValue": 4
+          },
+          {
+            "cell": "H7",
+            "formula": "G7/COUNTA(B7:E7)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "I7",
+            "formula": "RANK(F7,F6:F9,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F8",
+            "formula": "AVERAGE(B8:E8)",
+            "cachedValue": 73.5
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(B8>=75,1,0)+IF(C8>=75,1,0)+IF(D8>=75,1,0)+IF(E8>=75,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "H8",
+            "formula": "G8/COUNTA(B8:E8)",
+            "cachedValue": 0.25
+          },
+          {
+            "cell": "I8",
+            "formula": "RANK(F8,F6:F9,0)",
+            "cachedValue": 4
+          },
+          {
+            "cell": "F9",
+            "formula": "AVERAGE(B9:E9)",
+            "cachedValue": 84.75
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(B9>=75,1,0)+IF(C9>=75,1,0)+IF(D9>=75,1,0)+IF(E9>=75,1,0)",
+            "cachedValue": 4
+          },
+          {
+            "cell": "H9",
+            "formula": "G9/COUNTA(B9:E9)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "I9",
+            "formula": "RANK(F9,F6:F9,0)",
+            "cachedValue": 2
+          }
+        ],
+        "columnWidths": [
+          24,
+          13,
+          13,
+          13,
+          13,
+          16,
+          16,
+          19,
+          14
+        ]
+      }
+    ]
+  },
+  {
+    "id": "jadwal-ruang-kelas-utilisasi-bentrok-kapasitas",
+    "name": "Jadwal Ruang Kelas, Utilisasi & Bentrok Kapasitas",
+    "category": "pendidikan",
+    "categoryLabel": "Pendidikan",
+    "symbol": "JRK",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Pantau pemakaian ruang per slot, kecukupan kapasitas, ketersediaan pengajar, dan kesiapan sesi agar penempatan kelas tidak melebihi kapasitas ruang.",
+    "tags": [
+      "jadwal ruang kelas",
+      "kapasitas kelas",
+      "utilisasi ruangan",
+      "jadwal pengajar",
+      "manajemen fasilitas"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama sekolah, kampus, kelas, atau program",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama institusi atau program pendidikan"
+      },
+      {
+        "id": "ownerName",
+        "label": "Guru, dosen, wali kelas, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pelaksanaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Semester ganjil",
+          "Semester genap",
+          "Tahunan",
+          "Per angkatan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenjang atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "SD/MI",
+          "SMP/MTs",
+          "SMA/SMK/MA",
+          "Perguruan tinggi",
+          "Kursus atau pelatihan",
+          "Kegiatan sekolah"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kurikulum, kebijakan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan ketentuan penilaian, jadwal, atau konteks tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Utilisasi Ruang",
+        "title": "Jadwal Ruang Kelas, Utilisasi & Bentrok Kapasitas - {{entityName}}",
+        "columns": [
+          "Slot/Waktu",
+          "Ruang",
+          "Kapasitas Ruang",
+          "Jumlah Siswa",
+          "Pengajar Tersedia (1/0)",
+          "Utilisasi Ruang",
+          "Melebihi Kapasitas (1/0)",
+          "Sesi Siap (1/0)"
+        ],
+        "rows": [
+          [
+            "Senin 07.00-08.30",
+            "R-101",
+            36,
+            34,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            "Senin 08.30-10.00",
+            "R-101",
+            36,
+            38,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            "Senin 07.00-08.30",
+            "Lab-1",
+            24,
+            22,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            "Selasa 10.00-11.30",
+            "R-202",
+            32,
+            30,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "IF(C6=0,0,D6/C6)",
+            "cachedValue": 0.9444444444
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(D6>C6,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(AND(E6=1,G6=0),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F7",
+            "formula": "IF(C7=0,0,D7/C7)",
+            "cachedValue": 1.0555555556
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(D7>C7,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(AND(E7=1,G7=0),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F8",
+            "formula": "IF(C8=0,0,D8/C8)",
+            "cachedValue": 0.9166666667
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(D8>C8,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(AND(E8=1,G8=0),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F9",
+            "formula": "IF(C9=0,0,D9/C9)",
+            "cachedValue": 0.9375
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(D9>C9,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(AND(E9=1,G9=0),1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          22,
+          18,
+          18,
+          17,
+          22,
+          17,
+          22,
+          16
+        ]
+      }
+    ]
+  },
+  {
+    "id": "indeks-prioritas-intervensi-akademik",
+    "name": "Indeks Prioritas Dukungan Akademik Berbasis Bukti",
+    "category": "pendidikan",
+    "categoryLabel": "Pendidikan",
+    "symbol": "IPA",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Gabungkan indikator akademik yang dapat ditindaklanjuti seperti ketidakhadiran, tugas tidak terkumpul, dan nilai asesmen untuk membantu wali kelas memprioritaskan dukungan belajar tanpa membuat diagnosis pribadi.",
+    "tags": [
+      "dukungan akademik",
+      "intervensi belajar",
+      "indikator risiko akademik",
+      "wali kelas",
+      "pemantauan"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama sekolah, kampus, kelas, atau program",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama institusi atau program pendidikan"
+      },
+      {
+        "id": "ownerName",
+        "label": "Guru, dosen, wali kelas, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pelaksanaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Semester ganjil",
+          "Semester genap",
+          "Tahunan",
+          "Per angkatan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenjang atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "SD/MI",
+          "SMP/MTs",
+          "SMA/SMK/MA",
+          "Perguruan tinggi",
+          "Kursus atau pelatihan",
+          "Kegiatan sekolah"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kurikulum, kebijakan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan ketentuan penilaian, jadwal, atau konteks tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Prioritas Dukungan",
+        "title": "Indeks Prioritas Dukungan Akademik Berbasis Bukti - {{entityName}}",
+        "columns": [
+          "Kode Siswa",
+          "Ketidakhadiran (%)",
+          "Tugas Tidak Masuk (%)",
+          "Nilai Asesmen",
+          "Indeks Kebutuhan Dukungan",
+          "Prioritas Tinggi (1/0)",
+          "Tindak Lanjut"
+        ],
+        "rows": [
+          [
+            "S-041",
+            20,
+            35,
+            58,
+            0,
+            0,
+            "Temu belajar dan target tugas"
+          ],
+          [
+            "S-042",
+            5,
+            10,
+            82,
+            0,
+            0,
+            "Pantau rutin"
+          ],
+          [
+            "S-043",
+            30,
+            50,
+            62,
+            0,
+            0,
+            "Rencana dukungan bertahap"
+          ],
+          [
+            "S-044",
+            10,
+            25,
+            70,
+            0,
+            0,
+            "Klinik materi"
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "B6*0.4+C6*0.3+(100-D6)*0.3",
+            "cachedValue": 31.1
+          },
+          {
+            "cell": "F6",
+            "formula": "IF(E6>=25,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "E7",
+            "formula": "B7*0.4+C7*0.3+(100-D7)*0.3",
+            "cachedValue": 10.4
+          },
+          {
+            "cell": "F7",
+            "formula": "IF(E7>=25,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "E8",
+            "formula": "B8*0.4+C8*0.3+(100-D8)*0.3",
+            "cachedValue": 38.4
+          },
+          {
+            "cell": "F8",
+            "formula": "IF(E8>=25,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "E9",
+            "formula": "B9*0.4+C9*0.3+(100-D9)*0.3",
+            "cachedValue": 20.5
+          },
+          {
+            "cell": "F9",
+            "formula": "IF(E9>=25,1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          18,
+          21,
+          23,
+          17,
+          24,
+          20,
+          34
+        ]
+      }
+    ]
+  },
+  {
+    "id": "evaluasi-program-kursus-kepuasan-perbaikan",
+    "name": "Evaluasi Program Kursus, Kepuasan Peserta & Prioritas Perbaikan",
+    "category": "pendidikan",
+    "categoryLabel": "Pendidikan",
+    "symbol": "EPP",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Analisis evaluasi per modul berdasarkan jumlah responden, skor kepuasan, kelengkapan respons, dan gap terhadap standar untuk menetapkan prioritas peningkatan program.",
+    "tags": [
+      "evaluasi kursus",
+      "kepuasan peserta",
+      "quality assurance",
+      "perbaikan program",
+      "pelatihan"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama sekolah, kampus, kelas, atau program",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama institusi atau program pendidikan"
+      },
+      {
+        "id": "ownerName",
+        "label": "Guru, dosen, wali kelas, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pelaksanaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Semester ganjil",
+          "Semester genap",
+          "Tahunan",
+          "Per angkatan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenjang atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "SD/MI",
+          "SMP/MTs",
+          "SMA/SMK/MA",
+          "Perguruan tinggi",
+          "Kursus atau pelatihan",
+          "Kegiatan sekolah"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kurikulum, kebijakan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan ketentuan penilaian, jadwal, atau konteks tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Evaluasi Program",
+        "title": "Evaluasi Program Kursus, Kepuasan Peserta & Prioritas Perbaikan - {{entityName}}",
+        "columns": [
+          "Modul/Batch",
+          "Peserta Terdaftar",
+          "Respons Masuk",
+          "Rerata Skor (1-5)",
+          "Cakupan Respons",
+          "Gap terhadap Standar",
+          "Prioritas Perbaikan (1/0)"
+        ],
+        "rows": [
+          [
+            "Dasar kompetensi",
+            30,
+            28,
+            4.4,
+            0,
+            0,
+            0
+          ],
+          [
+            "Praktik terstruktur",
+            30,
+            25,
+            3.6,
+            0,
+            0,
+            0
+          ],
+          [
+            "Mentoring proyek",
+            24,
+            18,
+            3.2,
+            0,
+            0,
+            0
+          ],
+          [
+            "Presentasi akhir",
+            24,
+            22,
+            4.1,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "IF(B6=0,0,C6/B6)",
+            "cachedValue": 0.9333333333
+          },
+          {
+            "cell": "F6",
+            "formula": "MAX(0,4-D6)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(AND(F6>=0.7,E6>=0.5),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "E7",
+            "formula": "IF(B7=0,0,C7/B7)",
+            "cachedValue": 0.8333333333
+          },
+          {
+            "cell": "F7",
+            "formula": "MAX(0,4-D7)",
+            "cachedValue": 0.4
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(AND(F7>=0.7,E7>=0.5),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "E8",
+            "formula": "IF(B8=0,0,C8/B8)",
+            "cachedValue": 0.75
+          },
+          {
+            "cell": "F8",
+            "formula": "MAX(0,4-D8)",
+            "cachedValue": 0.8
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(AND(F8>=0.7,E8>=0.5),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "E9",
+            "formula": "IF(B9=0,0,C9/B9)",
+            "cachedValue": 0.9166666667
+          },
+          {
+            "cell": "F9",
+            "formula": "MAX(0,4-D9)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(AND(F9>=0.7,E9>=0.5),1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          26,
+          19,
+          16,
+          18,
+          18,
+          19,
+          23
+        ]
+      }
+    ]
+  },
+  {
+    "id": "model-efektivitas-program-sekolah-biaya-hasil",
+    "name": "Model Efektivitas Program Sekolah: Anggaran, Jangkauan & Hasil",
+    "category": "pendidikan",
+    "categoryLabel": "Pendidikan",
+    "symbol": "MES",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Ukur efisiensi program sekolah melalui serapan anggaran, ketercapaian peserta, biaya per peserta, dan skor hasil sehingga keputusan perpanjangan program didukung data.",
+    "tags": [
+      "efektivitas program sekolah",
+      "anggaran pendidikan",
+      "jangkauan peserta",
+      "biaya per peserta",
+      "evaluasi program"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama sekolah, kampus, kelas, atau program",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama institusi atau program pendidikan"
+      },
+      {
+        "id": "ownerName",
+        "label": "Guru, dosen, wali kelas, atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pelaksanaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Semester ganjil",
+          "Semester genap",
+          "Tahunan",
+          "Per angkatan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenjang atau ruang lingkup",
+        "type": "select",
+        "required": true,
+        "options": [
+          "SD/MI",
+          "SMP/MTs",
+          "SMA/SMK/MA",
+          "Perguruan tinggi",
+          "Kursus atau pelatihan",
+          "Kegiatan sekolah"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan kurikulum, kebijakan, atau asumsi",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan ketentuan penilaian, jadwal, atau konteks tambahan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Efektivitas Program",
+        "title": "Model Efektivitas Program Sekolah: Anggaran, Jangkauan & Hasil - {{entityName}}",
+        "columns": [
+          "Program",
+          "Anggaran (Rp)",
+          "Realisasi (Rp)",
+          "Peserta Aktual",
+          "Target Peserta",
+          "Hasil Tercapai (1/0)",
+          "Biaya/Peserta (Rp)",
+          "Serapan Anggaran",
+          "Capaian Peserta",
+          "Efektivitas (0-100)"
+        ],
+        "rows": [
+          [
+            "Kelas literasi",
+            8000000,
+            7200000,
+            90,
+            100,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Klinik numerasi",
+            6000000,
+            5900000,
+            65,
+            80,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Pelatihan guru",
+            12000000,
+            10800000,
+            24,
+            25,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Bursa karya siswa",
+            5000000,
+            5200000,
+            110,
+            100,
+            1,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "IF(D6=0,0,C6/D6)",
+            "cachedValue": 80000
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(B6=0,0,C6/B6)",
+            "cachedValue": 0.9
+          },
+          {
+            "cell": "I6",
+            "formula": "IF(E6=0,0,D6/E6)",
+            "cachedValue": 0.9
+          },
+          {
+            "cell": "J6",
+            "formula": "(F6*50)+(MIN(1,I6)*30)+(IF(H6<=1,1,0)*20)",
+            "cachedValue": 97
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(D7=0,0,C7/D7)",
+            "cachedValue": 90769.2307692308
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(B7=0,0,C7/B7)",
+            "cachedValue": 0.9833333333
+          },
+          {
+            "cell": "I7",
+            "formula": "IF(E7=0,0,D7/E7)",
+            "cachedValue": 0.8125
+          },
+          {
+            "cell": "J7",
+            "formula": "(F7*50)+(MIN(1,I7)*30)+(IF(H7<=1,1,0)*20)",
+            "cachedValue": 94.375
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(D8=0,0,C8/D8)",
+            "cachedValue": 450000
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(B8=0,0,C8/B8)",
+            "cachedValue": 0.9
+          },
+          {
+            "cell": "I8",
+            "formula": "IF(E8=0,0,D8/E8)",
+            "cachedValue": 0.96
+          },
+          {
+            "cell": "J8",
+            "formula": "(F8*50)+(MIN(1,I8)*30)+(IF(H8<=1,1,0)*20)",
+            "cachedValue": 98.8
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(D9=0,0,C9/D9)",
+            "cachedValue": 47272.7272727273
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(B9=0,0,C9/B9)",
+            "cachedValue": 1.04
+          },
+          {
+            "cell": "I9",
+            "formula": "IF(E9=0,0,D9/E9)",
+            "cachedValue": 1.1
+          },
+          {
+            "cell": "J9",
+            "formula": "(F9*50)+(MIN(1,I9)*30)+(IF(H9<=1,1,0)*20)",
+            "cachedValue": 80
+          }
+        ],
+        "columnWidths": [
+          25,
+          18,
+          18,
+          17,
+          17,
+          20,
+          21,
+          18,
+          17,
+          20
+        ]
+      }
+    ]
   }
 ]
