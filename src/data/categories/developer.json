@@ -1,106 +1,3480 @@
 [
   {
-    "id": "developer-readme",
-    "name": "Developer README Kit",
+    "id": "readme-repositori-produksi",
+    "name": "README.md Repositori Produksi: Setup, Arsitektur, Testing & Operasional",
     "category": "developer",
-    "categoryLabel": "Developer",
-    "symbol": "DEV",
+    "categoryLabel": "Software Engineering & DevOps",
+    "symbol": "README",
     "format": "md",
-    "description": "Kerangka README repository yang memuat pengenalan proyek, instalasi, penggunaan, dan kontribusi.",
+    "quality": "standar",
+    "description": "README repositori siap publikasi yang menjelaskan tujuan, status dukungan, prasyarat runtime, instalasi reproducible, konfigurasi environment, perintah development/test/build, deployment, dan jalur kontribusi.",
     "tags": [
-      "developer",
-      "github",
-      "readme",
-      "dokumentasi",
-      "kode",
-      "open source"
+      "README",
+      "repository",
+      "setup",
+      "developer experience",
+      "documentation"
     ],
     "questions": [
       {
         "id": "entityName",
-        "label": "Nama proyek atau repository",
+        "label": "Nama proyek, produk, atau repositori",
         "type": "text",
         "required": true,
-        "placeholder": "Contoh: Toko Sinar Jaya"
+        "placeholder": "Nama service atau repository"
       },
       {
         "id": "ownerName",
-        "label": "Nama maintainer",
+        "label": "Maintainer, tech lead, atau pemilik sistem",
         "type": "text",
         "required": false,
-        "placeholder": "Nama penanggung jawab"
+        "placeholder": "Nama atau tim penanggung jawab"
       },
       {
         "id": "period",
-        "label": "Periode yang digunakan",
+        "label": "Tahap siklus hidup teknis",
         "type": "select",
         "required": true,
         "options": [
-          "Proyek baru",
+          "Inisiasi/desain",
           "Pengembangan aktif",
+          "QA dan staging",
+          "Persiapan rilis",
+          "Produksi",
           "Pemeliharaan",
-          "Arsip"
+          "Migrasi/dekomisioning"
         ]
       },
       {
         "id": "scope",
-        "label": "Ruang lingkup atau konteks penggunaan",
+        "label": "Domain atau stack teknologi",
         "type": "select",
         "required": true,
         "options": [
-          "Website atau aplikasi web",
-          "Aplikasi desktop",
-          "Aplikasi mobile",
-          "Library atau package",
-          "Tool atau automation"
+          "Frontend web",
+          "Backend/API",
+          "Full-stack",
+          "Mobile",
+          "Database/data platform",
+          "Cloud/DevOps/SRE",
+          "Security engineering",
+          "QA/automation",
+          "Open-source library/tooling"
         ]
       },
       {
         "id": "notes",
-        "label": "Catatan tambahan",
+        "label": "Versi, lingkungan, constraint, dan catatan teknis",
         "type": "textarea",
         "required": false,
-        "placeholder": "Tuliskan kebutuhan tambahan yang ingin dimasukkan."
+        "placeholder": "Versi runtime, framework, environment, batasan infrastruktur, link issue, atau standar tim."
       }
     ],
     "sections": [
       {
-        "heading": "Tentang proyek",
-        "body": "**{{entityName}}** adalah proyek yang dikembangkan untuk memenuhi kebutuhan yang telah ditentukan oleh maintainer."
+        "heading": "Konteks dan pemilik teknis",
+        "body": "Dokumen **README.md Repositori Produksi: Setup, Arsitektur, Testing & Operasional** untuk **{{entityName}}**. Pemilik/maintainer: **{{ownerName}}**. Tahap siklus hidup: **{{period}}**. Domain: **{{scope}}**. Versi dokumen: [semver/nomor]; status: [Draft/Review/Approved]; repo/issue referensi: [URL]. Catatan lingkungan dan batasan: {{notes}}."
       },
       {
-        "heading": "Status dan maintainer",
+        "heading": "Ringkasan dan status dukungan",
+        "body": "Jelaskan masalah yang diselesaikan, pengguna sasaran, batas kemampuan, status rilis, platform yang didukung, dan tautan dokumentasi. Tandai fitur eksperimental dan breaking change secara eksplisit."
+      },
+      {
+        "heading": "Prasyarat dan versi toolchain",
+        "body": "Catat versi minimum dan versi yang diuji: runtime, package manager, database, container engine, dan CLI. Contoh `engines` serta file versi harus konsisten dengan CI."
+      },
+      {
+        "heading": "Instalasi reproducible",
+        "body": "```bash\ngit clone <repository-url>\ncd <repository-directory>\ncorepack enable\npnpm install --frozen-lockfile\ncp .env.example .env.local\npnpm dev\n``` \nJelaskan alternatif npm/yarn hanya bila lockfile dan CI mendukungnya. Jangan menyarankan instalasi global yang tidak diperlukan."
+      },
+      {
+        "heading": "Konfigurasi environment",
+        "body": "Sediakan tabel `VARIABLE | REQUIRED | DEFAULT | DESCRIPTION | SECRET`. Contoh `.env.example` harus berisi placeholder aman, bukan nilai produksi. Validasi variabel wajib pada startup dan dokumentasikan sumber secret per environment."
+      },
+      {
+        "heading": "Perintah harian dan pemeriksaan kualitas",
+        "body": "```bash\npnpm lint\npnpm typecheck\npnpm test\npnpm test:e2e\npnpm build\npnpm start\n``` \nCantumkan expected result, kebutuhan service lokal, fixture, dan cara menjalankan satu test secara terisolasi."
+      },
+      {
+        "heading": "Struktur repository dan alur data",
+        "body": "```text\nsrc/\n  app/          # route dan UI boundary\n  components/   # komponen presentasi\n  services/     # integrasi dan business logic\n  lib/          # helper murni dan konfigurasi\n  tests/        # unit/integration test\ndocs/           # ADR, runbook, diagram\n.github/        # workflow dan template kontribusi\n``` \nSesuaikan daftar dengan struktur aktual dan tunjukkan entry point, migration folder, serta tempat menambahkan fitur."
+      },
+      {
+        "heading": "Deployment, observability, dan recovery",
+        "body": "Dokumentasikan build artifact, environment target, health endpoint, log/trace/dashboard, proses rollback, backup, dan kontak on-call. Bedakan prosedur lokal, staging, dan produksi."
+      },
+      {
+        "heading": "Lisensi, keamanan, dan dukungan",
+        "body": "Tuliskan lisensi yang benar-benar dipilih, versi yang didukung, jalur pelaporan vulnerability privat, kebijakan data, dan batas dukungan. Tambahkan link `CONTRIBUTING.md`, `SECURITY.md`, `CHANGELOG.md`, dan dokumentasi API bila tersedia."
+      },
+      {
+        "heading": "Validasi dan pemeliharaan",
         "bullets": [
-          "Maintainer: {{ownerName}}",
-          "Status pengembangan: {{scope}}",
-          "Versi atau periode: {{period}}"
+          "Tetapkan reviewer teknis, tanggal review, dan sumber kebenaran (repository, ticket, dashboard, atau runbook).",
+          "Simpan perubahan melalui pull request agar riwayat, persetujuan, dan pemilik keputusan dapat ditelusuri.",
+          "Jangan memasukkan secret, token, private key, data pelanggan, atau kredensial nyata ke dalam dokumen maupun contoh.",
+          "Perbarui dokumen ketika kontrak API, konfigurasi, dependency, arsitektur, atau prosedur operasional berubah."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "contributing-pull-request-guide",
+    "name": "CONTRIBUTING.md: Panduan Kontribusi, Branching & Pull Request",
+    "category": "developer",
+    "categoryLabel": "Software Engineering & DevOps",
+    "symbol": "CONT",
+    "format": "md",
+    "quality": "standar",
+    "description": "Panduan kontribusi untuk repository engineering yang mengunci standar branch, commit, test lokal, review, perubahan database, dokumentasi, dan syarat merge.",
+    "tags": [
+      "CONTRIBUTING",
+      "pull request",
+      "branch strategy",
+      "conventional commits",
+      "code contribution"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek, produk, atau repositori",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama service atau repository"
+      },
+      {
+        "id": "ownerName",
+        "label": "Maintainer, tech lead, atau pemilik sistem",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama atau tim penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Tahap siklus hidup teknis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Inisiasi/desain",
+          "Pengembangan aktif",
+          "QA dan staging",
+          "Persiapan rilis",
+          "Produksi",
+          "Pemeliharaan",
+          "Migrasi/dekomisioning"
         ]
       },
       {
-        "heading": "Fitur utama",
-        "bullets": [
-          "Tuliskan fitur utama proyek",
-          "Jelaskan batasan dan kebutuhan sistem",
-          "Cantumkan platform yang didukung"
+        "id": "scope",
+        "label": "Domain atau stack teknologi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Frontend web",
+          "Backend/API",
+          "Full-stack",
+          "Mobile",
+          "Database/data platform",
+          "Cloud/DevOps/SRE",
+          "Security engineering",
+          "QA/automation",
+          "Open-source library/tooling"
         ]
       },
       {
-        "heading": "Instalasi",
-        "body": "Tuliskan prasyarat, perintah instalasi, dan konfigurasi yang perlu dilakukan sebelum proyek dijalankan."
-      },
-      {
-        "heading": "Penggunaan",
-        "body": "Tambahkan contoh penggunaan paling umum beserta input dan hasil yang diharapkan."
-      },
-      {
-        "heading": "Kontribusi dan lisensi",
-        "body": "Jelaskan cara melaporkan masalah, mengajukan perubahan, dan ketentuan lisensi proyek."
-      },
-      {
-        "heading": "Catatan proyek",
-        "body": "{{notes}}"
+        "id": "notes",
+        "label": "Versi, lingkungan, constraint, dan catatan teknis",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Versi runtime, framework, environment, batasan infrastruktur, link issue, atau standar tim."
       }
     ],
-    "quality": "baik"
+    "sections": [
+      {
+        "heading": "Konteks dan pemilik teknis",
+        "body": "Dokumen **CONTRIBUTING.md: Panduan Kontribusi, Branching & Pull Request** untuk **{{entityName}}**. Pemilik/maintainer: **{{ownerName}}**. Tahap siklus hidup: **{{period}}**. Domain: **{{scope}}**. Versi dokumen: [semver/nomor]; status: [Draft/Review/Approved]; repo/issue referensi: [URL]. Catatan lingkungan dan batasan: {{notes}}."
+      },
+      {
+        "heading": "Model kontribusi dan prasyarat",
+        "body": "Jelaskan siapa yang dapat mengusulkan perubahan, proses issue terlebih dahulu, aturan DCO/CLA bila benar-benar digunakan, lisensi kontribusi, serta cara meminta bantuan maintainer."
+      },
+      {
+        "heading": "Branch dan penamaan commit",
+        "body": "```bash\ngit switch main\ngit pull --ff-only\ngit switch -c feat/short-description\n# atau fix/, docs/, refactor/, chore/\ngit commit -m \"feat(api): add cursor pagination\"\n``` \nGunakan format commit yang disepakati: `type(scope): summary`. Hindari commit yang menggabungkan perubahan tidak terkait."
+      },
+      {
+        "heading": "Setup lokal dan test wajib",
+        "body": "```bash\npnpm install --frozen-lockfile\npnpm lint\npnpm typecheck\npnpm test -- --runInBand\npnpm build\n``` \nDokumentasikan perintah yang aktual untuk repository. PR tidak boleh mengklaim test lolos bila tidak dijalankan."
+      },
+      {
+        "heading": "Standar pull request",
+        "body": "```markdown\n## Ringkasan\n## Masalah / issue terkait\n## Solusi dan keputusan teknis\n## Risiko dan dampak kompatibilitas\n## Cara pengujian\n## Screenshot / log yang relevan\n## Dokumentasi dan changelog\n## Checklist\n- [ ] Scope terbatasi\n- [ ] Test relevan ditambahkan\n- [ ] Tidak ada secret atau data pribadi\n- [ ] Migration dan rollback dijelaskan\n```"
+      },
+      {
+        "heading": "Aturan review dan merge",
+        "bullets": [
+          "Minimal reviewer: [jumlah] sesuai CODEOWNERS dan tingkat risiko.",
+          "Perubahan auth, permission, billing, schema, atau secret memerlukan reviewer domain terkait.",
+          "Semua status check wajib hijau; force-push dilarang setelah approval kecuali perubahan disetujui ulang.",
+          "Gunakan squash/rebase/merge commit sesuai kebijakan repository; jangan menghapus diskusi unresolved.",
+          "PR besar dipecah menjadi perubahan yang dapat direview secara independen."
+        ]
+      },
+      {
+        "heading": "Database, dependency, dan dokumentasi",
+        "body": "Perubahan schema menyertakan migration forward dan rollback/backward compatibility. Dependency baru wajib menjelaskan kebutuhan, lisensi, ukuran bundle, risiko supply chain, serta strategi update. Perubahan perilaku publik memperbarui API docs dan changelog."
+      },
+      {
+        "heading": "Pelaporan masalah dan perilaku kolaborasi",
+        "body": "Bug keamanan tidak dilaporkan melalui issue publik. Untuk masalah biasa, sertakan versi, environment, langkah reproduksi, expected/actual result, log tersanitasi, dan dampak. Terapkan komunikasi profesional dan review berbasis kode."
+      },
+      {
+        "heading": "Validasi dan pemeliharaan",
+        "bullets": [
+          "Tetapkan reviewer teknis, tanggal review, dan sumber kebenaran (repository, ticket, dashboard, atau runbook).",
+          "Simpan perubahan melalui pull request agar riwayat, persetujuan, dan pemilik keputusan dapat ditelusuri.",
+          "Jangan memasukkan secret, token, private key, data pelanggan, atau kredensial nyata ke dalam dokumen maupun contoh.",
+          "Perbarui dokumen ketika kontrak API, konfigurasi, dependency, arsitektur, atau prosedur operasional berubah."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "checklist-code-review",
+    "name": "Checklist Pull Request & Code Review untuk Perubahan Produksi",
+    "category": "developer",
+    "categoryLabel": "Software Engineering & DevOps",
+    "symbol": "CR",
+    "format": "md",
+    "quality": "standar",
+    "description": "Checklist reviewer lintas aplikasi untuk menilai correctness, keamanan, kompatibilitas, testability, observability, performa, dan kemudahan rollback sebelum merge.",
+    "tags": [
+      "code review",
+      "pull request checklist",
+      "secure coding",
+      "maintainability",
+      "review"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek, produk, atau repositori",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama service atau repository"
+      },
+      {
+        "id": "ownerName",
+        "label": "Maintainer, tech lead, atau pemilik sistem",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama atau tim penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Tahap siklus hidup teknis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Inisiasi/desain",
+          "Pengembangan aktif",
+          "QA dan staging",
+          "Persiapan rilis",
+          "Produksi",
+          "Pemeliharaan",
+          "Migrasi/dekomisioning"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Domain atau stack teknologi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Frontend web",
+          "Backend/API",
+          "Full-stack",
+          "Mobile",
+          "Database/data platform",
+          "Cloud/DevOps/SRE",
+          "Security engineering",
+          "QA/automation",
+          "Open-source library/tooling"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Versi, lingkungan, constraint, dan catatan teknis",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Versi runtime, framework, environment, batasan infrastruktur, link issue, atau standar tim."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Konteks dan pemilik teknis",
+        "body": "Dokumen **Checklist Pull Request & Code Review untuk Perubahan Produksi** untuk **{{entityName}}**. Pemilik/maintainer: **{{ownerName}}**. Tahap siklus hidup: **{{period}}**. Domain: **{{scope}}**. Versi dokumen: [semver/nomor]; status: [Draft/Review/Approved]; repo/issue referensi: [URL]. Catatan lingkungan dan batasan: {{notes}}."
+      },
+      {
+        "heading": "Checklist konteks dan scope",
+        "bullets": [
+          "- [ ] Tujuan perubahan sesuai issue/acceptance criteria.",
+          "- [ ] Scope tidak mencampur refactor yang tidak terkait.",
+          "- [ ] Perilaku lama yang harus dipertahankan sudah diidentifikasi.",
+          "- [ ] Feature flag atau staged rollout disiapkan bila risikonya tinggi."
+        ]
+      },
+      {
+        "heading": "Correctness dan desain",
+        "bullets": [
+          "- [ ] Edge case, null/empty input, timezone, concurrency, retry, dan partial failure diperiksa.",
+          "- [ ] Error handling tidak menelan exception atau mengembalikan sukses palsu.",
+          "- [ ] Boundary antara controller, domain logic, dan persistence tetap jelas.",
+          "- [ ] Tidak ada N+1 query, blocking call, atau operasi mahal di hot path tanpa alasan.",
+          "- [ ] Nama, tipe, struktur, dan abstraksi sepadan dengan kompleksitas masalah."
+        ]
+      },
+      {
+        "heading": "Security dan privasi",
+        "bullets": [
+          "- [ ] AuthN/AuthZ dicek di server, bukan hanya UI.",
+          "- [ ] Input divalidasi dan output di-encode sesuai konteks.",
+          "- [ ] Tidak ada SQL injection, command injection, SSRF, path traversal, atau insecure deserialization.",
+          "- [ ] Secret, token, PII, dan payload sensitif tidak masuk log atau source control.",
+          "- [ ] Dependency dan permission baru memiliki alasan dan versi terkunci."
+        ]
+      },
+      {
+        "heading": "Test dan kompatibilitas",
+        "body": "```bash\npnpm lint\npnpm typecheck\npnpm test\npnpm test:e2e\npnpm build\n``` \nPeriksa test positif, negatif, boundary, regression, contract, serta migration. Pastikan test gagal bila perilaku yang diperbaiki kembali rusak."
+      },
+      {
+        "heading": "Operasional dan persetujuan",
+        "bullets": [
+          "- [ ] Log, metric, trace, alert, dan dashboard diperbarui bila perilaku operasional berubah.",
+          "- [ ] Migration aman untuk versi aplikasi sebelum/sesudah deploy.",
+          "- [ ] Rollback atau mitigasi tersedia dan diuji secara proporsional.",
+          "- [ ] README/API docs/runbook/changelog diperbarui.",
+          "- [ ] Reviewer memberi approval berdasarkan bukti, bukan hanya jumlah komentar."
+        ]
+      },
+      {
+        "heading": "Keputusan review",
+        "body": "Gunakan status **Approve**, **Request changes**, atau **Comment**. Catat blocker dengan file/baris, risiko, dan kriteria selesai. Jangan menyetujui perubahan yang belum dipahami atau test yang belum diverifikasi."
+      },
+      {
+        "heading": "Validasi dan pemeliharaan",
+        "bullets": [
+          "Tetapkan reviewer teknis, tanggal review, dan sumber kebenaran (repository, ticket, dashboard, atau runbook).",
+          "Simpan perubahan melalui pull request agar riwayat, persetujuan, dan pemilik keputusan dapat ditelusuri.",
+          "Jangan memasukkan secret, token, private key, data pelanggan, atau kredensial nyata ke dalam dokumen maupun contoh.",
+          "Perbarui dokumen ketika kontrak API, konfigurasi, dependency, arsitektur, atau prosedur operasional berubah."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "architecture-decision-record-adr",
+    "name": "Architecture Decision Record (ADR): Konteks, Opsi & Konsekuensi",
+    "category": "developer",
+    "categoryLabel": "Software Engineering & DevOps",
+    "symbol": "ADR",
+    "format": "md",
+    "quality": "standar",
+    "description": "Template ADR untuk merekam keputusan arsitektur yang sulit dibalik, alternatif yang dipertimbangkan, constraint, konsekuensi operasional, dan pemicu evaluasi ulang.",
+    "tags": [
+      "ADR",
+      "architecture decision record",
+      "technical decision",
+      "system design"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek, produk, atau repositori",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama service atau repository"
+      },
+      {
+        "id": "ownerName",
+        "label": "Maintainer, tech lead, atau pemilik sistem",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama atau tim penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Tahap siklus hidup teknis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Inisiasi/desain",
+          "Pengembangan aktif",
+          "QA dan staging",
+          "Persiapan rilis",
+          "Produksi",
+          "Pemeliharaan",
+          "Migrasi/dekomisioning"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Domain atau stack teknologi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Frontend web",
+          "Backend/API",
+          "Full-stack",
+          "Mobile",
+          "Database/data platform",
+          "Cloud/DevOps/SRE",
+          "Security engineering",
+          "QA/automation",
+          "Open-source library/tooling"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Versi, lingkungan, constraint, dan catatan teknis",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Versi runtime, framework, environment, batasan infrastruktur, link issue, atau standar tim."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Konteks dan pemilik teknis",
+        "body": "Dokumen **Architecture Decision Record (ADR): Konteks, Opsi & Konsekuensi** untuk **{{entityName}}**. Pemilik/maintainer: **{{ownerName}}**. Tahap siklus hidup: **{{period}}**. Domain: **{{scope}}**. Versi dokumen: [semver/nomor]; status: [Draft/Review/Approved]; repo/issue referensi: [URL]. Catatan lingkungan dan batasan: {{notes}}."
+      },
+      {
+        "heading": "Metadata keputusan",
+        "body": "ID: `ADR-NNN`; judul: [keputusan dalam bentuk kalimat]; status: [Proposed/Accepted/Deprecated/Superseded]; tanggal: [YYYY-MM-DD]; pemilik: [tim]; reviewer: [nama]. Tautkan ADR pengganti jika status berubah."
+      },
+      {
+        "heading": "Konteks dan masalah",
+        "body": "Jelaskan kebutuhan bisnis/teknis, beban saat ini, failure mode, constraint runtime, kebutuhan compliance, dan bukti yang memicu keputusan. Pisahkan fakta terukur dari asumsi yang masih harus diuji."
+      },
+      {
+        "heading": "Persyaratan dan batasan",
+        "bullets": [
+          "Functional requirement: [perilaku wajib dan acceptance criteria].",
+          "Non-functional: latency, throughput, availability, durability, RPO/RTO, security.",
+          "Constraint: biaya, skill tim, vendor, kompatibilitas, deadline, dan lock-in.",
+          "Out of scope: [hal yang tidak diselesaikan oleh keputusan ini]."
+        ]
+      },
+      {
+        "heading": "Opsi yang dievaluasi",
+        "body": "```text\nOption A: [solusi]\n  Pros: [keuntungan]\n  Cons: [biaya/risiko]\n  Operational impact: [on-call, deployment, observability]\n\nOption B: [solusi alternatif]\n  Pros: [keuntungan]\n  Cons: [biaya/risiko]\n  Operational impact: [konsekuensi]\n``` \nBandingkan opsi dengan kriteria yang sama dan sebutkan alasan opsi ditolak."
+      },
+      {
+        "heading": "Keputusan dan diagram",
+        "body": "```mermaid\nflowchart LR\n  Client --> API\n  API --> DomainService\n  DomainService --> Storage[(Primary Store)]\n  DomainService --> Queue[(Async Queue)]\n``` \nGanti diagram dengan komponen dan alur aktual, termasuk trust boundary dan jalur kegagalan."
+      },
+      {
+        "heading": "Konsekuensi dan risiko",
+        "bullets": [
+          "Positive: [manfaat yang dapat diverifikasi].",
+          "Negative: [kompleksitas, biaya, latency, vendor lock-in].",
+          "Risiko: [failure mode, pemilik, mitigasi, indikator].",
+          "Operational burden: [backup, upgrade, on-call, observability].",
+          "Security/privacy impact: [data flow, threat, kontrol]."
+        ]
+      },
+      {
+        "heading": "Rencana implementasi dan evaluasi",
+        "body": "Tentukan langkah migrasi, feature flag, rollout, test, owner, milestone, serta metrik keberhasilan. Evaluasi ulang jika [threshold beban/biaya/ketersediaan] berubah, vendor tidak memenuhi SLA, atau constraint utama tidak lagi berlaku."
+      },
+      {
+        "heading": "Validasi dan pemeliharaan",
+        "bullets": [
+          "Tetapkan reviewer teknis, tanggal review, dan sumber kebenaran (repository, ticket, dashboard, atau runbook).",
+          "Simpan perubahan melalui pull request agar riwayat, persetujuan, dan pemilik keputusan dapat ditelusuri.",
+          "Jangan memasukkan secret, token, private key, data pelanggan, atau kredensial nyata ke dalam dokumen maupun contoh.",
+          "Perbarui dokumen ketika kontrak API, konfigurasi, dependency, arsitektur, atau prosedur operasional berubah."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rfc-desain-sistem",
+    "name": "Request for Comments (RFC) Desain Sistem & Review Teknis",
+    "category": "developer",
+    "categoryLabel": "Software Engineering & DevOps",
+    "symbol": "RFC",
+    "format": "md",
+    "quality": "standar",
+    "description": "RFC engineering untuk perubahan lintas service dengan problem statement, requirement, alternatif, desain komponen, kontrak, keamanan, strategi rollout, risiko, dan pertanyaan terbuka.",
+    "tags": [
+      "RFC",
+      "system design",
+      "technical proposal",
+      "engineering review",
+      "architecture"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek, produk, atau repositori",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama service atau repository"
+      },
+      {
+        "id": "ownerName",
+        "label": "Maintainer, tech lead, atau pemilik sistem",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama atau tim penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Tahap siklus hidup teknis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Inisiasi/desain",
+          "Pengembangan aktif",
+          "QA dan staging",
+          "Persiapan rilis",
+          "Produksi",
+          "Pemeliharaan",
+          "Migrasi/dekomisioning"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Domain atau stack teknologi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Frontend web",
+          "Backend/API",
+          "Full-stack",
+          "Mobile",
+          "Database/data platform",
+          "Cloud/DevOps/SRE",
+          "Security engineering",
+          "QA/automation",
+          "Open-source library/tooling"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Versi, lingkungan, constraint, dan catatan teknis",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Versi runtime, framework, environment, batasan infrastruktur, link issue, atau standar tim."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Konteks dan pemilik teknis",
+        "body": "Dokumen **Request for Comments (RFC) Desain Sistem & Review Teknis** untuk **{{entityName}}**. Pemilik/maintainer: **{{ownerName}}**. Tahap siklus hidup: **{{period}}**. Domain: **{{scope}}**. Versi dokumen: [semver/nomor]; status: [Draft/Review/Approved]; repo/issue referensi: [URL]. Catatan lingkungan dan batasan: {{notes}}."
+      },
+      {
+        "heading": "Ringkasan dan status RFC",
+        "body": "RFC-ID: [RFC-NNN]; judul: [proposal]; status: [Draft/Review/Approved/Rejected]; author: {{ownerName}}; reviewer: [tim]; review deadline: [tanggal]. Perubahan ditujukan bagi {{entityName}} pada {{scope}}."
+      },
+      {
+        "heading": "Problem statement dan tujuan",
+        "body": "Gambarkan kondisi saat ini dengan bukti, pain point, pelanggan/komponen terdampak, dan alasan perubahan diperlukan. Tuliskan 3-5 tujuan terukur dan definisi sukses."
+      },
+      {
+        "heading": "Non-goals dan constraint",
+        "bullets": [
+          "Non-goals: [fitur yang sengaja tidak dibangun].",
+          "Constraint kompatibilitas: [API/client/schema/runtime].",
+          "Budget/latency/throughput/availability target: [angka dan cara ukur].",
+          "Security, privacy, retention, dan compliance requirement: [detail]."
+        ]
+      },
+      {
+        "heading": "Desain target",
+        "body": "```mermaid\nflowchart LR\n  Web --> Gateway\n  Gateway --> Auth\n  Gateway --> ServiceA\n  ServiceA --> DB[(Database)]\n  ServiceA --> Queue\n  Queue --> Worker\n  Worker --> ExternalAPI\n``` \nLengkapi komponen, ownership, protocol, trust boundary, sequence, timeout, retry, idempotency, dan data flow yang aktual."
+      },
+      {
+        "heading": "Kontrak dan model data",
+        "body": "Tuliskan request/response schema, event contract, database entity, index, uniqueness, ownership, retention, dan compatibility. Sertakan contoh JSON/SQL serta aturan validasi dan error response."
+      },
+      {
+        "heading": "Alternatif, trade-off, dan estimasi",
+        "body": "Bandingkan minimal dua alternatif memakai kriteria konsisten: engineering effort, infra cost, operational load, latency, failure isolation, security, vendor dependency, dan migration complexity. Nyatakan asumsi estimasi."
+      },
+      {
+        "heading": "Rencana rollout dan rollback",
+        "bullets": [
+          "Implementasi bertahap: schema expand → dual write/read bila perlu → backfill → cutover → cleanup.",
+          "Rollout: internal → canary → persentase trafik → 100%, dengan metric gate tiap tahap.",
+          "Rollback: trigger, owner, command/runbook, batas aman, dan kondisi yang membuat rollback tidak aman.",
+          "Test: unit, integration, contract, load, chaos/failure, security, dan migration rehearsal."
+        ]
+      },
+      {
+        "heading": "Review, keputusan, dan open questions",
+        "body": "```markdown\n- [ ] API contract reviewed\n- [ ] Data model and migration reviewed\n- [ ] Security and privacy reviewed\n- [ ] SLO and operational ownership assigned\n- [ ] Cost estimate approved\n- [ ] Rollback rehearsed\n``` \nCatat setiap komentar sebagai resolved/unresolved, decision owner, dan tanggal keputusan akhir."
+      },
+      {
+        "heading": "Validasi dan pemeliharaan",
+        "bullets": [
+          "Tetapkan reviewer teknis, tanggal review, dan sumber kebenaran (repository, ticket, dashboard, atau runbook).",
+          "Simpan perubahan melalui pull request agar riwayat, persetujuan, dan pemilik keputusan dapat ditelusuri.",
+          "Jangan memasukkan secret, token, private key, data pelanggan, atau kredensial nyata ke dalam dokumen maupun contoh.",
+          "Perbarui dokumen ketika kontrak API, konfigurasi, dependency, arsitektur, atau prosedur operasional berubah."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "api-contract-endpoint-spec",
+    "name": "Spesifikasi API: Endpoint Contract, Schema, Error & Idempotency",
+    "category": "developer",
+    "categoryLabel": "Software Engineering & DevOps",
+    "symbol": "API",
+    "format": "md",
+    "quality": "standar",
+    "description": "Dokumen kontrak endpoint REST yang mencakup autentikasi, authorization, request/response schema, validasi, pagination, idempotency, rate limit, error code, dan versioning.",
+    "tags": [
+      "API specification",
+      "REST",
+      "OpenAPI",
+      "endpoint contract",
+      "idempotency"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek, produk, atau repositori",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama service atau repository"
+      },
+      {
+        "id": "ownerName",
+        "label": "Maintainer, tech lead, atau pemilik sistem",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama atau tim penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Tahap siklus hidup teknis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Inisiasi/desain",
+          "Pengembangan aktif",
+          "QA dan staging",
+          "Persiapan rilis",
+          "Produksi",
+          "Pemeliharaan",
+          "Migrasi/dekomisioning"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Domain atau stack teknologi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Frontend web",
+          "Backend/API",
+          "Full-stack",
+          "Mobile",
+          "Database/data platform",
+          "Cloud/DevOps/SRE",
+          "Security engineering",
+          "QA/automation",
+          "Open-source library/tooling"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Versi, lingkungan, constraint, dan catatan teknis",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Versi runtime, framework, environment, batasan infrastruktur, link issue, atau standar tim."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Konteks dan pemilik teknis",
+        "body": "Dokumen **Spesifikasi API: Endpoint Contract, Schema, Error & Idempotency** untuk **{{entityName}}**. Pemilik/maintainer: **{{ownerName}}**. Tahap siklus hidup: **{{period}}**. Domain: **{{scope}}**. Versi dokumen: [semver/nomor]; status: [Draft/Review/Approved]; repo/issue referensi: [URL]. Catatan lingkungan dan batasan: {{notes}}."
+      },
+      {
+        "heading": "Identitas API dan standar",
+        "body": "API/service: {{entityName}}; owner: {{ownerName}}; domain: {{scope}}; siklus rilis: {{period}}. Base URL per environment: [dev/staging/prod]. Versi kontrak: [v1.x]. Format: JSON UTF-8; waktu ISO-8601 UTC; ID: [UUID/ULID]."
+      },
+      {
+        "heading": "Endpoint dan autentikasi",
+        "body": "```yaml\nopenapi: 3.1.0\ninfo:\n  title: Service API\n  version: 1.0.0\npaths:\n  /v1/resources:\n    post:\n      operationId: createResource\n      security:\n        - bearerAuth: []\n      parameters:\n        - in: header\n          name: Idempotency-Key\n          required: true\n          schema: { type: string, minLength: 16, maxLength: 128 }\n      requestBody:\n        required: true\n        content:\n          application/json:\n            schema: { $ref: '#/components/schemas/CreateResource' }\n      responses:\n        '201': { description: Created }\n        '400': { description: Validation error }\n        '401': { description: Unauthenticated }\n        '409': { description: Conflict }\n        '429': { description: Rate limited }\n``` \nTambahkan security scheme, scopes, role mapping, dan aturan object-level authorization."
+      },
+      {
+        "heading": "Request, response, dan validasi",
+        "body": "Contoh request/response harus menggunakan data sintetis. Tentukan required/optional, tipe, format, min/max, enum, nullable, normalization, ukuran payload, dan field yang tidak boleh dikirim klien. Response menjelaskan field yang selalu ada dan yang mungkin null."
+      },
+      {
+        "heading": "Pagination, sorting, dan filtering",
+        "body": "Standarkan cursor atau offset pagination; jelaskan default/max page size, stable ordering, cursor opacity, filter allowlist, sort allowlist, dan perilaku saat cursor tidak valid. Hindari query arbitrary dari klien."
+      },
+      {
+        "heading": "Error model dan retry",
+        "body": "```json\n{\n  \"error\": {\n    \"code\": \"RESOURCE_CONFLICT\",\n    \"message\": \"The resource cannot be changed in its current state.\",\n    \"requestId\": \"req_example_123\",\n    \"details\": []\n  }\n}\n``` \nTetapkan HTTP status, error code stabil, retryable flag, correlation/request ID, dan kebijakan retry dengan exponential backoff + jitter. Jangan memasukkan stack trace atau secret."
+      },
+      {
+        "heading": "Idempotency, concurrency, dan rate limit",
+        "body": "Definisikan lingkup idempotency key, TTL, payload hash, replay response, dan konflik key reuse. Jelaskan ETag/If-Match atau version field untuk optimistic concurrency. Rate limit ditulis per principal/endpoint dengan header limit, remaining, reset, dan respons 429."
+      },
+      {
+        "heading": "Observability, compatibility, dan acceptance",
+        "body": "Log method/path template/status/latency/request ID tanpa data sensitif; metric latency/error/volume; trace lintas service. Tambahkan contract test, negative test, schema validation, deprecation policy, dan contoh curl menggunakan token placeholder."
+      },
+      {
+        "heading": "Validasi dan pemeliharaan",
+        "bullets": [
+          "Tetapkan reviewer teknis, tanggal review, dan sumber kebenaran (repository, ticket, dashboard, atau runbook).",
+          "Simpan perubahan melalui pull request agar riwayat, persetujuan, dan pemilik keputusan dapat ditelusuri.",
+          "Jangan memasukkan secret, token, private key, data pelanggan, atau kredensial nyata ke dalam dokumen maupun contoh.",
+          "Perbarui dokumen ketika kontrak API, konfigurasi, dependency, arsitektur, atau prosedur operasional berubah."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bug-triage-register",
+    "name": "Pelacak Bug, Severity Scoring & SLA Triage",
+    "category": "developer",
+    "categoryLabel": "Software Engineering & DevOps",
+    "symbol": "BUG",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Register bug yang menghitung skor prioritas dari impact dan urgency, memantau umur issue, serta menandai respons yang melewati SLA triage.",
+    "tags": [
+      "bug tracker",
+      "triage",
+      "severity",
+      "SLA",
+      "issue management"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek, produk, atau repositori",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama service atau repository"
+      },
+      {
+        "id": "ownerName",
+        "label": "Maintainer, tech lead, atau pemilik sistem",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama atau tim penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Tahap siklus hidup teknis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Inisiasi/desain",
+          "Pengembangan aktif",
+          "QA dan staging",
+          "Persiapan rilis",
+          "Produksi",
+          "Pemeliharaan",
+          "Migrasi/dekomisioning"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Domain atau stack teknologi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Frontend web",
+          "Backend/API",
+          "Full-stack",
+          "Mobile",
+          "Database/data platform",
+          "Cloud/DevOps/SRE",
+          "Security engineering",
+          "QA/automation",
+          "Open-source library/tooling"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Versi, lingkungan, constraint, dan catatan teknis",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Versi runtime, framework, environment, batasan infrastruktur, link issue, atau standar tim."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Bug Triage",
+        "title": "Pelacak Bug & SLA Triage - {{entityName}}",
+        "columns": [
+          "Bug ID",
+          "Impact (1-5)",
+          "Urgency (1-5)",
+          "Umur Issue (hari)",
+          "SLA Respons (jam)",
+          "Respons Aktual (jam)",
+          "Priority Score",
+          "SLA Terpenuhi (1/0)",
+          "Umur >14 Hari (1/0)"
+        ],
+        "rows": [
+          [
+            "BUG-101",
+            4,
+            4,
+            2,
+            4,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            "BUG-102",
+            5,
+            5,
+            10,
+            2,
+            5,
+            0,
+            0,
+            0
+          ],
+          [
+            "BUG-103",
+            3,
+            2,
+            20,
+            24,
+            36,
+            0,
+            0,
+            0
+          ],
+          [
+            "BUG-104",
+            2,
+            3,
+            5,
+            48,
+            12,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "B6*C6",
+            "cachedValue": 16
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(F6<=E6,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "I6",
+            "formula": "IF(D6>14,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G7",
+            "formula": "B7*C7",
+            "cachedValue": 25
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(F7<=E7,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "I7",
+            "formula": "IF(D7>14,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G8",
+            "formula": "B8*C8",
+            "cachedValue": 6
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(F8<=E8,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "I8",
+            "formula": "IF(D8>14,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G9",
+            "formula": "B9*C9",
+            "cachedValue": 6
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(F9<=E9,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "I9",
+            "formula": "IF(D9>14,1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          16,
+          19,
+          21
+        ]
+      }
+    ]
+  },
+  {
+    "id": "developer-onboarding-codebase",
+    "name": "Panduan Onboarding Developer Baru ke Codebase & Lingkungan Kerja",
+    "category": "developer",
+    "categoryLabel": "Software Engineering & DevOps",
+    "symbol": "ONB",
+    "format": "md",
+    "quality": "standar",
+    "description": "Runbook onboarding engineer yang memandu akses least-privilege, setup toolchain, konfigurasi lokal, arsitektur codebase, test, debugging, dan first contribution.",
+    "tags": [
+      "developer onboarding",
+      "codebase",
+      "local development",
+      "DX",
+      "access control"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek, produk, atau repositori",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama service atau repository"
+      },
+      {
+        "id": "ownerName",
+        "label": "Maintainer, tech lead, atau pemilik sistem",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama atau tim penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Tahap siklus hidup teknis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Inisiasi/desain",
+          "Pengembangan aktif",
+          "QA dan staging",
+          "Persiapan rilis",
+          "Produksi",
+          "Pemeliharaan",
+          "Migrasi/dekomisioning"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Domain atau stack teknologi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Frontend web",
+          "Backend/API",
+          "Full-stack",
+          "Mobile",
+          "Database/data platform",
+          "Cloud/DevOps/SRE",
+          "Security engineering",
+          "QA/automation",
+          "Open-source library/tooling"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Versi, lingkungan, constraint, dan catatan teknis",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Versi runtime, framework, environment, batasan infrastruktur, link issue, atau standar tim."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Konteks dan pemilik teknis",
+        "body": "Dokumen **Panduan Onboarding Developer Baru ke Codebase & Lingkungan Kerja** untuk **{{entityName}}**. Pemilik/maintainer: **{{ownerName}}**. Tahap siklus hidup: **{{period}}**. Domain: **{{scope}}**. Versi dokumen: [semver/nomor]; status: [Draft/Review/Approved]; repo/issue referensi: [URL]. Catatan lingkungan dan batasan: {{notes}}."
+      },
+      {
+        "heading": "Akses dan persiapan hari pertama",
+        "bullets": [
+          "- [ ] Akun organisasi dan MFA aktif.",
+          "- [ ] Akses repository, issue tracker, CI, package registry, dan dokumentasi sesuai role.",
+          "- [ ] Akses database/log produksi tidak diberikan secara default.",
+          "- [ ] Perangkat memenuhi baseline OS, disk encryption, antivirus/EDR, dan password manager."
+        ]
+      },
+      {
+        "heading": "Toolchain dan setup",
+        "body": "```bash\ngit --version\nnode --version\ncorepack enable\npnpm --version\ngit clone <repository-url>\ncd <repo>\npnpm install --frozen-lockfile\ncp .env.example .env.local\npnpm dev\n``` \nCatat versi runtime, package manager, IDE extension, container runtime, dan service pendukung yang diuji."
+      },
+      {
+        "heading": "Peta codebase dan ownership",
+        "body": "Buat peta direktori aktual: entry point, route, domain modules, persistence, integrations, shared libraries, migrations, test fixtures, infrastructure, dan deployment config. Sertakan CODEOWNERS/owner per service dan jalur eskalasi."
+      },
+      {
+        "heading": "Alur request dan data",
+        "body": "```mermaid\nsequenceDiagram\n  participant C as Client\n  participant A as API\n  participant S as Service\n  participant D as Database\n  C->>A: HTTP request\n  A->>A: Auth + validation\n  A->>S: Command/query\n  S->>D: Read/write\n  D-->>S: Result\n  S-->>A: Domain result\n  A-->>C: HTTP response\n``` \nGanti dengan alur aktual untuk fitur utama."
+      },
+      {
+        "heading": "Testing dan debugging",
+        "bullets": [
+          "- [ ] Jalankan lint, typecheck, unit, integration, dan build.",
+          "- [ ] Ketahui cara menjalankan satu test/file dan membaca coverage.",
+          "- [ ] Gunakan fixture lokal; jangan mengunduh data pelanggan untuk debugging.",
+          "- [ ] Tambahkan breakpoint/log tersanitasi dan correlation ID.",
+          "- [ ] Ketahui mock service, test database, dan cleanup test."
+        ]
+      },
+      {
+        "heading": "First task dan definition of done",
+        "body": "Pilih issue berlabel good-first-task yang tidak memerlukan akses sensitif. Sebelum PR: reproduksi masalah, buat test, implementasi minimum, jalankan checks, perbarui dokumen, minta review, dan pastikan acceptance criteria diverifikasi."
+      },
+      {
+        "heading": "Operasional, keamanan, dan dukungan",
+        "body": "Jelaskan cara membaca dashboard, prosedur on-call, log yang boleh diakses, proses rotasi secret, pelaporan insiden, dan cara meminta akses tambahan dengan approval. Sertakan daftar kontak tim dan jadwal pairing awal."
+      },
+      {
+        "heading": "Validasi dan pemeliharaan",
+        "bullets": [
+          "Tetapkan reviewer teknis, tanggal review, dan sumber kebenaran (repository, ticket, dashboard, atau runbook).",
+          "Simpan perubahan melalui pull request agar riwayat, persetujuan, dan pemilik keputusan dapat ditelusuri.",
+          "Jangan memasukkan secret, token, private key, data pelanggan, atau kredensial nyata ke dalam dokumen maupun contoh.",
+          "Perbarui dokumen ketika kontrak API, konfigurasi, dependency, arsitektur, atau prosedur operasional berubah."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "changelog-rilis-semver",
+    "name": "CHANGELOG.md: Catatan Rilis Keep a Changelog & Semantic Versioning",
+    "category": "developer",
+    "categoryLabel": "Software Engineering & DevOps",
+    "symbol": "CHG",
+    "format": "md",
+    "quality": "standar",
+    "description": "Format changelog rilis yang konsisten dengan kategori Added/Changed/Deprecated/Removed/Fixed/Security, aturan semver, tautan compare, dan pemeriksaan sebelum tag.",
+    "tags": [
+      "changelog",
+      "keep a changelog",
+      "semantic versioning",
+      "release notes",
+      "versioning"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek, produk, atau repositori",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama service atau repository"
+      },
+      {
+        "id": "ownerName",
+        "label": "Maintainer, tech lead, atau pemilik sistem",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama atau tim penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Tahap siklus hidup teknis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Inisiasi/desain",
+          "Pengembangan aktif",
+          "QA dan staging",
+          "Persiapan rilis",
+          "Produksi",
+          "Pemeliharaan",
+          "Migrasi/dekomisioning"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Domain atau stack teknologi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Frontend web",
+          "Backend/API",
+          "Full-stack",
+          "Mobile",
+          "Database/data platform",
+          "Cloud/DevOps/SRE",
+          "Security engineering",
+          "QA/automation",
+          "Open-source library/tooling"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Versi, lingkungan, constraint, dan catatan teknis",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Versi runtime, framework, environment, batasan infrastruktur, link issue, atau standar tim."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Konteks dan pemilik teknis",
+        "body": "Dokumen **CHANGELOG.md: Catatan Rilis Keep a Changelog & Semantic Versioning** untuk **{{entityName}}**. Pemilik/maintainer: **{{ownerName}}**. Tahap siklus hidup: **{{period}}**. Domain: **{{scope}}**. Versi dokumen: [semver/nomor]; status: [Draft/Review/Approved]; repo/issue referensi: [URL]. Catatan lingkungan dan batasan: {{notes}}."
+      },
+      {
+        "heading": "Aturan versi dan sumber perubahan",
+        "body": "Gunakan `MAJOR.MINOR.PATCH`: MAJOR untuk breaking change, MINOR untuk fitur kompatibel, PATCH untuk perbaikan kompatibel. Tetapkan apakah proyek memakai prerelease (`-alpha`, `-rc`) dan build metadata."
+      },
+      {
+        "heading": "Format changelog",
+        "body": "```markdown\n# Changelog\n\n## [Unreleased]\n### Added\n- [Fitur baru dan dampak pengguna]\n### Changed\n- [Perubahan perilaku]\n### Deprecated\n- [API/fitur dan tanggal rencana penghapusan]\n### Removed\n- [Fitur yang dihapus dan jalur migrasi]\n### Fixed\n- [Bug dan referensi issue]\n### Security\n- [Perbaikan keamanan tanpa detail eksploit sensitif]\n\n## [1.2.0] - YYYY-MM-DD\n- ...\n```"
+      },
+      {
+        "heading": "Standar entri",
+        "body": "Setiap entri menyebut dampak pengguna/developer, issue/PR, breaking change, tindakan migrasi, dan batas kompatibilitas. Hindari commit log mentah, kata 'improvement' tanpa penjelasan, atau klaim security yang membocorkan vulnerability sebelum koordinasi."
+      },
+      {
+        "heading": "Proses cut release",
+        "body": "```bash\ngit status --short\ngit log --oneline <last-tag>..HEAD\npnpm lint && pnpm typecheck && pnpm test && pnpm build\ngit tag -a vX.Y.Z -m \"Release vX.Y.Z\"\ngit push origin vX.Y.Z\n``` \nSesuaikan command pada toolchain aktual dan gunakan protected release workflow bila tersedia."
+      },
+      {
+        "heading": "Checklist sebelum publikasi",
+        "bullets": [
+          "- [ ] Semua PR sejak rilis terakhir sudah diklasifikasikan.",
+          "- [ ] Versi package, container image, dan release tag konsisten.",
+          "- [ ] Breaking change memiliki migration/upgrade guide.",
+          "- [ ] Changelog tidak menyertakan secret atau rincian exploit yang belum dikoordinasikan.",
+          "- [ ] Artefak, checksum, SBOM, dan signature tersedia bila disyaratkan."
+        ]
+      },
+      {
+        "heading": "Dukungan dan pemeliharaan",
+        "body": "Tautkan release notes, source tag, artifact, docs, upgrade guide, dan security advisory. Catat versi yang masih didukung serta tanggal akhir dukungan (EOL) bila ada."
+      },
+      {
+        "heading": "Validasi dan pemeliharaan",
+        "bullets": [
+          "Tetapkan reviewer teknis, tanggal review, dan sumber kebenaran (repository, ticket, dashboard, atau runbook).",
+          "Simpan perubahan melalui pull request agar riwayat, persetujuan, dan pemilik keputusan dapat ditelusuri.",
+          "Jangan memasukkan secret, token, private key, data pelanggan, atau kredensial nyata ke dalam dokumen maupun contoh.",
+          "Perbarui dokumen ketika kontrak API, konfigurasi, dependency, arsitektur, atau prosedur operasional berubah."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "incident-postmortem-produksi",
+    "name": "Laporan Insiden Produksi & Blameless Post-Mortem",
+    "category": "developer",
+    "categoryLabel": "Software Engineering & DevOps",
+    "symbol": "INC",
+    "format": "md",
+    "quality": "baik",
+    "description": "Dokumen incident response yang menyatukan severity, dampak pelanggan, timeline UTC, deteksi, mitigasi, akar penyebab, faktor kontribusi, dan corrective action dengan owner dan due date.",
+    "tags": [
+      "incident management",
+      "postmortem",
+      "SRE",
+      "root cause",
+      "corrective action"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek, produk, atau repositori",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama service atau repository"
+      },
+      {
+        "id": "ownerName",
+        "label": "Maintainer, tech lead, atau pemilik sistem",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama atau tim penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Tahap siklus hidup teknis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Inisiasi/desain",
+          "Pengembangan aktif",
+          "QA dan staging",
+          "Persiapan rilis",
+          "Produksi",
+          "Pemeliharaan",
+          "Migrasi/dekomisioning"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Domain atau stack teknologi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Frontend web",
+          "Backend/API",
+          "Full-stack",
+          "Mobile",
+          "Database/data platform",
+          "Cloud/DevOps/SRE",
+          "Security engineering",
+          "QA/automation",
+          "Open-source library/tooling"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Versi, lingkungan, constraint, dan catatan teknis",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Versi runtime, framework, environment, batasan infrastruktur, link issue, atau standar tim."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Konteks dan pemilik teknis",
+        "body": "Dokumen **Laporan Insiden Produksi & Blameless Post-Mortem** untuk **{{entityName}}**. Pemilik/maintainer: **{{ownerName}}**. Tahap siklus hidup: **{{period}}**. Domain: **{{scope}}**. Versi dokumen: [semver/nomor]; status: [Draft/Review/Approved]; repo/issue referensi: [URL]. Catatan lingkungan dan batasan: {{notes}}."
+      },
+      {
+        "heading": "Metadata insiden",
+        "body": "Incident ID: [INC-YYYY-NNN]; service: {{entityName}}; incident commander: {{ownerName}}; domain: {{scope}}; periode terkait: {{period}}; severity: [SEV-1..SEV-4]. Status: [Open/Monitoring/Resolved]."
+      },
+      {
+        "heading": "Ringkasan dampak",
+        "body": "Ringkas apa yang gagal, durasi, jumlah pengguna/tenant terdampak, transaksi gagal, data hilang/terekspos, wilayah, dan dampak bisnis. Sertakan sumber metrik dan confidence level; jangan menebak jumlah."
+      },
+      {
+        "heading": "Timeline berbasis UTC",
+        "body": "```text\n09:02 UTC  Alert latency p95 fired\n09:05 UTC  On-call acknowledged\n09:11 UTC  Error rate confirmed above SLO\n09:18 UTC  Traffic shifted from affected pool\n09:31 UTC  Error rate returned to baseline\n10:00 UTC  Customer impact validated\n``` \nGunakan timestamp aktual dari event/log/chat dan tandai zona waktu."
+      },
+      {
+        "heading": "Deteksi dan respons",
+        "body": "Jelaskan sinyal yang mendeteksi (alert, support ticket, synthetic test), waktu acknowledge, incident commander, kanal komunikasi, mitigasi, rollback, stakeholder updates, dan alasan tindakan diambil."
+      },
+      {
+        "heading": "Root cause dan faktor kontribusi",
+        "body": "```text\nTrigger:\n  [perubahan atau kondisi yang memicu]\nFailure mechanism:\n  [mengapa sistem berperilaku demikian]\nContributing factors:\n  [desain, test gap, observability, process, dependency]\nWhy existing controls missed it:\n  [bukti]\n``` \nFokus pada kondisi sistem dan kontrol, bukan menyalahkan individu."
+      },
+      {
+        "heading": "Apa yang berjalan dan tidak berjalan",
+        "bullets": [
+          "Deteksi: [alert tepat/tidak, blind spot].",
+          "Mitigasi: [tindakan efektif dan efek samping].",
+          "Komunikasi: [frekuensi update, keterlambatan, audiens].",
+          "Dokumentasi dan tooling: [runbook, dashboard, akses]."
+        ]
+      },
+      {
+        "heading": "Corrective actions dan verifikasi",
+        "body": "```markdown\n| Action | Owner | Due date | Priority | Verification | Status |\n|---|---|---|---|---|---|\n| [fix] | [team] | [date] | P1 | [test/metric] | Open |\n``` \nSetiap tindakan harus mengurangi risiko berulang atau mempercepat deteksi/pemulihan. Pisahkan immediate fix dan systemic fix."
+      },
+      {
+        "heading": "Penutupan dan pembelajaran",
+        "body": "Tetapkan kapan incident ditutup, siapa menyetujui postmortem, tanggal review action, komunikasi publik/pelanggan yang disetujui, dan perubahan runbook/alert/SLO. Lampirkan query, dashboard, commit, dan dokumen terkait yang sudah disanitasi."
+      },
+      {
+        "heading": "Validasi dan pemeliharaan",
+        "bullets": [
+          "Tetapkan reviewer teknis, tanggal review, dan sumber kebenaran (repository, ticket, dashboard, atau runbook).",
+          "Simpan perubahan melalui pull request agar riwayat, persetujuan, dan pemilik keputusan dapat ditelusuri.",
+          "Jangan memasukkan secret, token, private key, data pelanggan, atau kredensial nyata ke dalam dokumen maupun contoh.",
+          "Perbarui dokumen ketika kontrak API, konfigurasi, dependency, arsitektur, atau prosedur operasional berubah."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "runbook-pemulihan-service",
+    "name": "Runbook Pemulihan Service: Triage, Restart, Rollback & Verifikasi",
+    "category": "developer",
+    "categoryLabel": "Software Engineering & DevOps",
+    "symbol": "RUN",
+    "format": "md",
+    "quality": "baik",
+    "description": "Runbook operasi untuk gangguan service yang mendefinisikan trigger, safety check, diagnosis, mitigasi, rollback, validasi health, komunikasi, dan exit criteria.",
+    "tags": [
+      "runbook",
+      "service recovery",
+      "kubectl",
+      "rollback",
+      "on-call"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek, produk, atau repositori",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama service atau repository"
+      },
+      {
+        "id": "ownerName",
+        "label": "Maintainer, tech lead, atau pemilik sistem",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama atau tim penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Tahap siklus hidup teknis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Inisiasi/desain",
+          "Pengembangan aktif",
+          "QA dan staging",
+          "Persiapan rilis",
+          "Produksi",
+          "Pemeliharaan",
+          "Migrasi/dekomisioning"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Domain atau stack teknologi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Frontend web",
+          "Backend/API",
+          "Full-stack",
+          "Mobile",
+          "Database/data platform",
+          "Cloud/DevOps/SRE",
+          "Security engineering",
+          "QA/automation",
+          "Open-source library/tooling"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Versi, lingkungan, constraint, dan catatan teknis",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Versi runtime, framework, environment, batasan infrastruktur, link issue, atau standar tim."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Konteks dan pemilik teknis",
+        "body": "Dokumen **Runbook Pemulihan Service: Triage, Restart, Rollback & Verifikasi** untuk **{{entityName}}**. Pemilik/maintainer: **{{ownerName}}**. Tahap siklus hidup: **{{period}}**. Domain: **{{scope}}**. Versi dokumen: [semver/nomor]; status: [Draft/Review/Approved]; repo/issue referensi: [URL]. Catatan lingkungan dan batasan: {{notes}}."
+      },
+      {
+        "heading": "Lingkup dan batas keamanan",
+        "body": "Service: {{entityName}}; on-call owner: {{ownerName}}; environment: {{period}}; domain: {{scope}}. Jalankan hanya oleh role berwenang. Perintah contoh wajib disesuaikan cluster/context dan tidak boleh dijalankan sebelum verifikasi target."
+      },
+      {
+        "heading": "Trigger dan severity",
+        "body": "Trigger: elevated 5xx, latency p95/p99 melewati SLO, queue backlog, CPU/memory saturation, failed health check, atau dependency outage. Tentukan SEV, impact, paging criteria, commander, dan channel incident."
+      },
+      {
+        "heading": "Triage awal",
+        "body": "```bash\nkubectl config current-context\nkubectl get pods -n <namespace> -o wide\nkubectl get deploy -n <namespace>\nkubectl get events -n <namespace> --sort-by=.lastTimestamp\nkubectl logs deploy/<deployment> -n <namespace> --since=15m\n``` \nPastikan namespace/context benar, ambil snapshot event dan log, catat timestamp UTC, lalu cari perubahan deploy/config terbaru."
+      },
+      {
+        "heading": "Diagnosis dependency dan kapasitas",
+        "body": "Periksa database connection pool, queue lag, external API status, DNS/TLS, secret/config rotation, autoscaling, node pressure, disk, dan rate limits. Bandingkan dengan baseline dashboard; jangan meningkatkan kapasitas tanpa memeriksa quota dan biaya."
+      },
+      {
+        "heading": "Mitigasi aman",
+        "body": "Opsi: disable feature flag, shift traffic, scale sesuai batas, circuit-breaker dependency, atau throttle noncritical job. Tentukan approver untuk tindakan berisiko, langkah reversibility, dan komunikasi sebelum eksekusi."
+      },
+      {
+        "heading": "Restart atau rollback",
+        "body": "```bash\n# Inspect rollout before changing anything\nkubectl rollout history deployment/<deployment> -n <namespace>\nkubectl rollout status deployment/<deployment> -n <namespace> --timeout=120s\n\n# Roll back only after incident commander approval\nkubectl rollout undo deployment/<deployment> -n <namespace>\n``` \nJangan menyalin perintah ke produksi tanpa mengisi resource/namespace yang diverifikasi dan mencatat change ticket."
+      },
+      {
+        "heading": "Verifikasi pemulihan",
+        "body": "```bash\ncurl -fsS https://<health-host>/health/ready\nkubectl get pods -n <namespace>\n``` \nValidasi error rate, latency, saturation, queue lag, synthetic transaction, data integrity, dan customer journey selama observation window yang ditetapkan."
+      },
+      {
+        "heading": "Exit criteria dan komunikasi",
+        "body": "Tetapkan stabilitas selama [window], backlog kembali normal, tidak ada error baru, dan owner sistem menerima handoff. Kirim update status, tulis timeline, buat incident record, dan jadwalkan postmortem bila severity memenuhi ambang."
+      },
+      {
+        "heading": "Validasi dan pemeliharaan",
+        "bullets": [
+          "Tetapkan reviewer teknis, tanggal review, dan sumber kebenaran (repository, ticket, dashboard, atau runbook).",
+          "Simpan perubahan melalui pull request agar riwayat, persetujuan, dan pemilik keputusan dapat ditelusuri.",
+          "Jangan memasukkan secret, token, private key, data pelanggan, atau kredensial nyata ke dalam dokumen maupun contoh.",
+          "Perbarui dokumen ketika kontrak API, konfigurasi, dependency, arsitektur, atau prosedur operasional berubah."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "database-migration-rollback-plan",
+    "name": "Rencana Migrasi Database: Expand-Contract, Backfill & Rollback Plan",
+    "category": "developer",
+    "categoryLabel": "Software Engineering & DevOps",
+    "symbol": "DBM",
+    "format": "md",
+    "quality": "baik",
+    "description": "Rencana perubahan schema/data produksi yang aman terhadap versi aplikasi lama-baru, dengan precheck, expand-contract, backfill bertahap, validasi, rollback, dan recovery.",
+    "tags": [
+      "database migration",
+      "schema migration",
+      "rollback plan",
+      "backfill",
+      "expand contract"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek, produk, atau repositori",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama service atau repository"
+      },
+      {
+        "id": "ownerName",
+        "label": "Maintainer, tech lead, atau pemilik sistem",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama atau tim penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Tahap siklus hidup teknis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Inisiasi/desain",
+          "Pengembangan aktif",
+          "QA dan staging",
+          "Persiapan rilis",
+          "Produksi",
+          "Pemeliharaan",
+          "Migrasi/dekomisioning"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Domain atau stack teknologi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Frontend web",
+          "Backend/API",
+          "Full-stack",
+          "Mobile",
+          "Database/data platform",
+          "Cloud/DevOps/SRE",
+          "Security engineering",
+          "QA/automation",
+          "Open-source library/tooling"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Versi, lingkungan, constraint, dan catatan teknis",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Versi runtime, framework, environment, batasan infrastruktur, link issue, atau standar tim."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Konteks dan pemilik teknis",
+        "body": "Dokumen **Rencana Migrasi Database: Expand-Contract, Backfill & Rollback Plan** untuk **{{entityName}}**. Pemilik/maintainer: **{{ownerName}}**. Tahap siklus hidup: **{{period}}**. Domain: **{{scope}}**. Versi dokumen: [semver/nomor]; status: [Draft/Review/Approved]; repo/issue referensi: [URL]. Catatan lingkungan dan batasan: {{notes}}."
+      },
+      {
+        "heading": "Metadata dan dampak perubahan",
+        "body": "Database/service: {{entityName}}; migration owner: {{ownerName}}; lifecycle: {{period}}; domain: {{scope}}. Ticket/ADR: [link]. DB engine/version: [isi]. Ukuran tabel, write rate, replication, downtime budget, dan constraint dicatat sebelum rencana disetujui."
+      },
+      {
+        "heading": "Perubahan schema dan kompatibilitas",
+        "body": "```sql\n-- EXPAND: additive and backward-compatible\nALTER TABLE accounts\n  ADD COLUMN display_name_v2 VARCHAR(160);\n\n-- Deploy code that can read old + new representation.\n-- Backfill in bounded batches with checkpointing.\n-- CONTRACT only after old code and consumers are retired.\n``` \nGanti SQL dengan migration yang telah diuji pada versi engine dan schema aktual."
+      },
+      {
+        "heading": "Pre-migration checks",
+        "bullets": [
+          "- [ ] Backup terbaru dan restore test berhasil.",
+          "- [ ] Migration diuji terhadap copy schema/data representatif.",
+          "- [ ] Lock duration, index build, disk headroom, replication lag, dan query plan diperiksa.",
+          "- [ ] Writer/reader compatibility untuk versi aplikasi N-1 dan N diuji.",
+          "- [ ] Change window, approver, owner database, dan stop condition disepakati."
+        ]
+      },
+      {
+        "heading": "Prosedur eksekusi",
+        "body": "Catat migration ID dan checksum; deploy perubahan additive; aktifkan dual-write/read hanya dengan reconciliation; backfill per batch dengan rate limit; verifikasi row count/checksum; alihkan pembacaan; tunggu masa observasi; hapus struktur lama pada rilis terpisah."
+      },
+      {
+        "heading": "Backfill, idempotency, dan data validation",
+        "body": "Definisikan primary key range, batch size, retry, checkpoint, dead-letter, progress metric, dan resume procedure. Query verifikasi: jumlah row, null rate, duplicate key, referential integrity, sample comparison, dan mismatch threshold."
+      },
+      {
+        "heading": "Rollback dan keputusan stop",
+        "body": "```text\nSTOP jika:\n- replication lag > [threshold]\n- error rate > [threshold]\n- lock wait > [threshold]\n- data mismatch > [threshold]\nRollback path:\n1. stop backfill / disable feature flag\n2. route reads to old column or code path\n3. preserve new data for reconciliation\n4. restore snapshot only with DBA approval\n5. verify write consistency before reopening traffic\n``` \nRollback schema destructive tidak dilakukan bila data baru belum direkonsiliasi."
+      },
+      {
+        "heading": "Post-migration verification",
+        "body": "Validasi query plan, latency p95, write/read errors, replica lag, constraints, and application compatibility. Simpan migration output, dashboard, approvals, dan hasil reconciliations."
+      },
+      {
+        "heading": "Komunikasi dan sign-off",
+        "body": "Cantumkan operator, approver, backup contact, incident commander, timeline, status keputusan, dan siapa yang mengumumkan keberhasilan. Sign-off dari DBA, service owner, QA, dan product bila perubahan memengaruhi pelanggan."
+      },
+      {
+        "heading": "Validasi dan pemeliharaan",
+        "bullets": [
+          "Tetapkan reviewer teknis, tanggal review, dan sumber kebenaran (repository, ticket, dashboard, atau runbook).",
+          "Simpan perubahan melalui pull request agar riwayat, persetujuan, dan pemilik keputusan dapat ditelusuri.",
+          "Jangan memasukkan secret, token, private key, data pelanggan, atau kredensial nyata ke dalam dokumen maupun contoh.",
+          "Perbarui dokumen ketika kontrak API, konfigurasi, dependency, arsitektur, atau prosedur operasional berubah."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "security-vulnerability-disclosure-policy",
+    "name": "SECURITY.md: Kebijakan Pengungkapan Kerentanan & Versi Didukung",
+    "category": "developer",
+    "categoryLabel": "Software Engineering & DevOps",
+    "symbol": "SEC",
+    "format": "md",
+    "quality": "baik",
+    "description": "Kebijakan keamanan repository yang menjelaskan kanal pelaporan privat, scope, data yang perlu disertakan, response target, supported versions, coordinated disclosure, dan safe handling.",
+    "tags": [
+      "SECURITY.md",
+      "vulnerability disclosure",
+      "responsible disclosure",
+      "security policy",
+      "supported versions"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek, produk, atau repositori",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama service atau repository"
+      },
+      {
+        "id": "ownerName",
+        "label": "Maintainer, tech lead, atau pemilik sistem",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama atau tim penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Tahap siklus hidup teknis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Inisiasi/desain",
+          "Pengembangan aktif",
+          "QA dan staging",
+          "Persiapan rilis",
+          "Produksi",
+          "Pemeliharaan",
+          "Migrasi/dekomisioning"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Domain atau stack teknologi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Frontend web",
+          "Backend/API",
+          "Full-stack",
+          "Mobile",
+          "Database/data platform",
+          "Cloud/DevOps/SRE",
+          "Security engineering",
+          "QA/automation",
+          "Open-source library/tooling"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Versi, lingkungan, constraint, dan catatan teknis",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Versi runtime, framework, environment, batasan infrastruktur, link issue, atau standar tim."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Konteks dan pemilik teknis",
+        "body": "Dokumen **SECURITY.md: Kebijakan Pengungkapan Kerentanan & Versi Didukung** untuk **{{entityName}}**. Pemilik/maintainer: **{{ownerName}}**. Tahap siklus hidup: **{{period}}**. Domain: **{{scope}}**. Versi dokumen: [semver/nomor]; status: [Draft/Review/Approved]; repo/issue referensi: [URL]. Catatan lingkungan dan batasan: {{notes}}."
+      },
+      {
+        "heading": "Kanal pelaporan privat",
+        "body": "Laporkan dugaan kerentanan melalui **[alamat keamanan atau private advisory URL yang dikelola maintainer]**. Jangan membuat issue publik atau mengunggah proof-of-concept yang dapat dieksploitasi sebelum koordinasi. Kanal harus diuji dan dipantau oleh {{ownerName}}."
+      },
+      {
+        "heading": "Scope dan out-of-scope",
+        "body": "In scope: [repository/package/host/API versi yang dikelola]. Out of scope: layanan pihak ketiga yang bukan milik proyek, social engineering, physical attacks, denial-of-service destruktif, dan temuan tanpa dampak keamanan yang dapat dibuktikan. Daftar scope wajib diperbarui."
+      },
+      {
+        "heading": "Isi laporan minimum",
+        "body": "```text\nTitle and affected component:\nAffected version / commit:\nEnvironment and prerequisites:\nImpact and threat scenario:\nReproduction steps (safe, non-destructive):\nProof/evidence with secrets removed:\nSuggested mitigation (optional):\nReporter contact / disclosure preference:\n``` \nJangan menyertakan data pribadi atau kredensial pihak lain."
+      },
+      {
+        "heading": "Proses respons dan target waktu",
+        "body": "Target operasional yang disarankan: acknowledgment dalam [2 hari kerja], triage awal [5 hari kerja], pembaruan status [interval], dan koordinasi disclosure berdasarkan tingkat risiko. Target ini harus disesuaikan kapasitas tim dan tidak boleh dianggap SLA hukum."
+      },
+      {
+        "heading": "Penanganan dan coordinated disclosure",
+        "body": "Maintainer melakukan reproduksi aman, menilai severity, menentukan versi terdampak, membuat patch, menguji regression, dan mengoordinasikan advisory. Reporter dan maintainer menyepakati waktu publikasi; detail eksploit ditahan sampai pengguna memiliki jalur mitigasi yang wajar."
+      },
+      {
+        "heading": "Versi yang didukung",
+        "body": "```markdown\n| Version line | Supported | Security fixes |\n|---|---|---|\n| [current] | Yes | Yes |\n| [previous] | Limited | Critical only |\n| [older] | No | No |\n``` \nIsi berdasarkan kebijakan rilis aktual; jangan menandai versi supported bila tidak ada maintainer/patch path."
+      },
+      {
+        "heading": "Safe handling dan kredit",
+        "body": "Peneliti diminta tidak mengakses, memodifikasi, atau mengekstrak data pengguna; tidak mengganggu ketersediaan; dan menghentikan pengujian setelah bukti minimum diperoleh. Kredit publik diberikan hanya dengan persetujuan reporter dan setelah remediasi dikoordinasikan."
+      },
+      {
+        "heading": "Kontak dan review",
+        "body": "Owner policy: {{ownerName}}. Repository: {{entityName}}. Review pada {{period}} atau ketika proses advisory berubah. Catatan scope, contact channel, versi, dan prosedur khusus: {{notes}}."
+      },
+      {
+        "heading": "Validasi dan pemeliharaan",
+        "bullets": [
+          "Tetapkan reviewer teknis, tanggal review, dan sumber kebenaran (repository, ticket, dashboard, atau runbook).",
+          "Simpan perubahan melalui pull request agar riwayat, persetujuan, dan pemilik keputusan dapat ditelusuri.",
+          "Jangan memasukkan secret, token, private key, data pelanggan, atau kredensial nyata ke dalam dokumen maupun contoh.",
+          "Perbarui dokumen ketika kontrak API, konfigurasi, dependency, arsitektur, atau prosedur operasional berubah."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "arsitektur-sistem-c4-service-map",
+    "name": "Dokumentasi Arsitektur Sistem C4, Dependency Map & Service Ownership",
+    "category": "developer",
+    "categoryLabel": "Software Engineering & DevOps",
+    "symbol": "ARCH",
+    "format": "md",
+    "quality": "baik",
+    "description": "Dokumentasi arsitektur yang memetakan konteks, container, komponen, alur request/data, dependency, trust boundary, ownership, dan failure mode untuk sistem yang dapat dioperasikan.",
+    "tags": [
+      "C4 model",
+      "system architecture",
+      "service map",
+      "dependency map",
+      "ownership"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek, produk, atau repositori",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama service atau repository"
+      },
+      {
+        "id": "ownerName",
+        "label": "Maintainer, tech lead, atau pemilik sistem",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama atau tim penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Tahap siklus hidup teknis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Inisiasi/desain",
+          "Pengembangan aktif",
+          "QA dan staging",
+          "Persiapan rilis",
+          "Produksi",
+          "Pemeliharaan",
+          "Migrasi/dekomisioning"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Domain atau stack teknologi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Frontend web",
+          "Backend/API",
+          "Full-stack",
+          "Mobile",
+          "Database/data platform",
+          "Cloud/DevOps/SRE",
+          "Security engineering",
+          "QA/automation",
+          "Open-source library/tooling"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Versi, lingkungan, constraint, dan catatan teknis",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Versi runtime, framework, environment, batasan infrastruktur, link issue, atau standar tim."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Konteks dan pemilik teknis",
+        "body": "Dokumen **Dokumentasi Arsitektur Sistem C4, Dependency Map & Service Ownership** untuk **{{entityName}}**. Pemilik/maintainer: **{{ownerName}}**. Tahap siklus hidup: **{{period}}**. Domain: **{{scope}}**. Versi dokumen: [semver/nomor]; status: [Draft/Review/Approved]; repo/issue referensi: [URL]. Catatan lingkungan dan batasan: {{notes}}."
+      },
+      {
+        "heading": "Ringkasan sistem dan batas konteks",
+        "body": "Sistem {{entityName}} melayani [persona/consumer] untuk [tujuan]. Pemilik arsitektur {{ownerName}}. Domain {{scope}}. Tahap {{period}}. Definisikan system boundary dan apa yang secara eksplisit berada di luar sistem."
+      },
+      {
+        "heading": "C4 level 1: system context",
+        "body": "```mermaid\nflowchart LR\n  User[End User] --> System[Product System]\n  Admin[Operator] --> System\n  System --> Payment[Payment Provider]\n  System --> Notify[Notification Provider]\n  System --> Identity[Identity Provider]\n``` \nGanti node berdasarkan integrasi aktual; catat protokol, data dibagi, autentikasi, dan owner eksternal."
+      },
+      {
+        "heading": "C4 level 2: containers",
+        "body": "```mermaid\nflowchart TB\n  Web[Web Client] --> API[API Gateway]\n  Mobile[Mobile Client] --> API\n  API --> Auth[Identity Service]\n  API --> Core[Domain Service]\n  Core --> DB[(Primary Database)]\n  Core --> Cache[(Cache)]\n  Core --> Queue[(Message Broker)]\n  Queue --> Worker[Background Worker]\n``` \nSertakan bahasa/runtime, deployment unit, scaling mode, state, dan network boundary setiap container."
+      },
+      {
+        "heading": "C4 level 3: komponen dan ownership",
+        "body": "Untuk tiap service, catat: responsibility, owning team, repository, API contract, data owner, deploy pipeline, on-call, SLO, runbook, dan dependency upstream/downstream. Komponen tanpa owner harus masuk action plan."
+      },
+      {
+        "heading": "Alur request, data, dan trust boundary",
+        "body": "Dokumentasikan sequence untuk jalur kritis, data classification, encryption boundary, identity propagation, service-to-service auth, event delivery, retry, idempotency, dan retention. Tandai jalur PII/credential dan data yang keluar organisasi."
+      },
+      {
+        "heading": "Dependency dan failure mode",
+        "bullets": [
+          "Dependency sync/async dan timeout default: [detail].",
+          "Failure mode: timeout, partial response, queue backlog, stale cache, split brain, quota exceeded.",
+          "Fallback: cache, degraded mode, circuit breaker, queue replay, manual operation.",
+          "Data consistency: strong/eventual, reconciliation, deduplication, ordering."
+        ]
+      },
+      {
+        "heading": "Deployment topology dan capacity",
+        "body": "Cantumkan region/zone, ingress/egress, subnet, autoscaling, resource requests/limits, secrets management, backup, disaster recovery, dan observability. Tautkan diagram jaringan yang tidak mengungkap detail sensitif."
+      },
+      {
+        "heading": "Governance dan perubahan",
+        "body": "Setiap perubahan boundary, datastore, protocol, identity, atau ownership memerlukan ADR/RFC. Tinjau dependency dan diagram setelah release arsitektural; archive diagram lama dengan tanggal dan versi."
+      },
+      {
+        "heading": "Validasi dan pemeliharaan",
+        "bullets": [
+          "Tetapkan reviewer teknis, tanggal review, dan sumber kebenaran (repository, ticket, dashboard, atau runbook).",
+          "Simpan perubahan melalui pull request agar riwayat, persetujuan, dan pemilik keputusan dapat ditelusuri.",
+          "Jangan memasukkan secret, token, private key, data pelanggan, atau kredensial nyata ke dalam dokumen maupun contoh.",
+          "Perbarui dokumen ketika kontrak API, konfigurasi, dependency, arsitektur, atau prosedur operasional berubah."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "qa-test-case-execution-matrix",
+    "name": "Matriks Test Case QA, Coverage & Hasil Eksekusi",
+    "category": "developer",
+    "categoryLabel": "Software Engineering & DevOps",
+    "symbol": "QA",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Matrix QA yang mengukur cakupan test yang dieksekusi, pass rate, serta sisa test per modul untuk mendukung keputusan go/no-go rilis.",
+    "tags": [
+      "QA matrix",
+      "test execution",
+      "test coverage",
+      "pass rate",
+      "release gate"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek, produk, atau repositori",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama service atau repository"
+      },
+      {
+        "id": "ownerName",
+        "label": "Maintainer, tech lead, atau pemilik sistem",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama atau tim penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Tahap siklus hidup teknis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Inisiasi/desain",
+          "Pengembangan aktif",
+          "QA dan staging",
+          "Persiapan rilis",
+          "Produksi",
+          "Pemeliharaan",
+          "Migrasi/dekomisioning"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Domain atau stack teknologi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Frontend web",
+          "Backend/API",
+          "Full-stack",
+          "Mobile",
+          "Database/data platform",
+          "Cloud/DevOps/SRE",
+          "Security engineering",
+          "QA/automation",
+          "Open-source library/tooling"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Versi, lingkungan, constraint, dan catatan teknis",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Versi runtime, framework, environment, batasan infrastruktur, link issue, atau standar tim."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Test Execution",
+        "title": "Matriks Test Case QA - {{entityName}}",
+        "columns": [
+          "Modul",
+          "Test Direncanakan",
+          "Test Dieksekusi",
+          "Passed",
+          "Failed",
+          "Blocked",
+          "Execution Coverage (%)",
+          "Pass Rate (%)",
+          "Belum Dieksekusi"
+        ],
+        "rows": [
+          [
+            "Authentication",
+            20,
+            18,
+            16,
+            1,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            "Checkout",
+            25,
+            25,
+            22,
+            2,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            "Billing",
+            15,
+            12,
+            10,
+            1,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            "Public API",
+            30,
+            28,
+            26,
+            1,
+            1,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "IF(B6=0,0,C6/B6*100)",
+            "cachedValue": 90
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(C6=0,0,D6/C6*100)",
+            "cachedValue": 88.8888888889
+          },
+          {
+            "cell": "I6",
+            "formula": "B6-C6",
+            "cachedValue": 2
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(B7=0,0,C7/B7*100)",
+            "cachedValue": 100
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(C7=0,0,D7/C7*100)",
+            "cachedValue": 88
+          },
+          {
+            "cell": "I7",
+            "formula": "B7-C7",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(B8=0,0,C8/B8*100)",
+            "cachedValue": 80
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(C8=0,0,D8/C8*100)",
+            "cachedValue": 83.3333333333
+          },
+          {
+            "cell": "I8",
+            "formula": "B8-C8",
+            "cachedValue": 3
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(B9=0,0,C9/B9*100)",
+            "cachedValue": 93.3333333333
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(C9=0,0,D9/C9*100)",
+            "cachedValue": 92.8571428571
+          },
+          {
+            "cell": "I9",
+            "formula": "B9-C9",
+            "cachedValue": 2
+          }
+        ],
+        "columnWidths": [
+          20,
+          19,
+          19,
+          12,
+          12,
+          12,
+          23,
+          17,
+          19
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cicd-pipeline-design",
+    "name": "Spesifikasi CI/CD Pipeline: Build, Test, Artifact & Deployment Gates",
+    "category": "developer",
+    "categoryLabel": "Software Engineering & DevOps",
+    "symbol": "CICD",
+    "format": "md",
+    "quality": "baik",
+    "description": "Dokumen pipeline delivery yang menetapkan trigger, dependency caching, lint/typecheck/test/security scan, artifact immutability, environment promotion, approval gate, dan rollback.",
+    "tags": [
+      "CI/CD",
+      "GitHub Actions",
+      "pipeline",
+      "deployment",
+      "software delivery"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek, produk, atau repositori",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama service atau repository"
+      },
+      {
+        "id": "ownerName",
+        "label": "Maintainer, tech lead, atau pemilik sistem",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama atau tim penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Tahap siklus hidup teknis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Inisiasi/desain",
+          "Pengembangan aktif",
+          "QA dan staging",
+          "Persiapan rilis",
+          "Produksi",
+          "Pemeliharaan",
+          "Migrasi/dekomisioning"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Domain atau stack teknologi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Frontend web",
+          "Backend/API",
+          "Full-stack",
+          "Mobile",
+          "Database/data platform",
+          "Cloud/DevOps/SRE",
+          "Security engineering",
+          "QA/automation",
+          "Open-source library/tooling"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Versi, lingkungan, constraint, dan catatan teknis",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Versi runtime, framework, environment, batasan infrastruktur, link issue, atau standar tim."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Konteks dan pemilik teknis",
+        "body": "Dokumen **Spesifikasi CI/CD Pipeline: Build, Test, Artifact & Deployment Gates** untuk **{{entityName}}**. Pemilik/maintainer: **{{ownerName}}**. Tahap siklus hidup: **{{period}}**. Domain: **{{scope}}**. Versi dokumen: [semver/nomor]; status: [Draft/Review/Approved]; repo/issue referensi: [URL]. Catatan lingkungan dan batasan: {{notes}}."
+      },
+      {
+        "heading": "Tujuan dan pipeline ownership",
+        "body": "Pipeline untuk {{entityName}}, owner {{ownerName}}, domain {{scope}}, tahap {{period}}. Tetapkan branch trigger, environment, artifact registry, deployment target, approver, dan source workflow."
+      },
+      {
+        "heading": "Pipeline stages",
+        "body": "```text\nPull Request\n  -> Checkout pinned revision\n  -> Install from lockfile\n  -> Lint + typecheck\n  -> Unit + integration tests\n  -> SAST + dependency scan + secret scan\n  -> Build immutable artifact\n  -> Publish artifact + provenance\n\nProtected main\n  -> Promote same artifact to staging\n  -> Smoke/contract test\n  -> Approval gate\n  -> Production canary\n  -> Progressive rollout + health checks\n```"
+      },
+      {
+        "heading": "Contoh workflow GitHub Actions",
+        "body": "```yaml\nname: CI\non:\n  pull_request:\n  push:\n    branches: [main]\npermissions:\n  contents: read\njobs:\n  verify:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: 22\n          cache: npm\n      - run: npm ci\n      - run: npm run lint\n      - run: npm run typecheck\n      - run: npm test -- --run\n      - run: npm run build\n``` \nPin action SHA pada repository dengan kebijakan supply-chain ketat dan sesuaikan versi Node/package manager."
+      },
+      {
+        "heading": "Secrets, permissions, dan isolation",
+        "bullets": [
+          "Berikan `permissions` minimum per job; hindari `write-all`.",
+          "Gunakan OIDC/short-lived credentials bila platform mendukung; hindari long-lived cloud key.",
+          "Jangan expose production secret ke fork PR atau untrusted build.",
+          "Pisahkan build/test/deploy identity dan gunakan protected environment approval.",
+          "Pin dependency/action, aktifkan lockfile, provenance, SBOM, dan signature bila tersedia."
+        ]
+      },
+      {
+        "heading": "Artifact dan promotion",
+        "body": "Build artifact satu kali dari commit immutable; hitung digest/checksum dan deploy artifact yang sama ke staging lalu production. Jangan rebuild dengan dependency berbeda pada tiap environment. Simpan release manifest, commit SHA, image digest, dan migration ID."
+      },
+      {
+        "heading": "Deployment gate dan rollback",
+        "bullets": [
+          "Gate: unit/integration/contract/security scan lolos, migration compatible, approval tercatat.",
+          "Canary: [persentase trafik] selama [window], error/latency/saturation harus dalam batas.",
+          "Rollback trigger: [threshold] dan decision owner: [role].",
+          "Rollback action: redeploy digest sebelumnya atau disable flag; verifikasi data migration terpisah.",
+          "Post-deploy: smoke test, synthetic check, dashboard, dan release announcement."
+        ]
+      },
+      {
+        "heading": "KPI delivery dan pemeliharaan",
+        "body": "Ukur pipeline duration, queue time, flaky test rate, deployment frequency, change failure rate, rollback duration, dan build reproducibility. Review pipeline setelah perubahan runtime, action, permission, atau platform."
+      },
+      {
+        "heading": "Validasi dan pemeliharaan",
+        "bullets": [
+          "Tetapkan reviewer teknis, tanggal review, dan sumber kebenaran (repository, ticket, dashboard, atau runbook).",
+          "Simpan perubahan melalui pull request agar riwayat, persetujuan, dan pemilik keputusan dapat ditelusuri.",
+          "Jangan memasukkan secret, token, private key, data pelanggan, atau kredensial nyata ke dalam dokumen maupun contoh.",
+          "Perbarui dokumen ketika kontrak API, konfigurasi, dependency, arsitektur, atau prosedur operasional berubah."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "observability-slo-alerting",
+    "name": "Standar Observability: Logging, Metrics, Tracing, SLO & Alert Routing",
+    "category": "developer",
+    "categoryLabel": "Software Engineering & DevOps",
+    "symbol": "OBS",
+    "format": "md",
+    "quality": "baik",
+    "description": "Spesifikasi observability untuk service produksi yang menetapkan telemetry, label cardinality, redaction, golden signals, SLI/SLO, alert threshold, dan ownership on-call.",
+    "tags": [
+      "observability",
+      "SLO",
+      "SLI",
+      "Prometheus",
+      "OpenTelemetry",
+      "alerting"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek, produk, atau repositori",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama service atau repository"
+      },
+      {
+        "id": "ownerName",
+        "label": "Maintainer, tech lead, atau pemilik sistem",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama atau tim penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Tahap siklus hidup teknis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Inisiasi/desain",
+          "Pengembangan aktif",
+          "QA dan staging",
+          "Persiapan rilis",
+          "Produksi",
+          "Pemeliharaan",
+          "Migrasi/dekomisioning"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Domain atau stack teknologi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Frontend web",
+          "Backend/API",
+          "Full-stack",
+          "Mobile",
+          "Database/data platform",
+          "Cloud/DevOps/SRE",
+          "Security engineering",
+          "QA/automation",
+          "Open-source library/tooling"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Versi, lingkungan, constraint, dan catatan teknis",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Versi runtime, framework, environment, batasan infrastruktur, link issue, atau standar tim."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Konteks dan pemilik teknis",
+        "body": "Dokumen **Standar Observability: Logging, Metrics, Tracing, SLO & Alert Routing** untuk **{{entityName}}**. Pemilik/maintainer: **{{ownerName}}**. Tahap siklus hidup: **{{period}}**. Domain: **{{scope}}**. Versi dokumen: [semver/nomor]; status: [Draft/Review/Approved]; repo/issue referensi: [URL]. Catatan lingkungan dan batasan: {{notes}}."
+      },
+      {
+        "heading": "Service ownership dan objective",
+        "body": "Service {{entityName}}, owner {{ownerName}}, domain {{scope}}, lifecycle {{period}}. Cantumkan critical user journey, downstream dependency, on-call rotation, dashboard utama, dan runbook."
+      },
+      {
+        "heading": "Standar logging",
+        "body": "```json\n{\n  \"timestamp\": \"2026-01-01T00:00:00Z\",\n  \"level\": \"error\",\n  \"service\": \"api-service\",\n  \"environment\": \"production\",\n  \"trace_id\": \"trace-placeholder\",\n  \"request_id\": \"req-placeholder\",\n  \"event\": \"dependency_timeout\",\n  \"duration_ms\": 1200\n}\n``` \nGunakan structured log, UTC timestamp, correlation ID, redaction untuk PII/secret, dan retention berdasarkan kebutuhan. Jangan memasukkan token, body sensitif, atau identifier berisiko."
+      },
+      {
+        "heading": "Metrics dan label cardinality",
+        "body": "Gunakan counter, gauge, histogram, dan summary sesuai kebutuhan. Label dibatasi pada service, route template, method, status class, region, dan dependency; jangan memakai user ID, request ID, atau raw URL sebagai label."
+      },
+      {
+        "heading": "Distributed tracing",
+        "body": "Instruksikan propagation W3C Trace Context, span per dependency, sampling head/tail, status error, dan baggage yang diizinkan. Jelaskan redaction dan batas sampling untuk traffic sensitif."
+      },
+      {
+        "heading": "SLI/SLO dan error budget",
+        "body": "Definisikan SLI availability/latency/freshness/correctness dengan numerator, denominator, window, exclusion, dan data source. Target SLO harus disetujui product/engineering dan punya error budget policy."
+      },
+      {
+        "heading": "PromQL alert example",
+        "body": "```promql\n# 5xx ratio over 5m\nsum(rate(http_requests_total{status=~\"5..\"}[5m]))\n/\nsum(rate(http_requests_total[5m])) > 0.02\n\n# p95 latency\nhistogram_quantile(0.95,\n  sum by (le) (rate(http_request_duration_seconds_bucket[5m]))\n) > 0.8\n``` \nAlert harus memiliki `for`, severity, owner, dashboard, runbook URL, dan tindakan yang dapat dilakukan."
+      },
+      {
+        "heading": "Routing, noise control, dan review",
+        "body": "Atur deduplication, grouping, inhibition, escalation, maintenance window, paging threshold, dan siapa yang menerima alert. Audit alert tidak actionable dan alert fatigue. Simpan baseline, threshold rationale, dan hasil uji alert."
+      },
+      {
+        "heading": "Validasi dan pemeliharaan",
+        "bullets": [
+          "Tetapkan reviewer teknis, tanggal review, dan sumber kebenaran (repository, ticket, dashboard, atau runbook).",
+          "Simpan perubahan melalui pull request agar riwayat, persetujuan, dan pemilik keputusan dapat ditelusuri.",
+          "Jangan memasukkan secret, token, private key, data pelanggan, atau kredensial nyata ke dalam dokumen maupun contoh.",
+          "Perbarui dokumen ketika kontrak API, konfigurasi, dependency, arsitektur, atau prosedur operasional berubah."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "api-versioning-deprecation-guide",
+    "name": "Panduan API Versioning, Compatibility & Deprecation Lifecycle",
+    "category": "developer",
+    "categoryLabel": "Software Engineering & DevOps",
+    "symbol": "VER",
+    "format": "md",
+    "quality": "baik",
+    "description": "Panduan pengelolaan perubahan kontrak API agar consumer tidak terputus, dengan kebijakan kompatibilitas, sunset period, telemetry pemakaian, migration guide, dan proses penghentian versi.",
+    "tags": [
+      "API versioning",
+      "backward compatibility",
+      "deprecation",
+      "sunset",
+      "API lifecycle"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek, produk, atau repositori",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama service atau repository"
+      },
+      {
+        "id": "ownerName",
+        "label": "Maintainer, tech lead, atau pemilik sistem",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama atau tim penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Tahap siklus hidup teknis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Inisiasi/desain",
+          "Pengembangan aktif",
+          "QA dan staging",
+          "Persiapan rilis",
+          "Produksi",
+          "Pemeliharaan",
+          "Migrasi/dekomisioning"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Domain atau stack teknologi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Frontend web",
+          "Backend/API",
+          "Full-stack",
+          "Mobile",
+          "Database/data platform",
+          "Cloud/DevOps/SRE",
+          "Security engineering",
+          "QA/automation",
+          "Open-source library/tooling"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Versi, lingkungan, constraint, dan catatan teknis",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Versi runtime, framework, environment, batasan infrastruktur, link issue, atau standar tim."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Konteks dan pemilik teknis",
+        "body": "Dokumen **Panduan API Versioning, Compatibility & Deprecation Lifecycle** untuk **{{entityName}}**. Pemilik/maintainer: **{{ownerName}}**. Tahap siklus hidup: **{{period}}**. Domain: **{{scope}}**. Versi dokumen: [semver/nomor]; status: [Draft/Review/Approved]; repo/issue referensi: [URL]. Catatan lingkungan dan batasan: {{notes}}."
+      },
+      {
+        "heading": "Kebijakan versi",
+        "body": "Tetapkan strategi versi URL/header/schema, dukungan versi aktif, semantic compatibility, dan siapa yang berhak menyetujui breaking change untuk {{entityName}}. Owner: {{ownerName}}. Domain: {{scope}}. Tahap: {{period}}."
+      },
+      {
+        "heading": "Perubahan kompatibel dan breaking change",
+        "bullets": [
+          "Umumnya kompatibel: penambahan field optional, endpoint baru, enum yang consumer dapat toleransi bila kontrak mengizinkan.",
+          "Berisiko breaking: menghapus/rename field, memperketat validasi, mengubah tipe/semantik, mengubah default, menghapus endpoint, atau mempersempit permission.",
+          "Perubahan behavior yang tidak mengubah schema tetap dievaluasi melalui contract test."
+        ]
+      },
+      {
+        "heading": "Deprecation headers dan pemberitahuan",
+        "body": "```http\nDeprecation: @<unix-timestamp>\nSunset: <HTTP-date>\nLink: <migration-guide-url>; rel=\"deprecation\"\n``` \nTetapkan waktu pemberitahuan, sunset date, channel pemberitahuan, dan pengecualian security. Header hanya dikirim bila implementasi dan tanggalnya benar."
+      },
+      {
+        "heading": "Consumer inventory dan usage telemetry",
+        "body": "Inventarisasi consumer internal/eksternal, owner, versi SDK, volume request, endpoint yang dipakai, dan contact channel. Telemetry harus menghindari PII; consumer yang tidak teridentifikasi ditangani melalui outreach dan deadline."
+      },
+      {
+        "heading": "Migration guide",
+        "body": "```text\n1. Identify consumer calls to /v1/legacy-resource\n2. Upgrade SDK to >= x.y.z\n3. Replace field `oldName` with `newName`\n4. Update contract tests and fixtures\n5. Validate on staging\n6. Confirm production traffic uses v2\n``` \nSertakan side-by-side request/response, mapping error, authentication differences, and rollback constraints."
+      },
+      {
+        "heading": "Compatibility tests dan rollout",
+        "body": "Jalankan provider contract, consumer-driven contract, SDK tests, schema diff, and canary. Hentikan deprecation bila consumer kritis belum migrasi atau error meningkat."
+      },
+      {
+        "heading": "Retirement criteria",
+        "body": "Versi hanya dihentikan setelah sunset date, consumer inventory ditinjau, trafik sisa ditangani, dokumentasi diperbarui, dan legal/support approval terpenuhi. Catat keputusan serta exception secara tertulis."
+      },
+      {
+        "heading": "Validasi dan pemeliharaan",
+        "bullets": [
+          "Tetapkan reviewer teknis, tanggal review, dan sumber kebenaran (repository, ticket, dashboard, atau runbook).",
+          "Simpan perubahan melalui pull request agar riwayat, persetujuan, dan pemilik keputusan dapat ditelusuri.",
+          "Jangan memasukkan secret, token, private key, data pelanggan, atau kredensial nyata ke dalam dokumen maupun contoh.",
+          "Perbarui dokumen ketika kontrak API, konfigurasi, dependency, arsitektur, atau prosedur operasional berubah."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "production-readiness-security-checklist",
+    "name": "Production Readiness Review & Security Checklist Sebelum Rilis",
+    "category": "developer",
+    "categoryLabel": "Software Engineering & DevOps",
+    "symbol": "PRR",
+    "format": "md",
+    "quality": "unggulan",
+    "description": "Gate rilis produksi yang memeriksa security boundary, konfigurasi, backup, observability, SLO, capacity, dependency, incident readiness, privacy, dan rollback sebelum traffic pelanggan dibuka.",
+    "tags": [
+      "production readiness",
+      "security checklist",
+      "release gate",
+      "SRE",
+      "secure deployment"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek, produk, atau repositori",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama service atau repository"
+      },
+      {
+        "id": "ownerName",
+        "label": "Maintainer, tech lead, atau pemilik sistem",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama atau tim penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Tahap siklus hidup teknis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Inisiasi/desain",
+          "Pengembangan aktif",
+          "QA dan staging",
+          "Persiapan rilis",
+          "Produksi",
+          "Pemeliharaan",
+          "Migrasi/dekomisioning"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Domain atau stack teknologi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Frontend web",
+          "Backend/API",
+          "Full-stack",
+          "Mobile",
+          "Database/data platform",
+          "Cloud/DevOps/SRE",
+          "Security engineering",
+          "QA/automation",
+          "Open-source library/tooling"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Versi, lingkungan, constraint, dan catatan teknis",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Versi runtime, framework, environment, batasan infrastruktur, link issue, atau standar tim."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Konteks dan pemilik teknis",
+        "body": "Dokumen **Production Readiness Review & Security Checklist Sebelum Rilis** untuk **{{entityName}}**. Pemilik/maintainer: **{{ownerName}}**. Tahap siklus hidup: **{{period}}**. Domain: **{{scope}}**. Versi dokumen: [semver/nomor]; status: [Draft/Review/Approved]; repo/issue referensi: [URL]. Catatan lingkungan dan batasan: {{notes}}."
+      },
+      {
+        "heading": "Identitas rilis dan risk owner",
+        "body": "Release: [versi/commit/image digest]; service {{entityName}}; owner {{ownerName}}; domain {{scope}}; phase {{period}}. Risk classification: [low/medium/high]; approver engineering, security, product, dan operations."
+      },
+      {
+        "heading": "Security dan supply chain",
+        "bullets": [
+          "- [ ] Authentication dan authorization diuji server-side; privilege default minimum.",
+          "- [ ] Threat model, abuse case, dan data flow direview.",
+          "- [ ] Secret tidak ada di repo/image/log; rotasi dan revoke path tersedia.",
+          "- [ ] Dependency scan, secret scan, SAST, container/IaC scan, dan SBOM diperiksa.",
+          "- [ ] TLS, security headers, CORS, cookie flags, CSRF, rate limit, dan input validation diverifikasi.",
+          "- [ ] Admin action, audit log, break-glass, dan access review disiapkan."
+        ]
+      },
+      {
+        "heading": "Data, privacy, dan database",
+        "bullets": [
+          "- [ ] Klasifikasi data dan retention diidentifikasi.",
+          "- [ ] PII minimization, masking, export/delete workflow, dan audit access diuji.",
+          "- [ ] Migration backward compatible dan lock/replication impact diuji.",
+          "- [ ] Backup terbaru dan restore rehearsal lulus.",
+          "- [ ] Encryption in transit/at rest dan key rotation diverifikasi."
+        ]
+      },
+      {
+        "heading": "Reliability, SLO, dan capacity",
+        "bullets": [
+          "- [ ] SLI/SLO, error budget, dashboard, dan alert actionable ditentukan.",
+          "- [ ] Load/soak test dan resource headroom memenuhi target.",
+          "- [ ] Timeout, retry, jitter, circuit breaker, queue retry, dan idempotency diuji.",
+          "- [ ] Dependency failure memiliki fallback/degraded mode.",
+          "- [ ] RPO/RTO, multi-zone/region dependency, dan recovery owner jelas."
+        ]
+      },
+      {
+        "heading": "Release, rollback, dan operasional",
+        "body": "```text\nRelease gate sequence:\n1. Freeze candidate commit and artifact digest\n2. Run smoke + contract + security checks\n3. Apply additive migration\n4. Deploy canary / limited cohort\n5. Verify error, latency, saturation, and business KPI\n6. Expand traffic by approved stages\n7. Close release only after observation window\n\nRollback triggers: [error budget burn / latency / data integrity]\nRollback owner: [role]\n```"
+      },
+      {
+        "heading": "Support, compliance, dan komunikasi",
+        "body": "Tetapkan on-call, escalation path, customer communication, status page, support FAQ, runbook, vendor contact, data incident notification, dan service ownership. Pastikan klaim compliance didukung evidence aktual."
+      },
+      {
+        "heading": "Go/no-go dan bukti",
+        "body": "Setiap baris checklist diberi status Pass/Fail/Not Applicable dengan bukti/link, owner, reviewer, dan expiry. Blocker security/data integrity/rollback tidak boleh diubah menjadi waiver tanpa risk acceptance tertulis dari pihak berwenang."
+      },
+      {
+        "heading": "Sign-off dan pengecualian",
+        "body": "Keputusan: [GO/NO-GO/GO WITH CONDITIONS]. Pengecualian harus menyebut risiko, kompensasi, owner, expiry date, dan rollback trigger. Catatan final: {{notes}}."
+      },
+      {
+        "heading": "Validasi dan pemeliharaan",
+        "bullets": [
+          "Tetapkan reviewer teknis, tanggal review, dan sumber kebenaran (repository, ticket, dashboard, atau runbook).",
+          "Simpan perubahan melalui pull request agar riwayat, persetujuan, dan pemilik keputusan dapat ditelusuri.",
+          "Jangan memasukkan secret, token, private key, data pelanggan, atau kredensial nyata ke dalam dokumen maupun contoh.",
+          "Perbarui dokumen ketika kontrak API, konfigurasi, dependency, arsitektur, atau prosedur operasional berubah."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "disaster-recovery-bcp-plan",
+    "name": "Disaster Recovery & Business Continuity Plan untuk Sistem Digital",
+    "category": "developer",
+    "categoryLabel": "Software Engineering & DevOps",
+    "symbol": "DR",
+    "format": "md",
+    "quality": "unggulan",
+    "description": "Rencana kesinambungan sistem digital yang menetapkan business impact, RTO/RPO, dependency tier, backup/restore, failover, crisis communication, dan kriteria kembali normal.",
+    "tags": [
+      "disaster recovery",
+      "business continuity",
+      "RTO",
+      "RPO",
+      "failover",
+      "backup"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek, produk, atau repositori",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama service atau repository"
+      },
+      {
+        "id": "ownerName",
+        "label": "Maintainer, tech lead, atau pemilik sistem",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama atau tim penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Tahap siklus hidup teknis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Inisiasi/desain",
+          "Pengembangan aktif",
+          "QA dan staging",
+          "Persiapan rilis",
+          "Produksi",
+          "Pemeliharaan",
+          "Migrasi/dekomisioning"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Domain atau stack teknologi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Frontend web",
+          "Backend/API",
+          "Full-stack",
+          "Mobile",
+          "Database/data platform",
+          "Cloud/DevOps/SRE",
+          "Security engineering",
+          "QA/automation",
+          "Open-source library/tooling"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Versi, lingkungan, constraint, dan catatan teknis",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Versi runtime, framework, environment, batasan infrastruktur, link issue, atau standar tim."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Konteks dan pemilik teknis",
+        "body": "Dokumen **Disaster Recovery & Business Continuity Plan untuk Sistem Digital** untuk **{{entityName}}**. Pemilik/maintainer: **{{ownerName}}**. Tahap siklus hidup: **{{period}}**. Domain: **{{scope}}**. Versi dokumen: [semver/nomor]; status: [Draft/Review/Approved]; repo/issue referensi: [URL]. Catatan lingkungan dan batasan: {{notes}}."
+      },
+      {
+        "heading": "Tujuan, scope, dan command structure",
+        "body": "Sistem {{entityName}}, owner {{ownerName}}, domain {{scope}}, periode evaluasi {{period}}. Incident commander, technical lead, communications lead, business owner, vendor contact, dan pengganti harus ditentukan."
+      },
+      {
+        "heading": "Business impact dan service tier",
+        "body": "Petakan proses kritis, pelanggan/pihak terdampak, toleransi downtime, data yang dapat hilang, dependensi, jam kritis, dampak finansial/operasional, dan service tier. RTO adalah target pemulihan layanan; RPO adalah target kehilangan data yang dapat diterima."
+      },
+      {
+        "heading": "Dependency dan failure scenarios",
+        "bullets": [
+          "Cloud region/provider outage.",
+          "Database corruption atau accidental deletion.",
+          "Credential compromise / ransomware.",
+          "DNS, CDN, identity, payment, atau third-party dependency failure.",
+          "Loss of deployment pipeline, registry, or control plane."
+        ]
+      },
+      {
+        "heading": "Backup dan restore strategy",
+        "body": "```bash\n# Illustrative only: use the approved backup tooling\nbackup-tool list --service <service-id>\nbackup-tool verify --backup <backup-id>\nbackup-tool restore --backup <backup-id> --target <isolated-target>\n``` \nDokumentasikan encryption, immutability, retention, cross-account/region copy, backup owner, restore authorization, dan hasil uji restore."
+      },
+      {
+        "heading": "Failover dan recovery sequence",
+        "body": "Tetapkan decision threshold, approval, region/cluster target, DNS/traffic routing, secret/config availability, database promotion, queue replay, cache warmup, and dependency validation. Urutkan recovery berdasarkan dependency dan business priority."
+      },
+      {
+        "heading": "Komunikasi krisis",
+        "body": "Sediakan template status internal/pelanggan, kanal alternatif bila primary collaboration down, update interval, spokesperson, regulatory/legal review, dan bukti komunikasi. Hindari mengumumkan penyebab belum terverifikasi."
+      },
+      {
+        "heading": "Simulasi dan pengujian berkala",
+        "bullets": [
+          "- [ ] Tabletop exercise untuk setiap skenario prioritas.",
+          "- [ ] Restore test terisolasi membuktikan konsistensi dan waktu pemulihan.",
+          "- [ ] Failover diuji tanpa mengorbankan integritas data.",
+          "- [ ] Kontak, akun break-glass, credential recovery, dan vendor SLA diverifikasi.",
+          "- [ ] Gap hasil simulasi masuk backlog dengan owner dan due date."
+        ]
+      },
+      {
+        "heading": "Return to normal dan post-recovery",
+        "body": "Kriteria failback, reconciliation data, re-enable traffic, capacity normalization, alert reset, evidence retention, post-incident review, dan formal acceptance harus ditentukan sebelum layanan dinyatakan normal."
+      },
+      {
+        "heading": "Validasi dan pemeliharaan",
+        "bullets": [
+          "Tetapkan reviewer teknis, tanggal review, dan sumber kebenaran (repository, ticket, dashboard, atau runbook).",
+          "Simpan perubahan melalui pull request agar riwayat, persetujuan, dan pemilik keputusan dapat ditelusuri.",
+          "Jangan memasukkan secret, token, private key, data pelanggan, atau kredensial nyata ke dalam dokumen maupun contoh.",
+          "Perbarui dokumen ketika kontrak API, konfigurasi, dependency, arsitektur, atau prosedur operasional berubah."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "threat-model-stride",
+    "name": "Threat Modeling STRIDE: Asset, Trust Boundary & Mitigation Register",
+    "category": "developer",
+    "categoryLabel": "Software Engineering & DevOps",
+    "symbol": "THREAT",
+    "format": "md",
+    "quality": "unggulan",
+    "description": "Workshop threat model untuk mengidentifikasi spoofing, tampering, repudiation, information disclosure, denial of service, dan elevation of privilege pada asset, flow, dan trust boundary.",
+    "tags": [
+      "threat modeling",
+      "STRIDE",
+      "application security",
+      "attack surface",
+      "mitigation"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek, produk, atau repositori",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama service atau repository"
+      },
+      {
+        "id": "ownerName",
+        "label": "Maintainer, tech lead, atau pemilik sistem",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama atau tim penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Tahap siklus hidup teknis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Inisiasi/desain",
+          "Pengembangan aktif",
+          "QA dan staging",
+          "Persiapan rilis",
+          "Produksi",
+          "Pemeliharaan",
+          "Migrasi/dekomisioning"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Domain atau stack teknologi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Frontend web",
+          "Backend/API",
+          "Full-stack",
+          "Mobile",
+          "Database/data platform",
+          "Cloud/DevOps/SRE",
+          "Security engineering",
+          "QA/automation",
+          "Open-source library/tooling"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Versi, lingkungan, constraint, dan catatan teknis",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Versi runtime, framework, environment, batasan infrastruktur, link issue, atau standar tim."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Konteks dan pemilik teknis",
+        "body": "Dokumen **Threat Modeling STRIDE: Asset, Trust Boundary & Mitigation Register** untuk **{{entityName}}**. Pemilik/maintainer: **{{ownerName}}**. Tahap siklus hidup: **{{period}}**. Domain: **{{scope}}**. Versi dokumen: [semver/nomor]; status: [Draft/Review/Approved]; repo/issue referensi: [URL]. Catatan lingkungan dan batasan: {{notes}}."
+      },
+      {
+        "heading": "System scope dan asset",
+        "body": "Model untuk {{entityName}}, owner {{ownerName}}, domain {{scope}}, lifecycle {{period}}. Daftar asset: credential, session, PII, payment data, signing key, source code, deployment pipeline, database, and audit log. Tetapkan confidentiality/integrity/availability impact."
+      },
+      {
+        "heading": "Data flow dan trust boundary",
+        "body": "```mermaid\nflowchart LR\n  User -->|HTTPS| Edge[CDN / WAF]\n  Edge --> API[API Service]\n  API --> DB[(Database)]\n  API --> Queue[(Queue)]\n  Queue --> Worker[Worker]\n  Worker --> Vendor[External Provider]\n  Admin --> Control[Admin Plane]\n``` \nTandai boundary internet/internal, tenant, privileged plane, cloud account, third party, and sensitive data movement."
+      },
+      {
+        "heading": "Threat enumeration STRIDE",
+        "bullets": [
+          "**S - Spoofing:** session/token theft, forged service identity, credential stuffing.",
+          "**T - Tampering:** request/body manipulation, stored data modification, package or pipeline tampering.",
+          "**R - Repudiation:** insufficient audit trail, mutable logs, missing actor attribution.",
+          "**I - Information Disclosure:** IDOR, excessive response fields, logs/secrets exposure, insecure backup.",
+          "**D - Denial of Service:** expensive query, queue flood, resource exhaustion, dependency saturation.",
+          "**E - Elevation of Privilege:** broken role checks, confused deputy, unsafe admin workflow, IAM over-permission."
+        ]
+      },
+      {
+        "heading": "Attack path dan risk scoring",
+        "body": "Untuk tiap threat tulis entry point, precondition, attacker capability, asset, likelihood, impact, exploitability, existing control, residual risk, evidence, dan owner. Gunakan skala serta matrix yang disepakati, jangan menyajikan skor tanpa metodologi."
+      },
+      {
+        "heading": "Mitigation dan verification",
+        "body": "```text\nThreat: Cross-tenant object access\nControl: server-side tenant authorization on every lookup\nTest: negative test with tenant-A token requesting tenant-B object\nEvidence: integration test + audit event + policy review\nOwner: service team\n``` \nMitigasi dapat berupa authz, validation, rate limit, segmentation, encryption, logging, secure defaults, and operational controls."
+      },
+      {
+        "heading": "Abuse cases dan security test",
+        "body": "Turunkan threat menjadi test case negatif: privilege escalation, replay, injection, IDOR, path traversal, SSRF, race condition, enumeration, and resource abuse. Tentukan test owner, environment aman, acceptance criterion, dan retest date."
+      },
+      {
+        "heading": "Risk acceptance dan residual risk",
+        "body": "Risiko yang belum dimitigasi harus memiliki owner, alasan, compensating control, expiry, monitoring, dan approver yang berwenang. Risiko high/critical tidak ditutup hanya dengan komentar atau rencana tanpa due date."
+      },
+      {
+        "heading": "Review berkala",
+        "body": "Perbarui model saat endpoint, auth, identity provider, data flow, storage, third-party, atau deployment boundary berubah. Lampirkan diagram versi, workshop attendee, dan keputusan."
+      },
+      {
+        "heading": "Validasi dan pemeliharaan",
+        "bullets": [
+          "Tetapkan reviewer teknis, tanggal review, dan sumber kebenaran (repository, ticket, dashboard, atau runbook).",
+          "Simpan perubahan melalui pull request agar riwayat, persetujuan, dan pemilik keputusan dapat ditelusuri.",
+          "Jangan memasukkan secret, token, private key, data pelanggan, atau kredensial nyata ke dalam dokumen maupun contoh.",
+          "Perbarui dokumen ketika kontrak API, konfigurasi, dependency, arsitektur, atau prosedur operasional berubah."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cloud-infrastructure-cost-capacity",
+    "name": "Kalkulator Kapasitas Infrastruktur Cloud, Forecast & Biaya Bulanan",
+    "category": "developer",
+    "categoryLabel": "Software Engineering & DevOps",
+    "symbol": "CLOUD",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Model biaya infrastruktur berdasarkan kuantitas, tarif bulanan, utilisasi, dan contingency; menghitung proyeksi per service dan total budget agar sizing kapasitas dapat ditinjau sebelum provisioning.",
+    "tags": [
+      "cloud cost",
+      "capacity planning",
+      "infrastructure",
+      "FinOps",
+      "budget forecast"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek, produk, atau repositori",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama service atau repository"
+      },
+      {
+        "id": "ownerName",
+        "label": "Maintainer, tech lead, atau pemilik sistem",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama atau tim penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Tahap siklus hidup teknis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Inisiasi/desain",
+          "Pengembangan aktif",
+          "QA dan staging",
+          "Persiapan rilis",
+          "Produksi",
+          "Pemeliharaan",
+          "Migrasi/dekomisioning"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Domain atau stack teknologi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Frontend web",
+          "Backend/API",
+          "Full-stack",
+          "Mobile",
+          "Database/data platform",
+          "Cloud/DevOps/SRE",
+          "Security engineering",
+          "QA/automation",
+          "Open-source library/tooling"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Versi, lingkungan, constraint, dan catatan teknis",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Versi runtime, framework, environment, batasan infrastruktur, link issue, atau standar tim."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Cloud Cost Model",
+        "title": "Kalkulator Kapasitas & Biaya Cloud - {{entityName}}",
+        "columns": [
+          "Komponen",
+          "Unit/Bulan",
+          "Tarif per Unit (Rp)",
+          "Utilisasi (%)",
+          "Biaya Dasar (Rp)",
+          "Contingency (%)",
+          "Cadangan (Rp)",
+          "Forecast Bulanan (Rp)"
+        ],
+        "rows": [
+          [
+            "Compute instances",
+            3,
+            450000,
+            70,
+            0,
+            15,
+            0,
+            0
+          ],
+          [
+            "Managed database",
+            1,
+            1200000,
+            85,
+            0,
+            15,
+            0,
+            0
+          ],
+          [
+            "Object storage (GB)",
+            500,
+            1200,
+            80,
+            0,
+            15,
+            0,
+            0
+          ],
+          [
+            "Data egress (GB)",
+            300,
+            900,
+            100,
+            0,
+            15,
+            0,
+            0
+          ],
+          [
+            "TOTAL",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "B6*C6*D6/100",
+            "cachedValue": 945000
+          },
+          {
+            "cell": "G6",
+            "formula": "E6*F6/100",
+            "cachedValue": 141750
+          },
+          {
+            "cell": "H6",
+            "formula": "E6+G6",
+            "cachedValue": 1086750
+          },
+          {
+            "cell": "E7",
+            "formula": "B7*C7*D7/100",
+            "cachedValue": 1020000
+          },
+          {
+            "cell": "G7",
+            "formula": "E7*F7/100",
+            "cachedValue": 153000
+          },
+          {
+            "cell": "H7",
+            "formula": "E7+G7",
+            "cachedValue": 1173000
+          },
+          {
+            "cell": "E8",
+            "formula": "B8*C8*D8/100",
+            "cachedValue": 480000
+          },
+          {
+            "cell": "G8",
+            "formula": "E8*F8/100",
+            "cachedValue": 72000
+          },
+          {
+            "cell": "H8",
+            "formula": "E8+G8",
+            "cachedValue": 552000
+          },
+          {
+            "cell": "E9",
+            "formula": "B9*C9*D9/100",
+            "cachedValue": 270000
+          },
+          {
+            "cell": "G9",
+            "formula": "E9*F9/100",
+            "cachedValue": 40500
+          },
+          {
+            "cell": "H9",
+            "formula": "E9+G9",
+            "cachedValue": 310500
+          },
+          {
+            "cell": "E10",
+            "formula": "SUM(E6:E9)",
+            "cachedValue": 2715000
+          },
+          {
+            "cell": "G10",
+            "formula": "SUM(G6:G9)",
+            "cachedValue": 407250
+          },
+          {
+            "cell": "H10",
+            "formula": "SUM(H6:H9)",
+            "cachedValue": 3122250
+          }
+        ],
+        "columnWidths": [
+          25,
+          15,
+          23,
+          15,
+          21,
+          18,
+          19,
+          23
+        ]
+      }
+    ]
+  },
+  {
+    "id": "performance-load-test-plan",
+    "name": "Rencana Uji Beban & Performance Test dengan k6",
+    "category": "developer",
+    "categoryLabel": "Software Engineering & DevOps",
+    "symbol": "PERF",
+    "format": "md",
+    "quality": "unggulan",
+    "description": "Rencana performance test yang menentukan workload, baseline, ramp-up, percentile latency, throughput, error budget, resource saturation, dan keputusan kapasitas.",
+    "tags": [
+      "performance testing",
+      "load test",
+      "k6",
+      "latency",
+      "throughput",
+      "capacity"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek, produk, atau repositori",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama service atau repository"
+      },
+      {
+        "id": "ownerName",
+        "label": "Maintainer, tech lead, atau pemilik sistem",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama atau tim penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Tahap siklus hidup teknis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Inisiasi/desain",
+          "Pengembangan aktif",
+          "QA dan staging",
+          "Persiapan rilis",
+          "Produksi",
+          "Pemeliharaan",
+          "Migrasi/dekomisioning"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Domain atau stack teknologi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Frontend web",
+          "Backend/API",
+          "Full-stack",
+          "Mobile",
+          "Database/data platform",
+          "Cloud/DevOps/SRE",
+          "Security engineering",
+          "QA/automation",
+          "Open-source library/tooling"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Versi, lingkungan, constraint, dan catatan teknis",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Versi runtime, framework, environment, batasan infrastruktur, link issue, atau standar tim."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Konteks dan pemilik teknis",
+        "body": "Dokumen **Rencana Uji Beban & Performance Test dengan k6** untuk **{{entityName}}**. Pemilik/maintainer: **{{ownerName}}**. Tahap siklus hidup: **{{period}}**. Domain: **{{scope}}**. Versi dokumen: [semver/nomor]; status: [Draft/Review/Approved]; repo/issue referensi: [URL]. Catatan lingkungan dan batasan: {{notes}}."
+      },
+      {
+        "heading": "Sasaran dan non-goals",
+        "body": "Target service {{entityName}}, owner {{ownerName}}, domain {{scope}}, tahap {{period}}. Nyatakan user journey kritis, target concurrent users/RPS, latency p95/p99, error rate, dan pertanyaan kapasitas yang ingin dijawab."
+      },
+      {
+        "heading": "Test environment dan data",
+        "body": "Gunakan environment representatif dengan versi runtime, topology, DB size, cache, network, dan quota yang terdokumentasi. Data uji sintetis; jangan gunakan PII produksi tanpa dasar dan kontrol khusus. Catat known difference dari produksi."
+      },
+      {
+        "heading": "Workload profile",
+        "body": "Definisikan steady-state, ramp-up, spike, stress, soak, dan recovery. Sebutkan proporsi read/write, payload size, think time, concurrency, arrival rate, cache warm/cold, dan pola burst."
+      },
+      {
+        "heading": "Contoh k6 script",
+        "body": "```javascript\nimport http from 'k6/http';\nimport { check, sleep } from 'k6';\nimport { Rate } from 'k6/metrics';\n\nconst errors = new Rate('request_errors');\nexport const options = {\n  stages: [\n    { duration: '2m', target: 20 },\n    { duration: '5m', target: 100 },\n    { duration: '2m', target: 0 },\n  ],\n  thresholds: {\n    http_req_duration: ['p(95)<500'],\n    request_errors: ['rate<0.01'],\n  },\n};\nexport default function () {\n  const res = http.get(`${__ENV.BASE_URL}/health`);\n  const ok = check(res, { 'status is 200': r => r.status === 200 });\n  errors.add(!ok);\n  sleep(1);\n}\n``` \nGunakan endpoint dan data uji yang telah disetujui; rahasiakan token."
+      },
+      {
+        "heading": "Metrik dan observability",
+        "bullets": [
+          "Client: RPS, latency p50/p90/p95/p99, timeout, error class, dropped iterations.",
+          "Service: CPU, memory, event loop/thread pool, connection pool, GC, queue depth.",
+          "Database: query latency, locks, deadlocks, buffer/cache hit, replication lag.",
+          "Dependency: rate limit, timeout, error rate, retry, quota.",
+          "Business: success rate dan correctness transaksi, bukan sekadar HTTP 200."
+        ]
+      },
+      {
+        "heading": "Prosedur eksekusi dan safety",
+        "body": "Lakukan smoke test, warm-up, baseline, load stages, spike, soak, dan recovery. Tetapkan abort threshold, rate cap, owner yang dapat menghentikan test, serta larangan menjalankan stress ke sistem pihak ketiga tanpa izin."
+      },
+      {
+        "heading": "Analisis bottleneck dan capacity model",
+        "body": "Korelasikan latency percentile dengan CPU, memory, DB wait, queue, and dependency. Pisahkan saturation dari throttling. Catat throughput knee point, headroom, vertical/horizontal scaling, dan biaya tambahan."
+      },
+      {
+        "heading": "Kriteria lulus dan laporan",
+        "body": "Lulus bila p95/p99, error rate, throughput, data correctness, dan resource headroom memenuhi target yang disetujui. Lampirkan script/version, raw result, dashboard, topology, anomaly, rekomendasi, dan retest owner."
+      },
+      {
+        "heading": "Validasi dan pemeliharaan",
+        "bullets": [
+          "Tetapkan reviewer teknis, tanggal review, dan sumber kebenaran (repository, ticket, dashboard, atau runbook).",
+          "Simpan perubahan melalui pull request agar riwayat, persetujuan, dan pemilik keputusan dapat ditelusuri.",
+          "Jangan memasukkan secret, token, private key, data pelanggan, atau kredensial nyata ke dalam dokumen maupun contoh.",
+          "Perbarui dokumen ketika kontrak API, konfigurasi, dependency, arsitektur, atau prosedur operasional berubah."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "feature-flag-progressive-rollout",
+    "name": "Rencana Feature Flag, Canary Release & Progressive Rollout",
+    "category": "developer",
+    "categoryLabel": "Software Engineering & DevOps",
+    "symbol": "FLAG",
+    "format": "md",
+    "quality": "unggulan",
+    "description": "Rencana peluncuran fitur dengan flag lifecycle, segmentasi cohort, metric gate, kill switch, observasi, compatibility, dan cleanup agar perubahan berisiko dapat dihentikan tanpa deploy ulang.",
+    "tags": [
+      "feature flag",
+      "canary release",
+      "progressive delivery",
+      "rollout",
+      "kill switch"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek, produk, atau repositori",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama service atau repository"
+      },
+      {
+        "id": "ownerName",
+        "label": "Maintainer, tech lead, atau pemilik sistem",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama atau tim penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Tahap siklus hidup teknis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Inisiasi/desain",
+          "Pengembangan aktif",
+          "QA dan staging",
+          "Persiapan rilis",
+          "Produksi",
+          "Pemeliharaan",
+          "Migrasi/dekomisioning"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Domain atau stack teknologi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Frontend web",
+          "Backend/API",
+          "Full-stack",
+          "Mobile",
+          "Database/data platform",
+          "Cloud/DevOps/SRE",
+          "Security engineering",
+          "QA/automation",
+          "Open-source library/tooling"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Versi, lingkungan, constraint, dan catatan teknis",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Versi runtime, framework, environment, batasan infrastruktur, link issue, atau standar tim."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Konteks dan pemilik teknis",
+        "body": "Dokumen **Rencana Feature Flag, Canary Release & Progressive Rollout** untuk **{{entityName}}**. Pemilik/maintainer: **{{ownerName}}**. Tahap siklus hidup: **{{period}}**. Domain: **{{scope}}**. Versi dokumen: [semver/nomor]; status: [Draft/Review/Approved]; repo/issue referensi: [URL]. Catatan lingkungan dan batasan: {{notes}}."
+      },
+      {
+        "heading": "Identitas flag dan pemilik",
+        "body": "Feature: [nama]; repository/service {{entityName}}; owner {{ownerName}}; domain {{scope}}; release phase {{period}}. Flag key: `feature.<domain>.<feature-name>`. Flag type: [release/experiment/ops/permission]."
+      },
+      {
+        "heading": "Strategi flag dan default",
+        "body": "```yaml\nfeature_flags:\n  checkout_v2:\n    type: release\n    default: false\n    owner: <team>\n    expires_at: <YYYY-MM-DD>\n    kill_switch: true\n    targeting:\n      allow_internal: true\n      percentage: 0\n``` \nPastikan default aman saat flag service unavailable dan tentukan server-side evaluation untuk fitur sensitif."
+      },
+      {
+        "heading": "Cohort dan progressive stages",
+        "bullets": [
+          "Stage 0: internal users/test tenants 0%.",
+          "Stage 1: canary 1-5% dengan observasi minimal [window].",
+          "Stage 2: 10-25%, cek metric dan support signal.",
+          "Stage 3: 50%, validasi kapasitas dan segment fairness.",
+          "Stage 4: 100% setelah gate dipenuhi dan approver menyetujui.",
+          "Jangan memakai targeting berbasis data sensitif tanpa dasar dan review privasi."
+        ]
+      },
+      {
+        "heading": "Metric gate dan abort threshold",
+        "body": "Tentukan baseline dan threshold: error rate, latency p95/p99, business conversion, crash rate, support tickets, resource saturation, data mismatch. Metrik harus memiliki source, evaluation window, minimum sample, dan siapa yang mengambil keputusan."
+      },
+      {
+        "heading": "Kill switch dan rollback",
+        "body": "Dokumentasikan siapa boleh mematikan flag, command/API resmi, fallback behavior, dampak data, race condition, dan verifikasi setelah flag dimatikan. Simpan langkah rollback yang aman; mematikan flag tidak selalu membalikkan migration atau side effect."
+      },
+      {
+        "heading": "Test matrix",
+        "body": "```markdown\n- [ ] Flag OFF path\n- [ ] Flag ON path\n- [ ] Evaluation timeout / provider unavailable\n- [ ] Mixed cohort and tenant isolation\n- [ ] Old client / old schema compatibility\n- [ ] Kill switch during active traffic\n- [ ] Metrics and audit log\n```"
+      },
+      {
+        "heading": "Eksperimen dan evaluasi",
+        "body": "Jika flag dipakai eksperimen, tetapkan hypothesis, primary/guardrail metrics, randomization unit, sample size, duration, stopping rule, dan analisis bias. Pisahkan eksperimen dari flag operasional."
+      },
+      {
+        "heading": "Cleanup dan penutupan",
+        "body": "Flag sementara harus memiliki expiry date, owner, cleanup issue, removal PR, dan test setelah flag dihapus. Audit flag orphaned, stale targeting, dan secret/config references. Sign-off product, engineering, SRE, dan security bila relevan."
+      },
+      {
+        "heading": "Validasi dan pemeliharaan",
+        "bullets": [
+          "Tetapkan reviewer teknis, tanggal review, dan sumber kebenaran (repository, ticket, dashboard, atau runbook).",
+          "Simpan perubahan melalui pull request agar riwayat, persetujuan, dan pemilik keputusan dapat ditelusuri.",
+          "Jangan memasukkan secret, token, private key, data pelanggan, atau kredensial nyata ke dalam dokumen maupun contoh.",
+          "Perbarui dokumen ketika kontrak API, konfigurasi, dependency, arsitektur, atau prosedur operasional berubah."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "slo-error-budget-engineering-tracker",
+    "name": "Pelacak SLO Availability, Error Budget & Burn Rate",
+    "category": "developer",
+    "categoryLabel": "Software Engineering & DevOps",
+    "symbol": "SLO",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Tracker SLO per layanan yang menghitung availability aktual, jumlah error yang diizinkan, konsumsi error budget, dan status apakah layanan masih berada dalam budget.",
+    "tags": [
+      "SLO",
+      "error budget",
+      "availability",
+      "SRE",
+      "reliability tracker"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek, produk, atau repositori",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama service atau repository"
+      },
+      {
+        "id": "ownerName",
+        "label": "Maintainer, tech lead, atau pemilik sistem",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama atau tim penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Tahap siklus hidup teknis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Inisiasi/desain",
+          "Pengembangan aktif",
+          "QA dan staging",
+          "Persiapan rilis",
+          "Produksi",
+          "Pemeliharaan",
+          "Migrasi/dekomisioning"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Domain atau stack teknologi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Frontend web",
+          "Backend/API",
+          "Full-stack",
+          "Mobile",
+          "Database/data platform",
+          "Cloud/DevOps/SRE",
+          "Security engineering",
+          "QA/automation",
+          "Open-source library/tooling"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Versi, lingkungan, constraint, dan catatan teknis",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Versi runtime, framework, environment, batasan infrastruktur, link issue, atau standar tim."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "SLO Tracker",
+        "title": "Pelacak SLO & Error Budget - {{entityName}}",
+        "columns": [
+          "Service",
+          "Total Request",
+          "Successful Request",
+          "Target SLO (%)",
+          "Error Request",
+          "Availability Aktual (%)",
+          "Error Budget Maksimum",
+          "Budget Terpakai (%)",
+          "Dalam Budget (1/0)"
+        ],
+        "rows": [
+          [
+            "Public API",
+            500000,
+            499500,
+            99.9,
+            500,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Auth Service",
+            300000,
+            299850,
+            99.95,
+            150,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Web Frontend",
+            800000,
+            799600,
+            99.9,
+            400,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Worker Queue",
+            200000,
+            199700,
+            99.5,
+            300,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "IF(B6=0,0,C6/B6*100)",
+            "cachedValue": 99.9
+          },
+          {
+            "cell": "G6",
+            "formula": "B6*(1-D6/100)",
+            "cachedValue": 500
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(G6=0,0,E6/G6*100)",
+            "cachedValue": 100
+          },
+          {
+            "cell": "I6",
+            "formula": "IF(H6<=100,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F7",
+            "formula": "IF(B7=0,0,C7/B7*100)",
+            "cachedValue": 99.95
+          },
+          {
+            "cell": "G7",
+            "formula": "B7*(1-D7/100)",
+            "cachedValue": 150
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(G7=0,0,E7/G7*100)",
+            "cachedValue": 100
+          },
+          {
+            "cell": "I7",
+            "formula": "IF(H7<=100,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F8",
+            "formula": "IF(B8=0,0,C8/B8*100)",
+            "cachedValue": 99.95
+          },
+          {
+            "cell": "G8",
+            "formula": "B8*(1-D8/100)",
+            "cachedValue": 800
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(G8=0,0,E8/G8*100)",
+            "cachedValue": 50
+          },
+          {
+            "cell": "I8",
+            "formula": "IF(H8<=100,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F9",
+            "formula": "IF(B9=0,0,C9/B9*100)",
+            "cachedValue": 99.85
+          },
+          {
+            "cell": "G9",
+            "formula": "B9*(1-D9/100)",
+            "cachedValue": 1000
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(G9=0,0,E9/G9*100)",
+            "cachedValue": 30
+          },
+          {
+            "cell": "I9",
+            "formula": "IF(H9<=100,1,0)",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          20,
+          17,
+          19,
+          16,
+          17,
+          22,
+          22,
+          20,
+          18
+        ]
+      }
+    ]
   }
 ]
