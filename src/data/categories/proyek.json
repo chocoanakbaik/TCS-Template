@@ -1,108 +1,4981 @@
 [
   {
-    "id": "project-brief",
-    "name": "Project Brief",
+    "id": "wbs-pelacak-progres-pekerjaan",
+    "name": "Work Breakdown Structure (WBS) & Pelacak Progres Tugas",
     "category": "proyek",
     "categoryLabel": "Manajemen proyek",
-    "symbol": "PB",
-    "format": "md",
-    "description": "Dokumen ringkas untuk menyusun tujuan, ruang lingkup, pihak terkait, dan rencana pelaksanaan proyek.",
+    "symbol": "WBS",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Uraikan proyek menjadi paket kerja terukur, catat bobot dan baseline progres, lalu hitung kontribusi progres aktual, deviasi jadwal, sisa pekerjaan, dan status tiap paket.",
     "tags": [
-      "proyek",
-      "project",
-      "brief",
-      "scope",
-      "timeline",
-      "dokumentasi"
+      "WBS",
+      "work breakdown structure",
+      "progres tugas",
+      "deliverable",
+      "baseline proyek"
     ],
     "questions": [
       {
         "id": "entityName",
-        "label": "Nama proyek atau instansi",
+        "label": "Nama proyek atau organisasi",
         "type": "text",
         "required": true,
-        "placeholder": "Contoh: Toko Sinar Jaya"
+        "placeholder": "Nama proyek atau organisasi"
       },
       {
         "id": "ownerName",
-        "label": "Nama pemilik atau manajer proyek",
+        "label": "Project manager atau pemilik proyek",
         "type": "text",
         "required": false,
         "placeholder": "Nama penanggung jawab"
       },
       {
         "id": "period",
-        "label": "Periode yang digunakan",
+        "label": "Periode pengendalian proyek",
         "type": "select",
         "required": true,
         "options": [
-          "Kurang dari satu bulan",
-          "1–3 bulan",
-          "3–6 bulan",
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Kurang dari 1 bulan",
+          "1-3 bulan",
+          "3-6 bulan",
           "Lebih dari 6 bulan"
         ]
       },
       {
         "id": "scope",
-        "label": "Ruang lingkup atau konteks penggunaan",
+        "label": "Jenis atau ruang lingkup proyek",
         "type": "select",
         "required": true,
         "options": [
-          "Produk digital",
-          "Kegiatan atau acara",
-          "Operasional",
-          "Riset atau pendidikan",
-          "Lainnya"
+          "Produk digital atau IT",
+          "Konstruksi atau fasilitas",
+          "Operasional atau proses bisnis",
+          "Acara atau kampanye",
+          "Riset atau pengembangan",
+          "Lintas departemen"
         ]
       },
       {
         "id": "notes",
-        "label": "Catatan tambahan",
+        "label": "Asumsi, batasan, dan catatan proyek",
         "type": "textarea",
         "required": false,
-        "placeholder": "Tuliskan kebutuhan tambahan yang ingin dimasukkan."
+        "placeholder": "Tuliskan baseline, standar, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Struktur Pekerjaan",
+        "title": "Work Breakdown Structure (WBS) & Pelacak Progres Tugas - {{entityName}}",
+        "columns": [
+          "Kode WBS",
+          "Paket Pekerjaan",
+          "Bobot (%)",
+          "Rencana Progres (%)",
+          "Aktual Progres (%)",
+          "Kontribusi Aktual (%)",
+          "Deviasi (poin)",
+          "Sisa Pekerjaan (%)",
+          "Status (1=Selesai,2=Tertinggal,3=On Track)"
+        ],
+        "rows": [
+          [
+            "1.1",
+            "Analisis kebutuhan",
+            20,
+            100,
+            100,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "1.2",
+            "Desain solusi",
+            25,
+            90,
+            75,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "1.3",
+            "Implementasi",
+            35,
+            55,
+            40,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "1.4",
+            "Uji dan serah terima",
+            20,
+            20,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "C6*E6/100",
+            "cachedValue": 20
+          },
+          {
+            "cell": "G6",
+            "formula": "E6-D6",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H6",
+            "formula": "100-E6",
+            "cachedValue": 0
+          },
+          {
+            "cell": "I6",
+            "formula": "IF(E6>=100,1,IF(G6<0,2,3))",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F7",
+            "formula": "C7*E7/100",
+            "cachedValue": 18.75
+          },
+          {
+            "cell": "G7",
+            "formula": "E7-D7",
+            "cachedValue": -15
+          },
+          {
+            "cell": "H7",
+            "formula": "100-E7",
+            "cachedValue": 25
+          },
+          {
+            "cell": "I7",
+            "formula": "IF(E7>=100,1,IF(G7<0,2,3))",
+            "cachedValue": 2
+          },
+          {
+            "cell": "F8",
+            "formula": "C8*E8/100",
+            "cachedValue": 14
+          },
+          {
+            "cell": "G8",
+            "formula": "E8-D8",
+            "cachedValue": -15
+          },
+          {
+            "cell": "H8",
+            "formula": "100-E8",
+            "cachedValue": 60
+          },
+          {
+            "cell": "I8",
+            "formula": "IF(E8>=100,1,IF(G8<0,2,3))",
+            "cachedValue": 2
+          },
+          {
+            "cell": "F9",
+            "formula": "C9*E9/100",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G9",
+            "formula": "E9-D9",
+            "cachedValue": -20
+          },
+          {
+            "cell": "H9",
+            "formula": "100-E9",
+            "cachedValue": 100
+          },
+          {
+            "cell": "I9",
+            "formula": "IF(E9>=100,1,IF(G9<0,2,3))",
+            "cachedValue": 2
+          }
+        ],
+        "columnWidths": [
+          15,
+          30,
+          13,
+          18,
+          18,
+          20,
+          17,
+          19,
+          35
+        ]
+      }
+    ]
+  },
+  {
+    "id": "matriks-raci-pembagian-peran",
+    "name": "Matriks RACI Pembagian Peran & Kelengkapan Akuntabilitas",
+    "category": "proyek",
+    "categoryLabel": "Manajemen proyek",
+    "symbol": "RACI",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Petakan Responsible, Accountable, Consulted, dan Informed per deliverable; hitung kelengkapan penugasan agar pekerjaan kritis tidak tanpa pemilik atau penanggung jawab akhir.",
+    "tags": [
+      "RACI",
+      "pembagian peran",
+      "akuntabilitas",
+      "stakeholder",
+      "governance proyek"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek atau organisasi",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama proyek atau organisasi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Project manager atau pemilik proyek",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Kurang dari 1 bulan",
+          "1-3 bulan",
+          "3-6 bulan",
+          "Lebih dari 6 bulan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenis atau ruang lingkup proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Produk digital atau IT",
+          "Konstruksi atau fasilitas",
+          "Operasional atau proses bisnis",
+          "Acara atau kampanye",
+          "Riset atau pengembangan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Asumsi, batasan, dan catatan proyek",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan baseline, standar, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "RACI Register",
+        "title": "Matriks RACI Pembagian Peran & Kelengkapan Akuntabilitas - {{entityName}}",
+        "columns": [
+          "Deliverable/Aktivitas",
+          "Responsible",
+          "Accountable",
+          "Consulted",
+          "Informed",
+          "Peran Terisi",
+          "RACI Lengkap (1/0)"
+        ],
+        "rows": [
+          [
+            "Persetujuan kebutuhan",
+            "Analis Bisnis",
+            "Project Sponsor",
+            "Pengguna",
+            "Tim Proyek",
+            0,
+            0
+          ],
+          [
+            "Arsitektur solusi",
+            "Tech Lead",
+            "Project Manager",
+            "Security",
+            "Sponsor",
+            0,
+            0
+          ],
+          [
+            "Pengujian penerimaan",
+            "QA Lead",
+            "Product Owner",
+            "Pengguna",
+            "PMO",
+            0,
+            0
+          ],
+          [
+            "Serah terima operasional",
+            "Koordinator Proyek",
+            "Project Manager",
+            "Tim Operasi",
+            "Sponsor",
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "COUNTA(B6:E6)",
+            "cachedValue": 4
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(F6=4,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F7",
+            "formula": "COUNTA(B7:E7)",
+            "cachedValue": 4
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(F7=4,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F8",
+            "formula": "COUNTA(B8:E8)",
+            "cachedValue": 4
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(F8=4,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F9",
+            "formula": "COUNTA(B9:E9)",
+            "cachedValue": 4
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(F9=4,1,0)",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          30,
+          22,
+          22,
+          20,
+          18,
+          15,
+          20
+        ]
+      }
+    ]
+  },
+  {
+    "id": "risk-register-skor-mitigasi",
+    "name": "Daftar Risiko Proyek (Risk Register) & Skor Mitigasi",
+    "category": "proyek",
+    "categoryLabel": "Manajemen proyek",
+    "symbol": "RSK",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Nilai probabilitas dan dampak risiko, hitung eksposur inheren serta residu setelah mitigasi, dan tandai risiko yang harus dieskalasikan kepada sponsor.",
+    "tags": [
+      "risk register",
+      "risiko proyek",
+      "mitigasi",
+      "probabilitas",
+      "dampak"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek atau organisasi",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama proyek atau organisasi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Project manager atau pemilik proyek",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Kurang dari 1 bulan",
+          "1-3 bulan",
+          "3-6 bulan",
+          "Lebih dari 6 bulan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenis atau ruang lingkup proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Produk digital atau IT",
+          "Konstruksi atau fasilitas",
+          "Operasional atau proses bisnis",
+          "Acara atau kampanye",
+          "Riset atau pengembangan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Asumsi, batasan, dan catatan proyek",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan baseline, standar, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Risk Register",
+        "title": "Daftar Risiko Proyek (Risk Register) & Skor Mitigasi - {{entityName}}",
+        "columns": [
+          "ID Risiko",
+          "Probabilitas (1-5)",
+          "Dampak (1-5)",
+          "Skor Risiko",
+          "Level (1=Rendah,2=Sedang,3=Tinggi)",
+          "Mitigasi Selesai (%)",
+          "Skor Residual",
+          "Eskalasi (1/0)"
+        ],
+        "rows": [
+          [
+            "R-001",
+            4,
+            5,
+            0,
+            0,
+            30,
+            0,
+            0
+          ],
+          [
+            "R-002",
+            3,
+            3,
+            0,
+            0,
+            60,
+            0,
+            0
+          ],
+          [
+            "R-003",
+            2,
+            4,
+            0,
+            0,
+            80,
+            0,
+            0
+          ],
+          [
+            "R-004",
+            5,
+            4,
+            0,
+            0,
+            20,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "D6",
+            "formula": "B6*C6",
+            "cachedValue": 20
+          },
+          {
+            "cell": "E6",
+            "formula": "IF(D6>=15,3,IF(D6>=6,2,1))",
+            "cachedValue": 3
+          },
+          {
+            "cell": "G6",
+            "formula": "D6*(1-F6/100)",
+            "cachedValue": 14
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(G6>=12,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "D7",
+            "formula": "B7*C7",
+            "cachedValue": 9
+          },
+          {
+            "cell": "E7",
+            "formula": "IF(D7>=15,3,IF(D7>=6,2,1))",
+            "cachedValue": 2
+          },
+          {
+            "cell": "G7",
+            "formula": "D7*(1-F7/100)",
+            "cachedValue": 3.6
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(G7>=12,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "D8",
+            "formula": "B8*C8",
+            "cachedValue": 8
+          },
+          {
+            "cell": "E8",
+            "formula": "IF(D8>=15,3,IF(D8>=6,2,1))",
+            "cachedValue": 2
+          },
+          {
+            "cell": "G8",
+            "formula": "D8*(1-F8/100)",
+            "cachedValue": 1.6
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(G8>=12,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "D9",
+            "formula": "B9*C9",
+            "cachedValue": 20
+          },
+          {
+            "cell": "E9",
+            "formula": "IF(D9>=15,3,IF(D9>=6,2,1))",
+            "cachedValue": 3
+          },
+          {
+            "cell": "G9",
+            "formula": "D9*(1-F9/100)",
+            "cachedValue": 16
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(G9>=12,1,0)",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          15,
+          20,
+          15,
+          15,
+          30,
+          20,
+          18,
+          16
+        ]
+      }
+    ]
+  },
+  {
+    "id": "anggaran-proyek-cost-variance-cpi",
+    "name": "Anggaran Proyek vs Realisasi Biaya (Cost Variance & CPI)",
+    "category": "proyek",
+    "categoryLabel": "Manajemen proyek",
+    "symbol": "CVA",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Bandingkan planned value, earned value, dan actual cost untuk menghitung cost variance, CPI, estimasi biaya saat selesai, serta deviasi terhadap anggaran dasar.",
+    "tags": [
+      "anggaran proyek",
+      "cost variance",
+      "CPI",
+      "earned value",
+      "realisasi biaya"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek atau organisasi",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama proyek atau organisasi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Project manager atau pemilik proyek",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Kurang dari 1 bulan",
+          "1-3 bulan",
+          "3-6 bulan",
+          "Lebih dari 6 bulan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenis atau ruang lingkup proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Produk digital atau IT",
+          "Konstruksi atau fasilitas",
+          "Operasional atau proses bisnis",
+          "Acara atau kampanye",
+          "Riset atau pengembangan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Asumsi, batasan, dan catatan proyek",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan baseline, standar, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Cost Control",
+        "title": "Anggaran Proyek vs Realisasi Biaya (Cost Variance & CPI) - {{entityName}}",
+        "columns": [
+          "Paket Kerja",
+          "BAC / Anggaran (Rp)",
+          "Planned Value (Rp)",
+          "Earned Value (Rp)",
+          "Actual Cost (Rp)",
+          "Cost Variance (Rp)",
+          "CPI",
+          "EAC Proyeksi (Rp)",
+          "Variance at Completion (Rp)"
+        ],
+        "rows": [
+          [
+            "Analisis dan desain",
+            25000000,
+            25000000,
+            25000000,
+            27000000,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Pengembangan",
+            60000000,
+            35000000,
+            30000000,
+            33000000,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Pengujian",
+            20000000,
+            5000000,
+            3000000,
+            2500000,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Implementasi",
+            15000000,
+            1000000,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "D6-E6",
+            "cachedValue": -2000000
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(E6=0,0,D6/E6)",
+            "cachedValue": 0.9259259259
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(G6=0,0,B6/G6)",
+            "cachedValue": 27000000
+          },
+          {
+            "cell": "I6",
+            "formula": "B6-H6",
+            "cachedValue": -2000000
+          },
+          {
+            "cell": "F7",
+            "formula": "D7-E7",
+            "cachedValue": -3000000
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(E7=0,0,D7/E7)",
+            "cachedValue": 0.9090909091
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(G7=0,0,B7/G7)",
+            "cachedValue": 66000000
+          },
+          {
+            "cell": "I7",
+            "formula": "B7-H7",
+            "cachedValue": -6000000
+          },
+          {
+            "cell": "F8",
+            "formula": "D8-E8",
+            "cachedValue": 500000
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(E8=0,0,D8/E8)",
+            "cachedValue": 1.2
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(G8=0,0,B8/G8)",
+            "cachedValue": 16666666.666666668
+          },
+          {
+            "cell": "I8",
+            "formula": "B8-H8",
+            "cachedValue": 3333333.333333332
+          },
+          {
+            "cell": "F9",
+            "formula": "D9-E9",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(E9=0,0,D9/E9)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(G9=0,0,B9/G9)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "I9",
+            "formula": "B9-H9",
+            "cachedValue": 15000000
+          }
+        ],
+        "columnWidths": [
+          26,
+          21,
+          22,
+          22,
+          22,
+          22,
+          14,
+          22,
+          26
+        ]
+      }
+    ]
+  },
+  {
+    "id": "jadwal-milestone-dependensi-proyek",
+    "name": "Jadwal Milestone & Dependensi Proyek",
+    "category": "proyek",
+    "categoryLabel": "Manajemen proyek",
+    "symbol": "MSD",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Catat urutan milestone, jadwal relatif terhadap awal proyek, status prasyarat, keterlambatan aktual, dan kesiapan aktivitas berikutnya.",
+    "tags": [
+      "milestone",
+      "dependensi",
+      "jadwal proyek",
+      "keterlambatan",
+      "project schedule"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek atau organisasi",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama proyek atau organisasi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Project manager atau pemilik proyek",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Kurang dari 1 bulan",
+          "1-3 bulan",
+          "3-6 bulan",
+          "Lebih dari 6 bulan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenis atau ruang lingkup proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Produk digital atau IT",
+          "Konstruksi atau fasilitas",
+          "Operasional atau proses bisnis",
+          "Acara atau kampanye",
+          "Riset atau pengembangan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Asumsi, batasan, dan catatan proyek",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan baseline, standar, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Milestone Tracker",
+        "title": "Jadwal Milestone & Dependensi Proyek - {{entityName}}",
+        "columns": [
+          "Milestone",
+          "Rencana Selesai (hari)",
+          "Aktual Selesai (hari;0=belum)",
+          "Dependensi Selesai (1/0)",
+          "Hari Terlambat",
+          "Terlambat (1/0)",
+          "Siap Lanjut (1/0)"
+        ],
+        "rows": [
+          [
+            "Persetujuan charter",
+            5,
+            5,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            "Baseline kebutuhan",
+            12,
+            14,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            "Prototype disetujui",
+            25,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "UAT selesai",
+            40,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "IF(C6=0,0,MAX(0,C6-B6))",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F6",
+            "formula": "IF(AND(C6>0,C6>B6),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(AND(D6=1,C6>0),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "E7",
+            "formula": "IF(C7=0,0,MAX(0,C7-B7))",
+            "cachedValue": 2
+          },
+          {
+            "cell": "F7",
+            "formula": "IF(AND(C7>0,C7>B7),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(AND(D7=1,C7>0),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "E8",
+            "formula": "IF(C8=0,0,MAX(0,C8-B8))",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F8",
+            "formula": "IF(AND(C8>0,C8>B8),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(AND(D8=1,C8>0),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "E9",
+            "formula": "IF(C9=0,0,MAX(0,C9-B9))",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F9",
+            "formula": "IF(AND(C9>0,C9>B9),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(AND(D9=1,C9>0),1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          28,
+          20,
+          26,
+          23,
+          17,
+          17,
+          17
+        ]
+      }
+    ]
+  },
+  {
+    "id": "raid-log-isu-hambatan-proyek",
+    "name": "RAID Log: Risiko, Asumsi, Isu & Dependensi",
+    "category": "proyek",
+    "categoryLabel": "Manajemen proyek",
+    "symbol": "RAID",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Satukan risiko, asumsi, isu, dan dependensi dalam satu register; hitung umur isu, keterlambatan terhadap SLA, serta skor eskalasi berdasarkan dampak.",
+    "tags": [
+      "RAID log",
+      "isu proyek",
+      "hambatan",
+      "dependensi",
+      "asumsi"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek atau organisasi",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama proyek atau organisasi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Project manager atau pemilik proyek",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Kurang dari 1 bulan",
+          "1-3 bulan",
+          "3-6 bulan",
+          "Lebih dari 6 bulan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenis atau ruang lingkup proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Produk digital atau IT",
+          "Konstruksi atau fasilitas",
+          "Operasional atau proses bisnis",
+          "Acara atau kampanye",
+          "Riset atau pengembangan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Asumsi, batasan, dan catatan proyek",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan baseline, standar, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "RAID Register",
+        "title": "RAID Log: Risiko, Asumsi, Isu & Dependensi - {{entityName}}",
+        "columns": [
+          "ID",
+          "Jenis (1=Risk,2=Assumption,3=Issue,4=Dependency)",
+          "Hari Terbuka",
+          "SLA (hari)",
+          "Dampak (1-5)",
+          "Ditutup (1/0)",
+          "Hari Lewat SLA",
+          "Skor Eskalasi",
+          "Eskalasi (1/0)"
+        ],
+        "rows": [
+          [
+            "RA-001",
+            3,
+            6,
+            3,
+            5,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "RA-002",
+            4,
+            2,
+            5,
+            3,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "RA-003",
+            3,
+            1,
+            2,
+            4,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            "RA-004",
+            1,
+            4,
+            3,
+            4,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "IF(F6=1,0,MAX(0,C6-D6))",
+            "cachedValue": 3
+          },
+          {
+            "cell": "H6",
+            "formula": "G6*E6",
+            "cachedValue": 15
+          },
+          {
+            "cell": "I6",
+            "formula": "IF(AND(F6=0,H6>=8),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(F7=1,0,MAX(0,C7-D7))",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H7",
+            "formula": "G7*E7",
+            "cachedValue": 0
+          },
+          {
+            "cell": "I7",
+            "formula": "IF(AND(F7=0,H7>=8),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(F8=1,0,MAX(0,C8-D8))",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H8",
+            "formula": "G8*E8",
+            "cachedValue": 0
+          },
+          {
+            "cell": "I8",
+            "formula": "IF(AND(F8=0,H8>=8),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(F9=1,0,MAX(0,C9-D9))",
+            "cachedValue": 1
+          },
+          {
+            "cell": "H9",
+            "formula": "G9*E9",
+            "cachedValue": 4
+          },
+          {
+            "cell": "I9",
+            "formula": "IF(AND(F9=0,H9>=8),1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          14,
+          30,
+          15,
+          14,
+          15,
+          16,
+          18,
+          17,
+          16
+        ]
+      }
+    ]
+  },
+  {
+    "id": "log-rapat-action-item-pemilik-tenggat",
+    "name": "Log Rapat Proyek & Pelacak Action Items",
+    "category": "proyek",
+    "categoryLabel": "Manajemen proyek",
+    "symbol": "ACT",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Dokumentasikan tindak lanjut rapat beserta pemilik, estimasi jam, realisasi, status penyelesaian, dan penanda action item yang melewati tenggat.",
+    "tags": [
+      "notulen rapat",
+      "action items",
+      "pemilik tugas",
+      "tenggat",
+      "follow up proyek"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek atau organisasi",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama proyek atau organisasi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Project manager atau pemilik proyek",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Kurang dari 1 bulan",
+          "1-3 bulan",
+          "3-6 bulan",
+          "Lebih dari 6 bulan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenis atau ruang lingkup proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Produk digital atau IT",
+          "Konstruksi atau fasilitas",
+          "Operasional atau proses bisnis",
+          "Acara atau kampanye",
+          "Riset atau pengembangan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Asumsi, batasan, dan catatan proyek",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan baseline, standar, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Action Item Log",
+        "title": "Log Rapat Proyek & Pelacak Action Items - {{entityName}}",
+        "columns": [
+          "ID Action",
+          "Tindak Lanjut",
+          "Pemilik",
+          "Sisa Hari ke Tenggat",
+          "Estimasi (jam)",
+          "Aktual (jam)",
+          "Selesai (1/0)",
+          "Deviasi Jam",
+          "Terlambat (1/0)"
+        ],
+        "rows": [
+          [
+            "AI-01",
+            "Kirim revisi spesifikasi",
+            "Analis",
+            2,
+            4,
+            3,
+            0,
+            0,
+            0
+          ],
+          [
+            "AI-02",
+            "Verifikasi biaya vendor",
+            "Procurement",
+            -1,
+            2,
+            3,
+            0,
+            0,
+            0
+          ],
+          [
+            "AI-03",
+            "Setujui skenario UAT",
+            "Sponsor",
+            4,
+            1,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            "AI-04",
+            "Perbarui risk register",
+            "PM",
+            0,
+            1,
+            1,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "H6",
+            "formula": "F6-E6",
+            "cachedValue": -1
+          },
+          {
+            "cell": "I6",
+            "formula": "IF(AND(G6=0,D6<0),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H7",
+            "formula": "F7-E7",
+            "cachedValue": 1
+          },
+          {
+            "cell": "I7",
+            "formula": "IF(AND(G7=0,D7<0),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "H8",
+            "formula": "F8-E8",
+            "cachedValue": -1
+          },
+          {
+            "cell": "I8",
+            "formula": "IF(AND(G8=0,D8<0),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H9",
+            "formula": "F9-E9",
+            "cachedValue": 0
+          },
+          {
+            "cell": "I9",
+            "formula": "IF(AND(G9=0,D9<0),1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          15,
+          32,
+          18,
+          20,
+          17,
+          15,
+          15,
+          16,
+          17
+        ]
+      }
+    ]
+  },
+  {
+    "id": "timesheet-biaya-sumber-daya-proyek",
+    "name": "Timesheet Proyek, Biaya Tenaga Kerja & Deviasi Jam",
+    "category": "proyek",
+    "categoryLabel": "Manajemen proyek",
+    "symbol": "TSH",
+    "format": "xlsx",
+    "quality": "standar",
+    "description": "Rekam jam rencana dan aktual per anggota atau aktivitas, hitung biaya tenaga kerja, varians jam, dan selisih biaya agar pembebanan proyek dapat ditelusuri.",
+    "tags": [
+      "timesheet proyek",
+      "resource cost",
+      "jam kerja",
+      "biaya tenaga kerja",
+      "billable hours"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek atau organisasi",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama proyek atau organisasi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Project manager atau pemilik proyek",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Kurang dari 1 bulan",
+          "1-3 bulan",
+          "3-6 bulan",
+          "Lebih dari 6 bulan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenis atau ruang lingkup proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Produk digital atau IT",
+          "Konstruksi atau fasilitas",
+          "Operasional atau proses bisnis",
+          "Acara atau kampanye",
+          "Riset atau pengembangan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Asumsi, batasan, dan catatan proyek",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan baseline, standar, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Timesheet dan Biaya",
+        "title": "Timesheet Proyek, Biaya Tenaga Kerja & Deviasi Jam - {{entityName}}",
+        "columns": [
+          "Aktivitas",
+          "Sumber Daya",
+          "Jam Rencana",
+          "Jam Aktual",
+          "Tarif per Jam (Rp)",
+          "Biaya Rencana (Rp)",
+          "Biaya Aktual (Rp)",
+          "Selisih Biaya (Rp)",
+          "Deviasi Jam"
+        ],
+        "rows": [
+          [
+            "Analisis kebutuhan",
+            "Business Analyst",
+            16,
+            18,
+            175000,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Desain UI",
+            "Designer",
+            24,
+            22,
+            150000,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Pengembangan API",
+            "Developer",
+            40,
+            48,
+            200000,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Pengujian",
+            "QA",
+            24,
+            20,
+            150000,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "C6*E6",
+            "cachedValue": 2800000
+          },
+          {
+            "cell": "G6",
+            "formula": "D6*E6",
+            "cachedValue": 3150000
+          },
+          {
+            "cell": "H6",
+            "formula": "F6-G6",
+            "cachedValue": -350000
+          },
+          {
+            "cell": "I6",
+            "formula": "D6-C6",
+            "cachedValue": 2
+          },
+          {
+            "cell": "F7",
+            "formula": "C7*E7",
+            "cachedValue": 3600000
+          },
+          {
+            "cell": "G7",
+            "formula": "D7*E7",
+            "cachedValue": 3300000
+          },
+          {
+            "cell": "H7",
+            "formula": "F7-G7",
+            "cachedValue": 300000
+          },
+          {
+            "cell": "I7",
+            "formula": "D7-C7",
+            "cachedValue": -2
+          },
+          {
+            "cell": "F8",
+            "formula": "C8*E8",
+            "cachedValue": 8000000
+          },
+          {
+            "cell": "G8",
+            "formula": "D8*E8",
+            "cachedValue": 9600000
+          },
+          {
+            "cell": "H8",
+            "formula": "F8-G8",
+            "cachedValue": -1600000
+          },
+          {
+            "cell": "I8",
+            "formula": "D8-C8",
+            "cachedValue": 8
+          },
+          {
+            "cell": "F9",
+            "formula": "C9*E9",
+            "cachedValue": 3600000
+          },
+          {
+            "cell": "G9",
+            "formula": "D9*E9",
+            "cachedValue": 3000000
+          },
+          {
+            "cell": "H9",
+            "formula": "F9-G9",
+            "cachedValue": 600000
+          },
+          {
+            "cell": "I9",
+            "formula": "D9-C9",
+            "cachedValue": -4
+          }
+        ],
+        "columnWidths": [
+          24,
+          20,
+          16,
+          16,
+          21,
+          22,
+          22,
+          21,
+          16
+        ]
+      }
+    ]
+  },
+  {
+    "id": "piagam-proyek-project-charter",
+    "name": "Piagam Proyek (Project Charter) Resmi",
+    "category": "proyek",
+    "categoryLabel": "Manajemen proyek",
+    "symbol": "PCH",
+    "format": "md",
+    "quality": "standar",
+    "description": "Dokumen otorisasi proyek untuk menyepakati tujuan, justifikasi, ruang lingkup, deliverable, tata kelola, batasan, asumsi, dan kriteria keberhasilan sebelum pekerjaan dimulai.",
+    "tags": [
+      "project charter",
+      "piagam proyek",
+      "otorisasi",
+      "governance",
+      "project initiation"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek atau organisasi",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama proyek atau organisasi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Project manager atau pemilik proyek",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Kurang dari 1 bulan",
+          "1-3 bulan",
+          "3-6 bulan",
+          "Lebih dari 6 bulan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenis atau ruang lingkup proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Produk digital atau IT",
+          "Konstruksi atau fasilitas",
+          "Operasional atau proses bisnis",
+          "Acara atau kampanye",
+          "Riset atau pengembangan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Asumsi, batasan, dan catatan proyek",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan baseline, standar, atau ketentuan yang perlu diperhatikan."
       }
     ],
     "sections": [
       {
-        "heading": "Ringkasan",
-        "body": "Dokumen ini menjadi acuan awal pelaksanaan proyek **{{entityName}}**. Periode pelaksanaan direncanakan selama **{{period}}**."
+        "heading": "Identitas dan otorisasi proyek",
+        "body": "Piagam ini disusun untuk {{entityName}} dengan {{ownerName}} sebagai pemilik atau manajer proyek. Periode pelaksanaan: {{period}}. Ruang lingkup: {{scope}}. Isi nomor dokumen, sponsor, tanggal persetujuan, versi, dan pihak yang berwenang memberi otorisasi."
       },
       {
-        "heading": "Identitas dan penanggung jawab",
+        "heading": "Latar belakang dan justifikasi bisnis",
         "bullets": [
-          "Instansi atau proyek: {{entityName}}",
-          "Penanggung jawab: {{ownerName}}",
-          "Jenis proyek: {{scope}}"
+          "Masalah atau peluang yang menjadi alasan proyek: [data kondisi saat ini].",
+          "Dampak jika proyek tidak dijalankan: [biaya, risiko, layanan, kepatuhan, atau peluang].",
+          "Manfaat yang dituju dan penerima manfaat: [hasil yang dapat diukur].",
+          "Alternatif yang dipertimbangkan dan alasan pemilihan solusi: [ringkasan]."
         ]
       },
       {
-        "heading": "Tujuan proyek",
-        "body": "Jelaskan hasil yang ingin dicapai, masalah yang hendak diselesaikan, dan indikator keberhasilan yang dapat diperiksa."
-      },
-      {
-        "heading": "Ruang lingkup",
+        "heading": "Tujuan, hasil, dan kriteria keberhasilan",
         "bullets": [
-          "Daftar pekerjaan utama",
-          "Hasil atau deliverable yang harus diserahkan",
-          "Pihak yang terlibat dan tanggung jawabnya",
-          "Hal yang secara eksplisit berada di luar cakupan"
+          "Tujuan utama proyek: [rumusan spesifik dan terukur].",
+          "Indikator keberhasilan, baseline, target, sumber data, dan pemilik indikator: [matriks].",
+          "Deliverable utama beserta kriteria penerimaan: [daftar hasil dan bukti].",
+          "Batas toleransi jadwal, biaya, mutu, dan manfaat: [ambang eskalasi]."
         ]
       },
       {
-        "heading": "Rencana pelaksanaan",
+        "heading": "Ruang lingkup dan batasan",
         "bullets": [
-          "Persiapan dan penetapan kebutuhan",
-          "Pelaksanaan pekerjaan utama",
-          "Pemeriksaan kualitas dan revisi",
-          "Serah terima dan evaluasi"
+          "Termasuk dalam cakupan: [proses, lokasi, sistem, unit, atau produk].",
+          "Tidak termasuk dalam cakupan: [pengecualian eksplisit].",
+          "Asumsi utama: [ketersediaan personel, data, vendor, persetujuan, dan fasilitas].",
+          "Batasan: [anggaran, jadwal, teknologi, regulasi, atau kapasitas]."
         ]
       },
       {
-        "heading": "Catatan penyesuaian",
-        "body": "{{notes}}"
+        "heading": "Tata kelola dan struktur tanggung jawab",
+        "bullets": [
+          "Sponsor proyek dan kewenangan keputusan: [nama/peran].",
+          "Project manager dan tanggung jawab pengendalian: [nama/peran].",
+          "Pemilik deliverable serta pihak pemeriksa/penerima: [RACI atau daftar PIC].",
+          "Forum pengendalian, frekuensi rapat, jalur eskalasi, dan batas keputusan: [aturan]."
+        ]
+      },
+      {
+        "heading": "Milestone dan baseline tingkat tinggi",
+        "bullets": [
+          "Tanggal mulai dan target selesai: [tanggal].",
+          "Milestone persetujuan, desain, pelaksanaan, pengujian, dan serah terima: [target].",
+          "Baseline anggaran dan mekanisme persetujuan perubahan: [nilai dan otorisasi].",
+          "Risiko awal paling penting dan respons awal: [daftar]."
+        ]
+      },
+      {
+        "heading": "Persetujuan dan catatan khusus",
+        "body": "Pengesahan sponsor: [nama/tanggal]. Persetujuan pemilik proses: [nama/tanggal]. Ketentuan tambahan, pengecualian, atau asumsi yang perlu dibawa ke baseline: {{notes}}. Piagam berlaku setelah disetujui pihak berwenang."
+      }
+    ]
+  },
+  {
+    "id": "change-request-log-analisis-dampak",
+    "name": "Log Perubahan Ruang Lingkup (Change Request) & Analisis Dampak",
+    "category": "proyek",
+    "categoryLabel": "Manajemen proyek",
+    "symbol": "CRL",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Catat usulan perubahan ruang lingkup, dampak jadwal, biaya, mutu, dan manfaat; hitung skor dampak berbobot serta status rekomendasi untuk forum Change Control Board.",
+    "tags": [
+      "change request",
+      "scope control",
+      "CCB",
+      "analisis dampak",
+      "perubahan proyek"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek atau organisasi",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama proyek atau organisasi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Project manager atau pemilik proyek",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Kurang dari 1 bulan",
+          "1-3 bulan",
+          "3-6 bulan",
+          "Lebih dari 6 bulan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenis atau ruang lingkup proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Produk digital atau IT",
+          "Konstruksi atau fasilitas",
+          "Operasional atau proses bisnis",
+          "Acara atau kampanye",
+          "Riset atau pengembangan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Asumsi, batasan, dan catatan proyek",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan baseline, standar, atau ketentuan yang perlu diperhatikan."
       }
     ],
-    "quality": "unggulan"
+    "sheets": [
+      {
+        "name": "Change Request",
+        "title": "Log Perubahan Ruang Lingkup (Change Request) & Analisis Dampak - {{entityName}}",
+        "columns": [
+          "ID CR",
+          "Dampak Jadwal (1-5)",
+          "Dampak Biaya (1-5)",
+          "Dampak Ruang Lingkup (1-5)",
+          "Dampak Mutu (1-5)",
+          "Disetujui (1/0)",
+          "Skor Dampak",
+          "Status (1=Approved,2=Review,3=Reject)"
+        ],
+        "rows": [
+          [
+            "CR-001",
+            4,
+            3,
+            5,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            "CR-002",
+            2,
+            2,
+            2,
+            4,
+            1,
+            0,
+            0
+          ],
+          [
+            "CR-003",
+            5,
+            5,
+            4,
+            4,
+            0,
+            0,
+            0
+          ],
+          [
+            "CR-004",
+            1,
+            2,
+            1,
+            1,
+            1,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "B6*0.30+C6*0.25+D6*0.25+E6*0.20",
+            "cachedValue": 3.6
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(F6=1,1,IF(G6>=4,2,3))",
+            "cachedValue": 3
+          },
+          {
+            "cell": "G7",
+            "formula": "B7*0.30+C7*0.25+D7*0.25+E7*0.20",
+            "cachedValue": 2.4
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(F7=1,1,IF(G7>=4,2,3))",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G8",
+            "formula": "B8*0.30+C8*0.25+D8*0.25+E8*0.20",
+            "cachedValue": 4.55
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(F8=1,1,IF(G8>=4,2,3))",
+            "cachedValue": 2
+          },
+          {
+            "cell": "G9",
+            "formula": "B9*0.30+C9*0.25+D9*0.25+E9*0.20",
+            "cachedValue": 1.25
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(F9=1,1,IF(G9>=4,2,3))",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          14,
+          20,
+          20,
+          24,
+          17,
+          16,
+          15,
+          36
+        ]
+      }
+    ]
+  },
+  {
+    "id": "perencana-sprint-agile-velocity-kapasitas",
+    "name": "Perencana Sprint Agile, Velocity & Kapasitas Tim",
+    "category": "proyek",
+    "categoryLabel": "Manajemen proyek",
+    "symbol": "SPR",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Susun backlog sprint berdasarkan story point, tandai item yang selesai dan diterima, lalu ukur delivery rate, sisa pekerjaan, dan pemakaian kapasitas sprint.",
+    "tags": [
+      "Agile",
+      "Scrum",
+      "sprint planning",
+      "story point",
+      "velocity"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek atau organisasi",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama proyek atau organisasi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Project manager atau pemilik proyek",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Kurang dari 1 bulan",
+          "1-3 bulan",
+          "3-6 bulan",
+          "Lebih dari 6 bulan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenis atau ruang lingkup proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Produk digital atau IT",
+          "Konstruksi atau fasilitas",
+          "Operasional atau proses bisnis",
+          "Acara atau kampanye",
+          "Riset atau pengembangan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Asumsi, batasan, dan catatan proyek",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan baseline, standar, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Sprint Backlog",
+        "title": "Perencana Sprint Agile, Velocity & Kapasitas Tim - {{entityName}}",
+        "columns": [
+          "ID Story",
+          "User Story / Deliverable",
+          "Story Point",
+          "Selesai & Diterima (1/0)",
+          "Committed Point",
+          "Delivered Point",
+          "Sisa Point",
+          "Completion Rate"
+        ],
+        "rows": [
+          [
+            "US-01",
+            "Login dengan email",
+            5,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "US-02",
+            "Reset kata sandi",
+            3,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "US-03",
+            "Filter daftar transaksi",
+            8,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "US-04",
+            "Ekspor laporan",
+            5,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "US-05",
+            "Notifikasi status",
+            3,
+            1,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "C6",
+            "cachedValue": 5
+          },
+          {
+            "cell": "F6",
+            "formula": "C6*D6",
+            "cachedValue": 5
+          },
+          {
+            "cell": "G6",
+            "formula": "E6-F6",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(E6=0,0,F6/E6)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "E7",
+            "formula": "C7",
+            "cachedValue": 3
+          },
+          {
+            "cell": "F7",
+            "formula": "C7*D7",
+            "cachedValue": 3
+          },
+          {
+            "cell": "G7",
+            "formula": "E7-F7",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(E7=0,0,F7/E7)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "E8",
+            "formula": "C8",
+            "cachedValue": 8
+          },
+          {
+            "cell": "F8",
+            "formula": "C8*D8",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G8",
+            "formula": "E8-F8",
+            "cachedValue": 8
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(E8=0,0,F8/E8)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "E9",
+            "formula": "C9",
+            "cachedValue": 5
+          },
+          {
+            "cell": "F9",
+            "formula": "C9*D9",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G9",
+            "formula": "E9-F9",
+            "cachedValue": 5
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(E9=0,0,F9/E9)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "E10",
+            "formula": "C10",
+            "cachedValue": 3
+          },
+          {
+            "cell": "F10",
+            "formula": "C10*D10",
+            "cachedValue": 3
+          },
+          {
+            "cell": "G10",
+            "formula": "E10-F10",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H10",
+            "formula": "IF(E10=0,0,F10/E10)",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          14,
+          33,
+          15,
+          22,
+          17,
+          17,
+          14,
+          18
+        ]
+      }
+    ]
+  },
+  {
+    "id": "resource-capacity-leveling-proyek",
+    "name": "Perencanaan Kapasitas & Resource Leveling Tim Proyek",
+    "category": "proyek",
+    "categoryLabel": "Manajemen proyek",
+    "symbol": "RCL",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Bandingkan kapasitas kerja efektif anggota dengan alokasi pekerjaan, rapat, dan ketidakhadiran; hitung utilisasi serta tandai anggota yang melebihi kapasitas.",
+    "tags": [
+      "resource leveling",
+      "resource allocation",
+      "kapasitas tim",
+      "beban kerja",
+      "project resources"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek atau organisasi",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama proyek atau organisasi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Project manager atau pemilik proyek",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Kurang dari 1 bulan",
+          "1-3 bulan",
+          "3-6 bulan",
+          "Lebih dari 6 bulan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenis atau ruang lingkup proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Produk digital atau IT",
+          "Konstruksi atau fasilitas",
+          "Operasional atau proses bisnis",
+          "Acara atau kampanye",
+          "Riset atau pengembangan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Asumsi, batasan, dan catatan proyek",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan baseline, standar, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Kapasitas Tim",
+        "title": "Perencanaan Kapasitas & Resource Leveling Tim Proyek - {{entityName}}",
+        "columns": [
+          "Anggota/Peran",
+          "Kapasitas Efektif (jam)",
+          "Alokasi Tugas (jam)",
+          "Rapat (jam)",
+          "Tidak Tersedia (jam)",
+          "Jam Tersisa",
+          "Utilisasi",
+          "Overload (1/0)"
+        ],
+        "rows": [
+          [
+            "Project Manager",
+            32,
+            24,
+            6,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            "Developer",
+            36,
+            34,
+            2,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Designer",
+            32,
+            28,
+            3,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "QA",
+            32,
+            30,
+            4,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "B6-C6-D6-E6",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(B6-E6=0,0,(C6+D6)/(B6-E6))",
+            "cachedValue": 1
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(G6>1,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F7",
+            "formula": "B7-C7-D7-E7",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(B7-E7=0,0,(C7+D7)/(B7-E7))",
+            "cachedValue": 1
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(G7>1,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F8",
+            "formula": "B8-C8-D8-E8",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(B8-E8=0,0,(C8+D8)/(B8-E8))",
+            "cachedValue": 0.96875
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(G8>1,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F9",
+            "formula": "B9-C9-D9-E9",
+            "cachedValue": -2
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(B9-E9=0,0,(C9+D9)/(B9-E9))",
+            "cachedValue": 1.0625
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(G9>1,1,0)",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          22,
+          22,
+          18,
+          14,
+          20,
+          15,
+          15,
+          16
+        ]
+      }
+    ]
+  },
+  {
+    "id": "quality-defect-log-rework-severity",
+    "name": "Log Defect, Rework & Pemeriksaan Kualitas Deliverable",
+    "category": "proyek",
+    "categoryLabel": "Manajemen proyek",
+    "symbol": "QLT",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Prioritaskan defect berdasarkan severity dan umur temuan, pantau biaya rework serta status perbaikan, dan tandai defect kritis yang menghalangi penerimaan deliverable.",
+    "tags": [
+      "quality assurance",
+      "defect log",
+      "rework",
+      "bug tracking",
+      "acceptance criteria"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek atau organisasi",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama proyek atau organisasi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Project manager atau pemilik proyek",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Kurang dari 1 bulan",
+          "1-3 bulan",
+          "3-6 bulan",
+          "Lebih dari 6 bulan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenis atau ruang lingkup proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Produk digital atau IT",
+          "Konstruksi atau fasilitas",
+          "Operasional atau proses bisnis",
+          "Acara atau kampanye",
+          "Riset atau pengembangan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Asumsi, batasan, dan catatan proyek",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan baseline, standar, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Defect Register",
+        "title": "Log Defect, Rework & Pemeriksaan Kualitas Deliverable - {{entityName}}",
+        "columns": [
+          "ID Defect",
+          "Severity (1-4)",
+          "Umur Temuan (hari)",
+          "Estimasi Rework (jam)",
+          "Aktual Rework (jam)",
+          "Selesai (1/0)",
+          "Eksposur Terbuka",
+          "Blocker (1/0)"
+        ],
+        "rows": [
+          [
+            "DEF-001",
+            4,
+            5,
+            8,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            "DEF-002",
+            2,
+            3,
+            2,
+            2,
+            1,
+            0,
+            0
+          ],
+          [
+            "DEF-003",
+            3,
+            8,
+            5,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "DEF-004",
+            1,
+            2,
+            1,
+            1,
+            1,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "IF(F6=1,0,B6*C6)",
+            "cachedValue": 20
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(AND(F6=0,B6>=4,G6>=12),1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(F7=1,0,B7*C7)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(AND(F7=0,B7>=4,G7>=12),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(F8=1,0,B8*C8)",
+            "cachedValue": 24
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(AND(F8=0,B8>=4,G8>=12),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(F9=1,0,B9*C9)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(AND(F9=0,B9>=4,G9>=12),1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          15,
+          16,
+          19,
+          22,
+          20,
+          15,
+          18,
+          16
+        ]
+      }
+    ]
+  },
+  {
+    "id": "pengadaan-vendor-deliverable-invoice",
+    "name": "Kontrol Pengadaan Vendor, Deliverable & Tagihan Proyek",
+    "category": "proyek",
+    "categoryLabel": "Manajemen proyek",
+    "symbol": "VEN",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Periksa nilai kontrak, progres terverifikasi, penerimaan milestone, dan tagihan vendor; hitung nilai yang seharusnya diperoleh serta indikasi overbilling sebelum pembayaran diproses.",
+    "tags": [
+      "procurement proyek",
+      "vendor",
+      "invoice control",
+      "deliverable",
+      "pengadaan"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek atau organisasi",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama proyek atau organisasi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Project manager atau pemilik proyek",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Kurang dari 1 bulan",
+          "1-3 bulan",
+          "3-6 bulan",
+          "Lebih dari 6 bulan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenis atau ruang lingkup proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Produk digital atau IT",
+          "Konstruksi atau fasilitas",
+          "Operasional atau proses bisnis",
+          "Acara atau kampanye",
+          "Riset atau pengembangan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Asumsi, batasan, dan catatan proyek",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan baseline, standar, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Kontrol Vendor",
+        "title": "Kontrol Pengadaan Vendor, Deliverable & Tagihan Proyek - {{entityName}}",
+        "columns": [
+          "Paket Pengadaan",
+          "Nilai Kontrak (Rp)",
+          "Tagihan Kumulatif (Rp)",
+          "Progres Terverifikasi (%)",
+          "Milestone Diterima (1/0)",
+          "Earned Value (Rp)",
+          "Over/(Under) Billing (Rp)",
+          "Nilai Layak Dibayar (Rp)"
+        ],
+        "rows": [
+          [
+            "Desain sistem",
+            30000000,
+            15000000,
+            50,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            "Lisensi perangkat",
+            18000000,
+            18000000,
+            100,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            "Instalasi jaringan",
+            25000000,
+            20000000,
+            60,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Pelatihan pengguna",
+            8000000,
+            4000000,
+            50,
+            1,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "B6*D6/100",
+            "cachedValue": 15000000
+          },
+          {
+            "cell": "G6",
+            "formula": "C6-F6",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(AND(E6=1,G6<=0),C6,0)",
+            "cachedValue": 15000000
+          },
+          {
+            "cell": "F7",
+            "formula": "B7*D7/100",
+            "cachedValue": 18000000
+          },
+          {
+            "cell": "G7",
+            "formula": "C7-F7",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(AND(E7=1,G7<=0),C7,0)",
+            "cachedValue": 18000000
+          },
+          {
+            "cell": "F8",
+            "formula": "B8*D8/100",
+            "cachedValue": 15000000
+          },
+          {
+            "cell": "G8",
+            "formula": "C8-F8",
+            "cachedValue": 5000000
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(AND(E8=1,G8<=0),C8,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "F9",
+            "formula": "B9*D9/100",
+            "cachedValue": 4000000
+          },
+          {
+            "cell": "G9",
+            "formula": "C9-F9",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(AND(E9=1,G9<=0),C9,0)",
+            "cachedValue": 4000000
+          }
+        ],
+        "columnWidths": [
+          24,
+          20,
+          22,
+          24,
+          22,
+          20,
+          24,
+          22
+        ]
+      }
+    ]
+  },
+  {
+    "id": "matriks-komunikasi-stakeholder-proyek",
+    "name": "Matriks Komunikasi Stakeholder & Prioritas Keterlibatan",
+    "category": "proyek",
+    "categoryLabel": "Manajemen proyek",
+    "symbol": "STK",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Petakan pengaruh, dampak, dan kondisi dukungan stakeholder; hitung gap keterlibatan dan skor prioritas untuk menentukan intensitas komunikasi yang sesuai.",
+    "tags": [
+      "stakeholder register",
+      "komunikasi proyek",
+      "engagement",
+      "influence impact",
+      "manajemen stakeholder"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek atau organisasi",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama proyek atau organisasi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Project manager atau pemilik proyek",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Kurang dari 1 bulan",
+          "1-3 bulan",
+          "3-6 bulan",
+          "Lebih dari 6 bulan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenis atau ruang lingkup proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Produk digital atau IT",
+          "Konstruksi atau fasilitas",
+          "Operasional atau proses bisnis",
+          "Acara atau kampanye",
+          "Riset atau pengembangan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Asumsi, batasan, dan catatan proyek",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan baseline, standar, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Stakeholder Matrix",
+        "title": "Matriks Komunikasi Stakeholder & Prioritas Keterlibatan - {{entityName}}",
+        "columns": [
+          "Stakeholder/Peran",
+          "Pengaruh (1-5)",
+          "Dampak Proyek (1-5)",
+          "Keterlibatan Saat Ini (1-5)",
+          "Target Keterlibatan (1-5)",
+          "Gap Keterlibatan",
+          "Skor Prioritas",
+          "Perlu Rencana (1/0)"
+        ],
+        "rows": [
+          [
+            "Sponsor",
+            5,
+            5,
+            4,
+            5,
+            0,
+            0,
+            0
+          ],
+          [
+            "Pemilik Proses",
+            4,
+            5,
+            2,
+            5,
+            0,
+            0,
+            0
+          ],
+          [
+            "Pengguna Akhir",
+            3,
+            4,
+            2,
+            4,
+            0,
+            0,
+            0
+          ],
+          [
+            "Vendor Utama",
+            4,
+            3,
+            3,
+            4,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "MAX(0,E6-D6)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G6",
+            "formula": "B6*C6*F6",
+            "cachedValue": 25
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(G6>=20,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F7",
+            "formula": "MAX(0,E7-D7)",
+            "cachedValue": 3
+          },
+          {
+            "cell": "G7",
+            "formula": "B7*C7*F7",
+            "cachedValue": 60
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(G7>=20,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F8",
+            "formula": "MAX(0,E8-D8)",
+            "cachedValue": 2
+          },
+          {
+            "cell": "G8",
+            "formula": "B8*C8*F8",
+            "cachedValue": 24
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(G8>=20,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "F9",
+            "formula": "MAX(0,E9-D9)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G9",
+            "formula": "B9*C9*F9",
+            "cachedValue": 12
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(G9>=20,1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          24,
+          16,
+          20,
+          24,
+          23,
+          19,
+          17,
+          18
+        ]
+      }
+    ]
+  },
+  {
+    "id": "uat-serah-terima-kriteria-penerimaan",
+    "name": "Checklist UAT & Serah Terima Proyek (Handover)",
+    "category": "proyek",
+    "categoryLabel": "Manajemen proyek",
+    "symbol": "UAT",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Kelola skenario UAT, eksekusi dan hasil pengujian, defect terbuka, bukti penerimaan, serta status gate rilis untuk memastikan serah terima didukung bukti.",
+    "tags": [
+      "UAT",
+      "user acceptance testing",
+      "handover",
+      "serah terima",
+      "acceptance criteria"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek atau organisasi",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama proyek atau organisasi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Project manager atau pemilik proyek",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Kurang dari 1 bulan",
+          "1-3 bulan",
+          "3-6 bulan",
+          "Lebih dari 6 bulan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenis atau ruang lingkup proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Produk digital atau IT",
+          "Konstruksi atau fasilitas",
+          "Operasional atau proses bisnis",
+          "Acara atau kampanye",
+          "Riset atau pengembangan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Asumsi, batasan, dan catatan proyek",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan baseline, standar, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "UAT dan Handover",
+        "title": "Checklist UAT & Serah Terima Proyek (Handover) - {{entityName}}",
+        "columns": [
+          "ID Test",
+          "Skenario Uji",
+          "Kritikalitas (1-5)",
+          "Dieksekusi (1/0)",
+          "Lulus (1/0)",
+          "Defect Terbuka (1/0)",
+          "Poin Diterima",
+          "Blocker Rilis (1/0)"
+        ],
+        "rows": [
+          [
+            "UAT-01",
+            "Login dan hak akses",
+            5,
+            1,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            "UAT-02",
+            "Input transaksi valid",
+            5,
+            1,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            "UAT-03",
+            "Ekspor laporan",
+            3,
+            1,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            "UAT-04",
+            "Pemulihan data",
+            5,
+            0,
+            0,
+            1,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "IF(D6=1,E6*C6,0)",
+            "cachedValue": 5
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(AND(C6>=4,F6=1),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(D7=1,E7*C7,0)",
+            "cachedValue": 5
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(AND(C7>=4,F7=1),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(D8=1,E8*C8,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(AND(C8>=4,F8=1),1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(D9=1,E9*C9,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(AND(C9>=4,F9=1),1,0)",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          14,
+          30,
+          18,
+          16,
+          14,
+          20,
+          17,
+          18
+        ]
+      }
+    ]
+  },
+  {
+    "id": "laporan-status-proyek-mingguan-rag",
+    "name": "Laporan Status Proyek Mingguan untuk Klien & Eksekutif",
+    "category": "proyek",
+    "categoryLabel": "Manajemen proyek",
+    "symbol": "RAG",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Ringkasan status workstream yang membandingkan baseline dan progres aktual, pemakaian anggaran, serta isu terbuka; hasilkan indikator RAG numerik untuk rapat steering committee.",
+    "tags": [
+      "weekly status report",
+      "RAG status",
+      "laporan proyek",
+      "eksekutif",
+      "klien"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek atau organisasi",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama proyek atau organisasi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Project manager atau pemilik proyek",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Kurang dari 1 bulan",
+          "1-3 bulan",
+          "3-6 bulan",
+          "Lebih dari 6 bulan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenis atau ruang lingkup proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Produk digital atau IT",
+          "Konstruksi atau fasilitas",
+          "Operasional atau proses bisnis",
+          "Acara atau kampanye",
+          "Riset atau pengembangan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Asumsi, batasan, dan catatan proyek",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan baseline, standar, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Status Mingguan",
+        "title": "Laporan Status Proyek Mingguan untuk Klien & Eksekutif - {{entityName}}",
+        "columns": [
+          "Workstream",
+          "Baseline Progres (%)",
+          "Aktual Progres (%)",
+          "Deviasi Progres (poin)",
+          "Anggaran Terpakai (%)",
+          "Jumlah Isu Kritis",
+          "Status RAG (1=Hijau,2=Amber,3=Merah)"
+        ],
+        "rows": [
+          [
+            "Analisis",
+            100,
+            100,
+            0,
+            95,
+            0,
+            0
+          ],
+          [
+            "Desain",
+            100,
+            85,
+            0,
+            85,
+            1,
+            0
+          ],
+          [
+            "Build",
+            70,
+            52,
+            0,
+            65,
+            2,
+            0
+          ],
+          [
+            "UAT",
+            20,
+            5,
+            0,
+            25,
+            3,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "D6",
+            "formula": "C6-B6",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G6",
+            "formula": "IF(OR(D6<=-15,F6>=3),3,IF(OR(D6<0,E6>=90),2,1))",
+            "cachedValue": 2
+          },
+          {
+            "cell": "D7",
+            "formula": "C7-B7",
+            "cachedValue": -15
+          },
+          {
+            "cell": "G7",
+            "formula": "IF(OR(D7<=-15,F7>=3),3,IF(OR(D7<0,E7>=90),2,1))",
+            "cachedValue": 3
+          },
+          {
+            "cell": "D8",
+            "formula": "C8-B8",
+            "cachedValue": -18
+          },
+          {
+            "cell": "G8",
+            "formula": "IF(OR(D8<=-15,F8>=3),3,IF(OR(D8<0,E8>=90),2,1))",
+            "cachedValue": 3
+          },
+          {
+            "cell": "D9",
+            "formula": "C9-B9",
+            "cachedValue": -15
+          },
+          {
+            "cell": "G9",
+            "formula": "IF(OR(D9<=-15,F9>=3),3,IF(OR(D9<0,E9>=90),2,1))",
+            "cachedValue": 3
+          }
+        ],
+        "columnWidths": [
+          20,
+          20,
+          19,
+          21,
+          22,
+          18,
+          35
+        ]
+      }
+    ]
+  },
+  {
+    "id": "statement-of-work-sow-ruang-lingkup",
+    "name": "Statement of Work (SOW) & Batasan Ruang Lingkup",
+    "category": "proyek",
+    "categoryLabel": "Manajemen proyek",
+    "symbol": "SOW",
+    "format": "md",
+    "quality": "baik",
+    "description": "Dokumen ruang lingkup kerja yang menguraikan tujuan, layanan, deliverable, acceptance criteria, jadwal, tanggung jawab, dependensi, dan mekanisme perubahan agar ekspektasi klien dan tim selaras.",
+    "tags": [
+      "SOW",
+      "statement of work",
+      "ruang lingkup",
+      "deliverable",
+      "kontrak proyek"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek atau organisasi",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama proyek atau organisasi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Project manager atau pemilik proyek",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Kurang dari 1 bulan",
+          "1-3 bulan",
+          "3-6 bulan",
+          "Lebih dari 6 bulan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenis atau ruang lingkup proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Produk digital atau IT",
+          "Konstruksi atau fasilitas",
+          "Operasional atau proses bisnis",
+          "Acara atau kampanye",
+          "Riset atau pengembangan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Asumsi, batasan, dan catatan proyek",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan baseline, standar, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Para pihak dan tujuan pekerjaan",
+        "body": "Statement of Work ini disusun untuk {{entityName}} oleh {{ownerName}} pada periode {{period}} dengan ruang lingkup {{scope}}. Lengkapi pihak pemesan, pelaksana, nomor kontrak/PO, tanggal berlaku, dan otoritas persetujuan."
+      },
+      {
+        "heading": "Latar belakang dan tujuan",
+        "bullets": [
+          "Kondisi saat ini dan kebutuhan yang akan ditangani: [uraikan masalah dan bukti].",
+          "Tujuan layanan/pekerjaan: [hasil spesifik dan terukur].",
+          "Kelompok pengguna atau penerima hasil: [daftar].",
+          "Asumsi estimasi: [data, akses, keputusan, dan ketersediaan personel]."
+        ]
+      },
+      {
+        "heading": "Ruang lingkup pekerjaan",
+        "bullets": [
+          "Aktivitas yang termasuk: [paket pekerjaan, lokasi, sistem, proses, atau layanan].",
+          "Aktivitas yang tidak termasuk: [pengecualian eksplisit].",
+          "Input yang disediakan klien dan batas waktu ketersediaannya: [daftar].",
+          "Dependensi eksternal, persetujuan, dan akses yang dibutuhkan: [daftar]."
+        ]
+      },
+      {
+        "heading": "Deliverable dan acceptance criteria",
+        "bullets": [
+          "Deliverable 1: [format, pemilik, tanggal serah, kriteria penerimaan].",
+          "Deliverable 2: [format, pemilik, tanggal serah, kriteria penerimaan].",
+          "Deliverable 3: [format, pemilik, tanggal serah, kriteria penerimaan].",
+          "Proses review, masa pemeriksaan, defect, dan persetujuan tertulis: [aturan]."
+        ]
+      },
+      {
+        "heading": "Jadwal, tata kelola, dan pelaporan",
+        "bullets": [
+          "Milestone dan jadwal target: [tanggal dan prasyarat].",
+          "PIC klien dan PIC pelaksana beserta otoritas keputusan: [RACI].",
+          "Frekuensi rapat, laporan status, dan jalur eskalasi: [ketentuan].",
+          "Pengendalian kualitas, dokumentasi, dan penyimpanan artefak: [aturan]."
+        ]
+      },
+      {
+        "heading": "Perubahan, biaya, dan ketentuan komersial",
+        "body": "Perubahan ruang lingkup hanya dijalankan setelah change request disetujui pihak berwenang. Cantumkan dasar harga, termin pembayaran, biaya di luar cakupan, serta ketentuan komersial sesuai dokumen yang disepakati."
+      },
+      {
+        "heading": "Persetujuan dan catatan",
+        "body": "Catatan tambahan, pengecualian, atau asumsi sebelum penandatanganan: {{notes}}. SOW berlaku setelah disetujui sesuai mekanisme kontrak para pihak."
+      }
+    ]
+  },
+  {
+    "id": "earned-value-management-spi-cpi-eac",
+    "name": "Dashboard Earned Value Management (SPI, CPI, EAC & VAC)",
+    "category": "proyek",
+    "categoryLabel": "Manajemen proyek",
+    "symbol": "EVM",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Gabungkan BAC, planned value, earned value, dan actual cost per periode untuk menghitung schedule variance, cost variance, SPI, CPI, estimasi biaya saat selesai, dan variance at completion.",
+    "tags": [
+      "earned value management",
+      "EVM",
+      "SPI",
+      "CPI",
+      "EAC",
+      "VAC"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek atau organisasi",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama proyek atau organisasi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Project manager atau pemilik proyek",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Kurang dari 1 bulan",
+          "1-3 bulan",
+          "3-6 bulan",
+          "Lebih dari 6 bulan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenis atau ruang lingkup proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Produk digital atau IT",
+          "Konstruksi atau fasilitas",
+          "Operasional atau proses bisnis",
+          "Acara atau kampanye",
+          "Riset atau pengembangan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Asumsi, batasan, dan catatan proyek",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan baseline, standar, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Earned Value Dashboard",
+        "title": "Dashboard Earned Value Management (SPI, CPI, EAC & VAC) - {{entityName}}",
+        "columns": [
+          "Periode",
+          "BAC (Rp)",
+          "PV (Rp)",
+          "EV (Rp)",
+          "AC (Rp)",
+          "Schedule Variance",
+          "Cost Variance",
+          "SPI",
+          "CPI",
+          "EAC Proyeksi",
+          "ETC Proyeksi",
+          "VAC"
+        ],
+        "rows": [
+          [
+            "Minggu 1",
+            120000000,
+            25000000,
+            23000000,
+            24000000,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Minggu 2",
+            120000000,
+            45000000,
+            42000000,
+            46000000,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Minggu 3",
+            120000000,
+            70000000,
+            62000000,
+            68000000,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            "Minggu 4",
+            120000000,
+            90000000,
+            85000000,
+            92000000,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "D6-C6",
+            "cachedValue": -2000000
+          },
+          {
+            "cell": "G6",
+            "formula": "D6-E6",
+            "cachedValue": -1000000
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(C6=0,0,D6/C6)",
+            "cachedValue": 0.92
+          },
+          {
+            "cell": "I6",
+            "formula": "IF(E6=0,0,D6/E6)",
+            "cachedValue": 0.9583333333
+          },
+          {
+            "cell": "J6",
+            "formula": "IF(I6=0,0,B6/I6)",
+            "cachedValue": 125217391.30434783
+          },
+          {
+            "cell": "K6",
+            "formula": "J6-E6",
+            "cachedValue": 101217391.30434783
+          },
+          {
+            "cell": "L6",
+            "formula": "B6-J6",
+            "cachedValue": -5217391.304347828
+          },
+          {
+            "cell": "F7",
+            "formula": "D7-C7",
+            "cachedValue": -3000000
+          },
+          {
+            "cell": "G7",
+            "formula": "D7-E7",
+            "cachedValue": -4000000
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(C7=0,0,D7/C7)",
+            "cachedValue": 0.9333333333
+          },
+          {
+            "cell": "I7",
+            "formula": "IF(E7=0,0,D7/E7)",
+            "cachedValue": 0.9130434783
+          },
+          {
+            "cell": "J7",
+            "formula": "IF(I7=0,0,B7/I7)",
+            "cachedValue": 131428571.42857145
+          },
+          {
+            "cell": "K7",
+            "formula": "J7-E7",
+            "cachedValue": 85428571.42857143
+          },
+          {
+            "cell": "L7",
+            "formula": "B7-J7",
+            "cachedValue": -11428571.428571433
+          },
+          {
+            "cell": "F8",
+            "formula": "D8-C8",
+            "cachedValue": -8000000
+          },
+          {
+            "cell": "G8",
+            "formula": "D8-E8",
+            "cachedValue": -6000000
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(C8=0,0,D8/C8)",
+            "cachedValue": 0.8857142857
+          },
+          {
+            "cell": "I8",
+            "formula": "IF(E8=0,0,D8/E8)",
+            "cachedValue": 0.9117647059
+          },
+          {
+            "cell": "J8",
+            "formula": "IF(I8=0,0,B8/I8)",
+            "cachedValue": 131612903.22580646
+          },
+          {
+            "cell": "K8",
+            "formula": "J8-E8",
+            "cachedValue": 63612903.22580647
+          },
+          {
+            "cell": "L8",
+            "formula": "B8-J8",
+            "cachedValue": -11612903.22580646
+          },
+          {
+            "cell": "F9",
+            "formula": "D9-C9",
+            "cachedValue": -5000000
+          },
+          {
+            "cell": "G9",
+            "formula": "D9-E9",
+            "cachedValue": -7000000
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(C9=0,0,D9/C9)",
+            "cachedValue": 0.9444444444
+          },
+          {
+            "cell": "I9",
+            "formula": "IF(E9=0,0,D9/E9)",
+            "cachedValue": 0.9239130435
+          },
+          {
+            "cell": "J9",
+            "formula": "IF(I9=0,0,B9/I9)",
+            "cachedValue": 129882352.94117647
+          },
+          {
+            "cell": "K9",
+            "formula": "J9-E9",
+            "cachedValue": 37882352.941176474
+          },
+          {
+            "cell": "L9",
+            "formula": "B9-J9",
+            "cachedValue": -9882352.941176474
+          }
+        ],
+        "columnWidths": [
+          15,
+          20,
+          19,
+          19,
+          19,
+          19,
+          19,
+          14,
+          14,
+          20,
+          20,
+          19
+        ]
+      }
+    ]
+  },
+  {
+    "id": "portfolio-prioritas-investasi-multi-proyek",
+    "name": "Matriks Prioritas Portofolio & Skor Investasi Multi-Proyek",
+    "category": "proyek",
+    "categoryLabel": "Manajemen proyek",
+    "symbol": "PFM",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Bandingkan proyek lintas unit menggunakan strategic fit, urgensi, manfaat, confidence, kebutuhan sumber daya, dan risiko; hitung skor prioritas berbobot serta peringkat portofolio.",
+    "tags": [
+      "portfolio management",
+      "prioritas proyek",
+      "investment scoring",
+      "strategic alignment",
+      "PMO"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek atau organisasi",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama proyek atau organisasi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Project manager atau pemilik proyek",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Kurang dari 1 bulan",
+          "1-3 bulan",
+          "3-6 bulan",
+          "Lebih dari 6 bulan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenis atau ruang lingkup proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Produk digital atau IT",
+          "Konstruksi atau fasilitas",
+          "Operasional atau proses bisnis",
+          "Acara atau kampanye",
+          "Riset atau pengembangan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Asumsi, batasan, dan catatan proyek",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan baseline, standar, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Portfolio Scoring",
+        "title": "Matriks Prioritas Portofolio & Skor Investasi Multi-Proyek - {{entityName}}",
+        "columns": [
+          "Proyek",
+          "Strategic Fit (1-5)",
+          "Urgensi (1-5)",
+          "Manfaat (1-5)",
+          "Confidence (1-5)",
+          "Beban Resource (1-5)",
+          "Risiko (1-5)",
+          "Skor Prioritas",
+          "Peringkat",
+          "Keputusan (1=Prioritas,2=Review,3=Tunda)"
+        ],
+        "rows": [
+          [
+            "Otomasi layanan",
+            5,
+            4,
+            5,
+            4,
+            3,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            "Revamp aplikasi",
+            4,
+            3,
+            5,
+            4,
+            5,
+            4,
+            0,
+            0,
+            0
+          ],
+          [
+            "Perbaikan gudang",
+            4,
+            5,
+            4,
+            5,
+            2,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            "Portal internal",
+            3,
+            2,
+            3,
+            4,
+            2,
+            1,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "H6",
+            "formula": "B6*0.25+C6*0.15+D6*0.25+E6*0.15+(6-F6)*0.10+(6-G6)*0.10",
+            "cachedValue": 4.4
+          },
+          {
+            "cell": "I6",
+            "formula": "RANK(H6,H6:H9,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "J6",
+            "formula": "IF(H6>=4,1,IF(H6>=3,2,3))",
+            "cachedValue": 1
+          },
+          {
+            "cell": "H7",
+            "formula": "B7*0.25+C7*0.15+D7*0.25+E7*0.15+(6-F7)*0.10+(6-G7)*0.10",
+            "cachedValue": 3.6
+          },
+          {
+            "cell": "I7",
+            "formula": "RANK(H7,H6:H9,0)",
+            "cachedValue": 3
+          },
+          {
+            "cell": "J7",
+            "formula": "IF(H7>=4,1,IF(H7>=3,2,3))",
+            "cachedValue": 2
+          },
+          {
+            "cell": "H8",
+            "formula": "B8*0.25+C8*0.15+D8*0.25+E8*0.15+(6-F8)*0.10+(6-G8)*0.10",
+            "cachedValue": 4.3
+          },
+          {
+            "cell": "I8",
+            "formula": "RANK(H8,H6:H9,0)",
+            "cachedValue": 2
+          },
+          {
+            "cell": "J8",
+            "formula": "IF(H8>=4,1,IF(H8>=3,2,3))",
+            "cachedValue": 1
+          },
+          {
+            "cell": "H9",
+            "formula": "B9*0.25+C9*0.15+D9*0.25+E9*0.15+(6-F9)*0.10+(6-G9)*0.10",
+            "cachedValue": 3.3
+          },
+          {
+            "cell": "I9",
+            "formula": "RANK(H9,H6:H9,0)",
+            "cachedValue": 4
+          },
+          {
+            "cell": "J9",
+            "formula": "IF(H9>=4,1,IF(H9>=3,2,3))",
+            "cachedValue": 2
+          }
+        ],
+        "columnWidths": [
+          24,
+          20,
+          15,
+          16,
+          19,
+          21,
+          15,
+          18,
+          14,
+          36
+        ]
+      }
+    ]
+  },
+  {
+    "id": "model-risk-emv-contingency-reserve",
+    "name": "Model Risiko Kuantitatif, Expected Monetary Value & Contingency Reserve",
+    "category": "proyek",
+    "categoryLabel": "Manajemen proyek",
+    "symbol": "EMV",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Hitung eksposur risiko moneter berdasarkan probabilitas dan dampak biaya, estimasi penurunan eksposur setelah mitigasi, serta kebutuhan contingency reserve dan biaya respons.",
+    "tags": [
+      "quantitative risk analysis",
+      "EMV",
+      "contingency reserve",
+      "expected monetary value",
+      "risk response"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek atau organisasi",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama proyek atau organisasi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Project manager atau pemilik proyek",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Kurang dari 1 bulan",
+          "1-3 bulan",
+          "3-6 bulan",
+          "Lebih dari 6 bulan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenis atau ruang lingkup proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Produk digital atau IT",
+          "Konstruksi atau fasilitas",
+          "Operasional atau proses bisnis",
+          "Acara atau kampanye",
+          "Riset atau pengembangan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Asumsi, batasan, dan catatan proyek",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan baseline, standar, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Risk Quantification",
+        "title": "Model Risiko Kuantitatif, Expected Monetary Value & Contingency Reserve - {{entityName}}",
+        "columns": [
+          "ID Risiko",
+          "Probabilitas (%)",
+          "Dampak Biaya (Rp)",
+          "EMV Inheren (Rp)",
+          "Efektivitas Mitigasi (%)",
+          "EMV Residual (Rp)",
+          "Biaya Respons (Rp)",
+          "Cadangan Bersih (Rp)",
+          "Risiko Dominan (1/0)"
+        ],
+        "rows": [
+          [
+            "QR-01",
+            40,
+            25000000,
+            0,
+            50,
+            0,
+            3000000,
+            0,
+            0
+          ],
+          [
+            "QR-02",
+            25,
+            50000000,
+            0,
+            70,
+            0,
+            6000000,
+            0,
+            0
+          ],
+          [
+            "QR-03",
+            15,
+            80000000,
+            0,
+            30,
+            0,
+            5000000,
+            0,
+            0
+          ],
+          [
+            "QR-04",
+            60,
+            12000000,
+            0,
+            80,
+            0,
+            2000000,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "D6",
+            "formula": "B6/100*C6",
+            "cachedValue": 10000000
+          },
+          {
+            "cell": "F6",
+            "formula": "D6*(1-E6/100)",
+            "cachedValue": 5000000
+          },
+          {
+            "cell": "H6",
+            "formula": "MAX(0,F6-G6)",
+            "cachedValue": 2000000
+          },
+          {
+            "cell": "I6",
+            "formula": "IF(H6>=10000000,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "D7",
+            "formula": "B7/100*C7",
+            "cachedValue": 12500000
+          },
+          {
+            "cell": "F7",
+            "formula": "D7*(1-E7/100)",
+            "cachedValue": 3750000.000000001
+          },
+          {
+            "cell": "H7",
+            "formula": "MAX(0,F7-G7)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "I7",
+            "formula": "IF(H7>=10000000,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "D8",
+            "formula": "B8/100*C8",
+            "cachedValue": 12000000
+          },
+          {
+            "cell": "F8",
+            "formula": "D8*(1-E8/100)",
+            "cachedValue": 8400000
+          },
+          {
+            "cell": "H8",
+            "formula": "MAX(0,F8-G8)",
+            "cachedValue": 3400000
+          },
+          {
+            "cell": "I8",
+            "formula": "IF(H8>=10000000,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "D9",
+            "formula": "B9/100*C9",
+            "cachedValue": 7200000
+          },
+          {
+            "cell": "F9",
+            "formula": "D9*(1-E9/100)",
+            "cachedValue": 1439999.9999999998
+          },
+          {
+            "cell": "H9",
+            "formula": "MAX(0,F9-G9)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "I9",
+            "formula": "IF(H9>=10000000,1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          14,
+          19,
+          21,
+          20,
+          23,
+          21,
+          21,
+          21,
+          19
+        ]
+      }
+    ]
+  },
+  {
+    "id": "analisis-critical-path-total-float",
+    "name": "Analisis Critical Path, Early/Late Dates & Total Float",
+    "category": "proyek",
+    "categoryLabel": "Manajemen proyek",
+    "symbol": "CPM",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Hitung early finish dari early start dan durasi, total float dari late start dan early start, lalu identifikasi aktivitas kritis untuk fokus pengendalian jadwal.",
+    "tags": [
+      "critical path method",
+      "CPM",
+      "total float",
+      "early start",
+      "late start"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek atau organisasi",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama proyek atau organisasi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Project manager atau pemilik proyek",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Kurang dari 1 bulan",
+          "1-3 bulan",
+          "3-6 bulan",
+          "Lebih dari 6 bulan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenis atau ruang lingkup proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Produk digital atau IT",
+          "Konstruksi atau fasilitas",
+          "Operasional atau proses bisnis",
+          "Acara atau kampanye",
+          "Riset atau pengembangan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Asumsi, batasan, dan catatan proyek",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan baseline, standar, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Critical Path",
+        "title": "Analisis Critical Path, Early/Late Dates & Total Float - {{entityName}}",
+        "columns": [
+          "ID Aktivitas",
+          "Aktivitas",
+          "Durasi (hari)",
+          "Early Start",
+          "Early Finish",
+          "Late Start",
+          "Late Finish",
+          "Total Float",
+          "Kritis (1/0)"
+        ],
+        "rows": [
+          [
+            "A",
+            "Persetujuan kebutuhan",
+            5,
+            0,
+            0,
+            0,
+            5,
+            0,
+            0
+          ],
+          [
+            "B",
+            "Desain arsitektur",
+            8,
+            5,
+            0,
+            5,
+            13,
+            0,
+            0
+          ],
+          [
+            "C",
+            "Pengadaan perangkat",
+            10,
+            5,
+            0,
+            8,
+            18,
+            0,
+            0
+          ],
+          [
+            "D",
+            "Implementasi",
+            12,
+            13,
+            0,
+            13,
+            25,
+            0,
+            0
+          ],
+          [
+            "E",
+            "UAT dan perbaikan",
+            6,
+            25,
+            0,
+            25,
+            31,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "C6+D6",
+            "cachedValue": 5
+          },
+          {
+            "cell": "H6",
+            "formula": "F6-D6",
+            "cachedValue": 0
+          },
+          {
+            "cell": "I6",
+            "formula": "IF(H6=0,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "E7",
+            "formula": "C7+D7",
+            "cachedValue": 13
+          },
+          {
+            "cell": "H7",
+            "formula": "F7-D7",
+            "cachedValue": 0
+          },
+          {
+            "cell": "I7",
+            "formula": "IF(H7=0,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "E8",
+            "formula": "C8+D8",
+            "cachedValue": 15
+          },
+          {
+            "cell": "H8",
+            "formula": "F8-D8",
+            "cachedValue": 3
+          },
+          {
+            "cell": "I8",
+            "formula": "IF(H8=0,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "E9",
+            "formula": "C9+D9",
+            "cachedValue": 25
+          },
+          {
+            "cell": "H9",
+            "formula": "F9-D9",
+            "cachedValue": 0
+          },
+          {
+            "cell": "I9",
+            "formula": "IF(H9=0,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "E10",
+            "formula": "C10+D10",
+            "cachedValue": 31
+          },
+          {
+            "cell": "H10",
+            "formula": "F10-D10",
+            "cachedValue": 0
+          },
+          {
+            "cell": "I10",
+            "formula": "IF(H10=0,1,0)",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          14,
+          28,
+          16,
+          15,
+          16,
+          15,
+          16,
+          16,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "id": "forecast-resource-demand-multi-proyek",
+    "name": "Forecast Kebutuhan Resource Multi-Proyek & Konflik Kapasitas Mingguan",
+    "category": "proyek",
+    "categoryLabel": "Manajemen proyek",
+    "symbol": "MRF",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Bandingkan kebutuhan jam kerja lintas proyek per minggu dengan kapasitas efektif per peran, ukur puncak utilisasi, dan tandai periode yang membutuhkan resource leveling.",
+    "tags": [
+      "resource forecast",
+      "multi-project",
+      "capacity planning",
+      "resource conflict",
+      "PMO"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek atau organisasi",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama proyek atau organisasi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Project manager atau pemilik proyek",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Kurang dari 1 bulan",
+          "1-3 bulan",
+          "3-6 bulan",
+          "Lebih dari 6 bulan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenis atau ruang lingkup proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Produk digital atau IT",
+          "Konstruksi atau fasilitas",
+          "Operasional atau proses bisnis",
+          "Acara atau kampanye",
+          "Riset atau pengembangan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Asumsi, batasan, dan catatan proyek",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan baseline, standar, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Resource Forecast",
+        "title": "Forecast Kebutuhan Resource Multi-Proyek & Konflik Kapasitas Mingguan - {{entityName}}",
+        "columns": [
+          "Peran/Resource",
+          "Minggu 1 (jam)",
+          "Minggu 2 (jam)",
+          "Minggu 3 (jam)",
+          "Minggu 4 (jam)",
+          "Kapasitas/Minggu (jam)",
+          "Total Demand",
+          "Peak Utilisasi",
+          "Overload (1/0)"
+        ],
+        "rows": [
+          [
+            "Developer",
+            30,
+            38,
+            42,
+            35,
+            36,
+            0,
+            0,
+            0
+          ],
+          [
+            "QA",
+            20,
+            24,
+            32,
+            40,
+            32,
+            0,
+            0,
+            0
+          ],
+          [
+            "Business Analyst",
+            24,
+            28,
+            20,
+            18,
+            32,
+            0,
+            0,
+            0
+          ],
+          [
+            "Project Manager",
+            28,
+            30,
+            26,
+            25,
+            32,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "SUM(B6:E6)",
+            "cachedValue": 145
+          },
+          {
+            "cell": "H6",
+            "formula": "IF(F6=0,0,MAX(B6:E6)/F6)",
+            "cachedValue": 1.1666666667
+          },
+          {
+            "cell": "I6",
+            "formula": "IF(H6>1,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G7",
+            "formula": "SUM(B7:E7)",
+            "cachedValue": 116
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(F7=0,0,MAX(B7:E7)/F7)",
+            "cachedValue": 1.25
+          },
+          {
+            "cell": "I7",
+            "formula": "IF(H7>1,1,0)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G8",
+            "formula": "SUM(B8:E8)",
+            "cachedValue": 90
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(F8=0,0,MAX(B8:E8)/F8)",
+            "cachedValue": 0.875
+          },
+          {
+            "cell": "I8",
+            "formula": "IF(H8>1,1,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "G9",
+            "formula": "SUM(B9:E9)",
+            "cachedValue": 109
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(F9=0,0,MAX(B9:E9)/F9)",
+            "cachedValue": 0.9375
+          },
+          {
+            "cell": "I9",
+            "formula": "IF(H9>1,1,0)",
+            "cachedValue": 0
+          }
+        ],
+        "columnWidths": [
+          23,
+          17,
+          17,
+          17,
+          17,
+          23,
+          16,
+          17,
+          16
+        ]
+      }
+    ]
+  },
+  {
+    "id": "realisasi-manfaat-benefit-tracking",
+    "name": "Pelacak Realisasi Manfaat Proyek & Benefit Tracking",
+    "category": "proyek",
+    "categoryLabel": "Manajemen proyek",
+    "symbol": "BEN",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Pantau manfaat yang dijanjikan terhadap baseline dan target, hitung realisasi KPI, nilai manfaat yang telah terealisasi, biaya pencapaian, dan manfaat bersih.",
+    "tags": [
+      "benefit realization",
+      "KPI proyek",
+      "manfaat proyek",
+      "ROI",
+      "post implementation"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek atau organisasi",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama proyek atau organisasi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Project manager atau pemilik proyek",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Kurang dari 1 bulan",
+          "1-3 bulan",
+          "3-6 bulan",
+          "Lebih dari 6 bulan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenis atau ruang lingkup proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Produk digital atau IT",
+          "Konstruksi atau fasilitas",
+          "Operasional atau proses bisnis",
+          "Acara atau kampanye",
+          "Riset atau pengembangan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Asumsi, batasan, dan catatan proyek",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan baseline, standar, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Benefits Realization",
+        "title": "Pelacak Realisasi Manfaat Proyek & Benefit Tracking - {{entityName}}",
+        "columns": [
+          "Manfaat/KPI",
+          "Baseline",
+          "Target",
+          "Aktual",
+          "Realisasi Target (%)",
+          "Nilai Manfaat Penuh (Rp)",
+          "Persentase Realisasi",
+          "Manfaat Terealisasi (Rp)",
+          "Biaya Realisasi (Rp)",
+          "Manfaat Bersih (Rp)"
+        ],
+        "rows": [
+          [
+            "Pengurangan waktu proses (jam)",
+            12,
+            6,
+            8,
+            0,
+            120000000,
+            0,
+            0,
+            25000000,
+            0
+          ],
+          [
+            "Pengurangan error (%)",
+            8,
+            2,
+            3,
+            0,
+            80000000,
+            0,
+            0,
+            18000000,
+            0
+          ],
+          [
+            "Peningkatan output (%)",
+            100,
+            125,
+            118,
+            0,
+            150000000,
+            0,
+            0,
+            30000000,
+            0
+          ],
+          [
+            "Pengurangan biaya proses (Rp juta)",
+            0,
+            40,
+            28,
+            0,
+            90000000,
+            0,
+            0,
+            15000000,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "E6",
+            "formula": "IF(C6=B6,0,MAX(0,MIN(1,(D6-B6)/(C6-B6))))",
+            "cachedValue": 0.6666666667
+          },
+          {
+            "cell": "G6",
+            "formula": "E6",
+            "cachedValue": 0.6666666667
+          },
+          {
+            "cell": "H6",
+            "formula": "F6*G6",
+            "cachedValue": 80000000
+          },
+          {
+            "cell": "J6",
+            "formula": "H6-I6",
+            "cachedValue": 55000000
+          },
+          {
+            "cell": "E7",
+            "formula": "IF(C7=B7,0,MAX(0,MIN(1,(D7-B7)/(C7-B7))))",
+            "cachedValue": 0.8333333333
+          },
+          {
+            "cell": "G7",
+            "formula": "E7",
+            "cachedValue": 0.8333333333
+          },
+          {
+            "cell": "H7",
+            "formula": "F7*G7",
+            "cachedValue": 66666666.66666667
+          },
+          {
+            "cell": "J7",
+            "formula": "H7-I7",
+            "cachedValue": 48666666.66666667
+          },
+          {
+            "cell": "E8",
+            "formula": "IF(C8=B8,0,MAX(0,MIN(1,(D8-B8)/(C8-B8))))",
+            "cachedValue": 0.72
+          },
+          {
+            "cell": "G8",
+            "formula": "E8",
+            "cachedValue": 0.72
+          },
+          {
+            "cell": "H8",
+            "formula": "F8*G8",
+            "cachedValue": 108000000
+          },
+          {
+            "cell": "J8",
+            "formula": "H8-I8",
+            "cachedValue": 78000000
+          },
+          {
+            "cell": "E9",
+            "formula": "IF(C9=B9,0,MAX(0,MIN(1,(D9-B9)/(C9-B9))))",
+            "cachedValue": 0.7
+          },
+          {
+            "cell": "G9",
+            "formula": "E9",
+            "cachedValue": 0.7
+          },
+          {
+            "cell": "H9",
+            "formula": "F9*G9",
+            "cachedValue": 62999999.999999985
+          },
+          {
+            "cell": "J9",
+            "formula": "H9-I9",
+            "cachedValue": 47999999.99999999
+          }
+        ],
+        "columnWidths": [
+          25,
+          14,
+          14,
+          14,
+          19,
+          24,
+          19,
+          22,
+          22,
+          21
+        ]
+      }
+    ]
+  },
+  {
+    "id": "evaluasi-pasca-proyek-post-mortem-lessons-learned",
+    "name": "Evaluasi Pasca-Proyek (Post-Mortem) & Lessons Learned",
+    "category": "proyek",
+    "categoryLabel": "Manajemen proyek",
+    "symbol": "PMR",
+    "format": "md",
+    "quality": "unggulan",
+    "description": "Dokumen evaluasi setelah proyek ditutup untuk membandingkan baseline dan realisasi, mengidentifikasi penyebab deviasi, menangkap pelajaran yang dapat digunakan kembali, dan menetapkan pemilik tindak lanjut.",
+    "tags": [
+      "post mortem",
+      "lessons learned",
+      "project closure",
+      "evaluasi proyek",
+      "continuous improvement"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek atau organisasi",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama proyek atau organisasi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Project manager atau pemilik proyek",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode pengendalian proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mingguan",
+          "Bulanan",
+          "Kuartalan",
+          "Kurang dari 1 bulan",
+          "1-3 bulan",
+          "3-6 bulan",
+          "Lebih dari 6 bulan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Jenis atau ruang lingkup proyek",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Produk digital atau IT",
+          "Konstruksi atau fasilitas",
+          "Operasional atau proses bisnis",
+          "Acara atau kampanye",
+          "Riset atau pengembangan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Asumsi, batasan, dan catatan proyek",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan baseline, standar, atau ketentuan yang perlu diperhatikan."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Identitas dan ringkasan hasil",
+        "body": "Evaluasi pasca-proyek untuk {{entityName}} difasilitasi oleh {{ownerName}} pada periode {{period}} dengan ruang lingkup {{scope}}. Cantumkan sponsor, project manager, tanggal penutupan, versi dokumen, dan peserta evaluasi."
+      },
+      {
+        "heading": "Perbandingan baseline dan realisasi",
+        "bullets": [
+          "Tujuan dan indikator keberhasilan awal: [baseline, target, dan sumber pengukuran].",
+          "Hasil aktual setiap indikator: [nilai aktual, bukti, dan status tercapai/tidak].",
+          "Perbandingan jadwal: [tanggal baseline, tanggal aktual, milestone yang bergeser].",
+          "Perbandingan biaya: [anggaran disetujui, biaya aktual, varians, dan penyebab].",
+          "Perubahan ruang lingkup dan keputusan yang memengaruhi hasil: [nomor CR dan persetujuan]."
+        ]
+      },
+      {
+        "heading": "Apa yang berjalan baik",
+        "bullets": [
+          "Praktik atau keputusan yang mempercepat pekerjaan atau mengurangi risiko: [contoh konkret].",
+          "Kolaborasi, komunikasi, atau proses yang terbukti efektif: [bukti dan konteks].",
+          "Komponen solusi atau deliverable yang memenuhi kriteria sejak pemeriksaan awal: [rincian]."
+        ]
+      },
+      {
+        "heading": "Masalah, akar penyebab, dan dampak",
+        "bullets": [
+          "Masalah utama dan kapan mulai terlihat: [fakta, bukan dugaan].",
+          "Akar penyebab menggunakan metode 5 Why/fishbone atau analisis setara: [temuan].",
+          "Dampak terhadap biaya, jadwal, mutu, keselamatan, atau manfaat: [kuantifikasi].",
+          "Sinyal peringatan dini yang terlewat dan alasan eskalasi terlambat: [rincian]."
+        ]
+      },
+      {
+        "heading": "Lessons learned yang dapat digunakan ulang",
+        "bullets": [
+          "Hal yang perlu dipertahankan pada proyek berikutnya: [praktik dan prasyarat].",
+          "Hal yang perlu diubah atau dihentikan: [proses, kebijakan, atau keputusan].",
+          "Template, checklist, atau standar kerja yang perlu diperbarui: [artefak dan pemilik].",
+          "Risiko yang perlu dimasukkan sejak inisiasi proyek berikutnya: [daftar]."
+        ]
+      },
+      {
+        "heading": "Rencana tindakan pasca-proyek",
+        "bullets": [
+          "Tindakan, pemilik, tenggat, indikator selesai, dan bukti: [daftar terukur].",
+          "Pemilik operasi dan mekanisme pemantauan manfaat setelah serah terima: [PIC dan frekuensi].",
+          "Dokumen, akses, aset, dan kontrak yang masih harus ditutup: [checklist]."
+        ]
+      },
+      {
+        "heading": "Persetujuan dan catatan akhir",
+        "body": "Kesimpulan, pembatasan data, atau catatan tambahan dari tim evaluasi: {{notes}}. Penutupan formal dilakukan setelah artefak diserahkan, sisa isu memiliki pemilik, dan tindak lanjut disetujui."
+      }
+    ]
   }
 ]
