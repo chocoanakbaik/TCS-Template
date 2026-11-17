@@ -28,6 +28,9 @@ export const metadata: Metadata = {
     description: 'Koleksi template digital gratis yang dapat disesuaikan dan diunduh langsung di browser.',
     images: [{ url: tcsTemplateLogo.src, alt: 'Logo TCS Template' }],
   },
+  verification: {
+    google: 'yCgLGWwxuy-D3nzW2sfa7GvtMmJf5QaOSFKd3xlsZdw',
+  },
   robots: {index:true,follow:true},
 };
 
