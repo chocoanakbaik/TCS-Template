@@ -6,7 +6,6 @@
     "categoryLabel": "Bisnis & keuangan",
     "symbol": "FT",
     "format": "xlsx",
-    "difficulty": "menengah",
     "description": "Catat pemasukan, pengeluaran, dan saldo dengan rumus otomatis yang dapat dilanjutkan sesuai kebutuhan.",
     "tags": [
       "keuangan",
@@ -151,6 +150,7 @@
           18
         ]
       }
-    ]
+    ],
+    "quality": "unggulan"
   }
 ]
