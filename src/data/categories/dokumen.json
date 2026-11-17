@@ -1,107 +1,3449 @@
 [
   {
-    "id": "sop-template",
-    "name": "SOP Template",
+    "id": "sop-departemen-terkendali",
+    "name": "Standar Operasional Prosedur (SOP) Departemen & Kontrol Revisi",
     "category": "dokumen",
-    "categoryLabel": "Dokumen",
+    "categoryLabel": "Administrasi & dokumen resmi",
     "symbol": "SOP",
     "format": "md",
-    "description": "Kerangka standar operasional prosedur dengan bagian tujuan, ruang lingkup, peran, dan langkah kerja.",
+    "quality": "standar",
+    "description": "Prosedur departemen yang menetapkan pemicu, input-output, peran, instruksi kerja berurutan, kontrol pengecualian, bukti pelaksanaan, KPI, dan riwayat revisi.",
     "tags": [
-      "dokumen",
-      "sop",
-      "prosedur",
+      "SOP",
+      "prosedur departemen",
       "administrasi",
-      "operasional",
-      "panduan"
+      "kontrol dokumen",
+      "instruksi kerja"
     ],
     "questions": [
       {
         "id": "entityName",
-        "label": "Nama instansi atau unit kerja",
+        "label": "Nama perusahaan, instansi, atau pihak utama",
         "type": "text",
         "required": true,
-        "placeholder": "Contoh: Toko Sinar Jaya"
+        "placeholder": "Nama badan usaha atau instansi"
       },
       {
         "id": "ownerName",
-        "label": "Nama penyusun SOP",
+        "label": "Penanggung jawab atau penyusun dokumen",
         "type": "text",
         "required": false,
-        "placeholder": "Nama penanggung jawab"
+        "placeholder": "Nama dan jabatan penanggung jawab"
       },
       {
         "id": "period",
-        "label": "Periode yang digunakan",
+        "label": "Periode, tanggal berlaku, atau masa evaluasi",
         "type": "select",
         "required": true,
         "options": [
-          "Setiap 6 bulan",
-          "Setiap tahun",
-          "Saat prosedur berubah"
+          "Sekali pakai",
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Tahunan",
+          "Berlaku sampai dicabut",
+          "Sesuai masa perjanjian"
         ]
       },
       {
         "id": "scope",
-        "label": "Ruang lingkup atau konteks penggunaan",
+        "label": "Unit, proses, atau ruang lingkup dokumen",
         "type": "select",
         "required": true,
         "options": [
-          "Administrasi",
-          "Pelayanan",
-          "Operasional",
-          "Keuangan",
-          "Teknis"
+          "Administrasi umum",
+          "Keuangan dan pengadaan",
+          "SDM dan ketenagakerjaan",
+          "Operasional dan layanan",
+          "Penjualan dan kerja sama bisnis",
+          "Teknologi dan pengelolaan data",
+          "Legal dan kepatuhan",
+          "Lintas departemen"
         ]
       },
       {
         "id": "notes",
-        "label": "Catatan tambahan",
+        "label": "Ketentuan khusus, asumsi, dan catatan",
         "type": "textarea",
         "required": false,
-        "placeholder": "Tuliskan kebutuhan tambahan yang ingin dimasukkan."
+        "placeholder": "Masukkan nomor dokumen, tenggat, kebijakan internal, detail pihak, atau pengecualian."
       }
     ],
     "sections": [
       {
-        "heading": "Informasi dokumen",
+        "heading": "Identitas dan pengendalian dokumen",
+        "body": "Dokumen **Standar Operasional Prosedur (SOP) Departemen & Kontrol Revisi** disusun untuk **{{entityName}}**, dengan penanggung jawab **{{ownerName}}**, ruang lingkup **{{scope}}**, dan periode **{{period}}**. Nomor dokumen: [isi]; versi: [isi]; tanggal berlaku: [isi]; status: [Draft/Review/Disetujui]."
+      },
+      {
+        "heading": "Tujuan, pemicu, dan hasil proses",
+        "body": "SOP ini menyeragamkan proses [nama proses] agar [hasil terukur] tercapai, risiko kesalahan terkendali, dan bukti dapat ditelusuri. Proses dimulai saat [pemicu] dan berakhir ketika [output] diterima serta direkam."
+      },
+      {
+        "heading": "Ruang lingkup dan referensi",
         "bullets": [
-          "Instansi atau unit: {{entityName}}",
-          "Penyusun: {{ownerName}}",
-          "Jenis prosedur: {{scope}}",
-          "Periode peninjauan: {{period}}"
+          "Termasuk: [aktivitas, lokasi, sistem, transaksi, unit].",
+          "Tidak termasuk: [proses yang diatur SOP lain].",
+          "Pengguna: [jabatan pelaksana, pemeriksa, penyetuju].",
+          "Referensi: [kebijakan, formulir, kontrak, SOP terkait beserta nomor dan versi]."
         ]
       },
       {
-        "heading": "Tujuan",
-        "body": "Jelaskan alasan prosedur ini dibuat dan hasil kerja yang ingin distandardisasi."
-      },
-      {
-        "heading": "Ruang lingkup",
-        "body": "Tuliskan proses, unit kerja, lokasi, dan kondisi yang termasuk dalam prosedur ini."
-      },
-      {
-        "heading": "Peran dan tanggung jawab",
+        "heading": "Peran dan kewenangan",
         "bullets": [
-          "Pelaksana proses",
-          "Pemeriksa atau pemberi persetujuan",
-          "Penanggung jawab akhir"
+          "Pelaksana: memeriksa input, menjalankan langkah, menyimpan bukti.",
+          "Pemeriksa: memvalidasi hasil dan mencatat alasan pengembalian.",
+          "Penyetuju: memberi persetujuan sesuai matriks kewenangan.",
+          "Pemilik proses: memantau KPI, kapasitas, pelatihan, dan pembaruan.",
+          "Pengganti dan jalur eskalasi: [jabatan serta kondisi aktivasi]."
         ]
       },
       {
-        "heading": "Langkah kerja",
+        "heading": "Input, alat, dan standar penerimaan",
         "bullets": [
-          "Persiapan sebelum proses dimulai",
-          "Pelaksanaan langkah utama secara berurutan",
-          "Pemeriksaan hasil",
-          "Pencatatan dan penyimpanan bukti kerja"
+          "Input wajib: [formulir, data, dokumen pendukung, otorisasi].",
+          "Sistem/peralatan: [aplikasi, versi, akses, kontrol keamanan].",
+          "Kriteria kelengkapan: [field wajib, validasi, sumber data].",
+          "SLA dan toleransi kualitas: [batas waktu dan indikator]."
         ]
       },
       {
-        "heading": "Catatan dan pengecualian",
-        "body": "{{notes}}"
+        "heading": "Instruksi kerja",
+        "bullets": [
+          "01. Terima permintaan melalui kanal resmi, beri nomor referensi, dan catat waktu penerimaan.",
+          "02. Periksa kelengkapan dengan checklist; kembalikan kekurangan secara tertulis.",
+          "03. Verifikasi kewenangan pemohon sebelum tindakan finansial, hukum, atau akses data.",
+          "04. Jalankan langkah inti sesuai urutan dan batas otorisasi; simpan bukti pada repositori resmi.",
+          "05. Minta pemeriksaan independen pada titik kontrol dan catat keputusan.",
+          "06. Sampaikan hasil, minta konfirmasi bila relevan, dan tutup nomor referensi.",
+          "07. Arsipkan berkas sesuai klasifikasi dan masa retensi."
+        ]
+      },
+      {
+        "heading": "Pengecualian, kegagalan, dan eskalasi",
+        "body": "Jika terjadi ketidakcocokan data, sistem tidak tersedia, dokumen hilang, atau dugaan penyalahgunaan, hentikan langkah berisiko, amankan bukti, catat insiden, dan eskalasi kepada [jabatan/kanal] dalam [batas waktu]. Pengecualian memerlukan persetujuan tertulis dengan alasan dan masa berlaku."
+      },
+      {
+        "heading": "Rekaman, KPI, dan audit",
+        "bullets": [
+          "Rekaman: [formulir, log, bukti verifikasi, persetujuan, output].",
+          "Lokasi arsip, pemilik akses, backup, dan klasifikasi: [rincian].",
+          "KPI: [waktu penyelesaian, tingkat kesalahan, tingkat pengembalian, kepatuhan checklist].",
+          "Audit sampel: [frekuensi, jumlah sampel, pemeriksa, dan tindak lanjut]."
+        ]
+      },
+      {
+        "heading": "Persetujuan dan riwayat revisi",
+        "body": "Disusun oleh [nama], diperiksa [jabatan], disetujui [pejabat berwenang]. Riwayat revisi wajib memuat versi, tanggal, bagian berubah, alasan, penyusun, dan pemberi persetujuan."
+      },
+      {
+        "heading": "Catatan, lampiran, dan pengesahan",
+        "body": "Catatan khusus, asumsi yang perlu diverifikasi, pengecualian, serta ketentuan tambahan: **{{notes}}**. Pastikan seluruh lampiran, identitas pihak, dasar kewenangan, versi, dan bukti persetujuan disimpan bersama dokumen final."
+      }
+    ]
+  },
+  {
+    "id": "notulensi-rapat-resmi-mom",
+    "name": "Notulensi Rapat Resmi (Minutes of Meeting) & Daftar Keputusan",
+    "category": "dokumen",
+    "categoryLabel": "Administrasi & dokumen resmi",
+    "symbol": "MOM",
+    "format": "md",
+    "quality": "standar",
+    "description": "Notulensi rapat yang memisahkan fakta pembahasan, keputusan yang disahkan, pemilik tindakan, tenggat, isu tertunda, dan daftar distribusi.",
+    "tags": [
+      "notulensi",
+      "minutes of meeting",
+      "MoM",
+      "action items",
+      "keputusan rapat"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan, instansi, atau pihak utama",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama badan usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab atau penyusun dokumen",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama dan jabatan penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode, tanggal berlaku, atau masa evaluasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sekali pakai",
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Tahunan",
+          "Berlaku sampai dicabut",
+          "Sesuai masa perjanjian"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Unit, proses, atau ruang lingkup dokumen",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Administrasi umum",
+          "Keuangan dan pengadaan",
+          "SDM dan ketenagakerjaan",
+          "Operasional dan layanan",
+          "Penjualan dan kerja sama bisnis",
+          "Teknologi dan pengelolaan data",
+          "Legal dan kepatuhan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Ketentuan khusus, asumsi, dan catatan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Masukkan nomor dokumen, tenggat, kebijakan internal, detail pihak, atau pengecualian."
       }
     ],
-    "quality": "unggulan"
+    "sections": [
+      {
+        "heading": "Identitas dan pengendalian dokumen",
+        "body": "Dokumen **Notulensi Rapat Resmi (Minutes of Meeting) & Daftar Keputusan** disusun untuk **{{entityName}}**, dengan penanggung jawab **{{ownerName}}**, ruang lingkup **{{scope}}**, dan periode **{{period}}**. Nomor dokumen: [isi]; versi: [isi]; tanggal berlaku: [isi]; status: [Draft/Review/Disetujui]."
+      },
+      {
+        "heading": "Detail rapat",
+        "bullets": [
+          "Nomor rapat: [MOM-YYYY-NNN]; tanggal dan jam: [mulai-selesai dan zona waktu].",
+          "Lokasi/platform: [alamat/tautan]; pimpinan: [nama]; notulis: [nama].",
+          "Peserta hadir, izin, dan perwakilan: [nama, jabatan, status].",
+          "Tujuan rapat dan hasil yang diharapkan: [output spesifik]."
+        ]
+      },
+      {
+        "heading": "Agenda dan bahan prabaca",
+        "bullets": [
+          "Agenda 1: [topik, presenter, keputusan yang dibutuhkan].",
+          "Agenda 2: [topik, presenter, data pendukung].",
+          "Dokumen referensi: [judul, versi, tanggal, lokasi arsip].",
+          "Agenda yang ditunda dan alasan: [rincian]."
+        ]
+      },
+      {
+        "heading": "Ringkasan pembahasan",
+        "body": "Untuk setiap agenda catat kondisi awal, data/bukti yang disampaikan, opsi yang dibahas, keberatan/risiko, dan pertanyaan terbuka. Bedakan fakta, pendapat, usulan, dan keputusan. Jangan menyajikan opini sebagai kesepakatan."
+      },
+      {
+        "heading": "Keputusan yang disahkan",
+        "bullets": [
+          "KEP-01: [keputusan final], dasar pertimbangan [data], berlaku [tanggal], disetujui [nama/jabatan].",
+          "KEP-02: [batas anggaran/ruang lingkup/risiko], pihak terdampak [unit].",
+          "Keputusan tertunda: [isu], syarat keputusan berikutnya [data/approval yang dibutuhkan]."
+        ]
+      },
+      {
+        "heading": "Daftar tindakan (Action Items)",
+        "body": "Untuk setiap tindakan gunakan format: **ACT-ID | Hasil konkret | PIC | Tenggat tanggal/jam | Dependensi | Bukti selesai | Status**. Hindari action item tanpa PIC atau tenggat. Pemilik administrasi memperbarui status sampai tindakan ditutup."
+      },
+      {
+        "heading": "Risiko, isu terbuka, dan eskalasi",
+        "bullets": [
+          "Isu manajemen: [dampak, opsi, rekomendasi, tenggat].",
+          "Risiko: [pemilik risiko, indikator pemicu, mitigasi].",
+          "Dokumen/data belum tersedia: [pemilik dan tanggal pemenuhan]."
+        ]
+      },
+      {
+        "heading": "Konfirmasi dan distribusi",
+        "body": "Draf dibagikan untuk koreksi faktual paling lambat [tanggal]. Koreksi keputusan perlu persetujuan pimpinan rapat. Arsipkan undangan, daftar hadir, bahan, keputusan, dan bukti tindak lanjut. Disetujui pimpinan: [nama/tanggal]."
+      },
+      {
+        "heading": "Catatan, lampiran, dan pengesahan",
+        "body": "Catatan khusus, asumsi yang perlu diverifikasi, pengecualian, serta ketentuan tambahan: **{{notes}}**. Pastikan seluruh lampiran, identitas pihak, dasar kewenangan, versi, dan bukti persetujuan disimpan bersama dokumen final."
+      }
+    ]
+  },
+  {
+    "id": "memorandum-internal-perusahaan",
+    "name": "Memorandum Internal Perusahaan: Instruksi, Keputusan & Tindak Lanjut",
+    "category": "dokumen",
+    "categoryLabel": "Administrasi & dokumen resmi",
+    "symbol": "MEMO",
+    "format": "md",
+    "quality": "standar",
+    "description": "Memo antarunit untuk menyampaikan keputusan, instruksi kerja, perubahan kebijakan, atau permintaan tindakan dengan otorisasi, tenggat, dan bukti penerimaan yang jelas.",
+    "tags": [
+      "memorandum",
+      "memo internal",
+      "instruksi perusahaan",
+      "komunikasi resmi"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan, instansi, atau pihak utama",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama badan usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab atau penyusun dokumen",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama dan jabatan penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode, tanggal berlaku, atau masa evaluasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sekali pakai",
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Tahunan",
+          "Berlaku sampai dicabut",
+          "Sesuai masa perjanjian"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Unit, proses, atau ruang lingkup dokumen",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Administrasi umum",
+          "Keuangan dan pengadaan",
+          "SDM dan ketenagakerjaan",
+          "Operasional dan layanan",
+          "Penjualan dan kerja sama bisnis",
+          "Teknologi dan pengelolaan data",
+          "Legal dan kepatuhan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Ketentuan khusus, asumsi, dan catatan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Masukkan nomor dokumen, tenggat, kebijakan internal, detail pihak, atau pengecualian."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Identitas dan pengendalian dokumen",
+        "body": "Dokumen **Memorandum Internal Perusahaan: Instruksi, Keputusan & Tindak Lanjut** disusun untuk **{{entityName}}**, dengan penanggung jawab **{{ownerName}}**, ruang lingkup **{{scope}}**, dan periode **{{period}}**. Nomor dokumen: [isi]; versi: [isi]; tanggal berlaku: [isi]; status: [Draft/Review/Disetujui]."
+      },
+      {
+        "heading": "Format kepala memo",
+        "body": "**MEMORANDUM INTERNAL**  \nNomor: [MEMO/UNIT/NNN/TAHUN]  \nKepada: [nama/jabatan/unit]  \nDari: [nama/jabatan/unit]  \nTanggal: [tanggal]  \nPerihal: [judul singkat dan spesifik]  \nKlasifikasi: [Internal/Terbatas]."
+      },
+      {
+        "heading": "Maksud penerbitan",
+        "body": "Memo ini diterbitkan untuk [menyampaikan keputusan/memberikan instruksi/meminta persetujuan/memberitahukan perubahan] terkait [pokok persoalan]. Nyatakan tindakan yang diminta dan unit penerima secara langsung."
+      },
+      {
+        "heading": "Latar belakang dan dasar",
+        "bullets": [
+          "Kondisi/kejadian pemicu: [fakta, tanggal, sumber].",
+          "Dokumen rujukan: [nomor, tanggal, penerbit].",
+          "Dampak bagi unit: [operasional, biaya, layanan, kepatuhan].",
+          "Batas kewenangan memo: [hal yang tidak dapat diputuskan melalui memo]."
+        ]
+      },
+      {
+        "heading": "Keputusan atau instruksi",
+        "body": "Dengan mempertimbangkan [fakta], ditetapkan [instruksi utama]. Ketentuan pelaksanaan: [langkah, standar output, sumber daya, kontrol]. Memo tidak menjadi persetujuan transaksi di luar batas kewenangan penerbit."
+      },
+      {
+        "heading": "Tugas, PIC, dan tenggat",
+        "bullets": [
+          "Unit/penerima bertanggung jawab menghasilkan [output].",
+          "PIC pelaksana: [nama/jabatan]; pemeriksa: [nama/jabatan].",
+          "Tenggat dan kanal pelaporan: [tanggal/jam/kanal].",
+          "Bukti penyelesaian: [dokumen, tautan, atau formulir]."
+        ]
+      },
+      {
+        "heading": "Distribusi dan kerahasiaan",
+        "body": "Daftar penerima: [jabatan/unit]. Penerusan memo hanya kepada pihak yang memiliki kebutuhan kerja. Simpan pada repositori resmi, catat bukti penerimaan, dan lampirkan SOP/instruksi turunan bila memo mengubah prosedur."
+      },
+      {
+        "heading": "Penutup dan otorisasi",
+        "body": "Memo berlaku sejak [tanggal efektif]. Penerbit wajib memiliki delegasi yang masih berlaku. Tanda tangan/approval elektronik: [otorisasi]. Catat mekanisme pertanyaan, keberatan, dan eskalasi."
+      },
+      {
+        "heading": "Catatan, lampiran, dan pengesahan",
+        "body": "Catatan khusus, asumsi yang perlu diverifikasi, pengecualian, serta ketentuan tambahan: **{{notes}}**. Pastikan seluruh lampiran, identitas pihak, dasar kewenangan, versi, dan bukti persetujuan disimpan bersama dokumen final."
+      }
+    ]
+  },
+  {
+    "id": "surat-permohonan-pengajuan-dana",
+    "name": "Surat Permohonan/Pengajuan Dana dengan Rincian Anggaran & Akuntabilitas",
+    "category": "dokumen",
+    "categoryLabel": "Administrasi & dokumen resmi",
+    "symbol": "DANA",
+    "format": "md",
+    "quality": "standar",
+    "description": "Surat pengajuan dana dengan tujuan penggunaan, rincian biaya, dasar estimasi, jadwal pencairan, otorisasi, bukti pertanggungjawaban, dan mekanisme pengembalian sisa dana.",
+    "tags": [
+      "surat pengajuan dana",
+      "permohonan anggaran",
+      "administrasi keuangan",
+      "budget approval"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan, instansi, atau pihak utama",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama badan usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab atau penyusun dokumen",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama dan jabatan penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode, tanggal berlaku, atau masa evaluasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sekali pakai",
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Tahunan",
+          "Berlaku sampai dicabut",
+          "Sesuai masa perjanjian"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Unit, proses, atau ruang lingkup dokumen",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Administrasi umum",
+          "Keuangan dan pengadaan",
+          "SDM dan ketenagakerjaan",
+          "Operasional dan layanan",
+          "Penjualan dan kerja sama bisnis",
+          "Teknologi dan pengelolaan data",
+          "Legal dan kepatuhan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Ketentuan khusus, asumsi, dan catatan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Masukkan nomor dokumen, tenggat, kebijakan internal, detail pihak, atau pengecualian."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Identitas dan pengendalian dokumen",
+        "body": "Dokumen **Surat Permohonan/Pengajuan Dana dengan Rincian Anggaran & Akuntabilitas** disusun untuk **{{entityName}}**, dengan penanggung jawab **{{ownerName}}**, ruang lingkup **{{scope}}**, dan periode **{{period}}**. Nomor dokumen: [isi]; versi: [isi]; tanggal berlaku: [isi]; status: [Draft/Review/Disetujui]."
+      },
+      {
+        "heading": "Kop dan identitas surat",
+        "body": "[KOP SURAT]  \nNomor: [nomor]  \nLampiran: [jumlah berkas]  \nPerihal: Permohonan Persetujuan/Pencairan Dana [kegiatan]  \nKepada Yth. [nama/jabatan penerima]  \nDari: [nama/unit]."
+      },
+      {
+        "heading": "Latar belakang dan tujuan",
+        "body": "Sehubungan dengan [kegiatan/kebutuhan], kami mengajukan dana untuk [tujuan spesifik]. Kebutuhan ini didasarkan pada [masalah/urgensi] dan ditargetkan menghasilkan [output serta penerima manfaat]. Cantumkan baseline dan alasan pemilihan waktu."
+      },
+      {
+        "heading": "Rincian anggaran",
+        "bullets": [
+          "Pos 1: [uraian], volume [jumlah], harga satuan Rp [nilai], subtotal Rp [nilai], sumber estimasi [quotation/harga pasar].",
+          "Pos 2: [uraian], volume, harga, subtotal, dasar estimasi.",
+          "Pajak, transportasi, dan biaya pendukung: [metode hitung dan dasar].",
+          "Total pengajuan: **Rp [total]**; sumber anggaran/cost center: [kode]."
+        ]
+      },
+      {
+        "heading": "Jadwal dan metode pencairan",
+        "bullets": [
+          "Tanggal kebutuhan: [tanggal] dan alasan tenggat.",
+          "Penerima pembayaran: [nama vendor/rekening resmi yang diverifikasi].",
+          "Metode: [transfer/reimbursement/uang muka] sesuai kebijakan.",
+          "Termin dan dokumen prasyarat: [milestone, invoice, PO]."
+        ]
+      },
+      {
+        "heading": "Pengendalian dan pertanggungjawaban",
+        "bullets": [
+          "Persetujuan berjenjang: [atasan, pemilik anggaran, keuangan].",
+          "Penggunaan di luar pos memerlukan persetujuan perubahan anggaran tertulis.",
+          "Bukti: invoice, kuitansi, bukti transfer, bukti pajak bila relevan, laporan kegiatan.",
+          "Batas laporan realisasi: [tanggal].",
+          "Sisa dana dikembalikan atau dialihkan hanya sesuai prosedur yang disetujui."
+        ]
+      },
+      {
+        "heading": "Pernyataan pemohon",
+        "body": "Pemohon menyatakan estimasi disusun dari sumber yang dapat diperiksa dan dana akan digunakan sesuai tujuan yang disetujui. Keputusan yang dimohon: [disetujui/ditolak/direvisi]. Tanda tangan pemohon, atasan, dan pejabat anggaran sesuai matriks kewenangan."
+      },
+      {
+        "heading": "Lampiran wajib",
+        "bullets": [
+          "TOR/kerangka acuan dan jadwal kegiatan.",
+          "RAB dengan volume, harga satuan, subtotal, dan sumber.",
+          "Penawaran vendor/pembanding jika diwajibkan.",
+          "Persetujuan atasan dan kode anggaran."
+        ]
+      },
+      {
+        "heading": "Catatan, lampiran, dan pengesahan",
+        "body": "Catatan khusus, asumsi yang perlu diverifikasi, pengecualian, serta ketentuan tambahan: **{{notes}}**. Pastikan seluruh lampiran, identitas pihak, dasar kewenangan, versi, dan bukti persetujuan disimpan bersama dokumen final."
+      }
+    ]
+  },
+  {
+    "id": "surat-undangan-rapat-resmi",
+    "name": "Surat Undangan Rapat Resmi & Konfirmasi Kehadiran",
+    "category": "dokumen",
+    "categoryLabel": "Administrasi & dokumen resmi",
+    "symbol": "UND",
+    "format": "md",
+    "quality": "standar",
+    "description": "Undangan formal dengan agenda, peserta wajib, bahan prabaca, keputusan yang dibutuhkan, instruksi konfirmasi, dan tata cara penggantian peserta.",
+    "tags": [
+      "surat undangan",
+      "rapat resmi",
+      "korespondensi",
+      "agenda rapat"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan, instansi, atau pihak utama",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama badan usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab atau penyusun dokumen",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama dan jabatan penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode, tanggal berlaku, atau masa evaluasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sekali pakai",
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Tahunan",
+          "Berlaku sampai dicabut",
+          "Sesuai masa perjanjian"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Unit, proses, atau ruang lingkup dokumen",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Administrasi umum",
+          "Keuangan dan pengadaan",
+          "SDM dan ketenagakerjaan",
+          "Operasional dan layanan",
+          "Penjualan dan kerja sama bisnis",
+          "Teknologi dan pengelolaan data",
+          "Legal dan kepatuhan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Ketentuan khusus, asumsi, dan catatan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Masukkan nomor dokumen, tenggat, kebijakan internal, detail pihak, atau pengecualian."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Identitas dan pengendalian dokumen",
+        "body": "Dokumen **Surat Undangan Rapat Resmi & Konfirmasi Kehadiran** disusun untuk **{{entityName}}**, dengan penanggung jawab **{{ownerName}}**, ruang lingkup **{{scope}}**, dan periode **{{period}}**. Nomor dokumen: [isi]; versi: [isi]; tanggal berlaku: [isi]; status: [Draft/Review/Disetujui]."
+      },
+      {
+        "heading": "Format surat undangan",
+        "body": "[KOP SURAT]  \nNomor: [UND/UNIT/NNN/TAHUN]  \nLampiran: [jika ada]  \nPerihal: Undangan Rapat [agenda]  \nTanggal surat: [tanggal]."
+      },
+      {
+        "heading": "Penerima dan maksud",
+        "body": "Yth. [nama, jabatan, unit/organisasi]. Dengan hormat, kami mengundang Bapak/Ibu untuk menghadiri rapat terkait [pokok bahasan] agar [hasil/keputusan yang diharapkan] dapat ditetapkan."
+      },
+      {
+        "heading": "Waktu dan media",
+        "bullets": [
+          "Hari/tanggal: [hari, tanggal].",
+          "Waktu: [mulai-selesai dan zona waktu].",
+          "Tempat/platform: [alamat/tautan dan petunjuk akses].",
+          "Pimpinan rapat dan notulis: [nama/jabatan].",
+          "Kebutuhan akses/perlengkapan: [rincian]."
+        ]
+      },
+      {
+        "heading": "Agenda dan bahan prabaca",
+        "bullets": [
+          "Agenda 1: [topik, pemilik presentasi, keputusan/output].",
+          "Agenda 2: [topik, data pembanding dan opsi].",
+          "Agenda 3: [risiko atau isu yang perlu diselesaikan].",
+          "Bahan prabaca: [tautan, versi, tenggat membaca]."
+        ]
+      },
+      {
+        "heading": "Konfirmasi dan persiapan",
+        "body": "Konfirmasi kehadiran paling lambat [tanggal/jam] melalui [email/form/kontak]. Peserta yang berhalangan mengirim pengganti dengan kewenangan yang sesuai. Peserta membawa [data/laporan/dokumen] dan menyiapkan rekomendasi untuk agenda keputusan."
+      },
+      {
+        "heading": "Penutup dan kontak",
+        "body": "Informasi teknis dapat diminta kepada [PIC] melalui [kontak resmi]. Hormat kami, [nama pejabat berwenang], [jabatan]. Lampiran: agenda, daftar peserta, dan bahan rapat."
+      },
+      {
+        "heading": "Catatan, lampiran, dan pengesahan",
+        "body": "Catatan khusus, asumsi yang perlu diverifikasi, pengecualian, serta ketentuan tambahan: **{{notes}}**. Pastikan seluruh lampiran, identitas pihak, dasar kewenangan, versi, dan bukti persetujuan disimpan bersama dokumen final."
+      }
+    ]
+  },
+  {
+    "id": "surat-tugas-perjalanan-dinas",
+    "name": "Surat Tugas & Perjalanan Dinas dengan Rincian Penugasan",
+    "category": "dokumen",
+    "categoryLabel": "Administrasi & dokumen resmi",
+    "symbol": "ST",
+    "format": "md",
+    "quality": "standar",
+    "description": "Surat penugasan yang menetapkan personel, dasar penugasan, tujuan, lokasi, jadwal, kewenangan terbatas, pembiayaan, dan kewajiban laporan setelah tugas.",
+    "tags": [
+      "surat tugas",
+      "perjalanan dinas",
+      "penugasan",
+      "administrasi SDM"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan, instansi, atau pihak utama",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama badan usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab atau penyusun dokumen",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama dan jabatan penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode, tanggal berlaku, atau masa evaluasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sekali pakai",
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Tahunan",
+          "Berlaku sampai dicabut",
+          "Sesuai masa perjanjian"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Unit, proses, atau ruang lingkup dokumen",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Administrasi umum",
+          "Keuangan dan pengadaan",
+          "SDM dan ketenagakerjaan",
+          "Operasional dan layanan",
+          "Penjualan dan kerja sama bisnis",
+          "Teknologi dan pengelolaan data",
+          "Legal dan kepatuhan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Ketentuan khusus, asumsi, dan catatan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Masukkan nomor dokumen, tenggat, kebijakan internal, detail pihak, atau pengecualian."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Identitas dan pengendalian dokumen",
+        "body": "Dokumen **Surat Tugas & Perjalanan Dinas dengan Rincian Penugasan** disusun untuk **{{entityName}}**, dengan penanggung jawab **{{ownerName}}**, ruang lingkup **{{scope}}**, dan periode **{{period}}**. Nomor dokumen: [isi]; versi: [isi]; tanggal berlaku: [isi]; status: [Draft/Review/Disetujui]."
+      },
+      {
+        "heading": "Identitas dan dasar penerbitan",
+        "body": "[KOP SURAT]  \nNomor: [ST/UNIT/NNN/TAHUN]  \nDasar: [surat/keputusan/permintaan nomor dan tanggal]. Penerbit harus memiliki kewenangan berdasarkan matriks delegasi."
+      },
+      {
+        "heading": "Personel yang ditugaskan",
+        "bullets": [
+          "Nama lengkap sesuai identitas: [nama].",
+          "Jabatan/unit dan nomor pegawai bila diperlukan: [data].",
+          "Anggota tim dan peran: [daftar].",
+          "Kontak darurat/koordinator: [kontak resmi]."
+        ]
+      },
+      {
+        "heading": "Maksud dan ruang lingkup tugas",
+        "body": "Menugaskan personel melaksanakan [tindakan spesifik] untuk mencapai [tujuan]. Keluaran wajib: [laporan, dokumen, keputusan, atau hasil teknis]. Tindakan di luar mandat memerlukan persetujuan tertulis."
+      },
+      {
+        "heading": "Lokasi, jadwal, dan agenda",
+        "bullets": [
+          "Lokasi tujuan dan alamat: [rincian].",
+          "Tanggal dan jam keberangkatan/kepulangan: [rincian].",
+          "Agenda per hari dan pihak yang ditemui: [daftar].",
+          "Prosedur perubahan jadwal/perjalanan: [jalur persetujuan]."
+        ]
+      },
+      {
+        "heading": "Pembiayaan dan kepatuhan",
+        "bullets": [
+          "Cost center/kode anggaran: [kode].",
+          "Transportasi, akomodasi, uang harian sesuai standar biaya internal.",
+          "Batas biaya tambahan dan pejabat penyetuju: [rincian].",
+          "Bukti klaim: tiket, invoice, bukti pembayaran, serta laporan kegiatan.",
+          "Larangan konflik kepentingan dan penggunaan aset/dana di luar mandat."
+        ]
+      },
+      {
+        "heading": "Pelaporan dan serah terima",
+        "body": "Laporan hasil, keputusan, tindak lanjut, realisasi biaya, dan bukti kegiatan disampaikan paling lambat [jumlah] hari kerja setelah tugas. Aset, dokumen, dan akses dikembalikan kepada [PIC]."
+      },
+      {
+        "heading": "Pengesahan",
+        "body": "Tanda tangan pejabat penerbit: [nama/jabatan]. Personel yang ditugaskan menyatakan menerima tugas dan memahami batas kewenangan. Lampiran: agenda, estimasi biaya, dan dokumen dasar penugasan."
+      },
+      {
+        "heading": "Catatan, lampiran, dan pengesahan",
+        "body": "Catatan khusus, asumsi yang perlu diverifikasi, pengecualian, serta ketentuan tambahan: **{{notes}}**. Pastikan seluruh lampiran, identitas pihak, dasar kewenangan, versi, dan bukti persetujuan disimpan bersama dokumen final."
+      }
+    ]
+  },
+  {
+    "id": "surat-kuasa-umum-administratif",
+    "name": "Surat Kuasa Umum untuk Pengurusan Administrasi Tertentu",
+    "category": "dokumen",
+    "categoryLabel": "Administrasi & dokumen resmi",
+    "symbol": "SKA",
+    "format": "md",
+    "quality": "standar",
+    "description": "Surat kuasa administratif dengan identitas pemberi-penerima, tindakan yang diperbolehkan, pengecualian transaksi, masa berlaku, pelaporan, dan pencabutan.",
+    "tags": [
+      "surat kuasa umum",
+      "kuasa administrasi",
+      "legal dasar",
+      "otorisasi"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan, instansi, atau pihak utama",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama badan usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab atau penyusun dokumen",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama dan jabatan penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode, tanggal berlaku, atau masa evaluasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sekali pakai",
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Tahunan",
+          "Berlaku sampai dicabut",
+          "Sesuai masa perjanjian"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Unit, proses, atau ruang lingkup dokumen",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Administrasi umum",
+          "Keuangan dan pengadaan",
+          "SDM dan ketenagakerjaan",
+          "Operasional dan layanan",
+          "Penjualan dan kerja sama bisnis",
+          "Teknologi dan pengelolaan data",
+          "Legal dan kepatuhan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Ketentuan khusus, asumsi, dan catatan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Masukkan nomor dokumen, tenggat, kebijakan internal, detail pihak, atau pengecualian."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Identitas dan pengendalian dokumen",
+        "body": "Dokumen **Surat Kuasa Umum untuk Pengurusan Administrasi Tertentu** disusun untuk **{{entityName}}**, dengan penanggung jawab **{{ownerName}}**, ruang lingkup **{{scope}}**, dan periode **{{period}}**. Nomor dokumen: [isi]; versi: [isi]; tanggal berlaku: [isi]; status: [Draft/Review/Disetujui]."
+      },
+      {
+        "heading": "Pemberi kuasa",
+        "body": "**SURAT KUASA UMUM** Nomor [nomor]. Pemberi Kuasa: [nama lengkap, alamat, identitas relevan, jabatan]. Bertindak untuk diri sendiri/atas nama [badan] berdasarkan [dasar kewenangan] dan dokumen pendukung."
+      },
+      {
+        "heading": "Penerima kuasa",
+        "body": "Penerima Kuasa: [nama lengkap, jabatan, alamat, identitas relevan]. Kuasa diberikan untuk urusan administratif yang dijelaskan dalam surat ini, bukan sebagai kuasa tanpa batas."
+      },
+      {
+        "heading": "Ruang lingkup kuasa",
+        "bullets": [
+          "Mengajukan, menyerahkan, dan mengambil dokumen di [instansi/unit] untuk urusan [objek spesifik].",
+          "Menerima tanda terima, nomor registrasi, atau salinan dokumen terkait.",
+          "Melakukan klarifikasi administratif dan menyampaikan dokumen tambahan yang telah disetujui.",
+          "Menandatangani bukti penerimaan administratif sepanjang tidak menimbulkan kewajiban finansial baru."
+        ]
+      },
+      {
+        "heading": "Batas dan tindakan yang dikecualikan",
+        "body": "Kuasa ini tidak mencakup pengalihan aset, penjualan/pembebanan jaminan, penarikan dana, pengakuan utang, penandatanganan kontrak baru, perubahan kepemilikan, atau tindakan yang mensyaratkan kuasa khusus/akta tersendiri kecuali dinyatakan tegas."
+      },
+      {
+        "heading": "Masa berlaku dan pencabutan",
+        "body": "Berlaku sejak [tanggal] sampai [tanggal/peristiwa selesai]. Pemberi dapat mencabut secara tertulis kepada penerima dan pihak terkait. Setelah berakhir, penerima menghentikan tindakan dan mengembalikan dokumen/aset."
+      },
+      {
+        "heading": "Pelaporan dan tanda tangan",
+        "bullets": [
+          "Penerima tidak boleh mengalihkan kuasa tanpa persetujuan tertulis.",
+          "Setiap tindakan dan dokumen yang diterima dilaporkan beserta buktinya.",
+          "Lampirkan identitas dan bukti kewenangan pemberi.",
+          "Tanda tangan, saksi, meterai, notaris, atau legalisasi mengikuti persyaratan transaksi/instansi."
+        ]
+      },
+      {
+        "heading": "Catatan, lampiran, dan pengesahan",
+        "body": "Catatan khusus, asumsi yang perlu diverifikasi, pengecualian, serta ketentuan tambahan: **{{notes}}**. Pastikan seluruh lampiran, identitas pihak, dasar kewenangan, versi, dan bukti persetujuan disimpan bersama dokumen final."
+      }
+    ]
+  },
+  {
+    "id": "surat-kuasa-khusus-transaksi",
+    "name": "Surat Kuasa Khusus untuk Tindakan/Transaksi yang Ditetapkan",
+    "category": "dokumen",
+    "categoryLabel": "Administrasi & dokumen resmi",
+    "symbol": "SKK",
+    "format": "md",
+    "quality": "standar",
+    "description": "Kuasa khusus yang mengunci satu tindakan/urusan, identitas objek, batas nominal, pihak penerima, masa berlaku, larangan substitusi, dan bukti pendukung.",
+    "tags": [
+      "surat kuasa khusus",
+      "kuasa transaksi",
+      "otorisasi spesifik",
+      "dokumen legal"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan, instansi, atau pihak utama",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama badan usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab atau penyusun dokumen",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama dan jabatan penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode, tanggal berlaku, atau masa evaluasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sekali pakai",
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Tahunan",
+          "Berlaku sampai dicabut",
+          "Sesuai masa perjanjian"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Unit, proses, atau ruang lingkup dokumen",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Administrasi umum",
+          "Keuangan dan pengadaan",
+          "SDM dan ketenagakerjaan",
+          "Operasional dan layanan",
+          "Penjualan dan kerja sama bisnis",
+          "Teknologi dan pengelolaan data",
+          "Legal dan kepatuhan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Ketentuan khusus, asumsi, dan catatan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Masukkan nomor dokumen, tenggat, kebijakan internal, detail pihak, atau pengecualian."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Identitas dan pengendalian dokumen",
+        "body": "Dokumen **Surat Kuasa Khusus untuk Tindakan/Transaksi yang Ditetapkan** disusun untuk **{{entityName}}**, dengan penanggung jawab **{{ownerName}}**, ruang lingkup **{{scope}}**, dan periode **{{period}}**. Nomor dokumen: [isi]; versi: [isi]; tanggal berlaku: [isi]; status: [Draft/Review/Disetujui]."
+      },
+      {
+        "heading": "Identitas dan dasar kewenangan",
+        "body": "Pemberi Kuasa: [nama, identitas relevan, alamat, jabatan] bertindak untuk diri sendiri/atas nama badan berdasarkan [akta/keputusan/surat kuasa induk]. Penerbit wajib membuktikan kewenangannya."
+      },
+      {
+        "heading": "Penerima kuasa",
+        "body": "Penerima Kuasa: [nama lengkap, identitas, alamat, jabatan/afiliasi]. Kuasa ini hanya untuk tindakan yang dirinci dan tidak boleh ditafsirkan sebagai kuasa umum."
+      },
+      {
+        "heading": "Urusan dan objek kuasa",
+        "body": "Kuasa khusus diberikan untuk **[uraikan satu tindakan presisi]** atas **[objek/nomor kontrak/aset/perkara]** kepada **[pihak tujuan]** pada **[instansi/lokasi]**. Dokumen/tindakan yang boleh ditandatangani dibatasi pada [daftar tertutup]."
+      },
+      {
+        "heading": "Limit dan larangan",
+        "bullets": [
+          "Nilai maksimum/limit: Rp [nominal] atau nyatakan tidak ada kewenangan finansial.",
+          "Parameter transaksi yang disetujui: [harga, kuantitas, syarat].",
+          "Dilarang mengubah syarat material, mengalihkan hak, menerima uang, atau mendelegasikan kuasa.",
+          "Persetujuan tambahan: [pejabat, dokumen, dan mekanisme konfirmasi]."
+        ]
+      },
+      {
+        "heading": "Masa berlaku dan penghentian",
+        "body": "Berlaku sejak [tanggal/jam] sampai [tanggal/peristiwa tunggal]. Berakhir otomatis setelah tindakan selesai atau dicabut tertulis. Penerima menghentikan tindakan segera setelah menerima pemberitahuan pencabutan."
+      },
+      {
+        "heading": "Pertanggungjawaban dan lampiran",
+        "bullets": [
+          "Serahkan salinan hasil, tanda terima, dan komunikasi paling lambat [batas waktu].",
+          "Dana/aset/dokumen yang diterima diserahkan kepada [pihak] menggunakan BAST.",
+          "Penyimpangan instruksi dihentikan dan dilaporkan segera.",
+          "Lampiran: identitas, bukti kewenangan, dokumen objek, persetujuan internal."
+        ]
+      },
+      {
+        "heading": "Tanda tangan dan legalisasi",
+        "body": "Ditandatangani di [tempat] tanggal [tanggal]. Pemberi/Penerima Kuasa: [nama dan tanda tangan]. Saksi/legalisasi jika diwajibkan. Periksa persyaratan khusus instansi dan bentuk hukum untuk tindakan yang dikuasakan."
+      },
+      {
+        "heading": "Catatan, lampiran, dan pengesahan",
+        "body": "Catatan khusus, asumsi yang perlu diverifikasi, pengecualian, serta ketentuan tambahan: **{{notes}}**. Pastikan seluruh lampiran, identitas pihak, dasar kewenangan, versi, dan bukti persetujuan disimpan bersama dokumen final."
+      }
+    ]
+  },
+  {
+    "id": "surat-pernyataan-tanggung-jawab",
+    "name": "Surat Pernyataan Tanggung Jawab, Kebenaran Data & Kelengkapan Dokumen",
+    "category": "dokumen",
+    "categoryLabel": "Administrasi & dokumen resmi",
+    "symbol": "SPT",
+    "format": "md",
+    "quality": "standar",
+    "description": "Surat pernyataan yang mengonfirmasi kebenaran informasi, keaslian lampiran, tanggung jawab pemohon, kewajiban koreksi, dan konsekuensi administratif atas data tidak benar.",
+    "tags": [
+      "surat pernyataan",
+      "tanggung jawab",
+      "keabsahan dokumen",
+      "administrasi resmi"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan, instansi, atau pihak utama",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama badan usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab atau penyusun dokumen",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama dan jabatan penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode, tanggal berlaku, atau masa evaluasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sekali pakai",
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Tahunan",
+          "Berlaku sampai dicabut",
+          "Sesuai masa perjanjian"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Unit, proses, atau ruang lingkup dokumen",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Administrasi umum",
+          "Keuangan dan pengadaan",
+          "SDM dan ketenagakerjaan",
+          "Operasional dan layanan",
+          "Penjualan dan kerja sama bisnis",
+          "Teknologi dan pengelolaan data",
+          "Legal dan kepatuhan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Ketentuan khusus, asumsi, dan catatan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Masukkan nomor dokumen, tenggat, kebijakan internal, detail pihak, atau pengecualian."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Identitas dan pengendalian dokumen",
+        "body": "Dokumen **Surat Pernyataan Tanggung Jawab, Kebenaran Data & Kelengkapan Dokumen** disusun untuk **{{entityName}}**, dengan penanggung jawab **{{ownerName}}**, ruang lingkup **{{scope}}**, dan periode **{{period}}**. Nomor dokumen: [isi]; versi: [isi]; tanggal berlaku: [isi]; status: [Draft/Review/Disetujui]."
+      },
+      {
+        "heading": "Identitas pihak yang menyatakan",
+        "body": "Saya [nama lengkap], [jabatan/unit], identitas yang relevan [isi], bertindak untuk diri sendiri/atas nama badan dengan dasar kewenangan [dokumen]."
+      },
+      {
+        "heading": "Pernyataan fakta dan kelengkapan",
+        "bullets": [
+          "Informasi dalam [permohonan/proses] telah diperiksa dan sesuai dengan keadaan yang diketahui pada tanggal pernyataan.",
+          "Salinan lampiran sesuai dengan dokumen sumber yang dikuasai atau diverifikasi pihak berwenang.",
+          "Informasi material yang dapat memengaruhi keputusan telah diungkapkan.",
+          "Tidak ada perubahan material yang sengaja disembunyikan terkait data yang diserahkan."
+        ]
+      },
+      {
+        "heading": "Batas ruang lingkup pernyataan",
+        "body": "Pernyataan terbatas pada data dan dokumen dalam daftar lampiran untuk tujuan yang disebutkan. Surat ini tidak menggantikan audit, verifikasi independen, atau pemeriksaan yang diwajibkan penerima."
+      },
+      {
+        "heading": "Kewajiban koreksi dan pemberitahuan",
+        "bullets": [
+          "Koreksi disampaikan tertulis apabila ditemukan kesalahan/perubahan material.",
+          "Pemberitahuan kepada [unit/penerima] paling lambat [jangka waktu] sejak diketahui.",
+          "Dokumen pengganti diberi versi/tanggal dan ditautkan dengan dokumen sebelumnya."
+        ]
+      },
+      {
+        "heading": "Konsekuensi dan daftar lampiran",
+        "body": "Informasi tidak benar dapat menyebabkan penolakan proses atau tindakan sesuai aturan dan fakta yang berlaku. Lampiran: [nama dokumen, nomor, tanggal, jumlah halaman, hasil verifikasi]."
+      },
+      {
+        "heading": "Pernyataan penutup dan tanda tangan",
+        "body": "Dibuat di [tempat] pada [tanggal] secara sadar. Yang menyatakan: [nama/tanda tangan]. Saksi/pejabat penerima bila diperlukan: [nama]. Pastikan tanda tangan, meterai, serta format mengikuti ketentuan penerima."
+      },
+      {
+        "heading": "Catatan, lampiran, dan pengesahan",
+        "body": "Catatan khusus, asumsi yang perlu diverifikasi, pengecualian, serta ketentuan tambahan: **{{notes}}**. Pastikan seluruh lampiran, identitas pihak, dasar kewenangan, versi, dan bukti persetujuan disimpan bersama dokumen final."
+      }
+    ]
+  },
+  {
+    "id": "nda-perjanjian-kerahasiaan-mutual",
+    "name": "Perjanjian Kerahasiaan Bersama (Mutual Non-Disclosure Agreement / NDA)",
+    "category": "dokumen",
+    "categoryLabel": "Administrasi & dokumen resmi",
+    "symbol": "NDA",
+    "format": "md",
+    "quality": "baik",
+    "description": "Perjanjian kerahasiaan dua arah untuk pertukaran informasi bisnis dengan definisi, pengecualian, tujuan penggunaan, kontrol akses, pengungkapan wajib, pengembalian data, durasi, dan penanganan pelanggaran.",
+    "tags": [
+      "NDA",
+      "non disclosure agreement",
+      "kerahasiaan",
+      "perjanjian bisnis",
+      "confidential information"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan, instansi, atau pihak utama",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama badan usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab atau penyusun dokumen",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama dan jabatan penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode, tanggal berlaku, atau masa evaluasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sekali pakai",
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Tahunan",
+          "Berlaku sampai dicabut",
+          "Sesuai masa perjanjian"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Unit, proses, atau ruang lingkup dokumen",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Administrasi umum",
+          "Keuangan dan pengadaan",
+          "SDM dan ketenagakerjaan",
+          "Operasional dan layanan",
+          "Penjualan dan kerja sama bisnis",
+          "Teknologi dan pengelolaan data",
+          "Legal dan kepatuhan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Ketentuan khusus, asumsi, dan catatan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Masukkan nomor dokumen, tenggat, kebijakan internal, detail pihak, atau pengecualian."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Identitas dan pengendalian dokumen",
+        "body": "Dokumen **Perjanjian Kerahasiaan Bersama (Mutual Non-Disclosure Agreement / NDA)** disusun untuk **{{entityName}}**, dengan penanggung jawab **{{ownerName}}**, ruang lingkup **{{scope}}**, dan periode **{{period}}**. Nomor dokumen: [isi]; versi: [isi]; tanggal berlaku: [isi]; status: [Draft/Review/Disetujui]."
+      },
+      {
+        "heading": "Para pihak dan tujuan",
+        "body": "Perjanjian dibuat pada [tanggal] oleh {{entityName}}, diwakili [nama/jabatan dan dasar kewenangan], dan [nama pihak kedua], diwakili [nama/jabatan]. Para pihak bertukar informasi hanya untuk mengevaluasi/menjalankan {{scope}} sebagai Tujuan yang Diizinkan."
+      },
+      {
+        "heading": "Definisi informasi rahasia",
+        "bullets": [
+          "Informasi bisnis, strategi, harga, pelanggan, pemasok, proses, keuangan, desain, kode, spesifikasi, dan data pribadi yang diberi label rahasia atau secara wajar patut dipahami rahasia.",
+          "Informasi lisan dikonfirmasi tertulis dalam [jumlah] hari kerja jika diperlukan.",
+          "Salinan, ringkasan, analisis, dan turunan yang mengandung substansi informasi turut dilindungi.",
+          "Informasi yang telah tersedia umum, telah dimiliki sah, diterima sah dari pihak ketiga, atau dikembangkan independen dapat dikecualikan dengan bukti."
+        ]
+      },
+      {
+        "heading": "Kewajiban penerima",
+        "bullets": [
+          "Menggunakan informasi hanya untuk Tujuan yang Diizinkan.",
+          "Membatasi akses berdasarkan need-to-know dan memastikan penerima terikat kewajiban setara.",
+          "Melindungi informasi sekurang-kurangnya dengan standar kehati-hatian yang wajar.",
+          "Tidak menyalin, membagikan, reverse engineer, atau menggunakan untuk kompetisi tanpa izin.",
+          "Memberi tahu pihak pengungkap tanpa penundaan wajar setelah insiden atau akses tidak sah."
+        ]
+      },
+      {
+        "heading": "Pengungkapan yang diwajibkan",
+        "body": "Jika hukum/perintah otoritas mewajibkan pengungkapan, pihak penerima (sepanjang diizinkan) memberi pemberitahuan, membatasi data pada yang diwajibkan, dan bekerja sama meminta perlindungan kerahasiaan."
+      },
+      {
+        "heading": "Pengembalian dan pemusnahan",
+        "body": "Atas permintaan atau berakhirnya pembahasan, penerima mengembalikan/memusnahkan salinan dalam [jumlah] hari dan mengonfirmasi. Backup otomatis atau retensi legal boleh disimpan terbatas, tetap dilindungi, dan tidak digunakan kembali."
+      },
+      {
+        "heading": "Jangka waktu dan upaya hukum",
+        "body": "Perjanjian berlaku {{period}} sejak efektif. Kerahasiaan bertahan [jumlah] tahun setelah pengungkapan terakhir; rahasia dagang selama masih memenuhi kriteria hukum. Pelanggaran ditangani melalui penghentian, pemulihan, dan upaya yang tersedia. Hukum dan forum: [yurisdiksi/forum yang ditinjau]."
+      },
+      {
+        "heading": "Ketentuan umum dan tanda tangan",
+        "body": "Perubahan tertulis ditandatangani Para Pihak; pengalihan kewajiban memerlukan persetujuan; klausul tidak berlaku dipisahkan sejauh memungkinkan. Lampiran: daftar penerima informasi dan kontak insiden. Draf wajib ditinjau penasihat hukum sebelum tanda tangan."
+      },
+      {
+        "heading": "Catatan, lampiran, dan pengesahan",
+        "body": "Catatan khusus, asumsi yang perlu diverifikasi, pengecualian, serta ketentuan tambahan: **{{notes}}**. Pastikan seluruh lampiran, identitas pihak, dasar kewenangan, versi, dan bukti persetujuan disimpan bersama dokumen final."
+      }
+    ]
+  },
+  {
+    "id": "perjanjian-kerja-freelancer",
+    "name": "Perjanjian Jasa Freelancer: Deliverable, Fee & Hak Kekayaan Intelektual",
+    "category": "dokumen",
+    "categoryLabel": "Administrasi & dokumen resmi",
+    "symbol": "FL",
+    "format": "md",
+    "quality": "baik",
+    "description": "Kontrak freelancer yang mengatur ruang lingkup pekerjaan, standar hasil, milestone, revisi, fee, pajak, kerahasiaan, kepemilikan hasil, penghentian, dan serah terima akses.",
+    "tags": [
+      "freelancer agreement",
+      "kontrak jasa",
+      "deliverable",
+      "hak kekayaan intelektual",
+      "pembayaran"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan, instansi, atau pihak utama",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama badan usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab atau penyusun dokumen",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama dan jabatan penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode, tanggal berlaku, atau masa evaluasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sekali pakai",
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Tahunan",
+          "Berlaku sampai dicabut",
+          "Sesuai masa perjanjian"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Unit, proses, atau ruang lingkup dokumen",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Administrasi umum",
+          "Keuangan dan pengadaan",
+          "SDM dan ketenagakerjaan",
+          "Operasional dan layanan",
+          "Penjualan dan kerja sama bisnis",
+          "Teknologi dan pengelolaan data",
+          "Legal dan kepatuhan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Ketentuan khusus, asumsi, dan catatan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Masukkan nomor dokumen, tenggat, kebijakan internal, detail pihak, atau pengecualian."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Identitas dan pengendalian dokumen",
+        "body": "Dokumen **Perjanjian Jasa Freelancer: Deliverable, Fee & Hak Kekayaan Intelektual** disusun untuk **{{entityName}}**, dengan penanggung jawab **{{ownerName}}**, ruang lingkup **{{scope}}**, dan periode **{{period}}**. Nomor dokumen: [isi]; versi: [isi]; tanggal berlaku: [isi]; status: [Draft/Review/Disetujui]."
+      },
+      {
+        "heading": "Para pihak dan sifat hubungan",
+        "body": "Perjanjian dibuat antara {{entityName}}, diwakili {{ownerName}} berdasarkan kewenangan [dokumen], dan [nama freelancer, alamat, identitas relevan]. Hubungan ditujukan untuk jasa independen sesuai {{scope}}; klasifikasi hubungan wajib diperiksa terhadap fakta dan hukum ketenagakerjaan."
+      },
+      {
+        "heading": "Ruang lingkup dan deliverable",
+        "bullets": [
+          "Pekerjaan: [uraian terukur].",
+          "Deliverable D-01: [format, spesifikasi, sumber file, kriteria diterima].",
+          "Deliverable D-02: [spesifikasi, dependensi, tanggal].",
+          "Out of scope: [pekerjaan yang memerlukan change request].",
+          "Akses, data, dan bahan dari klien: [daftar serta kewajiban pengembalian]."
+        ]
+      },
+      {
+        "heading": "Jadwal dan penerimaan",
+        "body": "Milestone: brief [tanggal], draft [tanggal], review [tanggal], revisi [tanggal], final [tanggal], serah terima [tanggal]. Klien memberi umpan balik dalam [hari kerja]. Hasil diterima melalui konfirmasi tertulis atau kriteria penerimaan eksplisit dalam lampiran."
+      },
+      {
+        "heading": "Revisi dan perubahan",
+        "bullets": [
+          "Termasuk [jumlah] putaran revisi minor yang tidak mengubah brief.",
+          "Perubahan konsep/volume/format diproses melalui change request tertulis.",
+          "Freelancer memberikan estimasi biaya dan waktu sebelum pekerjaan tambahan.",
+          "Keterlambatan approval/bahan klien dicatat dan menggeser jadwal sesuai dampaknya."
+        ]
+      },
+      {
+        "heading": "Fee, invoice, pajak, dan pengeluaran",
+        "body": "Nilai jasa Rp [nominal], perlakuan pajak [jelaskan]. Termin: [DP], [milestone], dan [penerimaan final]. Invoice disertai bukti sesuai aturan. Pengeluaran pihak ketiga hanya dapat ditagihkan setelah persetujuan tertulis. Rekening pembayaran harus atas nama pihak yang terikat kontrak."
+      },
+      {
+        "heading": "Kerahasiaan dan keamanan",
+        "bullets": [
+          "Data hanya digunakan untuk pekerjaan dan tidak boleh diunggah ke layanan pihak ketiga/AI tanpa izin tertulis.",
+          "Akses memakai akun yang ditentukan dan tidak boleh dibagikan.",
+          "Insiden kehilangan data/perangkat atau akses tidak sah dilaporkan segera.",
+          "Setelah selesai, data, kredensial, dan aset klien dikembalikan/dihapus sesuai instruksi."
+        ]
+      },
+      {
+        "heading": "Hak kekayaan intelektual",
+        "body": "Tentukan apakah hasil dialihkan atau dilisensikan, objek, wilayah, durasi, media, hak modifikasi, serta waktu efektif (misalnya setelah pembayaran). Materi pra-eksisting, font, musik, kode, dan aset pihak ketiga diidentifikasi. Portofolio hanya boleh menggunakan hasil setelah izin tertulis dan anonimisasi bila diperlukan."
+      },
+      {
+        "heading": "Garansi, penghentian, dan sengketa",
+        "bullets": [
+          "Jaminan hasil tidak dengan sengaja melanggar hak pihak lain dan seluruh sumber pihak ketiga diungkapkan.",
+          "Pelanggaran material dan masa perbaikan: [definisi dan hari].",
+          "Akibat penghentian: pembayaran hasil diterima, penyerahan hasil dibayar, pencabutan akses, pengembalian data.",
+          "Hukum/forum, batas tanggung jawab, indemnity, dan garansi harus dirumuskan serta ditinjau legal."
+        ]
+      },
+      {
+        "heading": "Tanda tangan dan lampiran",
+        "body": "Lampiran brief, spesifikasi deliverable, jadwal, fee, dan akses menjadi bagian perjanjian. Tanda tangan wakil berwenang kedua pihak setelah review hukum."
+      },
+      {
+        "heading": "Catatan, lampiran, dan pengesahan",
+        "body": "Catatan khusus, asumsi yang perlu diverifikasi, pengecualian, serta ketentuan tambahan: **{{notes}}**. Pastikan seluruh lampiran, identitas pihak, dasar kewenangan, versi, dan bukti persetujuan disimpan bersama dokumen final."
+      }
+    ]
+  },
+  {
+    "id": "bast-serah-terima-barang",
+    "name": "Berita Acara Serah Terima (BAST) Barang, Inventaris & Dokumen Pendukung",
+    "category": "dokumen",
+    "categoryLabel": "Administrasi & dokumen resmi",
+    "symbol": "BAST",
+    "format": "md",
+    "quality": "baik",
+    "description": "BAST barang dengan identitas penyerah-penerima, serial number, jumlah, kondisi, kelengkapan, hasil inspeksi, pengecualian, garansi, dan tanda tangan penerimaan.",
+    "tags": [
+      "BAST barang",
+      "serah terima aset",
+      "inventaris",
+      "serial number",
+      "procurement"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan, instansi, atau pihak utama",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama badan usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab atau penyusun dokumen",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama dan jabatan penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode, tanggal berlaku, atau masa evaluasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sekali pakai",
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Tahunan",
+          "Berlaku sampai dicabut",
+          "Sesuai masa perjanjian"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Unit, proses, atau ruang lingkup dokumen",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Administrasi umum",
+          "Keuangan dan pengadaan",
+          "SDM dan ketenagakerjaan",
+          "Operasional dan layanan",
+          "Penjualan dan kerja sama bisnis",
+          "Teknologi dan pengelolaan data",
+          "Legal dan kepatuhan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Ketentuan khusus, asumsi, dan catatan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Masukkan nomor dokumen, tenggat, kebijakan internal, detail pihak, atau pengecualian."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Identitas dan pengendalian dokumen",
+        "body": "Dokumen **Berita Acara Serah Terima (BAST) Barang, Inventaris & Dokumen Pendukung** disusun untuk **{{entityName}}**, dengan penanggung jawab **{{ownerName}}**, ruang lingkup **{{scope}}**, dan periode **{{period}}**. Nomor dokumen: [isi]; versi: [isi]; tanggal berlaku: [isi]; status: [Draft/Review/Disetujui]."
+      },
+      {
+        "heading": "Identitas dan dasar serah terima",
+        "body": "Nomor: [BAST/UNIT/NNN/TAHUN]. Tanggal/lokasi: [hari, tanggal, alamat]. Penyerahan dilakukan untuk {{entityName}} pada ruang lingkup {{scope}}. Dasar: PO/kontrak/SPK nomor [referensi]."
+      },
+      {
+        "heading": "Penyerah, penerima, dan pemeriksa",
+        "bullets": [
+          "Penyerah: [nama, jabatan, organisasi, alamat, dasar kewenangan].",
+          "Penerima: [nama, jabatan, unit, identitas internal bila diperlukan].",
+          "Pemeriksa teknis/saksi: [nama, jabatan, kompetensi].",
+          "Penanggung jawab administrasi: {{ownerName}}."
+        ]
+      },
+      {
+        "heading": "Daftar barang",
+        "body": "Buat satu baris untuk setiap aset: **No. | Nama/Spesifikasi | Merek/Tipe | Serial Number/IMEI/Asset Tag | Jumlah | Satuan | Kondisi | Kelengkapan | Nilai acuan bila diperlukan**. Cocokkan fisik dengan PO dan packing list."
+      },
+      {
+        "heading": "Pemeriksaan dan hasil",
+        "bullets": [
+          "Jumlah fisik sesuai/tidak sesuai dokumen: [hasil].",
+          "Uji fungsi: [metode, hasil, nama pemeriksa].",
+          "Kelengkapan aksesori, manual, lisensi, dan garansi: [hasil].",
+          "Diterima: [daftar]; ditolak/ditangguhkan: [daftar dan alasan].",
+          "Kerusakan/kekurangan: [jenis, bukti foto, PIC, tenggat perbaikan]."
+        ]
+      },
+      {
+        "heading": "Tanggung jawab setelah penerimaan",
+        "body": "Penguasaan barang beralih sejak [tanggal/jam] sesuai kontrak. Penerimaan fisik tidak otomatis menghapus garansi atau hak klaim atas cacat tersembunyi. Status kepemilikan dan perpindahan risiko mengikuti kontrak dan aturan yang sah."
+      },
+      {
+        "heading": "Dokumen pendukung",
+        "bullets": [
+          "PO/kontrak/SPK dan addendum.",
+          "Packing list, surat jalan, invoice, bukti garansi.",
+          "Checklist inspeksi, foto serial number, hasil uji fungsi.",
+          "Daftar aset/asset tag dan lokasi penyimpanan."
+        ]
+      },
+      {
+        "heading": "Pengesahan",
+        "body": "Penyerah [nama/tanda tangan/tanggal], penerima [nama/tanda tangan/tanggal], pemeriksa [nama]. BAST dibuat dalam [jumlah] rangkap/arsip elektronik. Lampirkan bukti kondisi dan catatan pengecualian."
+      },
+      {
+        "heading": "Catatan, lampiran, dan pengesahan",
+        "body": "Catatan khusus, asumsi yang perlu diverifikasi, pengecualian, serta ketentuan tambahan: **{{notes}}**. Pastikan seluruh lampiran, identitas pihak, dasar kewenangan, versi, dan bukti persetujuan disimpan bersama dokumen final."
+      }
+    ]
+  },
+  {
+    "id": "bast-serah-terima-pekerjaan",
+    "name": "Berita Acara Serah Terima (BAST) Pekerjaan/Jasa & Uji Penerimaan",
+    "category": "dokumen",
+    "categoryLabel": "Administrasi & dokumen resmi",
+    "symbol": "BASTP",
+    "format": "md",
+    "quality": "baik",
+    "description": "BAST hasil pekerjaan berdasarkan kontrak dengan daftar deliverable, kriteria uji, temuan mayor-minor, punch list, masa pemeliharaan, dan dasar pembayaran.",
+    "tags": [
+      "BAST pekerjaan",
+      "service acceptance",
+      "deliverable",
+      "UAT",
+      "serah terima jasa"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan, instansi, atau pihak utama",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama badan usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab atau penyusun dokumen",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama dan jabatan penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode, tanggal berlaku, atau masa evaluasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sekali pakai",
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Tahunan",
+          "Berlaku sampai dicabut",
+          "Sesuai masa perjanjian"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Unit, proses, atau ruang lingkup dokumen",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Administrasi umum",
+          "Keuangan dan pengadaan",
+          "SDM dan ketenagakerjaan",
+          "Operasional dan layanan",
+          "Penjualan dan kerja sama bisnis",
+          "Teknologi dan pengelolaan data",
+          "Legal dan kepatuhan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Ketentuan khusus, asumsi, dan catatan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Masukkan nomor dokumen, tenggat, kebijakan internal, detail pihak, atau pengecualian."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Identitas dan pengendalian dokumen",
+        "body": "Dokumen **Berita Acara Serah Terima (BAST) Pekerjaan/Jasa & Uji Penerimaan** disusun untuk **{{entityName}}**, dengan penanggung jawab **{{ownerName}}**, ruang lingkup **{{scope}}**, dan periode **{{period}}**. Nomor dokumen: [isi]; versi: [isi]; tanggal berlaku: [isi]; status: [Draft/Review/Disetujui]."
+      },
+      {
+        "heading": "Dasar pekerjaan dan para pihak",
+        "body": "Nomor BAST: [nomor]. Pekerjaan untuk {{entityName}} pada ruang lingkup {{scope}}, periode {{period}}, dikelola {{ownerName}}. Dasar: kontrak/SPK/PO [nomor, tanggal, nilai, addendum]. Identitas pemberi kerja dan penyedia harus lengkap."
+      },
+      {
+        "heading": "Daftar deliverable dan kriteria",
+        "bullets": [
+          "Setiap baris: ID | uraian deliverable | kriteria kontrak | versi/tautan | pemeriksa | hasil | status (diterima/bersyarat/ditolak).",
+          "Cantumkan jumlah, format, konfigurasi, dokumentasi, dan sumber file.",
+          "Jangan menyatakan selesai tanpa bukti yang dapat diperiksa."
+        ]
+      },
+      {
+        "heading": "Metode dan hasil pengujian",
+        "bullets": [
+          "Metode inspeksi/UAT: [skenario, sampel, alat, lingkungan, tanggal].",
+          "Kriteria lulus: [fungsi, performa, kualitas, keamanan, dokumentasi].",
+          "Hasil aktual dan bukti: [tiap skenario].",
+          "Temuan mayor/kritis: [dampak, tindakan, status].",
+          "Temuan minor/punch list: [PIC, tenggat, bukti penutupan, verifikasi ulang]."
+        ]
+      },
+      {
+        "heading": "Penerimaan bersyarat",
+        "body": "Jika diterima bersyarat, sebutkan bagian yang diterima, bagian tertunda, tenggat perbaikan, pemilik tindakan, konsekuensi retensi/pembayaran sesuai kontrak, dan pejabat yang mengonfirmasi penutupan. BAST tidak menghapus hak atas cacat tersembunyi atau garansi."
+      },
+      {
+        "heading": "Transfer dokumentasi dan akses",
+        "bullets": [
+          "Manual, konfigurasi, source file, lisensi, dan kredensial diserahkan melalui kanal aman.",
+          "Akses administrator dipindahkan kepada PIC dan diuji.",
+          "Pelatihan/knowledge transfer: tanggal, peserta, materi, bukti.",
+          "Daftar aset, inventaris, lokasi backup, dan dependensi: [rincian]."
+        ]
+      },
+      {
+        "heading": "Pembayaran, garansi, dan pemeliharaan",
+        "body": "Termin invoice mengacu milestone [referensi]. Retensi/potongan mengikuti kontrak. Masa garansi/pemeliharaan: [mulai-akhir, response time, kanal eskalasi]. Penandatanganan BAST tidak mengubah syarat pembayaran yang belum terpenuhi."
+      },
+      {
+        "heading": "Pengesahan",
+        "body": "Pemberi kerja [nama/jabatan], penyedia [nama/jabatan], tim pemeriksa [nama]. Lampiran: checklist uji, punch list, bukti perbaikan, dan daftar transfer aset."
+      },
+      {
+        "heading": "Catatan, lampiran, dan pengesahan",
+        "body": "Catatan khusus, asumsi yang perlu diverifikasi, pengecualian, serta ketentuan tambahan: **{{notes}}**. Pastikan seluruh lampiran, identitas pihak, dasar kewenangan, versi, dan bukti persetujuan disimpan bersama dokumen final."
+      }
+    ]
+  },
+  {
+    "id": "proposal-penawaran-kerja-sama-b2b",
+    "name": "Proposal Penawaran Kerja Sama Bisnis B2B & Struktur Komersial",
+    "category": "dokumen",
+    "categoryLabel": "Administrasi & dokumen resmi",
+    "symbol": "B2B",
+    "format": "md",
+    "quality": "baik",
+    "description": "Proposal B2B dengan masalah dan peluang, solusi, ruang lingkup, deliverable, model harga, asumsi, KPI, tata kelola, dan langkah negosiasi.",
+    "tags": [
+      "proposal B2B",
+      "penawaran kerja sama",
+      "business proposal",
+      "commercial terms",
+      "partnership"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan, instansi, atau pihak utama",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama badan usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab atau penyusun dokumen",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama dan jabatan penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode, tanggal berlaku, atau masa evaluasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sekali pakai",
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Tahunan",
+          "Berlaku sampai dicabut",
+          "Sesuai masa perjanjian"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Unit, proses, atau ruang lingkup dokumen",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Administrasi umum",
+          "Keuangan dan pengadaan",
+          "SDM dan ketenagakerjaan",
+          "Operasional dan layanan",
+          "Penjualan dan kerja sama bisnis",
+          "Teknologi dan pengelolaan data",
+          "Legal dan kepatuhan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Ketentuan khusus, asumsi, dan catatan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Masukkan nomor dokumen, tenggat, kebijakan internal, detail pihak, atau pengecualian."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Identitas dan pengendalian dokumen",
+        "body": "Dokumen **Proposal Penawaran Kerja Sama Bisnis B2B & Struktur Komersial** disusun untuk **{{entityName}}**, dengan penanggung jawab **{{ownerName}}**, ruang lingkup **{{scope}}**, dan periode **{{period}}**. Nomor dokumen: [isi]; versi: [isi]; tanggal berlaku: [isi]; status: [Draft/Review/Disetujui]."
+      },
+      {
+        "heading": "Surat pengantar dan ringkasan",
+        "body": "**PROPOSAL KERJA SAMA** disampaikan oleh {{entityName}} melalui {{ownerName}} kepada [calon mitra] untuk {{scope}} pada {{period}}. Masa berlaku penawaran: [tanggal awal-akhir]. Ringkasan solusi: [nilai utama dalam 3-5 kalimat]."
+      },
+      {
+        "heading": "Profil dan kapasitas penyedia",
+        "bullets": [
+          "Identitas badan usaha, alamat, kontak resmi, dan wakil berwenang.",
+          "Kompetensi, lisensi/sertifikasi yang benar-benar dimiliki.",
+          "Pengalaman/studi kasus yang dapat diverifikasi dan izin referensi.",
+          "Kapasitas tim, lokasi layanan, dan pihak ketiga yang terlibat."
+        ]
+      },
+      {
+        "heading": "Kebutuhan mitra dan tujuan hasil",
+        "body": "Berdasarkan [brief/rapat/tanggal], kebutuhan mitra adalah [masalah]. Dampak saat ini: [biaya, waktu, risiko, peluang]. Tujuan: [hasil terukur], dengan baseline, target, sumber data, dan periode pengukuran."
+      },
+      {
+        "heading": "Solusi dan ruang lingkup",
+        "bullets": [
+          "Komponen A: aktivitas, output, metode, batas layanan.",
+          "Komponen B: integrasi, dependensi, dan output.",
+          "Pekerjaan di luar ruang lingkup: [daftar].",
+          "Kewajiban mitra: data, akses, PIC, persetujuan, infrastruktur.",
+          "Perubahan diproses melalui change request dengan dampak biaya/waktu."
+        ]
+      },
+      {
+        "heading": "Deliverable dan jadwal",
+        "body": "Milestone: kick-off, desain/validasi, implementasi, uji/serah terima, evaluasi. Untuk tiap milestone tetapkan output, pemilik, tanggal target, kriteria penerimaan, dan bukti."
+      },
+      {
+        "heading": "Model harga dan pembayaran",
+        "bullets": [
+          "Biaya implementasi: Rp [nominal] dan komponen.",
+          "Biaya berulang: Rp [nominal/periode], batas pemakaian dan layanan.",
+          "Pajak, biaya pihak ketiga, perjalanan, dan biaya tambahan.",
+          "Termin, jatuh tempo, invoice, konsekuensi keterlambatan yang sah.",
+          "Masa berlaku harga, volume minimum, dan perubahan biaya."
+        ]
+      },
+      {
+        "heading": "KPI, tata kelola, dan risiko",
+        "bullets": [
+          "KPI: baseline, target, sumber data, metode, frekuensi.",
+          "Rapat governance: frekuensi, peserta, notulen, jalur eskalasi.",
+          "Risiko: pemilik, indikator, mitigasi, tindakan kontingensi.",
+          "Kerahasiaan, data, IP, keamanan, dan izin pihak ketiga."
+        ]
+      },
+      {
+        "heading": "Langkah berikutnya dan status penawaran",
+        "body": "Proposal bukan kontrak definitif sebelum disetujui dan ditandatangani wakil berwenang. Tahapan berikut: klarifikasi, negosiasi, pemeriksaan, persetujuan internal, kontrak final. Kontak resmi: [nama/email/telepon]."
+      },
+      {
+        "heading": "Catatan, lampiran, dan pengesahan",
+        "body": "Catatan khusus, asumsi yang perlu diverifikasi, pengecualian, serta ketentuan tambahan: **{{notes}}**. Pastikan seluruh lampiran, identitas pihak, dasar kewenangan, versi, dan bukti persetujuan disimpan bersama dokumen final."
+      }
+    ]
+  },
+  {
+    "id": "surat-peringatan-karyawan-sp123",
+    "name": "Surat Peringatan Karyawan (SP 1/SP 2/SP 3) dengan Kronologi & Rencana Perbaikan",
+    "category": "dokumen",
+    "categoryLabel": "Administrasi & dokumen resmi",
+    "symbol": "SP",
+    "format": "md",
+    "quality": "baik",
+    "description": "Surat peringatan bertahap yang mencatat aturan relevan, fakta kejadian, bukti, tanggapan karyawan, tingkat tindakan, masa evaluasi, dukungan perbaikan, dan jalur keberatan.",
+    "tags": [
+      "surat peringatan",
+      "SP1",
+      "SP2",
+      "SP3",
+      "administrasi SDM",
+      "employee warning"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan, instansi, atau pihak utama",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama badan usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab atau penyusun dokumen",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama dan jabatan penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode, tanggal berlaku, atau masa evaluasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sekali pakai",
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Tahunan",
+          "Berlaku sampai dicabut",
+          "Sesuai masa perjanjian"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Unit, proses, atau ruang lingkup dokumen",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Administrasi umum",
+          "Keuangan dan pengadaan",
+          "SDM dan ketenagakerjaan",
+          "Operasional dan layanan",
+          "Penjualan dan kerja sama bisnis",
+          "Teknologi dan pengelolaan data",
+          "Legal dan kepatuhan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Ketentuan khusus, asumsi, dan catatan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Masukkan nomor dokumen, tenggat, kebijakan internal, detail pihak, atau pengecualian."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Identitas dan pengendalian dokumen",
+        "body": "Dokumen **Surat Peringatan Karyawan (SP 1/SP 2/SP 3) dengan Kronologi & Rencana Perbaikan** disusun untuk **{{entityName}}**, dengan penanggung jawab **{{ownerName}}**, ruang lingkup **{{scope}}**, dan periode **{{period}}**. Nomor dokumen: [isi]; versi: [isi]; tanggal berlaku: [isi]; status: [Draft/Review/Disetujui]."
+      },
+      {
+        "heading": "Identitas dan tingkat surat",
+        "body": "[KOP SURAT] Nomor: [SP/SDM/NNN/TAHUN]. Perihal: Surat Peringatan [Pertama/Kedua/Ketiga]. Tanggal: [tanggal]. Kepada: [nama, jabatan, unit]. Penerbit: [nama/jabatan]. Pilih tingkat tindakan sesuai kebijakan dan ketentuan yang berlaku, bukan otomatis dari label template."
+      },
+      {
+        "heading": "Dasar aturan dan kewenangan",
+        "body": "Rujukan: [Peraturan Perusahaan/PKB/perjanjian kerja/SOP], nomor/versi [referensi], ketentuan [pasal], bukti pemberitahuan kepada karyawan [tanggal]. Pastikan ketentuan masih berlaku dan penerbit memiliki kewenangan."
+      },
+      {
+        "heading": "Kronologi dan bukti",
+        "bullets": [
+          "Tanggal, waktu, lokasi: [fakta].",
+          "Perbuatan/kelalaian yang diduga: [uraian perilaku, bukan label personal].",
+          "Standar yang seharusnya: [target, instruksi tertulis, atau tugas].",
+          "Dampak terverifikasi: [operasional, layanan, keselamatan, biaya].",
+          "Bukti: [log, dokumen, saksi, hasil pemeriksaan, chain of custody]."
+        ]
+      },
+      {
+        "heading": "Klarifikasi karyawan",
+        "body": "Kesempatan klarifikasi diberikan pada [tanggal/metode]. Ringkasan tanggapan: [isi]. Bukti/konteks dari karyawan: [daftar]. Temuan pemeriksaan dan alasan menerima/menolak keterangan: [analisis objektif]. Hindari informasi pribadi yang tidak relevan."
+      },
+      {
+        "heading": "Tindakan dan periode evaluasi",
+        "body": "Perusahaan menerbitkan [SP1/SP2/SP3] berdasarkan ketentuan yang diverifikasi. Masa evaluasi: [mulai-sampai]. Perbaikan yang diminta: [indikator terukur]. Dukungan: coaching, pelatihan, supervisi, atau perbaikan proses. Konsekuensi pelanggaran berulang hanya diproses menurut hukum dan prosedur yang berlaku."
+      },
+      {
+        "heading": "Rencana perbaikan dan pemantauan",
+        "bullets": [
+          "Tindakan korektif dan bukti: [rincian].",
+          "Indikator keberhasilan: [hasil terukur].",
+          "Atasan pemantau dan frekuensi review: [nama/jadwal].",
+          "Tanggal evaluasi dan kesempatan umpan balik: [tanggal/proses]."
+        ]
+      },
+      {
+        "heading": "Penerimaan, keberatan, dan dokumentasi",
+        "body": "Tanda terima bukan berarti setuju dengan isi. Karyawan dapat mengajukan klarifikasi/keberatan melalui [kanal] dalam [jangka waktu] sesuai kebijakan. Simpan bukti dan akses hanya untuk pihak yang perlu mengetahui."
+      },
+      {
+        "heading": "Pengesahan dan review",
+        "body": "Penerbit [nama/jabatan], HR [PIC], karyawan [tanda terima], saksi bila perlu. Lampiran: bukti, undangan klarifikasi, tanggapan, dan hasil evaluasi. **Wajib ditinjau HR dan penasihat hukum sebelum diterbitkan; bukan penetapan otomatis PHK.**"
+      },
+      {
+        "heading": "Catatan, lampiran, dan pengesahan",
+        "body": "Catatan khusus, asumsi yang perlu diverifikasi, pengecualian, serta ketentuan tambahan: **{{notes}}**. Pastikan seluruh lampiran, identitas pihak, dasar kewenangan, versi, dan bukti persetujuan disimpan bersama dokumen final."
+      }
+    ]
+  },
+  {
+    "id": "surat-keberatan-klaim-resmi",
+    "name": "Surat Keberatan/Klarifikasi Resmi atas Tagihan, Layanan atau Keputusan",
+    "category": "dokumen",
+    "categoryLabel": "Administrasi & dokumen resmi",
+    "symbol": "OB",
+    "format": "md",
+    "quality": "baik",
+    "description": "Surat keberatan dengan nomor referensi, objek yang disengketakan, kronologi, bukti, dasar kontrak/kebijakan, dampak, permintaan penyelesaian, dan batas waktu tanggapan.",
+    "tags": [
+      "surat keberatan",
+      "surat klarifikasi",
+      "dispute letter",
+      "tagihan",
+      "korespondensi resmi"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan, instansi, atau pihak utama",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama badan usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab atau penyusun dokumen",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama dan jabatan penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode, tanggal berlaku, atau masa evaluasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sekali pakai",
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Tahunan",
+          "Berlaku sampai dicabut",
+          "Sesuai masa perjanjian"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Unit, proses, atau ruang lingkup dokumen",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Administrasi umum",
+          "Keuangan dan pengadaan",
+          "SDM dan ketenagakerjaan",
+          "Operasional dan layanan",
+          "Penjualan dan kerja sama bisnis",
+          "Teknologi dan pengelolaan data",
+          "Legal dan kepatuhan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Ketentuan khusus, asumsi, dan catatan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Masukkan nomor dokumen, tenggat, kebijakan internal, detail pihak, atau pengecualian."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Identitas dan pengendalian dokumen",
+        "body": "Dokumen **Surat Keberatan/Klarifikasi Resmi atas Tagihan, Layanan atau Keputusan** disusun untuk **{{entityName}}**, dengan penanggung jawab **{{ownerName}}**, ruang lingkup **{{scope}}**, dan periode **{{period}}**. Nomor dokumen: [isi]; versi: [isi]; tanggal berlaku: [isi]; status: [Draft/Review/Disetujui]."
+      },
+      {
+        "heading": "Kop, nomor, dan penerima",
+        "body": "[KOP SURAT] Nomor: [nomor]. Tanggal: [tanggal]. Perihal: Keberatan/Klarifikasi atas [objek]. Kepada: [nama/jabatan/organisasi/alamat]. Penanggung jawab komunikasi: [nama/jabatan]."
+      },
+      {
+        "heading": "Objek keberatan dan referensi",
+        "body": "Surat berkaitan dengan [tagihan/layanan/keputusan/hasil pekerjaan] nomor [referensi], tanggal [tanggal], nilai/objek [rincian], diterima pada [tanggal]. Bagian yang dipersoalkan dibatasi pada [uraian spesifik]."
+      },
+      {
+        "heading": "Kronologi dan fakta",
+        "bullets": [
+          "Kejadian 1: tanggal, tindakan, pihak, dan bukti.",
+          "Kejadian 2: komunikasi, respons, dan hasil.",
+          "Komplain sebelumnya: nomor tiket/surat dan tanggal.",
+          "Dokumen pembanding: kontrak, PO, invoice, BAST, SLA, foto, log."
+        ]
+      },
+      {
+        "heading": "Dasar dan analisis ketidaksesuaian",
+        "body": "Mengacu pada [klausul kontrak/kebijakan/standar] nomor [referensi], terdapat ketidaksesuaian berupa [uraian]. Perhitungan nilai/dampak menggunakan [metode, data, hasil]. Jika menyebut regulasi, periksa versi dan keberlakuannya terlebih dahulu."
+      },
+      {
+        "heading": "Permintaan penyelesaian",
+        "bullets": [
+          "Tindakan diminta: koreksi invoice/perbaikan layanan/klarifikasi/pembatalan bagian tertentu.",
+          "Nilai yang dikoreksi atau kompensasi: [angka dan metode].",
+          "Dokumen yang diminta: [daftar].",
+          "Batas waktu tanggapan: [tanggal kerja] melalui kanal resmi.",
+          "Opsi penyelesaian: rapat, mediasi, atau eskalasi sesuai kontrak."
+        ]
+      },
+      {
+        "heading": "Komunikasi dan reservasi hak",
+        "body": "Surat ini bertujuan menyelesaikan persoalan secara tertib dan tidak dimaksudkan sebagai pelepasan hak yang dimiliki secara sah. Komunikasi lanjutan dilakukan melalui perwakilan yang ditunjuk dan dicatat tertulis."
+      },
+      {
+        "heading": "Penutup dan lampiran",
+        "body": "Mohon konfirmasi penerimaan dan tanggapan tertulis. Lampiran: [dokumen pendukung]. Ditandatangani [nama/jabatan berwenang]."
+      },
+      {
+        "heading": "Catatan, lampiran, dan pengesahan",
+        "body": "Catatan khusus, asumsi yang perlu diverifikasi, pengecualian, serta ketentuan tambahan: **{{notes}}**. Pastikan seluruh lampiran, identitas pihak, dasar kewenangan, versi, dan bukti persetujuan disimpan bersama dokumen final."
+      }
+    ]
+  },
+  {
+    "id": "register-surat-masuk-keluar",
+    "name": "Register Surat Masuk & Keluar, Tenggat Respons dan Status Tindak Lanjut",
+    "category": "dokumen",
+    "categoryLabel": "Administrasi & dokumen resmi",
+    "symbol": "REG",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Register korespondensi dua arah dengan asal/tujuan, nomor agenda, perihal, hari pencatatan, SLA, hari penyelesaian, umur respons, dan indikator kepatuhan tenggat.",
+    "tags": [
+      "register surat",
+      "surat masuk",
+      "surat keluar",
+      "agenda surat",
+      "SLA korespondensi"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan, instansi, atau pihak utama",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama badan usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab atau penyusun dokumen",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama dan jabatan penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode, tanggal berlaku, atau masa evaluasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sekali pakai",
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Tahunan",
+          "Berlaku sampai dicabut",
+          "Sesuai masa perjanjian"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Unit, proses, atau ruang lingkup dokumen",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Administrasi umum",
+          "Keuangan dan pengadaan",
+          "SDM dan ketenagakerjaan",
+          "Operasional dan layanan",
+          "Penjualan dan kerja sama bisnis",
+          "Teknologi dan pengelolaan data",
+          "Legal dan kepatuhan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Ketentuan khusus, asumsi, dan catatan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Masukkan nomor dokumen, tenggat, kebijakan internal, detail pihak, atau pengecualian."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Register Korespondensi",
+        "title": "Register Surat Masuk & Keluar - {{entityName}}",
+        "columns": [
+          "Hari Dicatat (ke-)",
+          "Jenis (1=Masuk,2=Keluar)",
+          "Asal/Tujuan",
+          "Nomor Surat",
+          "Perihal",
+          "SLA (hari)",
+          "Hari Selesai (0=belum)",
+          "Hari Respons",
+          "Sesuai SLA (1/0)"
+        ],
+        "rows": [
+          [
+            1,
+            1,
+            "Dinas/Instansi",
+            "IN-001",
+            "Permintaan data administrasi",
+            3,
+            3,
+            0,
+            0
+          ],
+          [
+            2,
+            2,
+            "Mitra Vendor",
+            "OUT-001",
+            "Jawaban klarifikasi kontrak",
+            2,
+            5,
+            0,
+            0
+          ],
+          [
+            4,
+            1,
+            "Pelanggan B2B",
+            "IN-002",
+            "Permohonan perubahan data",
+            5,
+            0,
+            0,
+            0
+          ],
+          [
+            5,
+            2,
+            "Bank/Keuangan",
+            "OUT-002",
+            "Konfirmasi dokumen pembayaran",
+            3,
+            6,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "H6",
+            "formula": "IF(G6=0,0,G6-A6)",
+            "cachedValue": 2
+          },
+          {
+            "cell": "I6",
+            "formula": "IF(G6=0,0,IF(H6<=F6,1,0))",
+            "cachedValue": 1
+          },
+          {
+            "cell": "H7",
+            "formula": "IF(G7=0,0,G7-A7)",
+            "cachedValue": 3
+          },
+          {
+            "cell": "I7",
+            "formula": "IF(G7=0,0,IF(H7<=F7,1,0))",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H8",
+            "formula": "IF(G8=0,0,G8-A8)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "I8",
+            "formula": "IF(G8=0,0,0)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H9",
+            "formula": "IF(G9=0,0,G9-A9)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "I9",
+            "formula": "IF(G9=0,0,IF(H9<=F9,1,0))",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          17,
+          23,
+          24,
+          20,
+          34,
+          14,
+          22,
+          16,
+          18
+        ]
+      }
+    ]
+  },
+  {
+    "id": "register-kontrol-versi-persetujuan",
+    "name": "Register Dokumen Terkendali, Versi, Review & Persetujuan",
+    "category": "dokumen",
+    "categoryLabel": "Administrasi & dokumen resmi",
+    "symbol": "DCR",
+    "format": "xlsx",
+    "quality": "baik",
+    "description": "Register dokumen dengan pemilik, versi, status persetujuan, jadwal review, dan indikator dokumen yang sudah jatuh tempo atau belum memperoleh persetujuan.",
+    "tags": [
+      "document control",
+      "version control",
+      "approval register",
+      "review schedule",
+      "arsip"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan, instansi, atau pihak utama",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama badan usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab atau penyusun dokumen",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama dan jabatan penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode, tanggal berlaku, atau masa evaluasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sekali pakai",
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Tahunan",
+          "Berlaku sampai dicabut",
+          "Sesuai masa perjanjian"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Unit, proses, atau ruang lingkup dokumen",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Administrasi umum",
+          "Keuangan dan pengadaan",
+          "SDM dan ketenagakerjaan",
+          "Operasional dan layanan",
+          "Penjualan dan kerja sama bisnis",
+          "Teknologi dan pengelolaan data",
+          "Legal dan kepatuhan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Ketentuan khusus, asumsi, dan catatan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Masukkan nomor dokumen, tenggat, kebijakan internal, detail pihak, atau pengecualian."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Document Register",
+        "title": "Register Kontrol Dokumen - {{entityName}}",
+        "columns": [
+          "ID Dokumen",
+          "Judul Dokumen",
+          "Pemilik",
+          "Versi",
+          "Status (1=Approved,2=Draft,3=Obsolete)",
+          "Hari Review Berikutnya",
+          "Hari Pemantauan",
+          "Sisa Hari Review",
+          "Review Mendesak (1/0)"
+        ],
+        "rows": [
+          [
+            "POL-001",
+            "Kebijakan akses sistem",
+            "IT Governance",
+            "2.1",
+            1,
+            45,
+            30,
+            0,
+            0
+          ],
+          [
+            "SOP-014",
+            "SOP pengadaan",
+            "Procurement",
+            "1.3",
+            1,
+            25,
+            30,
+            0,
+            0
+          ],
+          [
+            "FRM-008",
+            "Formulir permintaan dana",
+            "Finance",
+            "0.9",
+            2,
+            15,
+            30,
+            0,
+            0
+          ],
+          [
+            "LEG-003",
+            "Template NDA",
+            "Legal",
+            "1.0",
+            1,
+            10,
+            30,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "H6",
+            "formula": "F6-G6",
+            "cachedValue": 15
+          },
+          {
+            "cell": "I6",
+            "formula": "IF(E6=1,IF(H6<=7,1,0),1)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H7",
+            "formula": "F7-G7",
+            "cachedValue": -5
+          },
+          {
+            "cell": "I7",
+            "formula": "IF(E7=1,IF(H7<=7,1,0),1)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "H8",
+            "formula": "F8-G8",
+            "cachedValue": -15
+          },
+          {
+            "cell": "I8",
+            "formula": "IF(E8=1,IF(H8<=7,1,0),1)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "H9",
+            "formula": "F9-G9",
+            "cachedValue": -20
+          },
+          {
+            "cell": "I9",
+            "formula": "IF(E9=1,IF(H9<=7,1,0),1)",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          15,
+          31,
+          21,
+          12,
+          34,
+          24,
+          19,
+          19,
+          20
+        ]
+      }
+    ]
+  },
+  {
+    "id": "perjanjian-kerja-sama-vendor",
+    "name": "Perjanjian Kerja Sama Vendor: SLA, Harga, Kualitas & Pengakhiran",
+    "category": "dokumen",
+    "categoryLabel": "Administrasi & dokumen resmi",
+    "symbol": "VENDOR",
+    "format": "md",
+    "quality": "unggulan",
+    "description": "Kontrak vendor dengan ruang lingkup, standar layanan, kontrol perubahan, invoice, SLA, audit, keamanan, subkontrak, garansi, wanprestasi, dan proses terminasi.",
+    "tags": [
+      "perjanjian vendor",
+      "vendor agreement",
+      "SLA",
+      "pengadaan",
+      "kontrak bisnis"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan, instansi, atau pihak utama",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama badan usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab atau penyusun dokumen",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama dan jabatan penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode, tanggal berlaku, atau masa evaluasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sekali pakai",
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Tahunan",
+          "Berlaku sampai dicabut",
+          "Sesuai masa perjanjian"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Unit, proses, atau ruang lingkup dokumen",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Administrasi umum",
+          "Keuangan dan pengadaan",
+          "SDM dan ketenagakerjaan",
+          "Operasional dan layanan",
+          "Penjualan dan kerja sama bisnis",
+          "Teknologi dan pengelolaan data",
+          "Legal dan kepatuhan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Ketentuan khusus, asumsi, dan catatan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Masukkan nomor dokumen, tenggat, kebijakan internal, detail pihak, atau pengecualian."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Identitas dan pengendalian dokumen",
+        "body": "Dokumen **Perjanjian Kerja Sama Vendor: SLA, Harga, Kualitas & Pengakhiran** disusun untuk **{{entityName}}**, dengan penanggung jawab **{{ownerName}}**, ruang lingkup **{{scope}}**, dan periode **{{period}}**. Nomor dokumen: [isi]; versi: [isi]; tanggal berlaku: [isi]; status: [Draft/Review/Disetujui]."
+      },
+      {
+        "heading": "Para pihak dan dokumen kontrak",
+        "body": "Perjanjian dibuat antara {{entityName}} diwakili [nama/jabatan dan dasar kewenangan] dan [nama vendor] diwakili [nama/jabatan]. Lampirkan bukti badan usaha dan kewenangan. Dokumen kontrak terdiri atas perjanjian, SOW, SLA, daftar harga, security addendum, serta perubahan tertulis."
+      },
+      {
+        "heading": "Definisi, layanan, dan ruang lingkup",
+        "bullets": [
+          "Barang/jasa dan istilah penting: [definisi].",
+          "Deliverable: [output, format, jumlah, spesifikasi, kriteria diterima].",
+          "SLA: [indikator, jam layanan, target, sumber pengukuran, pengecualian].",
+          "Ketergantungan klien: [data, akses, PIC, persetujuan, infrastruktur].",
+          "Pekerjaan tambahan memerlukan change request dengan dampak biaya dan jadwal."
+        ]
+      },
+      {
+        "heading": "SLA, kualitas, dan kontinuitas",
+        "bullets": [
+          "Availability/response time: [target dan metode pengukuran].",
+          "Tingkat keparahan insiden dan response/recovery time: [matriks].",
+          "Inspeksi kualitas: [sampel, metode, kriteria gagal].",
+          "Backup, pemulihan bencana, RTO/RPO, dan pemberitahuan gangguan.",
+          "Service credit/konsekuensi SLA: [formula dan batas] setelah review hukum."
+        ]
+      },
+      {
+        "heading": "Harga, pajak, invoice, dan audit biaya",
+        "body": "Nilai kontrak dan tarif per item dicantumkan dalam lampiran. Invoice harus disertai PO, BAST, timesheet, atau bukti pajak yang relevan. Pembayaran dilakukan dalam [hari] setelah dokumen lengkap dan penerimaan sesuai kontrak. Mekanisme audit invoice: [cakupan, masa, pemberitahuan]."
+      },
+      {
+        "heading": "Personel, subkontrak, dan kepatuhan",
+        "bullets": [
+          "Personel memiliki kompetensi/izin yang dibutuhkan.",
+          "Penggantian personel kunci mengikuti pemberitahuan/persetujuan.",
+          "Subkontrak mengikuti persetujuan dan vendor tetap bertanggung jawab.",
+          "Kepatuhan anti-suap, konflik kepentingan, keselamatan, dan regulasi sektor diverifikasi.",
+          "Vendor menyediakan bukti kepatuhan yang wajar untuk audit."
+        ]
+      },
+      {
+        "heading": "Kerahasiaan, data, dan keamanan",
+        "body": "Akses vendor berbasis least privilege. Data hanya digunakan untuk kontrak dan tidak dipindahkan ke penyedia lain tanpa izin. Insiden diberitahukan dalam [jam], disertai containment, bukti, dan analisis akar penyebab. Data pribadi diatur dalam DPA jika diperlukan."
+      },
+      {
+        "heading": "IP, garansi, dan dukungan",
+        "body": "Atur kepemilikan hasil, lisensi materi pra-eksisting, komponen pihak ketiga/open-source, hak modifikasi, source file, dokumentasi, garansi, waktu perbaikan, dan larangan penggunaan merek tanpa izin."
+      },
+      {
+        "heading": "Pelanggaran, pengakhiran, dan penyelesaian",
+        "bullets": [
+          "Pelanggaran material dan masa perbaikan: [definisi/cure period].",
+          "Pengakhiran karena pelanggaran, insolvensi, atau kenyamanan: [pemberitahuan/akibat].",
+          "Batas tanggung jawab, indemnity, asuransi, dan pengecualian ditinjau legal.",
+          "Transisi layanan, pengembalian aset/data, pencabutan akses, dan bantuan exit.",
+          "Force majeure dan kewajiban mitigasi: [mekanisme]."
+        ]
+      },
+      {
+        "heading": "Hukum, tanda tangan, dan lampiran",
+        "body": "Hukum/forum sengketa: [yurisdiksi dan mekanisme yang disetujui]. Wakil penandatangan harus memiliki kewenangan. Lampiran wajib: SOW, SLA, harga, kontrol keamanan, matriks RACI. Draf ditinjau legal, pengadaan, dan keuangan sebelum ditandatangani."
+      },
+      {
+        "heading": "Catatan, lampiran, dan pengesahan",
+        "body": "Catatan khusus, asumsi yang perlu diverifikasi, pengecualian, serta ketentuan tambahan: **{{notes}}**. Pastikan seluruh lampiran, identitas pihak, dasar kewenangan, versi, dan bukti persetujuan disimpan bersama dokumen final."
+      }
+    ]
+  },
+  {
+    "id": "kebijakan-privasi-layanan-digital",
+    "name": "Kebijakan Privasi Layanan Digital: Data, Tujuan Pemrosesan & Hak Pengguna",
+    "category": "dokumen",
+    "categoryLabel": "Administrasi & dokumen resmi",
+    "symbol": "PRIV",
+    "format": "md",
+    "quality": "unggulan",
+    "description": "Kerangka kebijakan privasi untuk memetakan pengendali, kategori data, dasar pemrosesan, tujuan, retensi, penerima, keamanan, hak subjek data, dan kanal pengaduan.",
+    "tags": [
+      "kebijakan privasi",
+      "privacy policy",
+      "data pribadi",
+      "perlindungan data",
+      "layanan digital"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan, instansi, atau pihak utama",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama badan usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab atau penyusun dokumen",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama dan jabatan penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode, tanggal berlaku, atau masa evaluasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sekali pakai",
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Tahunan",
+          "Berlaku sampai dicabut",
+          "Sesuai masa perjanjian"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Unit, proses, atau ruang lingkup dokumen",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Administrasi umum",
+          "Keuangan dan pengadaan",
+          "SDM dan ketenagakerjaan",
+          "Operasional dan layanan",
+          "Penjualan dan kerja sama bisnis",
+          "Teknologi dan pengelolaan data",
+          "Legal dan kepatuhan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Ketentuan khusus, asumsi, dan catatan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Masukkan nomor dokumen, tenggat, kebijakan internal, detail pihak, atau pengecualian."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Identitas dan pengendalian dokumen",
+        "body": "Dokumen **Kebijakan Privasi Layanan Digital: Data, Tujuan Pemrosesan & Hak Pengguna** disusun untuk **{{entityName}}**, dengan penanggung jawab **{{ownerName}}**, ruang lingkup **{{scope}}**, dan periode **{{period}}**. Nomor dokumen: [isi]; versi: [isi]; tanggal berlaku: [isi]; status: [Draft/Review/Disetujui]."
+      },
+      {
+        "heading": "Identitas pengelola dan cakupan",
+        "body": "Kebijakan Privasi {{entityName}} berlaku untuk [nama aplikasi/situs/layanan] pada {{scope}}. Pengendali/pengelola: [nama badan hukum dan alamat]. PIC privasi {{ownerName}}. Kontak: [email/form]. Versi [nomor], berlaku sejak [tanggal], ditinjau {{period}}."
+      },
+      {
+        "heading": "Kategori data yang diproses",
+        "bullets": [
+          "Identitas dan kontak: [field, wajib/opsional].",
+          "Akun dan autentikasi: [username, metode login, hash kredensial; jangan simpan password plaintext].",
+          "Transaksi dan dukungan: [pesanan, invoice, tiket, preferensi].",
+          "Data teknis: [IP, log, perangkat, cookie, telemetry].",
+          "Data sensitif/anak: [jika diproses, dasar, kebutuhan, perlindungan khusus].",
+          "Sumber data selain pengguna: [mitra/integrasi/sumber publik] dan cara pemberitahuan."
+        ]
+      },
+      {
+        "heading": "Tujuan dan dasar pemrosesan",
+        "body": "Untuk tiap kategori data tetapkan tujuan spesifik, dasar pemrosesan yang sah, kebutuhan minimum, konsekuensi bila data tidak diberikan, dan retensi. Tujuan potensial: akun, penyediaan layanan, pembayaran, dukungan, keamanan, kewajiban hukum, dan pemasaran dengan mekanisme persetujuan yang sesuai."
+      },
+      {
+        "heading": "Cookie, analitik, dan pihak ketiga",
+        "bullets": [
+          "Daftar cookie/SDK, tujuan, masa hidup, kategori esensial/opsional.",
+          "Penyedia analitik/iklan dan data yang diterima.",
+          "Cara mengatur preferensi atau menolak fitur non-esensial bila diwajibkan.",
+          "Tautan kebijakan pihak ketiga dan mekanisme pencabutan persetujuan.",
+          "Jangan menyatakan penyedia/fitur yang tidak benar-benar digunakan."
+        ]
+      },
+      {
+        "heading": "Penerima dan transfer data",
+        "body": "Data dapat diakses [kategori prosesor/vendor/afiliasi/otoritas] untuk tujuan yang dijelaskan. Cantumkan penerima, lokasi, jenis data, kontrol kontraktual, dan dasar transfer lintas negara jika ada. Jelaskan secara akurat apakah data dibagikan untuk iklan atau dijual."
+      },
+      {
+        "heading": "Retensi, keamanan, dan insiden",
+        "bullets": [
+          "Retensi per kategori dan alasan penentuannya.",
+          "Penghapusan, anonimisasi, backup, dan pengecualian karena kewajiban hukum.",
+          "Kontrol akses, enkripsi, logging, monitoring, dan pelatihan yang benar-benar diterapkan.",
+          "Kanal insiden dan notifikasi sesuai tenggat hukum yang berlaku.",
+          "Kewajiban vendor/prosesor saat investigasi."
+        ]
+      },
+      {
+        "heading": "Hak pengguna dan pengaduan",
+        "body": "Jelaskan hak yang tersedia menurut hukum relevan, cara mengajukan permintaan, verifikasi identitas proporsional, waktu respons, biaya yang sah, alasan penolakan, serta jalur pengaduan kepada pengelola atau otoritas."
+      },
+      {
+        "heading": "Perubahan dan pemeriksaan sebelum publikasi",
+        "body": "Perubahan material diberitahukan melalui [kanal]. Lampirkan daftar vendor, alur data, lokasi pemrosesan, masa retensi, dan PIC. **Sesuaikan dengan praktik aktual dan tinjau penasihat hukum/privasi sebelum publikasi; template ini tidak menjamin kepatuhan otomatis.**"
+      },
+      {
+        "heading": "Catatan, lampiran, dan pengesahan",
+        "body": "Catatan khusus, asumsi yang perlu diverifikasi, pengecualian, serta ketentuan tambahan: **{{notes}}**. Pastikan seluruh lampiran, identitas pihak, dasar kewenangan, versi, dan bukti persetujuan disimpan bersama dokumen final."
+      }
+    ]
+  },
+  {
+    "id": "syarat-ketentuan-layanan-dasar",
+    "name": "Syarat & Ketentuan Layanan Digital: Akun, Pembayaran & Tanggung Jawab",
+    "category": "dokumen",
+    "categoryLabel": "Administrasi & dokumen resmi",
+    "symbol": "TNC",
+    "format": "md",
+    "quality": "unggulan",
+    "description": "Kerangka Terms of Service untuk layanan digital yang mengatur akun, penggunaan yang diizinkan, transaksi, konten pengguna, lisensi, ketersediaan, penangguhan, pengaduan, dan sengketa.",
+    "tags": [
+      "terms and conditions",
+      "terms of service",
+      "syarat ketentuan",
+      "layanan digital",
+      "kebijakan pengguna"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan, instansi, atau pihak utama",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama badan usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab atau penyusun dokumen",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama dan jabatan penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode, tanggal berlaku, atau masa evaluasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sekali pakai",
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Tahunan",
+          "Berlaku sampai dicabut",
+          "Sesuai masa perjanjian"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Unit, proses, atau ruang lingkup dokumen",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Administrasi umum",
+          "Keuangan dan pengadaan",
+          "SDM dan ketenagakerjaan",
+          "Operasional dan layanan",
+          "Penjualan dan kerja sama bisnis",
+          "Teknologi dan pengelolaan data",
+          "Legal dan kepatuhan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Ketentuan khusus, asumsi, dan catatan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Masukkan nomor dokumen, tenggat, kebijakan internal, detail pihak, atau pengecualian."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Identitas dan pengendalian dokumen",
+        "body": "Dokumen **Syarat & Ketentuan Layanan Digital: Akun, Pembayaran & Tanggung Jawab** disusun untuk **{{entityName}}**, dengan penanggung jawab **{{ownerName}}**, ruang lingkup **{{scope}}**, dan periode **{{period}}**. Nomor dokumen: [isi]; versi: [isi]; tanggal berlaku: [isi]; status: [Draft/Review/Disetujui]."
+      },
+      {
+        "heading": "Identitas penyedia dan penerimaan",
+        "body": "Syarat ini mengatur [nama situs/aplikasi] yang disediakan {{entityName}} pada {{scope}}. Kontak resmi: [alamat/email]. PIC kebijakan {{ownerName}}. Versi [nomor], berlaku [tanggal], ditinjau {{period}}. Jelaskan cara pengguna menyetujui ketentuan dan cara mengakses versi yang berlaku."
+      },
+      {
+        "heading": "Definisi dan kelayakan",
+        "bullets": [
+          "Pengguna: individu/badan yang mengakses layanan.",
+          "Akun: kredensial/profil autentikasi.",
+          "Konten pengguna: teks, file, gambar, ulasan, atau materi yang dikirim.",
+          "Batas usia, kapasitas hukum, dan wilayah yang diperbolehkan.",
+          "Pengguna organisasi harus memiliki kewenangan bertindak."
+        ]
+      },
+      {
+        "heading": "Pendaftaran akun dan keamanan",
+        "body": "Pengguna memberikan informasi akurat, menjaga kredensial, mengaktifkan kontrol keamanan yang tersedia, dan melaporkan akses tidak sah. Penyedia menetapkan verifikasi proporsional dan proses pemulihan akun."
+      },
+      {
+        "heading": "Penggunaan dan larangan",
+        "bullets": [
+          "Gunakan layanan sesuai fungsi, dokumentasi, dan hukum.",
+          "Dilarang akses tanpa izin, mengganggu sistem, malware, penipuan, dan penyalahgunaan data.",
+          "Dilarang mengunggah konten yang melanggar hak IP, privasi, keselamatan, atau hukum.",
+          "Scraping/reverse engineering dibatasi sesuai hukum dan izin teknis.",
+          "Sediakan kanal laporan penyalahgunaan, pemeriksaan, serta keberatan jika pembatasan dilakukan."
+        ]
+      },
+      {
+        "heading": "Harga, pembayaran, pembatalan, dan refund",
+        "body": "Uraikan paket, fitur, batas penggunaan, mata uang, pajak, metode pembayaran, invoice, auto-renewal, perubahan harga, masa percobaan, pembatalan, refund, gagal bayar, dan waktu transaksi secara spesifik. Jangan menghapus hak konsumen yang tidak dapat dikesampingkan."
+      },
+      {
+        "heading": "Konten pengguna dan kekayaan intelektual",
+        "bullets": [
+          "Pengguna mempertahankan hak atas konten yang dimiliki secara sah.",
+          "Lisensi kepada penyedia dibatasi untuk penyimpanan/pemrosesan/penampilan yang diperlukan layanan.",
+          "Merek, perangkat lunak, dan desain penyedia tetap menjadi hak pemiliknya.",
+          "Prosedur pelaporan pelanggaran dan penanganan notice: [kanal/tenggat/bukti]."
+        ]
+      },
+      {
+        "heading": "Ketersediaan, dukungan, dan perubahan",
+        "body": "Jelaskan pemeliharaan, SLA jika benar-benar ada, dukungan, kompatibilitas, backup, ekspor data, perubahan fitur, dan penghentian. Jangan membuat klaim uptime/keamanan tanpa ukuran dan bukti."
+      },
+      {
+        "heading": "Penangguhan dan pengakhiran",
+        "bullets": [
+          "Alasan: pelanggaran, ancaman keamanan, kewajiban hukum, atau gagal bayar.",
+          "Pemberitahuan, pembatasan sementara, kesempatan koreksi, dan keberatan bila aman/wajib.",
+          "Cara pengguna mengakhiri akun dan menghentikan tagihan.",
+          "Dampak pada akses, data, invoice, lisensi, dan retensi legal."
+        ]
+      },
+      {
+        "heading": "Jaminan, tanggung jawab, dan sengketa",
+        "body": "Disclaimer, limitasi tanggung jawab, indemnity, dan pengecualian harus sesuai hukum konsumen dan transaksi elektronik; jangan mengecualikan tanggung jawab yang tidak dapat dikesampingkan. Tentukan pengaduan, negosiasi, mediasi, hukum, dan forum sah."
+      },
+      {
+        "heading": "Perubahan dan review",
+        "body": "Cantumkan metode notifikasi perubahan, tanggal efektif, dan riwayat versi. Lampirkan konfigurasi produk, alur pembayaran, wilayah pengguna, serta review legal. **Sesuaikan dengan perilaku layanan aktual sebelum dipublikasikan.**"
+      },
+      {
+        "heading": "Catatan, lampiran, dan pengesahan",
+        "body": "Catatan khusus, asumsi yang perlu diverifikasi, pengecualian, serta ketentuan tambahan: **{{notes}}**. Pastikan seluruh lampiran, identitas pihak, dasar kewenangan, versi, dan bukti persetujuan disimpan bersama dokumen final."
+      }
+    ]
+  },
+  {
+    "id": "perjanjian-pemrosesan-data-dpa",
+    "name": "Perjanjian Pemrosesan Data (Data Processing Agreement / DPA)",
+    "category": "dokumen",
+    "categoryLabel": "Administrasi & dokumen resmi",
+    "symbol": "DPA",
+    "format": "md",
+    "quality": "unggulan",
+    "description": "Perjanjian pengendali-prosesor yang menetapkan instruksi pemrosesan, kategori data/subjek, keamanan, subprosesor, bantuan hak pengguna, notifikasi insiden, audit, transfer, retensi, dan penghapusan.",
+    "tags": [
+      "DPA",
+      "data processing agreement",
+      "pengendali data",
+      "prosesor data",
+      "data security"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan, instansi, atau pihak utama",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama badan usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab atau penyusun dokumen",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama dan jabatan penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode, tanggal berlaku, atau masa evaluasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sekali pakai",
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Tahunan",
+          "Berlaku sampai dicabut",
+          "Sesuai masa perjanjian"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Unit, proses, atau ruang lingkup dokumen",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Administrasi umum",
+          "Keuangan dan pengadaan",
+          "SDM dan ketenagakerjaan",
+          "Operasional dan layanan",
+          "Penjualan dan kerja sama bisnis",
+          "Teknologi dan pengelolaan data",
+          "Legal dan kepatuhan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Ketentuan khusus, asumsi, dan catatan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Masukkan nomor dokumen, tenggat, kebijakan internal, detail pihak, atau pengecualian."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Identitas dan pengendalian dokumen",
+        "body": "Dokumen **Perjanjian Pemrosesan Data (Data Processing Agreement / DPA)** disusun untuk **{{entityName}}**, dengan penanggung jawab **{{ownerName}}**, ruang lingkup **{{scope}}**, dan periode **{{period}}**. Nomor dokumen: [isi]; versi: [isi]; tanggal berlaku: [isi]; status: [Draft/Review/Disetujui]."
+      },
+      {
+        "heading": "Para pihak, peran, dan kontrak utama",
+        "body": "DPA dibuat antara {{entityName}} sebagai [Pengendali/Prosesor] dan [pihak lawan] sebagai [Prosesor/Pengendali] untuk {{scope}}. PIC privasi/keamanan {{ownerName}}. Perjanjian utama [nomor/tanggal]. Periode pemrosesan {{period}}. Tetapkan peran sesuai aktivitas nyata, bukan sekadar label."
+      },
+      {
+        "heading": "Rincian aktivitas pemrosesan",
+        "bullets": [
+          "Subjek data: [pelanggan/karyawan/vendor/pengguna].",
+          "Kategori data: [identitas, kontak, transaksi, teknis, sensitif jika ada].",
+          "Tujuan/sifat operasi: [pengumpulan, hosting, analitik, dukungan, penghapusan].",
+          "Lokasi pemrosesan dan penyimpanan: [negara/wilayah].",
+          "Durasi, jadwal retensi, dan pemicu penghapusan.",
+          "Instruksi terdokumentasi: [lampiran dan versi]."
+        ]
+      },
+      {
+        "heading": "Instruksi dan batas penggunaan",
+        "body": "Prosesor hanya memproses data berdasarkan instruksi tertulis, termasuk transfer, retensi, dan penghapusan, kecuali diwajibkan hukum. Prosesor memberi tahu jika instruksi diperkirakan melanggar hukum dan mengikuti proses penanganan yang disepakati."
+      },
+      {
+        "heading": "Kerahasiaan dan kontrol keamanan",
+        "bullets": [
+          "Personel berwenang terikat kerahasiaan dan pelatihan.",
+          "Least privilege, autentikasi, logging, dan review akses.",
+          "Enkripsi saat transit/tersimpan sesuai risiko.",
+          "Backup, pemulihan, vulnerability management, dan pengujian keamanan.",
+          "Pemisahan tenant/lingkungan, penghapusan aman, dan kontrol vendor.",
+          "Lampiran menjelaskan kontrol aktual dan pengecualian."
+        ]
+      },
+      {
+        "heading": "Subprosesor dan transfer lintas negara",
+        "body": "Subprosesor mengikuti mekanisme otorisasi [spesifik/umum dengan notifikasi]. Daftar memuat nama, lokasi, fungsi, jenis data, dan perubahan. Prosesor mengikat subprosesor pada kewajiban setara. Transfer lintas negara memakai dasar dan perlindungan yang sah."
+      },
+      {
+        "heading": "Bantuan hak subjek data dan regulator",
+        "bullets": [
+          "Bantu permintaan akses, koreksi, penghapusan, pembatasan, dan hak lain sesuai hukum.",
+          "Tidak menanggapi langsung kecuali diinstruksikan atau diwajibkan.",
+          "Bantu penilaian dampak, konsultasi regulator, dan bukti keamanan.",
+          "Catat permintaan dan tindakan dengan pembatasan akses."
+        ]
+      },
+      {
+        "heading": "Insiden dan pelaporan",
+        "body": "Prosesor melaporkan dugaan insiden kepada [kontak] paling lambat [jam] sejak diketahui. Laporan awal memuat waktu, sistem, kategori data, jumlah subjek bila diketahui, dampak, mitigasi, dan kontak. Laporan akar penyebab dan tindakan korektif disampaikan bertahap."
+      },
+      {
+        "heading": "Audit, retensi, dan penghapusan",
+        "body": "Pengendali dapat meminta bukti kepatuhan/audit dengan pemberitahuan [hari] dan ruang lingkup yang proporsional. Setelah layanan selesai, Prosesor mengembalikan atau menghapus data serta memberikan bukti, kecuali retensi diwajibkan hukum."
+      },
+      {
+        "heading": "Tanggung jawab dan pengesahan",
+        "body": "Atur pembagian tanggung jawab, biaya bantuan, indemnity, batas tanggung jawab, dan pengakhiran konsisten dengan kontrak utama. Lampiran: pemrosesan, subprosesor, kontrol keamanan, instruksi, kontak insiden. **Tinjau ahli privasi dan keamanan sebelum tanda tangan.**"
+      },
+      {
+        "heading": "Catatan, lampiran, dan pengesahan",
+        "body": "Catatan khusus, asumsi yang perlu diverifikasi, pengecualian, serta ketentuan tambahan: **{{notes}}**. Pastikan seluruh lampiran, identitas pihak, dasar kewenangan, versi, dan bukti persetujuan disimpan bersama dokumen final."
+      }
+    ]
+  },
+  {
+    "id": "kebijakan-retensi-arsip-pemusnahan",
+    "name": "Kebijakan Retensi Arsip, Klasifikasi & Pemusnahan Dokumen",
+    "category": "dokumen",
+    "categoryLabel": "Administrasi & dokumen resmi",
+    "symbol": "RET",
+    "format": "md",
+    "quality": "unggulan",
+    "description": "Kebijakan pengelolaan arsip yang menetapkan klasifikasi, pemilik rekaman, jadwal retensi, legal hold, hak akses, transfer arsip, pemusnahan aman, dan bukti pemusnahan.",
+    "tags": [
+      "retensi arsip",
+      "records management",
+      "document retention",
+      "klasifikasi dokumen",
+      "pemusnahan arsip"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan, instansi, atau pihak utama",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama badan usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab atau penyusun dokumen",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama dan jabatan penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode, tanggal berlaku, atau masa evaluasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sekali pakai",
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Tahunan",
+          "Berlaku sampai dicabut",
+          "Sesuai masa perjanjian"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Unit, proses, atau ruang lingkup dokumen",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Administrasi umum",
+          "Keuangan dan pengadaan",
+          "SDM dan ketenagakerjaan",
+          "Operasional dan layanan",
+          "Penjualan dan kerja sama bisnis",
+          "Teknologi dan pengelolaan data",
+          "Legal dan kepatuhan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Ketentuan khusus, asumsi, dan catatan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Masukkan nomor dokumen, tenggat, kebijakan internal, detail pihak, atau pengecualian."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Identitas dan pengendalian dokumen",
+        "body": "Dokumen **Kebijakan Retensi Arsip, Klasifikasi & Pemusnahan Dokumen** disusun untuk **{{entityName}}**, dengan penanggung jawab **{{ownerName}}**, ruang lingkup **{{scope}}**, dan periode **{{period}}**. Nomor dokumen: [isi]; versi: [isi]; tanggal berlaku: [isi]; status: [Draft/Review/Disetujui]."
+      },
+      {
+        "heading": "Tujuan dan prinsip",
+        "body": "Kebijakan ini menjaga ketersediaan, keutuhan, kerahasiaan, dan keterlacakan arsip untuk {{entityName}} pada {{scope}}. Prinsipnya: simpan sesuai kebutuhan/aturan, hindari retensi tanpa batas, cegah pemusnahan sebelum waktunya, dan catat pemilik setiap keputusan."
+      },
+      {
+        "heading": "Klasifikasi dan pemilik rekaman",
+        "bullets": [
+          "Kelas dokumen: Publik, Internal, Terbatas, Rahasia atau kelas yang disahkan.",
+          "Pemilik proses dan pemilik arsip untuk setiap jenis rekaman.",
+          "Lokasi utama, backup, hak akses, media, metode perlindungan.",
+          "Kategori: kontrak, invoice, pajak, data pegawai, korespondensi, pelanggan, dan log sistem."
+        ]
+      },
+      {
+        "heading": "Jadwal retensi dan pemicu",
+        "bullets": [
+          "Jenis dokumen dan alasan penyimpanan: [operasional/regulasi/kontrak].",
+          "Masa retensi dan dasar yang diverifikasi: [angka/tahun/peraturan].",
+          "Pemicu hitung: tanggal transaksi, akhir kontrak, akhir hubungan kerja, atau peristiwa lain.",
+          "Pemilik persetujuan pemusnahan: [jabatan].",
+          "Pengecualian retensi dan dasar hukum: [rincian]."
+        ]
+      },
+      {
+        "heading": "Legal hold dan penangguhan",
+        "body": "Audit, sengketa, investigasi, permintaan regulator, atau instruksi preservasi memicu legal hold. Catat dokumen, sistem, penjaga, tanggal mulai, dan pencabutan. Pemusnahan ditangguhkan sampai hold dicabut tertulis oleh pihak berwenang."
+      },
+      {
+        "heading": "Akses, transfer, dan pemulihan",
+        "bullets": [
+          "Akses berdasarkan fungsi/need-to-know, dengan approval dan logging.",
+          "Transfer mempertahankan metadata, versi, bukti integritas, dan chain of custody.",
+          "Backup diuji pemulihannya; bukan alasan menahan data tanpa batas.",
+          "Vendor arsip/pemusnahan terikat kerahasiaan, keamanan, lokasi, dan audit."
+        ]
+      },
+      {
+        "heading": "Pemusnahan dan berita acara",
+        "body": "Verifikasi masa retensi berakhir, tidak ada legal hold, persetujuan diperoleh, dan salinan wajib diamankan. Gunakan metode sesuai media, seperti penghancuran fisik atau secure erase yang disetujui. Berita acara berisi daftar, rentang tanggal, metode, vendor, saksi, tanggal, dan bukti."
+      },
+      {
+        "heading": "Audit dan pelanggaran",
+        "bullets": [
+          "Audit sampel retensi, akses, dan pemusnahan secara berkala.",
+          "Kehilangan arsip atau pelanggaran akses ditangani melalui prosedur insiden.",
+          "Pengecualian wajib disetujui tertulis, memiliki alasan, pemilik, dan tanggal akhir.",
+          "Perbarui kebijakan saat regulasi, sistem, proses, atau temuan audit berubah."
+        ]
+      },
+      {
+        "heading": "Lampiran dan evaluasi",
+        "body": "Lampiran A: jadwal retensi. Lampiran B: klasifikasi dan akses. Lampiran C: legal hold dan berita acara pemusnahan. Pemilik review: {{ownerName}}. Tinjau bersama fungsi legal, audit, dan pemilik proses sebelum diberlakukan."
+      },
+      {
+        "heading": "Catatan, lampiran, dan pengesahan",
+        "body": "Catatan khusus, asumsi yang perlu diverifikasi, pengecualian, serta ketentuan tambahan: **{{notes}}**. Pastikan seluruh lampiran, identitas pihak, dasar kewenangan, versi, dan bukti persetujuan disimpan bersama dokumen final."
+      }
+    ]
+  },
+  {
+    "id": "checklist-kepatuhan-dokumen-audit",
+    "name": "Checklist Kepatuhan Dokumen Audit, Bukti Kontrol & Temuan Perbaikan",
+    "category": "dokumen",
+    "categoryLabel": "Administrasi & dokumen resmi",
+    "symbol": "AUD",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Checklist audit administrasi untuk mengukur kelengkapan bukti, kesesuaian versi, otorisasi, retensi, dan tindak lanjut; formula menghitung skor serta gap per kontrol.",
+    "tags": [
+      "audit checklist",
+      "compliance",
+      "document evidence",
+      "internal audit",
+      "corrective action"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan, instansi, atau pihak utama",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama badan usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab atau penyusun dokumen",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama dan jabatan penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode, tanggal berlaku, atau masa evaluasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sekali pakai",
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Tahunan",
+          "Berlaku sampai dicabut",
+          "Sesuai masa perjanjian"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Unit, proses, atau ruang lingkup dokumen",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Administrasi umum",
+          "Keuangan dan pengadaan",
+          "SDM dan ketenagakerjaan",
+          "Operasional dan layanan",
+          "Penjualan dan kerja sama bisnis",
+          "Teknologi dan pengelolaan data",
+          "Legal dan kepatuhan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Ketentuan khusus, asumsi, dan catatan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Masukkan nomor dokumen, tenggat, kebijakan internal, detail pihak, atau pengecualian."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Audit Checklist",
+        "title": "Checklist Kepatuhan Dokumen Audit - {{entityName}}",
+        "columns": [
+          "ID Kontrol",
+          "Area Pemeriksaan",
+          "Kontrol/Bukti yang Diharapkan",
+          "Bukti Ada (1/0)",
+          "Versi Valid (1/0)",
+          "Approval Valid (1/0)",
+          "Retensi Jelas (1/0)",
+          "Skor Kontrol",
+          "Gap (1/0)",
+          "PIC Perbaikan"
+        ],
+        "rows": [
+          [
+            "DOC-01",
+            "Governance",
+            "Kebijakan memiliki pemilik dan versi",
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            "Document Control"
+          ],
+          [
+            "DOC-02",
+            "Persetujuan",
+            "Dokumen material disetujui pejabat berwenang",
+            1,
+            1,
+            0,
+            1,
+            0,
+            0,
+            "Unit Owner"
+          ],
+          [
+            "DOC-03",
+            "Penyimpanan",
+            "Akses arsip sesuai klasifikasi dan kebutuhan",
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            "IT Admin"
+          ],
+          [
+            "DOC-04",
+            "Retensi",
+            "Masa simpan dan pemusnahan terdokumentasi",
+            0,
+            1,
+            1,
+            0,
+            0,
+            0,
+            "Legal/Records"
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "H6",
+            "formula": "SUM(D6:G6)",
+            "cachedValue": 4
+          },
+          {
+            "cell": "I6",
+            "formula": "IF(H6=4,0,1)",
+            "cachedValue": 0
+          },
+          {
+            "cell": "H7",
+            "formula": "SUM(D7:G7)",
+            "cachedValue": 3
+          },
+          {
+            "cell": "I7",
+            "formula": "IF(H7=4,0,1)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "H8",
+            "formula": "SUM(D8:G8)",
+            "cachedValue": 3
+          },
+          {
+            "cell": "I8",
+            "formula": "IF(H8=4,0,1)",
+            "cachedValue": 1
+          },
+          {
+            "cell": "H9",
+            "formula": "SUM(D9:G9)",
+            "cachedValue": 2
+          },
+          {
+            "cell": "I9",
+            "formula": "IF(H9=4,0,1)",
+            "cachedValue": 1
+          }
+        ],
+        "columnWidths": [
+          14,
+          20,
+          43,
+          18,
+          18,
+          19,
+          17,
+          16,
+          14,
+          21
+        ]
+      }
+    ]
+  },
+  {
+    "id": "pelacak-masa-berlaku-legal-perizinan",
+    "name": "Pelacak Masa Berlaku Dokumen Legal, Kontrak & Perizinan",
+    "category": "dokumen",
+    "categoryLabel": "Administrasi & dokumen resmi",
+    "symbol": "EXP",
+    "format": "xlsx",
+    "quality": "unggulan",
+    "description": "Pantau izin, sertifikat, kontrak, dan dokumen legal dengan tanggal efektif, durasi, sisa masa berlaku, status kedaluwarsa, dan prioritas pembaruan otomatis.",
+    "tags": [
+      "legal register",
+      "izin usaha",
+      "expiry tracker",
+      "kontrak",
+      "renewal alert"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama perusahaan, instansi, atau pihak utama",
+        "type": "text",
+        "required": true,
+        "placeholder": "Nama badan usaha atau instansi"
+      },
+      {
+        "id": "ownerName",
+        "label": "Penanggung jawab atau penyusun dokumen",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama dan jabatan penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode, tanggal berlaku, atau masa evaluasi",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sekali pakai",
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Tahunan",
+          "Berlaku sampai dicabut",
+          "Sesuai masa perjanjian"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Unit, proses, atau ruang lingkup dokumen",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Administrasi umum",
+          "Keuangan dan pengadaan",
+          "SDM dan ketenagakerjaan",
+          "Operasional dan layanan",
+          "Penjualan dan kerja sama bisnis",
+          "Teknologi dan pengelolaan data",
+          "Legal dan kepatuhan",
+          "Lintas departemen"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Ketentuan khusus, asumsi, dan catatan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Masukkan nomor dokumen, tenggat, kebijakan internal, detail pihak, atau pengecualian."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Legal Expiry",
+        "title": "Pelacak Masa Berlaku Legal & Perizinan - {{entityName}}",
+        "columns": [
+          "ID Dokumen",
+          "Jenis Dokumen",
+          "Penerbit/Pihak",
+          "Hari Mulai",
+          "Masa Berlaku (hari)",
+          "Hari Pemantauan",
+          "Hari Kedaluwarsa",
+          "Sisa Hari",
+          "Status (1=Aktif,2=Segera,3=Expired)"
+        ],
+        "rows": [
+          [
+            "LIC-001",
+            "NIB/Perizinan",
+            "Instansi A",
+            10,
+            365,
+            300,
+            0,
+            0,
+            0
+          ],
+          [
+            "CERT-002",
+            "Sertifikat Operasional",
+            "Lembaga B",
+            20,
+            180,
+            170,
+            0,
+            0,
+            0
+          ],
+          [
+            "CTR-003",
+            "Kontrak Vendor",
+            "Vendor C",
+            30,
+            90,
+            115,
+            0,
+            0,
+            0
+          ],
+          [
+            "DOM-004",
+            "Domain/SSL",
+            "Registrar D",
+            40,
+            365,
+            400,
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "G6",
+            "formula": "D6+E6",
+            "cachedValue": 375
+          },
+          {
+            "cell": "H6",
+            "formula": "G6-F6",
+            "cachedValue": 75
+          },
+          {
+            "cell": "I6",
+            "formula": "IF(H6<0,3,IF(H6<=30,2,1))",
+            "cachedValue": 1
+          },
+          {
+            "cell": "G7",
+            "formula": "D7+E7",
+            "cachedValue": 200
+          },
+          {
+            "cell": "H7",
+            "formula": "G7-F7",
+            "cachedValue": 30
+          },
+          {
+            "cell": "I7",
+            "formula": "IF(H7<0,3,IF(H7<=30,2,1))",
+            "cachedValue": 2
+          },
+          {
+            "cell": "G8",
+            "formula": "D8+E8",
+            "cachedValue": 120
+          },
+          {
+            "cell": "H8",
+            "formula": "G8-F8",
+            "cachedValue": 5
+          },
+          {
+            "cell": "I8",
+            "formula": "IF(H8<0,3,IF(H8<=30,2,1))",
+            "cachedValue": 2
+          },
+          {
+            "cell": "G9",
+            "formula": "D9+E9",
+            "cachedValue": 405
+          },
+          {
+            "cell": "H9",
+            "formula": "G9-F9",
+            "cachedValue": 5
+          },
+          {
+            "cell": "I9",
+            "formula": "IF(H9<0,3,IF(H9<=30,2,1))",
+            "cachedValue": 2
+          }
+        ],
+        "columnWidths": [
+          15,
+          24,
+          21,
+          16,
+          21,
+          20,
+          19,
+          14,
+          34
+        ]
+      }
+    ]
   }
 ]
