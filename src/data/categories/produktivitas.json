@@ -1,0 +1,131 @@
+[
+  {
+    "id": "weekly-planner",
+    "name": "Weekly Planner",
+    "category": "produktivitas",
+    "categoryLabel": "Produktivitas",
+    "symbol": "WP",
+    "format": "xlsx",
+    "difficulty": "dasar",
+    "description": "Rencanakan aktivitas mingguan, prioritas, target, dan status penyelesaian dalam satu lembar kerja.",
+    "tags": [
+      "planner",
+      "mingguan",
+      "agenda",
+      "produktivitas",
+      "tugas",
+      "jadwal"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama individu atau tim",
+        "type": "text",
+        "required": true,
+        "placeholder": "Contoh: Toko Sinar Jaya"
+      },
+      {
+        "id": "ownerName",
+        "label": "Nama penyusun jadwal",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode yang digunakan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mingguan",
+          "Dua mingguan",
+          "Bulanan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup atau konteks penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Pekerjaan",
+          "Belajar",
+          "Kegiatan pribadi",
+          "Kombinasi"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan kebutuhan tambahan yang ingin dimasukkan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Rencana Mingguan",
+        "title": "Weekly Planner - {{entityName}}",
+        "columns": [
+          "Hari",
+          "Prioritas",
+          "Aktivitas",
+          "Target",
+          "Status",
+          "Catatan"
+        ],
+        "rows": [
+          [
+            "Senin",
+            "Tinggi",
+            "Susun rencana mingguan",
+            "Selesai sebelum siang",
+            "Belum dimulai",
+            ""
+          ],
+          [
+            "Selasa",
+            "Menengah",
+            "Kerjakan tugas utama",
+            "Satu tugas utama",
+            "Belum dimulai",
+            ""
+          ],
+          [
+            "Rabu",
+            "Menengah",
+            "Evaluasi progres",
+            "Periksa target",
+            "Belum dimulai",
+            ""
+          ],
+          [
+            "Kamis",
+            "Rendah",
+            "Rapikan pekerjaan",
+            "Perbarui catatan",
+            "Belum dimulai",
+            ""
+          ],
+          [
+            "Jumat",
+            "Tinggi",
+            "Tinjau hasil mingguan",
+            "Catatan evaluasi",
+            "Belum dimulai",
+            ""
+          ]
+        ],
+        "formulaCells": [],
+        "columnWidths": [
+          16,
+          16,
+          30,
+          28,
+          20,
+          30
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,127 @@
+[
+  {
+    "id": "study-planner",
+    "name": "Study Planner",
+    "category": "pendidikan",
+    "categoryLabel": "Pendidikan",
+    "symbol": "SP",
+    "format": "xlsx",
+    "difficulty": "dasar",
+    "description": "Atur target belajar, materi, jumlah sesi, dan progres untuk membantu pemantauan kegiatan belajar.",
+    "tags": [
+      "pendidikan",
+      "belajar",
+      "siswa",
+      "mahasiswa",
+      "akademik",
+      "jadwal"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama siswa, mahasiswa, atau lembaga",
+        "type": "text",
+        "required": true,
+        "placeholder": "Contoh: Toko Sinar Jaya"
+      },
+      {
+        "id": "ownerName",
+        "label": "Nama pengajar atau penyusun",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode yang digunakan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mingguan",
+          "Bulanan",
+          "Per semester",
+          "Menjelang ujian"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup atau konteks penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sekolah",
+          "Perguruan tinggi",
+          "Kursus",
+          "Belajar mandiri"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan kebutuhan tambahan yang ingin dimasukkan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Target Belajar",
+        "title": "Study Planner - {{entityName}}",
+        "columns": [
+          "Mata Pelajaran",
+          "Target Sesi",
+          "Sesi Selesai",
+          "Progres",
+          "Catatan"
+        ],
+        "rows": [
+          [
+            "Matematika",
+            4,
+            2,
+            0,
+            ""
+          ],
+          [
+            "Bahasa Indonesia",
+            3,
+            1,
+            0,
+            ""
+          ],
+          [
+            "Bahasa Inggris",
+            4,
+            3,
+            0,
+            ""
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "D6",
+            "formula": "IF(B6=0,0,C6/B6)",
+            "cachedValue": 0.5
+          },
+          {
+            "cell": "D7",
+            "formula": "IF(B7=0,0,C7/B7)",
+            "cachedValue": 0.3333333333
+          },
+          {
+            "cell": "D8",
+            "formula": "IF(B8=0,0,C8/B8)",
+            "cachedValue": 0.75
+          }
+        ],
+        "columnWidths": [
+          28,
+          16,
+          18,
+          16,
+          32
+        ]
+      }
+    ]
+  }
+]

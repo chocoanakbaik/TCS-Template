@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
 Sitemap: https://tcs-template.vercel.app/sitemap.xml

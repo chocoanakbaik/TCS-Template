@@ -1,0 +1,106 @@
+[
+  {
+    "id": "developer-readme",
+    "name": "Developer README Kit",
+    "category": "developer",
+    "categoryLabel": "Developer",
+    "symbol": "DEV",
+    "format": "md",
+    "difficulty": "dasar",
+    "description": "Kerangka README repository yang memuat pengenalan proyek, instalasi, penggunaan, dan kontribusi.",
+    "tags": [
+      "developer",
+      "github",
+      "readme",
+      "dokumentasi",
+      "kode",
+      "open source"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek atau repository",
+        "type": "text",
+        "required": true,
+        "placeholder": "Contoh: Toko Sinar Jaya"
+      },
+      {
+        "id": "ownerName",
+        "label": "Nama maintainer",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode yang digunakan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Proyek baru",
+          "Pengembangan aktif",
+          "Pemeliharaan",
+          "Arsip"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup atau konteks penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Website atau aplikasi web",
+          "Aplikasi desktop",
+          "Aplikasi mobile",
+          "Library atau package",
+          "Tool atau automation"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan kebutuhan tambahan yang ingin dimasukkan."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Tentang proyek",
+        "body": "**{{entityName}}** adalah proyek yang dikembangkan untuk memenuhi kebutuhan yang telah ditentukan oleh maintainer."
+      },
+      {
+        "heading": "Status dan maintainer",
+        "bullets": [
+          "Maintainer: {{ownerName}}",
+          "Status pengembangan: {{scope}}",
+          "Versi atau periode: {{period}}"
+        ]
+      },
+      {
+        "heading": "Fitur utama",
+        "bullets": [
+          "Tuliskan fitur utama proyek",
+          "Jelaskan batasan dan kebutuhan sistem",
+          "Cantumkan platform yang didukung"
+        ]
+      },
+      {
+        "heading": "Instalasi",
+        "body": "Tuliskan prasyarat, perintah instalasi, dan konfigurasi yang perlu dilakukan sebelum proyek dijalankan."
+      },
+      {
+        "heading": "Penggunaan",
+        "body": "Tambahkan contoh penggunaan paling umum beserta input dan hasil yang diharapkan."
+      },
+      {
+        "heading": "Kontribusi dan lisensi",
+        "body": "Jelaskan cara melaporkan masalah, mengajukan perubahan, dan ketentuan lisensi proyek."
+      },
+      {
+        "heading": "Catatan proyek",
+        "body": "{{notes}}"
+      }
+    ]
+  }
+]

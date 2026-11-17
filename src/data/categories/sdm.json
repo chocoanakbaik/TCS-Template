@@ -1,0 +1,116 @@
+[
+  {
+    "id": "employee-roster",
+    "name": "Employee Roster",
+    "category": "sdm",
+    "categoryLabel": "Sumber daya manusia",
+    "symbol": "HR",
+    "format": "xlsx",
+    "difficulty": "menengah",
+    "description": "Susun daftar anggota tim, posisi, status, dan informasi administrasi dasar secara teratur.",
+    "tags": [
+      "sdm",
+      "hr",
+      "karyawan",
+      "pegawai",
+      "anggota",
+      "tim"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama instansi atau perusahaan",
+        "type": "text",
+        "required": true,
+        "placeholder": "Contoh: Toko Sinar Jaya"
+      },
+      {
+        "id": "ownerName",
+        "label": "Nama administrator SDM",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode yang digunakan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Setiap ada perubahan",
+          "Bulanan",
+          "Triwulanan",
+          "Tahunan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup atau konteks penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "1–5 orang",
+          "6–20 orang",
+          "21–50 orang",
+          "Lebih dari 50 orang"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan kebutuhan tambahan yang ingin dimasukkan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Daftar Anggota",
+        "title": "Employee Roster - {{entityName}}",
+        "columns": [
+          "ID",
+          "Nama",
+          "Divisi",
+          "Posisi",
+          "Status",
+          "Tanggal Bergabung"
+        ],
+        "rows": [
+          [
+            "EMP-001",
+            "Nama Contoh 1",
+            "Operasional",
+            "Staf",
+            "Aktif",
+            "2026-01-05"
+          ],
+          [
+            "EMP-002",
+            "Nama Contoh 2",
+            "Administrasi",
+            "Koordinator",
+            "Aktif",
+            "2026-02-10"
+          ],
+          [
+            "EMP-003",
+            "Nama Contoh 3",
+            "Keuangan",
+            "Staf",
+            "Kontrak",
+            "2026-03-15"
+          ]
+        ],
+        "formulaCells": [],
+        "columnWidths": [
+          15,
+          25,
+          22,
+          22,
+          16,
+          20
+        ]
+      }
+    ]
+  }
+]

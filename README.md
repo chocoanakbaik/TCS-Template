@@ -1,67 +1,51 @@
 # TCS Template
 
-**Koleksi template digital dari The Choco Studios.**
-
-TCS Template adalah katalog dan penyesuai kebutuhan untuk template kerja lintas bidang. Pengunjung dapat memilih template, menjelaskan konteks penggunaan, lalu menyalin atau mengunduh ringkasan spesifikasi sebagai acuan penyusunan.
-
-## Status proyek
-
-Website katalog dan alur spesifikasi tersedia. File template aktual akan ditambahkan ke katalog setelah setiap paket selesai disusun dan diuji. Tombol pada katalog saat ini mengarahkan pengguna ke proses spesifikasi, bukan mengklaim bahwa file unduhan sudah tersedia.
+Koleksi template digital gratis dari The Choco Studios. Website menggunakan Next.js App Router dan dirender statis saat build.
 
 ## Fitur
 
-- Katalog template lintas bidang dengan pencarian dan filter kategori.
-- Formulir bertahap untuk setiap template.
-- Pertanyaan umum yang selalu meminta bidang dan tujuan penggunaan.
-- Pertanyaan tambahan yang disesuaikan dengan jenis template.
-- Ringkasan kebutuhan yang dapat disalin atau diunduh sebagai TXT.
-- Rekomendasi template pendamping.
-- Tampilan responsif untuk desktop, tablet, dan ponsel.
-- Aksesibilitas dasar, navigasi keyboard, dan dukungan reduced motion.
-- Pemrosesan formulir di browser tanpa API, database, akun, analytics, atau pengiriman data ke server.
+- Katalog statis dengan sembilan kategori.
+- Pencarian dan filter kategori serta tingkat kesulitan.
+- Alur penyesuaian tepat lima pertanyaan untuk setiap template.
+- Generator spreadsheet XLSX dengan rumus Excel aktif.
+- Generator dokumen Markdown dan TXT.
+- Nama instansi atau proyek dimasukkan ke file hasil.
+- Pembuatan file di browser menggunakan SheetJS dan FileSaver.
+- Tidak menggunakan backend, API, database, Google Drive, atau akun pengguna.
 
-## Struktur
+## Struktur utama
 
-```text
-TCS-Template/
-├── index.html
-├── 404.html
-├── robots.txt
-├── vercel.json
-└── assets/
-    ├── css/
-    │   └── styles.css
-    └── js/
-        └── app.js
-```
+- src/data/categories/ — sembilan berkas JSON kategori.
+- src/data/index.ts — penggabungan seluruh data kategori.
+- src/data/schema.ts — tipe data katalog dan generator.
+- src/lib/template-generator.ts — generator XLSX, Markdown, dan TXT.
+- src/components/catalog-client.tsx — katalog, filter, formulir lima langkah, dan modal unduhan.
+- src/app/page.tsx — halaman katalog statis.
+- src/app/globals.css — sistem desain responsif.
 
-## Menjalankan secara lokal
+## Menjalankan proyek
 
-Tidak ada proses build atau instalasi dependency.
+Gunakan Node.js 20.9 atau lebih baru.
 
-1. Unduh atau clone repository.
-2. Buka `index.html` melalui browser, atau jalankan static file server sederhana dari folder proyek.
-3. Untuk menguji perilaku pencarian, filter, dan formulir pada browser, gunakan alamat localhost agar Clipboard API tersedia.
+Instal dependensi: npm install
+Mode pengembangan: npm run dev
+Build static export: npm run build
 
-## Ketergantungan
+Hasil static export berada di folder out. Vercel membangun dan menerbitkan proyek melalui integrasi Git.
 
-Tidak ada library runtime pihak ketiga, API eksternal, atau layanan backend. Website menggunakan HTML, CSS, dan JavaScript browser standar. Font menggunakan system font stack.
+## Menambahkan template
+
+Tambahkan satu objek ke berkas JSON kategori yang sesuai. Setiap template wajib memiliki tepat lima pertanyaan dan salah satu struktur konten berikut:
+
+- sheets: worksheet dengan columns, rows, formulaCells, dan columnWidths.
+- sections: bagian Markdown dengan heading, body, dan/atau bullets.
+
+Gunakan token {{entityName}}, {{ownerName}}, {{period}}, {{scope}}, dan {{notes}} untuk memasukkan jawaban formulir ke dalam file.
+
+formulaCells memakai alamat sel Excel A1 dan formula tanpa tanda sama dengan. Generator menyimpan formula dan nilai cache; aplikasi spreadsheet menghitung ulang saat file dibuka.
 
 ## Privasi
 
-Jawaban formulir diproses di browser. Tidak ada endpoint pengumpulan data, penyimpanan jawaban ke server, cookie, atau integrasi analytics pada implementasi ini. Ringkasan hanya dibuat saat pengguna memilih untuk menyalin atau mengunduhnya.
+Jawaban formulir diproses di browser. File disusun di memori browser lalu disimpan melalui dialog unduhan perangkat pengguna. Tidak ada permintaan ke server untuk membuat file.
 
-## Pengembangan
-
-Saat menambahkan template:
-
-1. Tambahkan definisi template pada array `templates` di `assets/js/app.js`.
-2. Sediakan bidang, tujuan, format rencana, pertanyaan tambahan, dan template terkait.
-3. Buat file template sebenarnya dan uji formula, validasi, kompatibilitas, serta petunjuk penggunaannya.
-4. Ubah status katalog dari “Dalam penyusunan” setelah file final tersedia.
-5. Jangan menampilkan tombol unduh untuk file yang belum dirilis.
-
-## Penerbit
-
-**The Choco Studios (TCS)**  
-Independent template collection.
+Dikembangkan oleh The Choco Studios (TCS).

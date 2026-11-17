@@ -1,0 +1,156 @@
+[
+  {
+    "id": "financial-tracker",
+    "name": "Financial Tracker",
+    "category": "bisnis",
+    "categoryLabel": "Bisnis & keuangan",
+    "symbol": "FT",
+    "format": "xlsx",
+    "difficulty": "menengah",
+    "description": "Catat pemasukan, pengeluaran, dan saldo dengan rumus otomatis yang dapat dilanjutkan sesuai kebutuhan.",
+    "tags": [
+      "keuangan",
+      "finance",
+      "arus kas",
+      "transaksi",
+      "pengeluaran",
+      "pemasukan",
+      "excel"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama instansi atau usaha",
+        "type": "text",
+        "required": true,
+        "placeholder": "Contoh: Toko Sinar Jaya"
+      },
+      {
+        "id": "ownerName",
+        "label": "Nama pemilik atau penanggung jawab",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode yang digunakan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Harian",
+          "Mingguan",
+          "Bulanan",
+          "Tahunan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup atau konteks penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Keuangan usaha",
+          "Keuangan organisasi",
+          "Keuangan pribadi",
+          "Proyek atau kegiatan"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan kebutuhan tambahan yang ingin dimasukkan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Transaksi",
+        "title": "Financial Tracker - {{entityName}}",
+        "columns": [
+          "Tanggal",
+          "Keterangan",
+          "Kategori",
+          "Pemasukan",
+          "Pengeluaran",
+          "Saldo"
+        ],
+        "rows": [
+          [
+            "2026-11-01",
+            "Penjualan contoh",
+            "Pemasukan",
+            1500000,
+            0,
+            0
+          ],
+          [
+            "2026-11-02",
+            "Biaya operasional",
+            "Operasional",
+            0,
+            250000,
+            0
+          ],
+          [
+            "2026-11-03",
+            "Pemasukan tambahan",
+            "Pemasukan",
+            500000,
+            0,
+            0
+          ],
+          [
+            "TOTAL",
+            "Ringkasan periode",
+            "",
+            0,
+            0,
+            0
+          ]
+        ],
+        "formulaCells": [
+          {
+            "cell": "F6",
+            "formula": "D6-E6",
+            "cachedValue": 1500000
+          },
+          {
+            "cell": "F7",
+            "formula": "D7-E7",
+            "cachedValue": -250000
+          },
+          {
+            "cell": "F8",
+            "formula": "D8-E8",
+            "cachedValue": 500000
+          },
+          {
+            "cell": "D9",
+            "formula": "SUM(D6:D8)",
+            "cachedValue": 2000000
+          },
+          {
+            "cell": "E9",
+            "formula": "SUM(E6:E8)",
+            "cachedValue": 250000
+          },
+          {
+            "cell": "F9",
+            "formula": "D9-E9",
+            "cachedValue": 1750000
+          }
+        ],
+        "columnWidths": [
+          15,
+          28,
+          20,
+          18,
+          18,
+          18
+        ]
+      }
+    ]
+  }
+]

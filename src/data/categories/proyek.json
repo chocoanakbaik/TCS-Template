@@ -1,0 +1,108 @@
+[
+  {
+    "id": "project-brief",
+    "name": "Project Brief",
+    "category": "proyek",
+    "categoryLabel": "Manajemen proyek",
+    "symbol": "PB",
+    "format": "md",
+    "difficulty": "menengah",
+    "description": "Dokumen ringkas untuk menyusun tujuan, ruang lingkup, pihak terkait, dan rencana pelaksanaan proyek.",
+    "tags": [
+      "proyek",
+      "project",
+      "brief",
+      "scope",
+      "timeline",
+      "dokumentasi"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama proyek atau instansi",
+        "type": "text",
+        "required": true,
+        "placeholder": "Contoh: Toko Sinar Jaya"
+      },
+      {
+        "id": "ownerName",
+        "label": "Nama pemilik atau manajer proyek",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode yang digunakan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Kurang dari satu bulan",
+          "1–3 bulan",
+          "3–6 bulan",
+          "Lebih dari 6 bulan"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup atau konteks penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Produk digital",
+          "Kegiatan atau acara",
+          "Operasional",
+          "Riset atau pendidikan",
+          "Lainnya"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan kebutuhan tambahan yang ingin dimasukkan."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Ringkasan",
+        "body": "Dokumen ini menjadi acuan awal pelaksanaan proyek **{{entityName}}**. Periode pelaksanaan direncanakan selama **{{period}}**."
+      },
+      {
+        "heading": "Identitas dan penanggung jawab",
+        "bullets": [
+          "Instansi atau proyek: {{entityName}}",
+          "Penanggung jawab: {{ownerName}}",
+          "Jenis proyek: {{scope}}"
+        ]
+      },
+      {
+        "heading": "Tujuan proyek",
+        "body": "Jelaskan hasil yang ingin dicapai, masalah yang hendak diselesaikan, dan indikator keberhasilan yang dapat diperiksa."
+      },
+      {
+        "heading": "Ruang lingkup",
+        "bullets": [
+          "Daftar pekerjaan utama",
+          "Hasil atau deliverable yang harus diserahkan",
+          "Pihak yang terlibat dan tanggung jawabnya",
+          "Hal yang secara eksplisit berada di luar cakupan"
+        ]
+      },
+      {
+        "heading": "Rencana pelaksanaan",
+        "bullets": [
+          "Persiapan dan penetapan kebutuhan",
+          "Pelaksanaan pekerjaan utama",
+          "Pemeriksaan kualitas dan revisi",
+          "Serah terima dan evaluasi"
+        ]
+      },
+      {
+        "heading": "Catatan penyesuaian",
+        "body": "{{notes}}"
+      }
+    ]
+  }
+]

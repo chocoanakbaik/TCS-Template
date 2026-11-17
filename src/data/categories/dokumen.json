@@ -1,0 +1,107 @@
+[
+  {
+    "id": "sop-template",
+    "name": "SOP Template",
+    "category": "dokumen",
+    "categoryLabel": "Dokumen",
+    "symbol": "SOP",
+    "format": "md",
+    "difficulty": "menengah",
+    "description": "Kerangka standar operasional prosedur dengan bagian tujuan, ruang lingkup, peran, dan langkah kerja.",
+    "tags": [
+      "dokumen",
+      "sop",
+      "prosedur",
+      "administrasi",
+      "operasional",
+      "panduan"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama instansi atau unit kerja",
+        "type": "text",
+        "required": true,
+        "placeholder": "Contoh: Toko Sinar Jaya"
+      },
+      {
+        "id": "ownerName",
+        "label": "Nama penyusun SOP",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode yang digunakan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Setiap 6 bulan",
+          "Setiap tahun",
+          "Saat prosedur berubah"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup atau konteks penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Administrasi",
+          "Pelayanan",
+          "Operasional",
+          "Keuangan",
+          "Teknis"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan kebutuhan tambahan yang ingin dimasukkan."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Informasi dokumen",
+        "bullets": [
+          "Instansi atau unit: {{entityName}}",
+          "Penyusun: {{ownerName}}",
+          "Jenis prosedur: {{scope}}",
+          "Periode peninjauan: {{period}}"
+        ]
+      },
+      {
+        "heading": "Tujuan",
+        "body": "Jelaskan alasan prosedur ini dibuat dan hasil kerja yang ingin distandardisasi."
+      },
+      {
+        "heading": "Ruang lingkup",
+        "body": "Tuliskan proses, unit kerja, lokasi, dan kondisi yang termasuk dalam prosedur ini."
+      },
+      {
+        "heading": "Peran dan tanggung jawab",
+        "bullets": [
+          "Pelaksana proses",
+          "Pemeriksa atau pemberi persetujuan",
+          "Penanggung jawab akhir"
+        ]
+      },
+      {
+        "heading": "Langkah kerja",
+        "bullets": [
+          "Persiapan sebelum proses dimulai",
+          "Pelaksanaan langkah utama secara berurutan",
+          "Pemeriksaan hasil",
+          "Pencatatan dan penyimpanan bukti kerja"
+        ]
+      },
+      {
+        "heading": "Catatan dan pengecualian",
+        "body": "{{notes}}"
+      }
+    ]
+  }
+]

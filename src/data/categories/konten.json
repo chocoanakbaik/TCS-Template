@@ -1,0 +1,116 @@
+[
+  {
+    "id": "content-calendar",
+    "name": "Content Calendar",
+    "category": "konten",
+    "categoryLabel": "Konten",
+    "symbol": "CC",
+    "format": "xlsx",
+    "difficulty": "dasar",
+    "description": "Kelola ide, kanal, jadwal publikasi, penanggung jawab, dan status produksi konten.",
+    "tags": [
+      "konten",
+      "media sosial",
+      "content",
+      "kalender",
+      "publikasi",
+      "marketing"
+    ],
+    "questions": [
+      {
+        "id": "entityName",
+        "label": "Nama brand, organisasi, atau proyek",
+        "type": "text",
+        "required": true,
+        "placeholder": "Contoh: Toko Sinar Jaya"
+      },
+      {
+        "id": "ownerName",
+        "label": "Nama pengelola konten",
+        "type": "text",
+        "required": false,
+        "placeholder": "Nama penanggung jawab"
+      },
+      {
+        "id": "period",
+        "label": "Periode yang digunakan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mingguan",
+          "Bulanan",
+          "Per kuartal"
+        ]
+      },
+      {
+        "id": "scope",
+        "label": "Ruang lingkup atau konteks penggunaan",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Instagram dan TikTok",
+          "YouTube",
+          "Website atau blog",
+          "LinkedIn",
+          "Beberapa kanal"
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Catatan tambahan",
+        "type": "textarea",
+        "required": false,
+        "placeholder": "Tuliskan kebutuhan tambahan yang ingin dimasukkan."
+      }
+    ],
+    "sheets": [
+      {
+        "name": "Kalender Konten",
+        "title": "Content Calendar - {{entityName}}",
+        "columns": [
+          "Tanggal",
+          "Platform",
+          "Pilar Konten",
+          "Ide Konten",
+          "Penanggung Jawab",
+          "Status"
+        ],
+        "rows": [
+          [
+            "2026-11-18",
+            "Instagram",
+            "Edukasi",
+            "Tips penggunaan produk",
+            "{{ownerName}}",
+            "Ide"
+          ],
+          [
+            "2026-11-20",
+            "TikTok",
+            "Behind the scenes",
+            "Proses pembuatan",
+            "{{ownerName}}",
+            "Draf"
+          ],
+          [
+            "2026-11-22",
+            "Website",
+            "Informasi",
+            "Artikel panduan",
+            "{{ownerName}}",
+            "Terjadwal"
+          ]
+        ],
+        "formulaCells": [],
+        "columnWidths": [
+          17,
+          18,
+          22,
+          32,
+          25,
+          18
+        ]
+      }
+    ]
+  }
+]
