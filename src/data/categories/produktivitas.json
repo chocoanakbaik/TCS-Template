@@ -6,7 +6,6 @@
     "categoryLabel": "Produktivitas",
     "symbol": "WP",
     "format": "xlsx",
-    "difficulty": "dasar",
     "description": "Rencanakan aktivitas mingguan, prioritas, target, dan status penyelesaian dalam satu lembar kerja.",
     "tags": [
       "planner",
@@ -126,6 +125,7 @@
           30
         ]
       }
-    ]
+    ],
+    "quality": "standar"
   }
 ]
