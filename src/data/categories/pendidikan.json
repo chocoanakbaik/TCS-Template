@@ -6,7 +6,6 @@
     "categoryLabel": "Pendidikan",
     "symbol": "SP",
     "format": "xlsx",
-    "difficulty": "dasar",
     "description": "Atur target belajar, materi, jumlah sesi, dan progres untuk membantu pemantauan kegiatan belajar.",
     "tags": [
       "pendidikan",
@@ -122,6 +121,7 @@
           32
         ]
       }
-    ]
+    ],
+    "quality": "baik"
   }
 ]
