@@ -254,13 +254,9 @@ button { color: inherit; }
   .orbit-one { width: 330px; height: 330px; }.orbit-two { width: 400px; height: 400px; }
   .note-top { right: 0; top: 18px; }.note-bottom { left: 0; bottom: 17px; }
   .hero-bottom { margin-top: 12px; }
-  .intro-grid { min-height: 0; grid-template-columns: 1fr; padding-block: 9px; }
-  .intro-grid div { min-height: 44px; padding-left: 0; }
-  .intro-grid div + div { border-left: 0; border-top: 1px solid #d4ddd2; }
   .section-space { padding: 75px 0; }
   .section-heading { align-items: start; flex-direction: column; gap: 18px; }
   .section-heading h2, .about-copy h2, .principles-layout h2 { font-size: 36px; }
-  .catalog-count { padding: 0; }
   .catalog-toolbar { margin-top: 31px; }
   .toolbar-note { display: none; }
   .category-filter { flex-wrap: nowrap; overflow-x: auto; padding: 1px 0 8px; margin-right: -18px; scrollbar-width: thin; }
