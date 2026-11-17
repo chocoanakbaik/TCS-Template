@@ -6,7 +6,6 @@
     "categoryLabel": "Developer",
     "symbol": "DEV",
     "format": "md",
-    "difficulty": "dasar",
     "description": "Kerangka README repository yang memuat pengenalan proyek, instalasi, penggunaan, dan kontribusi.",
     "tags": [
       "developer",
@@ -101,6 +100,7 @@
         "heading": "Catatan proyek",
         "body": "{{notes}}"
       }
-    ]
+    ],
+    "quality": "baik"
   }
 ]
