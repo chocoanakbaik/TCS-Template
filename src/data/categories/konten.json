@@ -6,7 +6,6 @@
     "categoryLabel": "Konten",
     "symbol": "CC",
     "format": "xlsx",
-    "difficulty": "dasar",
     "description": "Kelola ide, kanal, jadwal publikasi, penanggung jawab, dan status produksi konten.",
     "tags": [
       "konten",
@@ -111,6 +110,7 @@
           18
         ]
       }
-    ]
+    ],
+    "quality": "baik"
   }
 ]
