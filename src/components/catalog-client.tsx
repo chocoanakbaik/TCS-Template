@@ -166,7 +166,7 @@ export function CatalogClient({templates,view='home'}:Props) {
           <div className="filter-block">
             <span className="filter-label">Bidang</span>
             <div className="category-filter" role="group" aria-label="Filter kategori">
-              {categories.map((item)=><button className={'filter-chip'+(category===item.id?' is-active':'')} type="button" key={item.id} aria-pressed={category===item.id} onClick={()=>setCategory(item.id)}>{item.label}</button>)}
+              {categories.map((item)=><button className={'filter-chip'+(category===item.id?' is-active':'')} type="button" key={item.id} aria-pressed={category===item.id} onClick={()=>{setCategory(item.id);setQuality('semua');setQuery('');}}>{item.label}</button>)}
             </div>
           </div>
           <div className="filter-block quality-block">
