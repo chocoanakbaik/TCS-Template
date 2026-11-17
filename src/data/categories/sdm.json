@@ -6,7 +6,6 @@
     "categoryLabel": "Sumber daya manusia",
     "symbol": "HR",
     "format": "xlsx",
-    "difficulty": "menengah",
     "description": "Susun daftar anggota tim, posisi, status, dan informasi administrasi dasar secara teratur.",
     "tags": [
       "sdm",
@@ -111,6 +110,7 @@
           20
         ]
       }
-    ]
+    ],
+    "quality": "standar"
   }
 ]
