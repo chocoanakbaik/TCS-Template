@@ -6,7 +6,6 @@
     "categoryLabel": "Dokumen",
     "symbol": "SOP",
     "format": "md",
-    "difficulty": "menengah",
     "description": "Kerangka standar operasional prosedur dengan bagian tujuan, ruang lingkup, peran, dan langkah kerja.",
     "tags": [
       "dokumen",
@@ -102,6 +101,7 @@
         "heading": "Catatan dan pengecualian",
         "body": "{{notes}}"
       }
-    ]
+    ],
+    "quality": "unggulan"
   }
 ]
