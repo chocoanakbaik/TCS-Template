@@ -169,7 +169,7 @@ button { color: inherit; }
 .principle-list h3 { margin: 0; font-size: 15px; font-weight: 700; }
 .principle-list p { margin: 5px 0 0; color: #c0ccc0; font-size: 11px; line-height: 1.7; }
 .privacy-section { padding-block: 76px; }
-.privacy-card { display: grid; grid-template-columns: 55px 1fr auto; align-items: center; gap: 25px; padding: 31px; background: #ecefe8; border: 1px solid #dfe5dc; border-radius: 12px; }
+.privacy-card { display: grid; grid-template-columns: 55px minmax(0, 1fr); align-items: center; gap: 25px; padding: 31px; background: #ecefe8; border: 1px solid #dfe5dc; border-radius: 12px; }
 .privacy-icon { width: 49px; height: 49px; display: grid; place-items: center; color: #49634e; background: #dce6da; border-radius: 50%; font-size: 27px; }
 .privacy-card .eyebrow { margin: 0 0 7px; }
 .privacy-card h2 { margin: 0; font-size: 19px; letter-spacing: -.035em; }
