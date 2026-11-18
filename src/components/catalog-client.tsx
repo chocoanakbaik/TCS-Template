@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useMemo, useState } from 'react';
+import { Fragment, useEffect, useMemo, useState } from 'react';
 import tcsTemplateLogo from '../../Logo TCS Template dengan Ikon Centang.png';
 import { generateTemplateFile } from '@/lib/template-generator';
 import type { CategoryId, Quality, TemplateAnswers, TemplateDefinition, TemplateQuestion } from '@/data/schema';
@@ -22,6 +22,28 @@ const qualities:Array<{id:Quality|'semua';label:string}>=[
 ];
 const qualityLabel:Record<Quality,string>={standar:'Standar',baik:'Baik',unggulan:'Unggulan'};
 const formatLabel=(format:string)=>format.toUpperCase();
+
+type AdPlaceholderKind = 'banner' | 'display' | 'native';
+
+const adPlaceholderDetails:Record<AdPlaceholderKind,{label:string;title:string;description:string;size:string}>={
+  banner:{label:'BANNER HORIZONTAL',title:'Banner horizontal',description:'Slot untuk materi iklan berukuran memanjang.',size:'468 × 60 px'},
+  display:{label:'DISPLAY BANNER',title:'Display banner',description:'Slot iklan di antara kelompok template.',size:'300 × 250 px'},
+  native:{label:'NATIVE BANNER',title:'Konten promosi',description:'Area iklan native yang mengikuti lebar konten halaman.',size:'RESPONSIVE'},
+};
+
+function AdPlaceholder({kind}:{kind:AdPlaceholderKind}) {
+  const details=adPlaceholderDetails[kind];
+  return (
+    <aside className={'ad-placeholder ad-placeholder-'+kind} aria-label={'Wadah iklan '+details.size}>
+      <span className="ad-placeholder-kicker">RUANG IKLAN · {details.label}</span>
+      <div className="ad-placeholder-copy">
+        <strong>{details.title}</strong>
+        <span>{details.description}</span>
+      </div>
+      <span className="ad-placeholder-size">{details.size}</span>
+    </aside>
+  );
+}
 
 export function CatalogClient({templates,view='home'}:Props) {
   const [query,setQuery]=useState('');
@@ -151,6 +173,14 @@ export function CatalogClient({templates,view='home'}:Props) {
       </section>
       )}
 
+      {view==='home'&&(
+      <section className="home-ad-section" aria-label="Area iklan beranda">
+        <div className="container">
+          <AdPlaceholder kind="banner" />
+        </div>
+      </section>
+      )}
+
       {view==='catalog'&&(
       <section className="catalog-section section-space" id="catalog">
         <div className="container">
@@ -179,13 +209,22 @@ export function CatalogClient({templates,view='home'}:Props) {
           </div>
           {filteredTemplates.length>0?(
             <div className="template-grid" aria-live="polite">
-              {filteredTemplates.map((template,index)=><article className="template-card" key={template.id} style={{animationDelay:Math.min(index*45,270)+'ms'}}>
-                <div className="card-topline"><span className="card-category">{template.categoryLabel}</span><span className="card-format">{formatLabel(template.format)}</span></div>
-                <div className="card-symbol" aria-hidden="true">{template.symbol}</div>
-                <h3>{template.name}</h3><p>{template.description}</p>
-                <div className="card-meta"><span className={'quality-badge quality-'+template.quality}>{qualityLabel[template.quality]}</span><span className="question-count">5 pertanyaan</span></div>
-                <div className="card-bottom"><span className="card-status"><i/>GRATIS</span><button className="card-action" type="button" onClick={()=>openTemplate(template)}>Sesuaikan & unduh <span aria-hidden="true">→</span></button></div>
-              </article>)}
+              {filteredTemplates.map((template,index)=>(
+                <Fragment key={template.id}>
+                  <article className="template-card" style={{animationDelay:Math.min(index*45,270)+'ms'}}>
+                    <div className="card-topline"><span className="card-category">{template.categoryLabel}</span><span className="card-format">{formatLabel(template.format)}</span></div>
+                    <div className="card-symbol" aria-hidden="true">{template.symbol}</div>
+                    <h3>{template.name}</h3><p>{template.description}</p>
+                    <div className="card-meta"><span className={'quality-badge quality-'+template.quality}>{qualityLabel[template.quality]}</span><span className="question-count">5 pertanyaan</span></div>
+                    <div className="card-bottom"><span className="card-status"><i/>GRATIS</span><button className="card-action" type="button" onClick={()=>openTemplate(template)}>Sesuaikan & unduh <span aria-hidden="true">→</span></button></div>
+                  </article>
+                  {index===5&&filteredTemplates.length>6&&(
+                    <div className="ad-slot-grid-item">
+                      <AdPlaceholder kind="display" />
+                    </div>
+                  )}
+                </Fragment>
+              ))}
             </div>
           ):(
             <div className="empty-state"><span className="empty-symbol">⌕</span><h3>Template tidak ditemukan.</h3><p>Coba kata kunci lain atau ubah filter kategori dan kualitas template.</p>
@@ -207,6 +246,9 @@ export function CatalogClient({templates,view='home'}:Props) {
             <article className="step-card"><div className="step-illustration illustration-select"><div className="illus-sheet"><i/><i/><i/><i/></div><span className="illus-cursor">↖</span></div><span className="step-number">01</span><h3>Pilih template</h3><p>Temukan template berdasarkan bidang dan kualitas template yang sesuai.</p></article>
             <article className="step-card"><div className="step-illustration illustration-specify"><div className="illus-question">05</div><div className="illus-choice"/><div className="illus-choice short"/></div><span className="step-number">02</span><h3>Sesuaikan kebutuhan</h3><p>Jawab lima pertanyaan untuk memasukkan identitas dan konteks penggunaan.</p></article>
             <article className="step-card"><div className="step-illustration illustration-review"><div className="illus-check">↓</div><div className="illus-lines"><i/><i/><i/></div></div><span className="step-number">03</span><h3>Unduh file</h3><p>File XLSX atau Markdown dirakit langsung di browser, tanpa layanan backend.</p></article>
+          </div>
+          <div className="workflow-ad-container">
+            <AdPlaceholder kind="native" />
           </div>
         </div>
       </section>
