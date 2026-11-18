@@ -95,7 +95,7 @@ export default function PurchaseResult({orderId,token}:{orderId:string;token:str
       {data?.order.status==="paid"&&data.review&&<div style={{marginTop:22,borderTop:"1px solid #e8ece6",paddingTop:18}}>
         <strong>Ulasan sudah dikirim</strong><p style={{color:"#718075",fontSize:13}}>Status ulasan: {data.review.status==="pending"?"Menunggu moderasi":data.review.status}</p>
       </div>}
-      {data?.order.status==="paid"&&!data.review&&downloaded&&<div style={{marginTop:22,borderTop:"1px solid #e8ece6",paddingTop:18}}>
+      {data?.order.status==="paid"&&!data.review&&<div style={{marginTop:22,borderTop:"1px solid #e8ece6",paddingTop:18}}>
         <h2 style={{fontSize:19,margin:"0 0 8px"}}>Beri ulasan pembelian</h2><p style={{fontSize:13,color:"#718075"}}>Ulasan ini ditautkan ke order terverifikasi dan akan ditinjau sebelum ditampilkan.</p>
         <label style={{display:"block",fontSize:13,fontWeight:700,margin:"15px 0 7px"}}>Rating</label>
         <select value={rating} onChange={e=>setRating(Number(e.target.value))} style={{width:"100%",padding:11,border:"1px solid #dbe1d8",borderRadius:8}}>{[5,4,3,2,1].map(x=><option value={x} key={x}>{x} / 5</option>)}</select>
