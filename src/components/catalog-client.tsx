@@ -202,8 +202,15 @@ export function CatalogClient({templates,view='home'}:Props) {
                 <div className="card-symbol" aria-hidden="true">{template.symbol}</div>
                 <h3>{template.name}</h3><p>{template.description}</p>
                 <div className="card-meta"><span className={'quality-badge quality-'+template.quality}>{qualityLabel[template.quality]}</span><span className="question-count">5 pertanyaan</span></div>
-                <div className="card-bottom"><span className={'card-status'+(paidProducts.some((product)=>product.slug===template.id)?' card-status-paid':'')}><i/>{(()=>{const product=paidProducts.find((item)=>item.slug===template.id);return product?'
-              </article>)}
+                <div className="card-bottom">
+  <span className={"card-status" + (paidProducts.some((product) => product.slug === template.id) ? " card-status-paid" : "")}>
+    <i />
+    {paidProducts.some((product) => product.slug === template.id) ? "$" + ((paidProducts.find((product) => product.slug === template.id)?.priceCents ?? 0) / 100).toFixed(2) + " USD" : "GRATIS"}
+  </span>
+  <button className="card-action" type="button" onClick={() => openTemplate(template)}>
+    {paidProducts.some((product) => product.slug === template.id) ? "Beli & sesuaikan" : "Sesuaikan & unduh"} <span aria-hidden="true">→</span>
+  </button>
+</div></article>)}
             </div>
           ):(
             <div className="empty-state"><span className="empty-symbol">⌕</span><h3>Template tidak ditemukan.</h3><p>Coba kata kunci lain atau ubah filter kategori dan kualitas template.</p>
