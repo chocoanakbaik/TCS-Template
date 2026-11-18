@@ -26,7 +26,9 @@ async function verifySignature(rawBody: string, request: NextRequest): Promise<b
   const encodedKey = secret.startsWith("whsec_") ? secret.slice(6) : secret;
   let keyBytes: Uint8Array;
   try { keyBytes = decodeBase64(encodedKey); } catch { return false; }
-  const key = await crypto.subtle.importKey("raw", keyBytes, { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+  const keyBuffer = new ArrayBuffer(keyBytes.length);
+  new Uint8Array(keyBuffer).set(keyBytes);
+  const key = await crypto.subtle.importKey("raw", keyBuffer, { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
   const message = webhookId + "." + timestamp + "." + rawBody;
   const expected = new Uint8Array(await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(message)));
   const signatures = signatureHeader.split(" ").map((part) => part.trim()).filter(Boolean);
