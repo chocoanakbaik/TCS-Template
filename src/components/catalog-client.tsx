@@ -10,6 +10,7 @@ import type { CategoryId, Quality, TemplateAnswers, TemplateDefinition, Template
 type View = 'home'|'catalog'|'how-it-works'|'about';
 type Props = { templates: TemplateDefinition[]; view?: View };
 type DownloadResult = { filename:string; templateName:string };
+type ReviewSummary = { average:number|null; count:number };
 
 const categories:Array<{id:CategoryId|'semua';label:string}>=[
   {id:'semua',label:'Semua kategori'},{id:'bisnis',label:'Bisnis & keuangan'},
@@ -36,6 +37,24 @@ export function CatalogClient({templates,view='home'}:Props) {
   const [isGenerating,setIsGenerating]=useState(false);
   const [downloadResult,setDownloadResult]=useState<DownloadResult|null>(null);
   const [menuOpen,setMenuOpen]=useState(false);
+  const [reviewSummary,setReviewSummary]=useState<Record<string,ReviewSummary>>({});
+
+  useEffect(()=>{
+    let cancelled=false;
+    const loadReviews=async()=>{
+      const entries=await Promise.all(paidProducts.map(async(product)=>{
+        try{
+          const response=await fetch('/api/reviews?slug='+encodeURIComponent(product.slug),{cache:'no-store'});
+          if(!response.ok)return [product.slug,null] as const;
+          const data=await response.json();
+          return [product.slug,{average:typeof data.average==='number'?data.average:null,count:Number(data.count)||0}] as const;
+        }catch{return [product.slug,null] as const;}
+      }));
+      if(!cancelled)setReviewSummary(Object.fromEntries(entries.filter((entry)=>entry[1]!==null)) as Record<string,ReviewSummary>);
+    };
+    void loadReviews();
+    return()=>{cancelled=true;};
+  },[]);
 
   const allTemplates=useMemo(()=>[...templates,...paidProducts.map((product)=>product.template)], [templates]);
   const filteredTemplates=useMemo(()=>{
@@ -201,7 +220,7 @@ export function CatalogClient({templates,view='home'}:Props) {
                 <div className="card-topline"><span className="card-category">{template.categoryLabel}</span><span className="card-format">{formatLabel(template.format)}</span></div>
                 <div className="card-symbol" aria-hidden="true">{template.symbol}</div>
                 <h3>{template.name}</h3><p>{template.description}</p>
-                <div className="card-meta"><span className={'quality-badge quality-'+template.quality}>{qualityLabel[template.quality]}</span><span className="question-count">5 pertanyaan</span></div>
+                <div className="card-meta"><span className={'quality-badge quality-'+template.quality}>{qualityLabel[template.quality]}</span><span className="question-count">5 pertanyaan</span>{(reviewSummary[template.id]?.count??0)>0&&<span className="question-count" title="Rata-rata dari ulasan pembeli terverifikasi">★ {reviewSummary[template.id].average?.toFixed(1)} ({reviewSummary[template.id].count})</span>}</div>
                 <div className="card-bottom">
   <span className={"card-status" + (paidProducts.some((product) => product.slug === template.id) ? " card-status-paid" : "")}>
     <i />
