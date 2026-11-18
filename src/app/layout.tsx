@@ -6,7 +6,7 @@ import './globals.css';
 export const metadata: Metadata = {
   metadataBase: new URL('https://tcs-template.vercel.app'),
   title: 'TCS Template — Template yang mengikuti cara Anda bekerja',
-  description: 'Koleksi template digital gratis dari The Choco Studios. Sesuaikan kebutuhan dan unduh file XLSX atau Markdown langsung dari browser.',
+  description: 'Koleksi template digital gratis dan premium dari The Choco Studios. Sesuaikan kebutuhan, lakukan pembayaran untuk template premium, dan unduh file XLSX atau Markdown.',
   applicationName: 'TCS Template',
   keywords: ['TCS Template','The Choco Studios','template Excel','spreadsheet','template dokumen','template gratis'],
   icons: {
@@ -18,14 +18,14 @@ export const metadata: Metadata = {
     type: 'website',
     siteName: 'TCS Template',
     title: 'TCS Template — Template yang mengikuti cara Anda bekerja',
-    description: 'Pilih, sesuaikan, dan unduh template digital gratis dari The Choco Studios.',
+    description: 'Pilih dan sesuaikan template digital gratis atau premium dari The Choco Studios.',
     url: 'https://tcs-template.vercel.app/',
     images: [{ url: tcsTemplateLogo.src, width: tcsTemplateLogo.width, height: tcsTemplateLogo.height, alt: 'Logo TCS Template' }],
   },
   twitter: {
     card: 'summary',
     title: 'TCS Template — The Choco Studios',
-    description: 'Koleksi template digital gratis yang dapat disesuaikan dan diunduh langsung di browser.',
+    description: 'Koleksi template digital yang dapat disesuaikan dan diunduh setelah proses penyesuaian dan verifikasi pembayaran.',
     images: [{ url: tcsTemplateLogo.src, alt: 'Logo TCS Template' }],
   },
   verification: {
