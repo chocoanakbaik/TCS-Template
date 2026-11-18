@@ -173,7 +173,7 @@ export function CatalogClient({templates,view='home'}:Props) {
       <section className="catalog-section section-space" id="catalog">
         <div className="container">
           <div className="section-heading catalog-heading">
-            <div><p className="eyebrow">TEMPLATE COLLECTION</p><h2>Mulai dari kebutuhan Anda.</h2><p className="section-description">Pilih perangkat kerja berdasarkan bidang dan kualitas template. Seluruh file dibuat sesuai jawaban Anda dan dapat diunduh gratis.</p></div>
+            <div><p className="eyebrow">TEMPLATE COLLECTION</p><h2>Mulai dari kebutuhan Anda.</h2><p className="section-description">Pilih perangkat kerja berdasarkan bidang dan kualitas. Tersedia template gratis serta template premium yang dapat dibeli dan disesuaikan.</p></div>
             <div className="catalog-count"><strong>{filteredTemplates.length.toString().padStart(2,'0')}</strong><span>template tersedia</span></div>
           </div>
           <div className="catalog-toolbar">
@@ -202,7 +202,124 @@ export function CatalogClient({templates,view='home'}:Props) {
                 <div className="card-symbol" aria-hidden="true">{template.symbol}</div>
                 <h3>{template.name}</h3><p>{template.description}</p>
                 <div className="card-meta"><span className={'quality-badge quality-'+template.quality}>{qualityLabel[template.quality]}</span><span className="question-count">5 pertanyaan</span></div>
-                <div className="card-bottom"><span className="card-status"><i/>GRATIS</span><button className="card-action" type="button" onClick={()=>openTemplate(template)}>Sesuaikan & unduh <span aria-hidden="true">→</span></button></div>
+                <div className="card-bottom"><span className={'card-status'+(paidProducts.some((product)=>product.slug===template.id)?' card-status-paid':'')}><i/>{(()=>{const product=paidProducts.find((item)=>item.slug===template.id);return product?'
+              </article>)}
+            </div>
+          ):(
+            <div className="empty-state"><span className="empty-symbol">⌕</span><h3>Template tidak ditemukan.</h3><p>Coba kata kunci lain atau ubah filter kategori dan kualitas template.</p>
+              <button className="button button-secondary" type="button" onClick={()=>{setQuery('');setCategory('semua');setQuality('semua');}}>Reset filter</button>
+            </div>
+          )}
+        </div>
+      </section>
+      )}
+
+      {view==='how-it-works'&&(
+      <section className="workflow-section section-space" id="how-it-works">
+        <div className="container">
+          <div className="section-heading workflow-heading">
+            <div><p className="eyebrow">A BETTER STARTING POINT</p><h2>Dari kebutuhan menjadi file siap pakai.</h2></div>
+            <p className="section-description">Tidak perlu membuat akun TCS. Template gratis dibuat langsung di browser; pembelian template premium diverifikasi melalui pembayaran sebelum akses unduhan diberikan.</p>
+          </div>
+          <div className="steps-grid">
+            <article className="step-card"><div className="step-illustration illustration-select"><div className="illus-sheet"><i/><i/><i/><i/></div><span className="illus-cursor">↖</span></div><span className="step-number">01</span><h3>Pilih template</h3><p>Temukan template berdasarkan bidang dan kualitas template yang sesuai.</p></article>
+            <article className="step-card"><div className="step-illustration illustration-specify"><div className="illus-question">05</div><div className="illus-choice"/><div className="illus-choice short"/></div><span className="step-number">02</span><h3>Sesuaikan kebutuhan</h3><p>Jawab lima pertanyaan untuk memasukkan identitas dan konteks penggunaan.</p></article>
+            <article className="step-card"><div className="step-illustration illustration-review"><div className="illus-check">↓</div><div className="illus-lines"><i/><i/><i/></div></div><span className="step-number">03</span><h3>Unduh file</h3><p>File XLSX atau Markdown disiapkan setelah penyesuaian dan, untuk template premium, verifikasi pembayaran.</p></article>
+          </div>
+        </div>
+      </section>
+      )}
+
+      {view==='about'&&(
+      <>
+      <section className="about-section section-space" id="about">
+        <div className="container about-layout">
+          <div className="about-side"><span className="about-index">TCS<br/>/ TEMPLATE</span></div>
+          <div className="about-copy"><p className="eyebrow">THE CHOCO STUDIOS</p><h2>Perangkat kerja digital yang terbuka untuk semua.</h2>
+            <p>TCS Template adalah koleksi template digital dari The Choco Studios untuk membantu individu, bisnis, organisasi, dan berbagai bidang pekerjaan menyusun aktivitas dengan lebih teratur.</p>
+            <p>Template gratis tersedia untuk diunduh, sementara sejumlah template premium ditawarkan melalui pembelian satu kali. Seluruh koleksi dikembangkan dengan fokus pada kegunaan, struktur yang jelas, dan kemudahan penggunaan.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="principles-section">
+        <div className="container principles-layout">
+          <div><p className="eyebrow">SIMPLE BY DESIGN</p><h2>Fokus pada pekerjaan.<br/>Bukan pada kerumitan.</h2></div>
+          <div className="principle-list">
+            <article><div><h3>Mandiri</h3><p>Template gratis dapat dibuat langsung di perangkat tanpa akun TCS. Akses template premium diberikan setelah pembayaran terverifikasi.</p></div></article>
+            <article><div><h3>Fleksibel</h3><p>Isi file menyesuaikan nama instansi, proyek, periode, dan kebutuhan yang Anda masukkan.</p></div></article>
+            <article><div><h3>Transparan</h3><p>Format file, pertanyaan, rumus, dan isi dokumen ditentukan dengan jelas sebelum file diunduh.</p></div></article>
+          </div>
+        </div>
+      </section>
+
+      <section className="privacy-section section-space">
+        <div className="container privacy-card"><div className="privacy-icon" aria-hidden="true">◎</div><div><p className="eyebrow">YOUR INPUT STAYS YOURS</p><h2>Jawaban Anda tetap di perangkat sendiri.</h2><p>Jawaban template gratis diproses di browser. Untuk template premium, email dan jawaban penyesuaian disimpan bersama order di backend TCS untuk memverifikasi pembelian serta menyediakan file yang telah dibeli.</p></div></div>
+      </section>
+      </>
+      )}
+    </main>
+
+    <footer className="site-footer">
+      <div className="container footer-main">
+        <a className="wordmark footer-wordmark" href="/" aria-label="TCS Template, kembali ke atas"><Image src={tcsTemplateLogo} alt="Logo TCS Template" className="brand-logo footer-brand-logo" sizes="164px" /></a>
+        <p>Practical templates for everyday work.</p><a className="footer-top" href="/">Kembali ke atas <span aria-hidden="true">↑</span></a>
+      </div>
+      <div className="container footer-bottom"><span>© 2026 THE CHOCO STUDIOS. ALL RIGHTS RESERVED.</span></div>
+    </footer>
+
+    {activeTemplate&&activeQuestion&&(
+      <div className="modal-backdrop" onMouseDown={(e)=>{if(e.target===e.currentTarget)closeWizard();}}>
+        <section className="wizard-dialog" role="dialog" aria-modal="true" aria-labelledby="wizard-title">
+          <div className="wizard-top"><a className="wordmark wizard-wordmark" href="/" aria-label="TCS Template"><Image src={tcsTemplateLogo} alt="Logo TCS Template" className="brand-logo wizard-brand-logo" sizes="164px" /></a><button className="icon-button" type="button" onClick={closeWizard} aria-label="Tutup formulir" disabled={isGenerating}>×</button></div>
+          <div className="wizard-progress-wrap"><div className="wizard-progress-copy"><span>PERTANYAAN {String(step+1).padStart(2,'0')}</span><span>{String(step+1).padStart(2,'0')} / 05</span></div><div className="wizard-progress-track"><span style={{width:progress+'%'}}/></div></div>
+          <div className="wizard-body">
+            <div className="wizard-template-label">{activeTemplate.name} / {formatLabel(activeTemplate.format)}</div>
+            <h2 id="wizard-title">{step===0?'Mulai dengan identitas penggunaan.':step===4?'Lengkapi catatan terakhir.':'Sesuaikan kebutuhan Anda.'}</h2>
+            <p className="wizard-description">Jawab pertanyaan berikut. Informasi yang Anda masukkan akan digunakan untuk menyesuaikan isi file.</p>
+            <div className="question-area">
+              <label className="question-label" htmlFor={'answer-'+activeQuestion.id}>{activeQuestion.label}{activeQuestion.required?<span aria-hidden="true"> *</span>:null}</label>
+              {activeQuestion.type==='select'?(
+                <select id={'answer-'+activeQuestion.id} className="question-input" value={answers[activeQuestion.id]??''} onChange={(e)=>updateAnswer(activeQuestion,e.target.value)} required={activeQuestion.required}>
+                  <option value="">Pilih salah satu</option>{(activeQuestion.options??[]).map((option)=><option key={option} value={option}>{option}</option>)}
+                </select>
+              ):activeQuestion.type==='textarea'?(
+                <textarea id={'answer-'+activeQuestion.id} className="question-input question-textarea" value={answers[activeQuestion.id]??''} onChange={(e)=>updateAnswer(activeQuestion,e.target.value)} placeholder={activeQuestion.placeholder} rows={4}/>
+              ):(
+                <input id={'answer-'+activeQuestion.id} className="question-input" type="text" maxLength={120} value={answers[activeQuestion.id]??''} onChange={(e)=>updateAnswer(activeQuestion,e.target.value)} placeholder={activeQuestion.placeholder} required={activeQuestion.required} autoComplete="off"/>
+              )}
+              {activeQuestion.hint?<p className="question-hint">{activeQuestion.hint}</p>:null}
+              {!activeQuestion.required?<p className="question-hint">Pertanyaan opsional. Anda dapat melewatinya.</p>:null}
+              {step===4&&paidProducts.some((product)=>product.slug===activeTemplate.id)&&<>
+                <label className="question-label" htmlFor="checkout-email" style={{display:'block',marginTop:22}}>Email pembeli <span aria-hidden="true">*</span></label>
+                <input id="checkout-email" className="question-input" type="email" value={checkoutEmail} onChange={(e)=>{setCheckoutEmail(e.target.value);setFormError('');}} placeholder="nama@email.com" autoComplete="email" required/>
+                <p className="question-hint">Email ini digunakan untuk mengaitkan pembayaran dengan akses unduhan. Tidak perlu membuat akun.</p>
+              </>}
+              {formError?<p className="form-error" role="alert">{formError}</p>:null}
+            </div>
+          </div>
+          <div className="wizard-footer">
+            <button className="button button-quiet" type="button" onClick={()=>{setStep((current)=>Math.max(0,current-1));setFormError('');}} disabled={step===0||isGenerating}>Kembali</button>
+            <button className="button button-primary" type="button" onClick={handleNext} disabled={isGenerating}>{isGenerating?(paidProducts.some((product)=>product.slug===activeTemplate.id)?'Membuka checkout...':'Membuat file...'):step===4?(paidProducts.some((product)=>product.slug===activeTemplate.id)?'Lanjut ke pembayaran':'Unduh Template'):'Lanjutkan'} <span aria-hidden="true">{step===4?(paidProducts.some((product)=>product.slug===activeTemplate.id)?'→':'↓'):'→'}</span></button>
+          </div>
+        </section>
+      </div>
+    )}
+
+    {downloadResult&&(
+      <div className="modal-backdrop success-backdrop">
+        <section className="success-dialog" role="dialog" aria-modal="true" aria-labelledby="success-title">
+          <div className="success-icon" aria-hidden="true">✓</div><p className="eyebrow">DOWNLOAD READY</p>
+          <h2 id="success-title">Template berhasil dibuat.</h2>
+          <p>File <strong>{downloadResult.filename}</strong> telah dirakit di browser dan proses unduhan sudah dimulai.</p>
+          <p className="success-template-name">{downloadResult.templateName} · Gratis</p>
+          <div className="success-actions"><a className="button button-coffee" href="https://saweria.co/thechocostudios" target="_blank" rel="noopener noreferrer">Traktir Kopi <span aria-hidden="true">↗</span></a><button className="button button-quiet" type="button" onClick={()=>setDownloadResult(null)}>Selesai</button></div>
+        </section>
+      </div>
+    )}
+  </>;
+}
++(product.priceCents/100).toFixed(2)+' USD':'GRATIS';})()}</span><button className="card-action" type="button" onClick={()=>openTemplate(template)}>{paidProducts.some((product)=>product.slug===template.id)?'Beli & sesuaikan':'Sesuaikan & unduh'} <span aria-hidden="true">→</span></button></div>
               </article>)}
             </div>
           ):(
