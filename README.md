@@ -1,17 +1,19 @@
 # TCS Template
 
-Koleksi template digital gratis dari The Choco Studios. Website menggunakan Next.js App Router dan dirender statis saat build.
+TCS Template adalah katalog perangkat kerja digital dari The Choco Studios. Koleksi ini berisi template gratis dan template premium yang dapat disesuaikan dengan kebutuhan pengguna.
 
 ## Fitur
 
-- Katalog statis dengan sembilan kategori.
+- Katalog 225 template pada sembilan kategori.
 - Pencarian dan filter kategori serta kualitas template.
-- Alur penyesuaian tepat lima pertanyaan untuk setiap template.
+- Formulir penyesuaian lima pertanyaan.
 - Generator spreadsheet XLSX dengan rumus Excel aktif.
 - Generator dokumen Markdown dan TXT.
-- Nama instansi atau proyek dimasukkan ke file hasil.
-- Pembuatan file di browser menggunakan SheetJS dan FileSaver.
-- Tidak menggunakan backend, API, database, Google Drive, atau akun pengguna.
+- Tujuh template premium dengan checkout Dodo Payments.
+- Guest checkout tanpa akun pembeli.
+- Verifikasi pembayaran melalui webhook Dodo Payments.
+- Riwayat transaksi dan moderasi ulasan pembeli melalui panel admin.
+- Template premium disimpan pada backend dan hanya diberikan setelah pembayaran terverifikasi.
 
 ## Klasifikasi kualitas
 
@@ -23,37 +25,66 @@ Kualitas merupakan penilaian internal TCS terhadap kelengkapan struktur, cakupan
 
 ## Struktur utama
 
-- src/data/categories/ — sembilan berkas JSON kategori.
-- src/data/index.ts — penggabungan seluruh data kategori.
-- src/data/schema.ts — tipe data katalog dan generator.
-- src/lib/template-generator.ts — generator XLSX, Markdown, dan TXT.
-- src/components/catalog-client.tsx — katalog, filter, formulir lima langkah, dan modal unduhan.
-- src/app/page.tsx — halaman katalog statis.
-- src/app/globals.css — sistem desain responsif.
+- `src/data/categories/` — data template gratis.
+- `src/data/paid-products.ts` — metadata katalog produk premium tanpa isi template.
+- `src/data/schema.ts` — tipe data katalog dan generator.
+- `src/lib/template-generator.ts` — generator XLSX, Markdown, dan TXT.
+- `src/app/api/` — checkout, verifikasi order, webhook, dan API panel admin.
+- `src/app/admin/` — panel admin TCS Template.
+- `src/app/pembelian/selesai/` — halaman verifikasi pembayaran dan unduhan.
 
 ## Menjalankan proyek
 
 Gunakan Node.js 20.9 atau lebih baru.
 
-Instal dependensi: npm install
-Mode pengembangan: npm run dev
-Build static export: npm run build
+```bash
+npm install
+npm run dev
+npm run build
+```
 
-Hasil static export berada di folder out. Vercel membangun dan menerbitkan proyek melalui integrasi Git.
+Deploy production menggunakan integrasi Git Vercel. Proyek menggunakan Next.js server runtime agar Route Handler untuk checkout dan webhook dapat berjalan.
 
-## Menambahkan template
+## Environment variables
 
-Tambahkan satu objek ke berkas JSON kategori yang sesuai. Setiap template wajib memiliki tepat lima pertanyaan dan salah satu struktur konten berikut:
+Atur variabel berikut pada environment Vercel:
 
-- sheets: worksheet dengan columns, rows, formulaCells, dan columnWidths.
-- sections: bagian Markdown dengan heading, body, dan/atau bullets.
+- `DODO_PAYMENTS_API_KEY` — API key Dodo Payments.
+- `DODO_PAYMENTS_WEBHOOK_KEY` — signing key endpoint webhook Dodo.
+- `DODO_PAYMENTS_ENVIRONMENT` — `test_mode` atau `live_mode`.
+- `TCS_TEMPLATE_DATA_URL` — URL Supabase Edge Function privat.
+- `TCS_TEMPLATE_INTERNAL_TOKEN` — token komunikasi internal backend.
+- `TCS_TEMPLATE_ADMIN_PASSWORD` — kata sandi panel admin.
+- `TCS_TEMPLATE_SESSION_SECRET` — rahasia untuk menandatangani sesi admin.
 
-Gunakan token {{entityName}}, {{ownerName}}, {{period}}, {{scope}}, dan {{notes}} untuk memasukkan jawaban formulir ke dalam file.
+Jangan masukkan nilai rahasia ke source code atau variabel `NEXT_PUBLIC_*`.
 
-formulaCells memakai alamat sel Excel A1 dan formula tanpa tanda sama dengan. Generator menyimpan formula dan nilai cache; aplikasi spreadsheet menghitung ulang saat file dibuka.
+## Alur pembelian
+
+1. Pembeli memilih template premium dan mengisi lima pertanyaan serta email.
+2. Server membuat order dan Checkout Session Dodo Payments.
+3. Dodo mengirim webhook ke `/api/webhooks/dodo`.
+4. Server memverifikasi tanda tangan, mengambil detail pembayaran dari API Dodo, lalu mencocokkan produk, nilai, mata uang, dan order.
+5. Halaman hasil pembelian menunggu status lunas pada database. Data template premium hanya diberikan setelah hak pembelian tervalidasi.
+6. Pembeli dapat mengunduh file dan mengirim ulasan yang terikat ke order tersebut.
+
+Status pada parameter redirect Dodo tidak dianggap sebagai bukti pembayaran. Webhook yang tervalidasi menjadi sumber perubahan status transaksi.
+
+## Panel admin
+
+Panel admin tersedia di `/admin`. Panel ini dilindungi kata sandi dan sesi cookie HTTP-only. Fitur panel mencakup ringkasan transaksi, daftar webhook Dodo, sinkronisasi endpoint dan event, serta moderasi ulasan pembeli.
 
 ## Privasi
 
-Jawaban formulir diproses di browser. File disusun di memori browser lalu disimpan melalui dialog unduhan perangkat pengguna. Tidak ada permintaan ke server untuk membuat file.
+Template gratis dibuat langsung di browser. Untuk template premium, email pembeli dan jawaban penyesuaian disimpan pada backend TCS untuk mengaitkan order, memverifikasi pembayaran, dan menyediakan hasil pembelian. Data transaksi dipisahkan menggunakan tabel khusus TCS Template.
+
+## Menambahkan template gratis
+
+Tambahkan objek pada berkas JSON kategori yang sesuai. Setiap template harus memiliki tepat lima pertanyaan serta salah satu struktur konten berikut:
+
+- `sheets`: worksheet dengan `columns`, `rows`, `formulaCells`, dan `columnWidths`.
+- `sections`: bagian Markdown dengan heading, body, dan/atau bullets.
+
+Gunakan token `{{entityName}}`, `{{ownerName}}`, `{{period}}`, `{{scope}}`, dan `{{notes}}` untuk memasukkan jawaban formulir ke dalam file.
 
 Dikembangkan oleh The Choco Studios (TCS).
