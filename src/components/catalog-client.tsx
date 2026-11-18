@@ -84,13 +84,28 @@ export function CatalogClient({templates,view='home'}:Props) {
     if(step<activeTemplate.questions.length-1) {
       setStep((current)=>current+1);setFormError('');return;
     }
+    const paidProduct=paidProducts.find((product)=>product.slug===activeTemplate.id);
     setIsGenerating(true);setFormError('');
     try {
+      if(paidProduct) {
+        if(!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(checkoutEmail.trim())) {
+          setFormError('Masukkan alamat email yang valid untuk melanjutkan pembayaran.');
+          return;
+        }
+        const response=await fetch('/api/checkout',{
+          method:'POST',headers:{'content-type':'application/json'},
+          body:JSON.stringify({slug:paidProduct.slug,email:checkoutEmail.trim(),answers}),
+        });
+        const checkout=await response.json();
+        if(!response.ok||typeof checkout.checkout_url!=='string') throw new Error(checkout.error??'Checkout gagal disiapkan.');
+        window.location.assign(checkout.checkout_url);
+        return;
+      }
       const filename=generateTemplateFile(activeTemplate,answers);
       setDownloadResult({filename,templateName:activeTemplate.name});
       setActiveTemplate(null);
     } catch(error) {
-      setFormError(error instanceof Error?error.message:'File gagal dibuat. Silakan coba kembali.');
+      setFormError(error instanceof Error?error.message:'Proses gagal. Silakan coba kembali.');
     } finally {setIsGenerating(false);}
   }
 
