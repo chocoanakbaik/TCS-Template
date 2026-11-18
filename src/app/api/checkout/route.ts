@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
         metadata: {
           tcs_order_id: order.order_id,
           tcs_template_slug: slug,
-          tcs_checkout_session: "tcs-template",
+          tcs_product_id: order.product_id,
         },
       }),
       cache: "no-store",
