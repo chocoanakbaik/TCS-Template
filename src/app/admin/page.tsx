@@ -4,7 +4,7 @@ import { FormEvent, useCallback, useEffect, useState } from "react";
 
 type Order = { id:string; slug:string; buyer_email:string; amount_cents:number; currency:string; status:string; created_at:string; paid_at?:string|null; payment_id?:string|null };
 type Review = { id:string; slug:string; rating:number; review_text:string; display_name?:string|null; status:string; created_at:string };
-type Overview = { stats:{total_orders:number;paid_orders:number;pending_orders:number;gross_paid_cents:number;total_reviews:number;pending_reviews:number};orders:Order[];reviews:Review[];templates:Array<{slug:string;name:string;product_id:string;price_cents:number;active:boolean}> };
+type Overview = { stats:{total_orders:number;paid_orders:number;pending_orders:number;gross_paid_cents:number;total_reviews:number;pending_reviews:number};orders:Order[];reviews:Review[];events:Array<{webhook_id:string;event_type:string;event_timestamp?:string|null;received_at:string;processed_at?:string|null;processing_error?:string|null}>;templates:Array<{slug:string;name:string;product_id:string;price_cents:number;active:boolean}> };
 type Webhook = {id:string;url:string;description?:string;disabled:boolean;filter_types:string[];is_tcs_endpoint?:boolean};
 
 const money=(cents:number)=>new Intl.NumberFormat("en-US",{style:"currency",currency:"USD"}).format(cents/100);
@@ -129,6 +129,13 @@ export default function AdminPage(){
         {webhooks.length?webhooks.map(h=><tr key={h.id}><td style={styles.td}><code>{h.id}</code></td><td style={styles.td}><span style={{overflowWrap:"anywhere"}}>{h.url}</span>{h.is_tcs_endpoint&&<div style={{...styles.muted,marginTop:4}}>Endpoint TCS Template</div>}</td><td style={styles.td}><span style={styles.pill}>{h.disabled?"Nonaktif":"Aktif"}</span></td><td style={styles.td}>{(h.filter_types??[]).join(", ")||"Tidak ada filter"}</td></tr>):<tr><td style={styles.td} colSpan={4}>Belum ada endpoint yang terdaftar.</td></tr>}
       </tbody></table></div>
       {signingKey&&<div style={{marginTop:18,padding:14,border:"1px solid #e8d7a9",borderRadius:10,background:"#fffaf0"}}><strong>Signing key endpoint baru</strong><p style={styles.muted}>Salin nilai ini ke environment <code>DODO_PAYMENTS_WEBHOOK_KEY</code> di Vercel. Nilai hanya ditampilkan pada sesi ini.</p><input readOnly value={signingKey} style={styles.input} onFocus={e=>e.currentTarget.select()}/></div>}
+    </section>
+    <section style={{...styles.card,marginBottom:18}}>
+      <h2 style={{fontSize:19,margin:"0 0 7px"}}>Riwayat penerimaan webhook</h2>
+      <p style={styles.muted}>Event yang diterima endpoint TCS Template dan hasil pemrosesannya.</p>
+      <div style={{overflowX:"auto",marginTop:12}}><table style={styles.table}><thead><tr><th style={styles.th}>WAKTU</th><th style={styles.th}>EVENT ID</th><th style={styles.th}>TIPE EVENT</th><th style={styles.th}>HASIL</th></tr></thead><tbody>
+        {(overview?.events??[]).length?(overview?.events??[]).map(event=><tr key={event.webhook_id}><td style={styles.td}>{date(event.received_at)}</td><td style={styles.td}><code>{event.webhook_id}</code></td><td style={styles.td}>{event.event_type}</td><td style={styles.td}><span style={styles.pill}>{event.processed_at?"Diproses":event.processing_error?"Perlu perhatian":"Diterima"}</span>{event.processing_error&&<div style={{color:"#a33b32",fontSize:12,marginTop:5}}>{event.processing_error}</div>}</td></tr>):<tr><td style={styles.td} colSpan={4}>Belum ada event webhook yang diterima.</td></tr>}
+      </tbody></table></div>
     </section>
     <section style={{...styles.card,marginBottom:18}}>
       <h2 style={{fontSize:19,margin:"0 0 14px"}}>Transaksi terbaru</h2><div style={{overflowX:"auto"}}><table style={styles.table}><thead><tr><th style={styles.th}>TANGGAL</th><th style={styles.th}>PRODUK</th><th style={styles.th}>PEMBELI</th><th style={styles.th}>NILAI</th><th style={styles.th}>STATUS</th><th style={styles.th}>PAYMENT ID</th></tr></thead><tbody>
