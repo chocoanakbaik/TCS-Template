@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useEffect, useMemo, useState } from 'react';
 import tcsTemplateLogo from '../../Logo TCS Template dengan Ikon Centang.png';
 import { generateTemplateFile } from '@/lib/template-generator';
+import { paidProducts } from '@/data/paid-products';
 import type { CategoryId, Quality, TemplateAnswers, TemplateDefinition, TemplateQuestion } from '@/data/schema';
 
 type View = 'home'|'catalog'|'how-it-works'|'about';
@@ -29,21 +30,23 @@ export function CatalogClient({templates,view='home'}:Props) {
   const [quality,setQuality]=useState<Quality|'semua'>('semua');
   const [activeTemplate,setActiveTemplate]=useState<TemplateDefinition|null>(null);
   const [answers,setAnswers]=useState<TemplateAnswers>({});
+  const [checkoutEmail,setCheckoutEmail]=useState('');
   const [step,setStep]=useState(0);
   const [formError,setFormError]=useState('');
   const [isGenerating,setIsGenerating]=useState(false);
   const [downloadResult,setDownloadResult]=useState<DownloadResult|null>(null);
   const [menuOpen,setMenuOpen]=useState(false);
 
+  const allTemplates=useMemo(()=>[...templates,...paidProducts.map((product)=>product.template)], [templates]);
   const filteredTemplates=useMemo(()=>{
     const term=query.trim().toLocaleLowerCase('id');
-    return templates.filter((template)=>{
+    return allTemplates.filter((template)=>{
       const categoryMatch=category==='semua'||template.category===category;
       const qualityMatch=quality==='semua'||template.quality===quality;
       const searchable=[template.name,template.categoryLabel,template.description,...template.tags].join(' ').toLocaleLowerCase('id');
       return categoryMatch&&qualityMatch&&(!term||searchable.includes(term));
     });
-  },[templates,query,category,quality]);
+  },[allTemplates,query,category,quality]);
 
   useEffect(()=>{
     if(!activeTemplate&&!downloadResult) return;
@@ -63,7 +66,7 @@ export function CatalogClient({templates,view='home'}:Props) {
 
   function openTemplate(template:TemplateDefinition) {
     if(template.questions.length!==5) {setFormError('Template belum dikonfigurasi dengan lima pertanyaan.');return;}
-    setAnswers({});setStep(0);setFormError('');setDownloadResult(null);setActiveTemplate(template);
+    setAnswers({});setCheckoutEmail('');setStep(0);setFormError('');setDownloadResult(null);setActiveTemplate(template);
   }
   function closeWizard() {
     if(isGenerating) return;
