@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   description: 'Koleksi template digital gratis dari The Choco Studios. Sesuaikan kebutuhan dan unduh file XLSX atau Markdown langsung dari browser.',
   applicationName: 'TCS Template',
   keywords: ['TCS Template','The Choco Studios','template Excel','spreadsheet','template dokumen','template gratis'],
+  other: {
+    monetag: '4c6b0a757da5fb9bfe0c57541fe5b8ab',
+  },
   icons: {
     icon: tcsTemplateLogo.src,
     shortcut: tcsTemplateLogo.src,
