@@ -21,5 +21,18 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "tcs-template.vercel.app"
+        }
+      ],
+      "destination": "https://tcstemplates.thechocostudios.bond/:path*",
+      "permanent": true
+    }
   ]
 }
