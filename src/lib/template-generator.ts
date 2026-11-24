@@ -35,6 +35,18 @@ function safeSheetName(name: string): string {
   return name.replace(/[\\/?*:[\]]/g, ' ').trim().slice(0,31) || 'Template';
 }
 
+function includeCellInWorksheetRange(worksheet: XLSX.WorkSheet, address: string): void {
+  const cell = XLSX.utils.decode_cell(address);
+  const range = worksheet['!ref']
+    ? XLSX.utils.decode_range(worksheet['!ref'])
+    : { s: { r: cell.r, c: cell.c }, e: { r: cell.r, c: cell.c } };
+  range.s.r = Math.min(range.s.r, cell.r);
+  range.s.c = Math.min(range.s.c, cell.c);
+  range.e.r = Math.max(range.e.r, cell.r);
+  range.e.c = Math.max(range.e.c, cell.c);
+  worksheet['!ref'] = XLSX.utils.encode_range(range);
+}
+
 function createWorksheet(sheet: TemplateSheet, context: Record<string,string>): XLSX.WorkSheet {
   const columnCount=sheet.columns.length;
   if(!columnCount) throw new Error('Setiap sheet harus memiliki setidaknya satu kolom.');
@@ -63,8 +75,22 @@ function createWorksheet(sheet: TemplateSheet, context: Record<string,string>): 
 
   for(const formula of sheet.formulaCells ?? []) {
     if(!/^[A-Z]{1,3}[1-9][0-9]*$/.test(formula.cell)) throw new Error('Referensi formula tidak valid: '+formula.cell);
+    if(Boolean(formula.labelCell) !== Boolean(formula.label?.trim())) {
+      throw new Error('Label ringkasan harus memiliki alamat sel dan teks label.');
+    }
     const existing=worksheet[formula.cell] ?? {};
     worksheet[formula.cell]={...existing,t:'n',f:formula.formula.replace(/^=/,''),v:formula.cachedValue ?? 0};
+    includeCellInWorksheetRange(worksheet,formula.cell);
+    if(formula.labelCell) {
+      if(!/^[A-Z]{1,3}[1-9][0-9]*$/.test(formula.labelCell)) throw new Error('Referensi label tidak valid: '+formula.labelCell);
+      const labelAddress=XLSX.utils.decode_cell(formula.labelCell);
+      const formulaAddress=XLSX.utils.decode_cell(formula.cell);
+      if(labelAddress.r!==formulaAddress.r || labelAddress.c>=formulaAddress.c) {
+        throw new Error('Label ringkasan harus berada di sebelah kiri formula pada baris yang sama.');
+      }
+      worksheet[formula.labelCell]={t:'s',v:replaceTokens(formula.label!,context)};
+      includeCellInWorksheetRange(worksheet,formula.labelCell);
+    }
   }
   return worksheet;
 }
