@@ -57,3 +57,8 @@ formulaCells memakai alamat sel Excel A1 dan formula tanpa tanda sama dengan. Ge
 Jawaban formulir diproses di browser. File disusun di memori browser lalu disimpan melalui dialog unduhan perangkat pengguna. Tidak ada permintaan ke server untuk membuat file.
 
 Dikembangkan oleh The Choco Studios (TCS).
+
+
+## Bahasa antarmuka
+
+TCS Template menyediakan pemilih bahasa Indonesia (utama/default), English, dan Mandarin Sederhana. Pilihan disimpan secara lokal pada browser dan berlaku untuk seluruh halaman katalog, cara kerja, dan tentang. Label UI, filter, petunjuk, formulir, status, serta pesan proses yang memiliki padanan diterjemahkan. Bahasa isi template yang diunduh tetap mengikuti bahasa sumber masing-masing template.
