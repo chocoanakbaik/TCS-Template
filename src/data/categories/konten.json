@@ -729,7 +729,9 @@
           {
             "cell": "H10",
             "formula": "AVERAGE(H6:H9)",
-            "cachedValue": 0.5
+            "cachedValue": 0.5,
+            "labelCell": "G10",
+            "label": "Rata-rata kepatuhan SLA"
           }
         ],
         "columnWidths": [

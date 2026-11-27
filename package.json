@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build"
+    "build": "npm run validate && next build",
+    "validate": "node scripts/validate-catalog.mjs"
   },
   "engines": {
     "node": ">=20.9.0"

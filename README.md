@@ -37,6 +37,7 @@ Gunakan Node.js 20.9 atau lebih baru.
 
 Instal dependensi: npm install
 Mode pengembangan: npm run dev
+Validasi seluruh katalog: npm run validate
 Build static export: npm run build
 
 Hasil static export berada di folder out. Vercel membangun dan menerbitkan proyek melalui integrasi Git.
