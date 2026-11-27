@@ -3,6 +3,7 @@ import Script from 'next/script';
 import type { ReactNode } from 'react';
 import tcsTemplateLogo from '../../Logo TCS Template dengan Ikon Centang.png';
 import './globals.css';
+import { LanguageSelector } from '@/components/language-selector';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://tcs-template.vercel.app'),
@@ -38,5 +39,5 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {themeColor:'#f6f7f3',colorScheme:'light'};
 
 export default function RootLayout({children}:{children:ReactNode}) {
-  return <html lang="id"><body>{children}<Script src="/tcs-community-widget.js" data-theme="template" strategy="afterInteractive" /></body></html>;
+  return <html lang="id"><body>{children}<LanguageSelector /><Script src="/tcs-community-widget.js" data-theme="template" strategy="afterInteractive" /></body></html>;
 }
