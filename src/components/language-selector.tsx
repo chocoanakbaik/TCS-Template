@@ -13,6 +13,7 @@ export function LanguageSelector() {
     const lastAttrs = new WeakMap<Element, Record<string, string>>();
     let language: 'id' | 'en' | 'zh' = 'id';
     const normalize = (value: string) => value.replace(/\s+/g, ' ').trim();
+    const cleanDisplay = (value: string) => value.replace(/\s*[·•]\s*/g, ' ').replace(/\s+[—–]\s+/g, ', ').replace(/\s+/g, ' ').trim();
     const excluded = (node: Text) => {
       const parent = node.parentElement;
       return !parent || !!parent.closest('script,style,noscript,textarea,input,select,option,code,pre,svg,[data-no-translate],#tcs-language-selector');
@@ -25,7 +26,7 @@ export function LanguageSelector() {
       const translated = language === 'id' ? normalize(original) : translations[normalize(original)]?.[language] ?? normalize(original);
       const leading = original.match(/^\s*/)?.[0] ?? '';
       const trailing = original.match(/\s*$/)?.[0] ?? '';
-      node.nodeValue = leading + translated + trailing;
+      node.nodeValue = leading + cleanDisplay(translated) + trailing;
       lastText.set(node, node.nodeValue);
     };
     const translateAttribute = (element: Element, name: string) => {
@@ -37,7 +38,8 @@ export function LanguageSelector() {
       if (!Object.hasOwn(source, name)) source[name] = current;
       originalAttrs.set(element, source);
       const raw = source[name];
-      element.setAttribute(name, language === 'id' ? raw : translations[normalize(raw)]?.[language] ?? raw);
+      const translated = language === 'id' ? raw : translations[normalize(raw)]?.[language] ?? raw;
+      element.setAttribute(name, cleanDisplay(translated));
       applied[name] = element.getAttribute(name) ?? '';
       lastAttrs.set(element, applied);
     };
@@ -59,19 +61,52 @@ export function LanguageSelector() {
       language = code === 'en' || code === 'zh' ? code : 'id';
       try { localStorage.setItem(storageKey, language); } catch {}
       document.documentElement.lang = language === 'zh' ? 'zh-CN' : language;
-      const select = document.getElementById('tcs-template-language') as HTMLSelectElement | null;
-      if (select) select.value = language;
+      const toggle = document.getElementById('tcs-template-language-toggle');
+      const menu = document.getElementById('tcs-template-language-menu');
+      if (toggle) {
+        toggle.textContent = ({ id: 'Bahasa', en: 'Language', zh: '语言' })[language];
+        toggle.setAttribute('aria-label', ({ id: 'Ganti bahasa', en: 'Change language', zh: '切换语言' })[language]);
+      }
+      if (menu) menu.setAttribute('aria-label', ({ id: 'Pilih bahasa', en: 'Choose language', zh: '选择语言' })[language]);
+      control.querySelectorAll<HTMLButtonElement>('[data-language]').forEach((option) => {
+        option.setAttribute('aria-pressed', String(option.dataset.language === language));
+      });
       scan();
-      document.title = language === 'id' ? 'TCS Template — Template yang mengikuti cara Anda bekerja' : language === 'en' ? 'TCS Template — Templates for your workflow' : 'TCS Template — 贴合您工作流程的模板';
+      document.title = language === 'id' ? 'TCS Template: Template yang mengikuti cara Anda bekerja' : language === 'en' ? 'TCS Template: Templates for your workflow' : 'TCS Template: 贴合您工作流程的模板';
     };
     const control = document.createElement('div');
     control.id = 'tcs-language-selector';
-    control.innerHTML = '<label for="tcs-template-language">Bahasa</label><select id="tcs-template-language" aria-label="Pilih bahasa"><option value="id">ID · Indonesia</option><option value="en">EN · English</option><option value="zh">中文 · Mandarin</option></select>';
+    control.innerHTML = '<button class="tcs-template-language-toggle" id="tcs-template-language-toggle" type="button" aria-label="Ganti bahasa" aria-controls="tcs-template-language-menu" aria-expanded="false">Bahasa</button><div class="tcs-template-language-menu" id="tcs-template-language-menu" role="group" aria-label="Pilih bahasa" hidden><button class="tcs-template-language-option" type="button" data-language="id" aria-pressed="true">Indonesia</button><button class="tcs-template-language-option" type="button" data-language="en" aria-pressed="false">English</button><button class="tcs-template-language-option" type="button" data-language="zh" aria-pressed="false">Mandarin</button></div>';
     const style = document.createElement('style');
-    style.textContent = '#tcs-language-selector{position:fixed;top:13px;right:16px;z-index:99999;display:flex;align-items:center;gap:8px;padding:7px 10px;border:1px solid #dfe4da;border-radius:999px;background:rgba(255,255,255,.96);color:#344e40;box-shadow:0 8px 24px rgba(29,43,33,.13);font:600 11px/1.2 system-ui,sans-serif;backdrop-filter:blur(10px)}#tcs-language-selector label{white-space:nowrap}#tcs-language-selector select{max-width:145px;border:0;outline:0;background:transparent;color:inherit;font:inherit;cursor:pointer}#tcs-language-selector option{background:#fff;color:#202923}@media(max-width:640px){#tcs-language-selector{top:8px;right:8px;padding:6px 8px}#tcs-language-selector label{display:none}}';
+    style.textContent = '#tcs-language-selector{position:fixed;top:13px;right:16px;z-index:99999;display:inline-flex}#tcs-language-selector .tcs-template-language-toggle{min-height:38px;padding:0 13px;border:1px solid #dfe4da;border-radius:9px;background:#fff;color:#344e40;font:600 11px/1.2 system-ui,sans-serif;cursor:pointer}#tcs-language-selector .tcs-template-language-toggle:hover,#tcs-language-selector .tcs-template-language-toggle[aria-expanded="true"]{border-color:#9eafa1;background:#f6f8f4}#tcs-language-selector .tcs-template-language-menu{position:absolute;top:calc(100% + 7px);right:0;display:grid;min-width:142px;gap:2px;padding:5px;border:1px solid #dfe4da;border-radius:9px;background:#fff;box-shadow:0 8px 24px rgba(29,43,33,.12)}#tcs-language-selector .tcs-template-language-menu[hidden]{display:none!important}#tcs-language-selector .tcs-template-language-option{min-height:35px;padding:8px 10px;border:0;border-radius:6px;background:transparent;color:#344e40;font:500 11px/1.2 system-ui,sans-serif;text-align:left;cursor:pointer}#tcs-language-selector .tcs-template-language-option:hover,#tcs-language-selector .tcs-template-language-option[aria-pressed="true"]{background:#eef2ec;color:#244638}#tcs-language-selector .tcs-template-language-option[aria-pressed="true"]{font-weight:700}@media(max-width:640px){#tcs-language-selector{top:8px;right:8px}}';
     document.head.append(style);
     document.body.append(control);
-    control.querySelector('select')?.addEventListener('change', (event) => setLanguage((event.target as HTMLSelectElement).value));
+    const toggle = control.querySelector<HTMLButtonElement>('#tcs-template-language-toggle');
+    const menu = control.querySelector<HTMLDivElement>('#tcs-template-language-menu');
+    const closeMenu = (restoreFocus: boolean) => {
+      if (!toggle || !menu) return;
+      menu.hidden = true;
+      toggle.setAttribute('aria-expanded', 'false');
+      if (restoreFocus) toggle.focus();
+    };
+    toggle?.addEventListener('click', () => {
+      if (!toggle || !menu) return;
+      const opening = menu.hidden;
+      menu.hidden = !opening;
+      toggle.setAttribute('aria-expanded', String(opening));
+    });
+    control.querySelectorAll<HTMLButtonElement>('[data-language]').forEach((option) => {
+      option.addEventListener('click', () => {
+        setLanguage(option.dataset.language ?? 'id');
+        closeMenu(true);
+      });
+    });
+    document.addEventListener('pointerdown', (event) => {
+      if (menu && !control.contains(event.target as Node) && !menu.hidden) closeMenu(false);
+    }, true);
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && menu && !menu.hidden) closeMenu(true);
+    });
     let saved = 'id';
     try { const stored = localStorage.getItem(storageKey); if (stored === 'en' || stored === 'zh' || stored === 'id') saved = stored; } catch {}
     setLanguage(saved);
